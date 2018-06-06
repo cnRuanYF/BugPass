@@ -16,19 +16,18 @@ public class User {
     private String username;
     /** 密码 */
     private String password;
+    /** 邮箱 */
+    private String email;
+    /** 手机号 */
+    private String phone;
+    /** QQ号 */
+    private String qq;
 
     /** 真实姓名 */
     private String realname;
-    /** 手机号 */
-    private String phone;
-    /** 邮箱 */
-    private String email;
 
     /** 注册日期 */
     private Date registerTime;
-
-    /** 用户头像 */
-    private int pictureId;
 
     /**
      * 构造一个用户对象
@@ -95,6 +94,20 @@ public class User {
     }
 
     /**
+     * @return the email
+     */
+    public String getEmail() {
+        return email;
+    }
+
+    /**
+     * @param email the email to set
+     */
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    /**
      * @return the phone
      */
     public String getPhone() {
@@ -108,18 +121,12 @@ public class User {
         this.phone = phone;
     }
 
-    /**
-     * @return the email
-     */
-    public String getEmail() {
-        return email;
+    public String getQq() {
+        return qq;
     }
 
-    /**
-     * @param email the email to set
-     */
-    public void setEmail(String email) {
-        this.email = email;
+    public void setQq(String qq) {
+        this.qq = qq;
     }
 
     /**
@@ -150,20 +157,6 @@ public class User {
         this.registerTime = registerTime;
     }
 
-    /**
-     * @return the pictureId
-     */
-    public int getPictureId() {
-        return pictureId;
-    }
-
-    /**
-     * @param pictureId the pictureId to set
-     */
-    public void setPictureId(int pictureId) {
-        this.pictureId = pictureId;
-    }
-
     /*
      * (non-Javadoc)
      * 
@@ -171,8 +164,8 @@ public class User {
      */
     @Override
     public String toString() {
-        return "User [id=" + id + ", username=" + username + ", password=" + password + ", realname=" + realname
-                + ", phone=" + phone + ", email=" + email + ", registerTime=" + registerTime + ", pictureId="
-                + pictureId + "]";
+        return "User [id=" + id + ", username=" + username + ", password=" + password + ", email=" + email + ", phone="
+                + phone + ", qq=" + qq + ", realname=" + realname + ", registerTime=" + registerTime + "]";
     }
+
 }
