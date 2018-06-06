@@ -11,7 +11,7 @@ public interface VersionDAO extends BaseDAO<Version> {
 	 * @return 返回查询结果（version对象）
 	 * @throws Exception
 	 */
-	Version findByVersionname(String vaersionName) throws Exception;
+	List<Version> findByVersionname(String vaersionName) throws Exception;
 	/**
 	 * 根据项目ID查询版本
 	 * @param projectId 传入项目ID

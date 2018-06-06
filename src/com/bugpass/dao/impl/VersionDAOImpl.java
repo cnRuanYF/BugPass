@@ -10,7 +10,7 @@ public class VersionDAOImpl implements VersionDAO {
 	
 	@Override
 	public boolean add(Version obj) throws Exception {
-		return DBUtil.execUpdate("insert into version values(null,?,?)", obj.getVersionName(),obj.getProjectId())>0;
+		return DBUtil.execUpdate("insert into version values(null,?,?)",obj.getProjectId(), obj.getVersionName())>0;
 	}
 
 	@Override
@@ -48,8 +48,8 @@ public class VersionDAOImpl implements VersionDAO {
 	}
 
 	@Override
-	public Version findByVersionname(String vaersionName) {
+	public List<Version> findByVersionname(String vaersionName) {
 		// TODO Auto-generated method stub
-		return (Version) DBUtil.execQuery("select * from version where versionName=?", Version.class, vaersionName);
+		return  (List<Version>) DBUtil.execQuery("select * from version where versionName=?", Version.class, vaersionName);
 	}
 }
