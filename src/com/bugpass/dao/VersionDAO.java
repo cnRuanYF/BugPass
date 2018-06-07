@@ -20,10 +20,10 @@ public interface VersionDAO extends BaseDAO<Version> {
 	 */
 	List<Version> findAllByProjectid(int projectId) throws Exception;
 	/**
-	 * 根据版本名删除版本
-	 * @param versionName 传入版本名
+	 * 根据版本ID删除版本
+	 * @param versionName 传入版本ID
 	 * @return 返回删除结果（成功返回true，失败返回false）
 	 * @throws Exception
 	 */
-	boolean deleteByVersionname(String versionName) throws Exception;
+	boolean deleteByVersionId(int versionId) throws Exception;
 }

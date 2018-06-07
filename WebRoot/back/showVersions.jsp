@@ -22,7 +22,7 @@
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <link href="../../assets/css/ie10-viewport-bug-workaround.css"
 	rel="stylesheet">
-	
+
 <script src="js/jquery-3.3.1.min.js"></script>
 <script src="js/bootstrap.js"></script>
 <link href="css/styles.css" rel="stylesheet">
@@ -64,9 +64,8 @@
 				</ul>
 				<form class="navbar-form navbar-right">
 					<input type="text" id="searchEmpLike" class="form-control"
-						placeholder="Search..."
-						value="${empLike==null?'':empLike}"> <input
-						type="button" id="btnSearch" class="form-control" value="搜索">
+						placeholder="Search..." value="${empLike==null?'':empLike}">
+					<input type="button" id="btnSearch" class="form-control" value="搜索">
 				</form>
 			</div>
 		</div>
@@ -75,14 +74,14 @@
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-sm-3 col-md-2 sidebar">
-				
+
 				<ul class="nav nav-sidebar">
 					<li class="active"><a href="UserServlet">版本管理</a></li>
-					<!-- <li><a href="back/addVersion.jsp">添加版本</a></li> -->
-					<li class="nav-item">
+					<li><a href="back/addVersion.jsp">添加版本</a></li>
+					<!-- <li class="nav-item">
 						<a class="nav-link" href="#modal-container-add" data-toggle="modal">添加版本</a>
-					</li>
-					
+					</li> -->
+
 				</ul>
 				<ul class="nav nav-sidebar hidden">
 					<li class="active"><a href="">Nav item again</a></li>
@@ -91,48 +90,59 @@
 				</ul>
 			</div>
 
-			
-<!-- 添加模态窗口 -->
-<div class="modal fade" id="modal-container-add" role="dialog" aria-hidden="true" aria-labelledby="registerModalLabel">
-	<div class="modal-dialog" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title" id="registerModalLabel">新用户注册</h5> 
-				<button class="close" type="button" data-dismiss="modal">
-					<span aria-hidden="true">×</span>
-				</button>
+
+			<!-- 添加模态窗口 -->
+			<div class="modal fade" id="modal-container-add" role="dialog"
+				aria-hidden="true" aria-labelledby="registerModalLabel">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="registerModalLabel">新用户注册</h5>
+							<button class="close" type="button" data-dismiss="modal">
+								<span aria-hidden="true">×</span>
+							</button>
+						</div>
+						<form class="mb-0" role="form" id="registerForm"
+							action="register.do" method="post"
+							onsubmit="return validateReg()">
+							<div class="modal-body">
+								<div class="form-group">
+									<label for="regUsername">用户名</label> <input
+										class="form-control lastpassClearHidden" id="regUsername"
+										name="username" type="text" placeholder="4~16位字母或数字，不能以数字开头"
+										required />
+								</div>
+								<div class="form-group">
+									<div class="text-danger" id="usernameCheck"></div>
+								</div>
+								<div class="form-group">
+									<label for="regPassword">密码</label> <input
+										class="form-control lastpassClearHidden" id="regPassword"
+										name="password" type="password" placeholder="4~16位字母或数字"
+										required />
+								</div>
+								<div class="form-group">
+									<label for="regPassword2">重复密码</label> <input
+										class="form-control lastpassClearHidden" id="regPassword2"
+										type="password" placeholder="再次输入密码" required />
+								</div>
+								<div class="form-group text-danger" id="regError">
+									<i class="fa fa-exclamation-circle mr-2"></i><span
+										id="regErrorMsg"></span>
+								</div>
+							</div>
+							<div class="modal-footer">
+								<button class="btn btn-primary btn-block" id="btnRegister"
+									type="submit">
+									<i class="fa fa-spinner fa-spin mr-2"></i>注册
+								</button>
+								<a class="btn btn-link" href="#modal-container-login"
+									data-dismiss="modal" data-toggle="modal">已有账号？点此登录</a>
+							</div>
+						</form>
+					</div>
+				</div>
 			</div>
-			<form class="mb-0" role="form" id="registerForm" action="register.do" method="post" onsubmit="return validateReg()">
-				<div class="modal-body">
-					<div class="form-group">
-						<label for="regUsername">用户名</label>
-						<input class="form-control lastpassClearHidden" id="regUsername" name="username" type="text" placeholder="4~16位字母或数字，不能以数字开头" required/>
-					</div>
-					<div class="form-group">
-						<div class="text-danger" id="usernameCheck"></div>
-					</div>
-					<div class="form-group">
-						<label for="regPassword">密码</label>
-						<input class="form-control lastpassClearHidden" id="regPassword" name="password" type="password" placeholder="4~16位字母或数字" required/>
-					</div>
-					<div class="form-group">
-						<label for="regPassword2">重复密码</label>
-						<input class="form-control lastpassClearHidden" id="regPassword2" type="password" placeholder="再次输入密码" required/>
-					</div>
-					<div class="form-group text-danger" id="regError">
-						<i class="fa fa-exclamation-circle mr-2"></i><span id="regErrorMsg"></span>
-					</div>
-				</div>
-				<div class="modal-footer">
-					<button class="btn btn-primary btn-block" id="btnRegister" type="submit">
-						<i class="fa fa-spinner fa-spin mr-2"></i>注册
-					</button> 
-					<a class="btn btn-link" href="#modal-container-login" data-dismiss="modal" data-toggle="modal">已有账号？点此登录</a>
-				</div>
-			</form>
-		</div>
-	</div>
-</div>
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 
 				<h2 class="sub-header">版本列表</h2>
@@ -149,8 +159,9 @@
 									<tr>
 										<td>${version.versionName}</td>
 										<td><a
-											href="mvc/selectOneArticle.jsp?id=${version.versionId}">修改</a>&nbsp;&nbsp;<a
-											href="ArticleServlet?key=delete&id=${version.versionId}">删除</a></td>
+											href="mvc/selectOneArticle.jsp?id=${version.versionId}">修改</a>&nbsp;&nbsp;
+											<button class="btn btn-danger btnDel"
+												value="${version.versionId}">删除</button></td>
 									</tr>
 								</c:forEach>
 							</c:if>
@@ -256,6 +267,51 @@
 		   });
 		   
 	   });
+	</script>
+	<script src="${pageContext.request.contextPath}/back/layer.js"></script>
+	<script type="text/javascript">
+	$(function(){
+		$(".btnDel").click(function(){
+			
+			var btn=$(this);
+			console.log($(btn).val());
+			layer.confirm('是否确定删除？', {
+  			  btn: ['确定','取消'] //按钮
+  			}, function(){
+  				//这里就是点击确定的时候执行的代码 ,执行ajax请求${pageContext.request.contextPath}
+  				
+  				
+  			$.post("${pageContext.request.contextPath}/VersionServlet",{"key":"dele","versionId":$(btn).val()},function(data,status){
+  				
+  				//尝试获取status data
+  				console.log("status"+status+",data :"+data);
+  				
+  				if(data)
+  					{
+  					  // layer.msg('删除成功', {icon: 1,time: 2000});
+  					   
+  					   //将这个样式调整一下
+  					   layer.msg('删除成功', {
+  						    time: 2000, //2s后自动关闭
+  						    btn: ['确定']
+  					   //下面一个函数的功能应该是等  msg的窗口消失后再执行
+  						  },function(){
+  							  
+  							  //重新刷新页面
+ 	    					      location.reload(); 
+  						  });
+  					}
+  				     else
+  					{
+  				    	layer.msg('删除失败', {icon: 1});
+  					}
+  			}); 
+  				
+  			});
+  		
+  	}); 
+  }); 
+
 	</script>
 </body>
 

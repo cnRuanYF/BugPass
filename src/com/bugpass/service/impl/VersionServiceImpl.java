@@ -8,7 +8,8 @@ import com.bugpass.entity.Version;
 import com.bugpass.service.VersionService;
 
 public class VersionServiceImpl implements VersionService {
-	VersionDAO vd=new VersionDAOImpl();
+	VersionDAO vd = new VersionDAOImpl();
+
 	@Override
 	public boolean returnAdd(Version version) {
 		try {
@@ -17,8 +18,9 @@ public class VersionServiceImpl implements VersionService {
 			e.printStackTrace();
 			return false;
 		}
-		
+
 	}
+
 	@Override
 	public List<Version> returnfindAllByProjectid(int projectId) {
 		try {
@@ -29,17 +31,28 @@ public class VersionServiceImpl implements VersionService {
 			return null;
 		}
 	}
+
 	@Override
 	public boolean returnFindByVersionName(String versionName) {
-		
+
 		try {
-			List<Version>versions=vd.findByVersionname(versionName);
-			if (versions.size()==0) {
+			List<Version> versions = vd.findByVersionname(versionName);
+			if (versions.size() == 0) {
 				return false;
 			} else {
 				return true;
 			}
-			
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+
+	@Override
+	public boolean returndeleteByVersionId(int versionId) {
+		try {
+			return vd.deleteByVersionId(versionId);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;

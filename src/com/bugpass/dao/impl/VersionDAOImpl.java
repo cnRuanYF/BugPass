@@ -7,10 +7,10 @@ import com.bugpass.entity.Version;
 import com.bugpass.util.DBUtil;
 
 public class VersionDAOImpl implements VersionDAO {
-	
+
 	@Override
 	public boolean add(Version obj) throws Exception {
-		return DBUtil.execUpdate("insert into version values(null,?,?)",obj.getProjectId(), obj.getVersionName())>0;
+		return DBUtil.execUpdate("insert into version values(null,?,?)", obj.getProjectId(), obj.getVersionName()) > 0;
 	}
 
 	@Override
@@ -18,10 +18,11 @@ public class VersionDAOImpl implements VersionDAO {
 		// TODO Auto-generated method stub
 		return false;
 	}
+
 	@Override
-	public boolean deleteByVersionname(String versionName) throws Exception {
+	public boolean deleteByVersionId(int versionId) throws Exception {
 		// TODO Auto-generated method stub
-		return DBUtil.execUpdate("delete from version where versionName=?", versionName)>0;
+		return DBUtil.execUpdate("delete from version where versionId=?", versionId) > 0;
 	}
 
 	@Override
@@ -35,6 +36,7 @@ public class VersionDAOImpl implements VersionDAO {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 	@Override
 	public List<Version> findAllByProjectid(int projectId) throws Exception {
 		// TODO Auto-generated method stub
@@ -50,6 +52,7 @@ public class VersionDAOImpl implements VersionDAO {
 	@Override
 	public List<Version> findByVersionname(String vaersionName) {
 		// TODO Auto-generated method stub
-		return  (List<Version>) DBUtil.execQuery("select * from version where versionName=?", Version.class, vaersionName);
+		return (List<Version>) DBUtil.execQuery("select * from version where versionName=?", Version.class,
+				vaersionName);
 	}
 }

@@ -20,7 +20,8 @@
 	<div class="container">
 		<form action="../AddEmpServlet?key=add" method="post">
 			<div class="form-group">
-				<label for="projectName">项目名称</label> <input type="text"
+				<label for="projectName">项目名称</label> 
+				<input type="text"
 					class="form-control" name="projectName" id="projectName" placeholder="员工编号">
 			</div>
 			<div class="form-group">
@@ -41,25 +42,27 @@
 <script type="text/javascript">
 	$(function() {
 		$("#button").click(function () {
-			$.get("../AddEmpServlet?key=add",{"empNum":$(".empNum").val,"empName":$(".empName").val,"empJob":$(".empJob").val,"mgr":$(".mgr").val,"hirdate":$(".hirdate").val,"sal":$(".sal").val,"comm":$(".comm").val,"deptno":$(".deptno").val},function (data,status) {
-				if (data) {
-					alert("添加成功");
-					location.href="../EmpServlet";
-				}else {
-					alert("添加失败");
-				}				
-			})
+			var versionNameMsg=$("#versionNameMsg").html();
+			if (versionNameMsg=="版本号已存在，请勿重复创建"||versionNameMsg=="版本号不能为空") {
+				//$("#button").addClass("disabled");
+				alert(versionNameMsg);
+			} else {
+				$.get("../VersionServlet?key=add",{"projectId":"1","versionName":$("#versionName").val()},function (data,status) {
+					if (data) {
+						alert("添加成功");
+						location.href="../VersionServlet?key=selectAll";
+					}else {
+						alert("添加失败");
+					}				
+				});
+			}
+			
 		})
 			$("#versionName").blur(function () {
 				$.get("../VersionServlet?key=selectVersionName&versionName="+$("#versionName").val(),function (data,status) {
 					$("#versionNameMsg").html(data);
 				})
-				var versionNameMsg=$("#versionNameMsg").html();
-				if (versionNameMsg=="版本号已存在，请勿重复创建"||versionNameMsg=="版本号不能为空") {
-					$("#button").addClass("disabled");
-				} else {
-					$("#button").removeClass("disabled");
-				}
+				
 			})
 		$.get("../AddEmpServlet?key=dept", function(data, status) {
 			array = JSON.parse(data);
