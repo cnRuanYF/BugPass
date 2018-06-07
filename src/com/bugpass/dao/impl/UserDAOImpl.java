@@ -2,6 +2,8 @@ package com.bugpass.dao.impl;
 
 import java.util.List;
 
+import javax.sql.rowset.CachedRowSet;
+
 import com.bugpass.dao.UserDAO;
 import com.bugpass.entity.User;
 import com.bugpass.util.DBUtil;
@@ -129,6 +131,45 @@ public class UserDAOImpl implements UserDAO {
         List<User> list = (List<User>) DBUtil.execQuery(sql, User.class, keyword, keyword, "%" + keyword + "%");
 
         return list;
+    }
+
+    @Override
+    public boolean checkUsernameExist(String username) throws Exception {
+        String sql = "select count(*) from " + TBNAME + " where upper(username)=upper(?)";
+        CachedRowSet crs = DBUtil.execQuery(sql, username);
+        boolean isExist = false;
+        if(crs.next()) {
+            isExist=true;
+        }
+        crs.close();
+        
+        return isExist;
+    }
+
+    @Override
+    public boolean checkEmailExist(String email) throws Exception {
+        String sql = "select count(*) from " + TBNAME + " where upper(email)=upper(?)";
+        CachedRowSet crs = DBUtil.execQuery(sql, email);
+        boolean isExist = false;
+        if(crs.next()) {
+            isExist=true;
+        }
+        crs.close();
+        
+        return isExist;
+    }
+
+    @Override
+    public boolean checkPhoneExist(String phone) throws Exception {
+        String sql = "select count(*) from " + TBNAME + " where upper(phone)=upper(?)";
+        CachedRowSet crs = DBUtil.execQuery(sql, phone);
+        boolean isExist = false;
+        if(crs.next()) {
+            isExist=true;
+        }
+        crs.close();
+        
+        return isExist;
     }
 
 }

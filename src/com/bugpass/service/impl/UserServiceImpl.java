@@ -1,6 +1,5 @@
 package com.bugpass.service.impl;
 
-import java.net.Socket;
 import java.util.List;
 
 import com.bugpass.dao.UserDAO;
@@ -16,33 +15,33 @@ import com.bugpass.service.UserService;
  */
 public class UserServiceImpl implements UserService {
 
-
-
-
     @Override
-    public User findByKeyword(String keyword) {
-
-        List<User> userList = null;
+    public boolean register(User user) {
         UserDAO dao = new UserDAOImpl();
 
+        boolean isSuccess = false;
         try {
-            userList = dao.findByKeyword(keyword);
+            isSuccess = dao.add(user);
         } catch (Exception e) {
-            // TODO 异常！DAO异常提示优化
-            packet.setSuccess(false);
-            packet.setMessage(e.getMessage());
-            sendResponse(socket, packet);
-            return;
+            e.printStackTrace(); // XXX 处理异常
         }
 
-        if (userList != null) {
-            packet.setSuccess(true);
-            packet.setContent(userList);
-        } else {
-            packet.setSuccess(false);
-            packet.setMessage(StringConst.NO_USER_HAS_BEEN_FOUND);
+        return isSuccess;
+    }
+
+    @Override
+    public boolean updateUserProfile(User user) {
+
+        UserDAO dao = new UserDAOImpl();
+
+        boolean isSuccess = false;
+        try {
+            isSuccess = dao.update(user);
+        } catch (Exception e) {
+            e.printStackTrace(); // XXX 处理异常
         }
-        sendResponse(socket, packet);
+
+        return isSuccess;
     }
 
     @Override
@@ -61,18 +60,75 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean updateUserProfile(User user) {
+    public User findByUsername(String username) {
 
         UserDAO dao = new UserDAOImpl();
-        
-        boolean isSuccess = false;
+        User user = null;
+
         try {
-            isSuccess = dao.update(user);
+            user = dao.findByUsername(username);
         } catch (Exception e) {
             e.printStackTrace(); // XXX 处理异常
         }
 
-        return isSuccess;
+        return user;
+    }
+
+    @Override
+    public List<User> findByKeyword(String keyword) {
+
+        List<User> userList = null;
+        UserDAO dao = new UserDAOImpl();
+
+        try {
+            userList = dao.findByKeyword(keyword);
+        } catch (Exception e) {
+            e.printStackTrace(); // XXX 处理异常
+        }
+
+        return userList;
+    }
+
+    @Override
+    public boolean checkUsernameExist(String username) {
+        UserDAO dao = new UserDAOImpl();
+
+        boolean isExist = false;
+        try {
+            isExist = dao.checkUsernameExist(username);
+        } catch (Exception e) {
+            e.printStackTrace(); // XXX 处理异常
+        }
+
+        return isExist;
+    }
+
+    @Override
+    public boolean checkEmailExist(String email) {
+        UserDAO dao = new UserDAOImpl();
+
+        boolean isExist = false;
+        try {
+            isExist = dao.checkEmailExist(email);
+        } catch (Exception e) {
+            e.printStackTrace(); // XXX 处理异常
+        }
+
+        return isExist;
+    }
+
+    @Override
+    public boolean checkPhoneExist(String phone) {
+        UserDAO dao = new UserDAOImpl();
+
+        boolean isExist = false;
+        try {
+            isExist = dao.checkPhoneExist(phone);
+        } catch (Exception e) {
+            e.printStackTrace(); // XXX 处理异常
+        }
+
+        return isExist;
     }
 
 }
