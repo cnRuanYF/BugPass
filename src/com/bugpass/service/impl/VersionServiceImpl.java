@@ -21,6 +21,27 @@ public class VersionServiceImpl implements VersionService {
 
 	}
 
+
+	@Override
+	public List<Version> returnListFindByVersionName(String versionName) {
+		try {
+			return vd.findByLikename(versionName);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	
+	@Override
+	public Version returnFindById(long id) {
+		try {
+			return vd.findById(id);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
 	@Override
 	public List<Version> returnfindAllByProjectid(int projectId) {
 		try {
@@ -58,5 +79,16 @@ public class VersionServiceImpl implements VersionService {
 			return false;
 		}
 	}
+
+	@Override
+	public boolean returnUpdate(Version version) {
+		try {
+			return vd.update(version);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+	
 
 }

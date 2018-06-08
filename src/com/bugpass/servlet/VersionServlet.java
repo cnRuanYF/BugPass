@@ -78,7 +78,40 @@ public class VersionServlet extends HttpServlet {
 			System.out.println(versionId);
 			boolean flag=vs.returndeleteByVersionId(versionId);
 			out.print(flag);
-		} 
+		}else if ("selectOne".equals(key)) {
+			long id=Long.parseLong(request.getParameter("versionId"));
+			PrintWriter out = response.getWriter();
+			out.print(vs.returnFindById(id).getVersionName());
+		} else if ("update".equals(key)) {
+			Version v=new Version();
+			int versionId=Integer.parseInt(request.getParameter("versionId"));
+			String versionName=request.getParameter("versionNewName");
+			v.setVersionId(versionId);
+			v.setVersionName(versionName);
+			PrintWriter out = response.getWriter();
+			boolean flag=vs.returnUpdate(v);
+			out.print(flag);
+		}else if ("selectByLike".equals(key)) {
+			String versionName=request.getParameter("versionLike");
+			if (versionName.equals("")) {
+				List<Version> versions = vs.returnfindAllByProjectid(1);
+				for (Version version : versions) {
+					System.out.println(version);
+				}
+				request.setAttribute("versions", versions);
+				request.getRequestDispatcher("back/showVersions.jsp").forward(request, response);
+			} else {
+				List<Version> versions = vs.returnListFindByVersionName(versionName);
+				for (Version version : versions) {
+					System.out.println(version);
+				}
+				request.setAttribute("versions", versions);
+				request.setAttribute("versionLike", versionName);
+				request.getRequestDispatcher("back/showVersions.jsp").forward(request, response);
+			}
+			
+		}
+		
 	}
 
 	/**

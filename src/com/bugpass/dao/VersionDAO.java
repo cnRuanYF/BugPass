@@ -26,4 +26,10 @@ public interface VersionDAO extends BaseDAO<Version> {
 	 * @throws Exception
 	 */
 	boolean deleteByVersionId(int versionId) throws Exception;
+	/**
+	 * 根据版本名模糊查询
+	 * @param vaersionName 模糊查询字段
+	 * @return 返回版本集合
+	 */
+	List<Version> findByLikename(String vaersionName);
 }

@@ -26,9 +26,8 @@ public class VersionDAOImpl implements VersionDAO {
 	}
 
 	@Override
-	public boolean update(Version obj) throws Exception {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean update(Version version) throws Exception {
+		return DBUtil.execUpdate("update version set versionName=? where versionId=?", version.getVersionName(),version.getVersionId())>0;
 	}
 
 	@Override
@@ -45,8 +44,13 @@ public class VersionDAOImpl implements VersionDAO {
 
 	@Override
 	public Version findById(long id) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		
+		List<Version> list= (List<Version>) DBUtil.execQuery("select * from version where versionId=?", Version.class, id);
+		if (list.size()>0) {
+			return list.get(0);
+		}else {
+			return null;
+		}
 	}
 
 	@Override
@@ -54,5 +58,11 @@ public class VersionDAOImpl implements VersionDAO {
 		// TODO Auto-generated method stub
 		return (List<Version>) DBUtil.execQuery("select * from version where versionName=?", Version.class,
 				vaersionName);
+	}
+	@Override
+	public List<Version> findByLikename(String vaersionName) {
+		// TODO Auto-generated method stub
+		return (List<Version>) DBUtil.execQuery("select * from version where versionName like ?", Version.class,
+				"%"+vaersionName+"%");
 	}
 }
