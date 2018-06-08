@@ -1,10 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ include file="header.jsp"%>
 
-<c:if test="${hotList == null}">
-    <% response.sendRedirect(basePath + "index.action"); %>
-</c:if>
-
 <!DOCTYPE html>
 <html>
 	<head>

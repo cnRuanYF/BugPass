@@ -21,7 +21,8 @@ import com.bugpass.util.EncryptionUtils;
  * @date 2018-06-05 22:37
  */
 @SuppressWarnings("serial")
-@WebServlet(urlPatterns = { "/register.*", "/login.do", "/logout.do" })
+@WebServlet(urlPatterns = { "/register.checkUsernameExist", "/register.checkPhoneExist", "/register.checkEmailExist",
+        "/login.do", "/logout.do" })
 public class UserServlet extends HttpServlet {
 
     private static final String REGISTER_PAGE = "index.jsp";
@@ -29,7 +30,8 @@ public class UserServlet extends HttpServlet {
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        // 退出登录使用get方式
+        request.setCharacterEncoding("utf-8");
+
         switch (request.getServletPath()) {
         case "/logout.do":
             userLogout(request, response);
@@ -50,7 +52,8 @@ public class UserServlet extends HttpServlet {
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        // 其余操作使用post方式
+        request.setCharacterEncoding("utf-8");
+
         switch (request.getServletPath()) {
         case "/register.do":
             userRegister(request, response);
@@ -72,7 +75,7 @@ public class UserServlet extends HttpServlet {
      * @throws IOException
      */
     private void checkUsernameExist(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String username = (String) request.getAttribute("username");
+        String username = (String) request.getParameter("username");
 
         UserService userService = new UserServiceImpl();
         boolean isExist = userService.checkUsernameExist(username);
@@ -92,7 +95,7 @@ public class UserServlet extends HttpServlet {
      * @throws IOException
      */
     private void checkEmailExist(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String email = (String) request.getAttribute("email");
+        String email = (String) request.getParameter("email");
 
         UserService userService = new UserServiceImpl();
         boolean isExist = userService.checkEmailExist(email);
@@ -112,7 +115,7 @@ public class UserServlet extends HttpServlet {
      * @throws IOException
      */
     private void checkPhoneExist(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String phone = (String) request.getAttribute("phone");
+        String phone = (String) request.getParameter("phone");
 
         UserService userService = new UserServiceImpl();
         boolean isExist = userService.checkPhoneExist(phone);

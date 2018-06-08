@@ -138,11 +138,14 @@ public class UserDAOImpl implements UserDAO {
         String sql = "select count(*) from " + TBNAME + " where upper(username)=upper(?)";
         CachedRowSet crs = DBUtil.execQuery(sql, username);
         boolean isExist = false;
-        if(crs.next()) {
-            isExist=true;
+        if (crs.next()) {
+            isExist = crs.getInt(1) > 0;
+            System.out.println(username);
+            System.out.println(isExist);
+            System.out.println(crs.getInt(1));
         }
         crs.close();
-        
+
         return isExist;
     }
 
@@ -151,11 +154,11 @@ public class UserDAOImpl implements UserDAO {
         String sql = "select count(*) from " + TBNAME + " where upper(email)=upper(?)";
         CachedRowSet crs = DBUtil.execQuery(sql, email);
         boolean isExist = false;
-        if(crs.next()) {
-            isExist=true;
+        if (crs.next()) {
+            isExist = crs.getInt(1) > 0;
         }
         crs.close();
-        
+
         return isExist;
     }
 
@@ -164,11 +167,11 @@ public class UserDAOImpl implements UserDAO {
         String sql = "select count(*) from " + TBNAME + " where upper(phone)=upper(?)";
         CachedRowSet crs = DBUtil.execQuery(sql, phone);
         boolean isExist = false;
-        if(crs.next()) {
-            isExist=true;
+        if (crs.next()) {
+            isExist = crs.getInt(1) > 0;
         }
         crs.close();
-        
+
         return isExist;
     }
 
