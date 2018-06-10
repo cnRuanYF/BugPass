@@ -16,77 +16,41 @@
 
 <title>缺陷管理系统-版本管理</title>
 
-<!-- Bootstrap core CSS -->
-<link href="dist/css/bootstrap.css" rel="stylesheet">
-
-<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-<link href="../../assets/css/ie10-viewport-bug-workaround.css"
-	rel="stylesheet">
-
-<script src="js/jquery-3.3.1.min.js"></script>
-<script src="js/bootstrap.js"></script>
-<link href="css/styles.css" rel="stylesheet">
 
 <!-- Custom styles for this template -->
 <link href="back/dashboard.css" rel="stylesheet">
 
-<!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
-<!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-<script src="../../assets/js/ie-emulation-modes-warning.js"></script>
-
 <!-- 模态窗口连接 -->
 <script
 	src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
-<script
-	src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<style type="text/css">
+
+}
+</style>
+
 </head>
 
 <body>
 
-	<nav class="navbar navbar-inverse navbar-fixed-top">
-		<div class="container-fluid">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle collapsed"
-					data-toggle="collapse" data-target="#navbar" aria-expanded="false"
-					aria-controls="navbar">
-					<span class="sr-only">Toggle navigation</span> <span
-						class="icon-bar"></span> <span class="icon-bar"></span> <span
-						class="icon-bar"></span>
-				</button>
-				<a class="navbar-brand" href="#">缺陷管理系统-版本管理</a>
-			</div>
-			<div id="navbar" class="navbar-collapse collapse">
-				<ul class="nav navbar-nav navbar-right">
-					<li><a href="#">仪表盘</a></li>
-					<li><a href="#">设置</a></li>
-					<li><a href="#">个人信息</a></li>
-					<li><a href="#">帮助</a></li>
+	
+		<%@ include file="../header.jsp"%>
+
+
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-sm-3 col-md-2 sidebar" >
+
+				<ul class="nav nav-sidebar">
+					
+					<li class="nav-item"><a class="nav-link"
+						href="#modal-container-add" data-toggle="modal" ><h4>添加版本</h4> </a></li>
+
 				</ul>
-				<form class="navbar-form navbar-right">
+				<form class="navbar-form ">
 					<input type="text" id="searchVersionLike" class="form-control"
 						placeholder="Search..." value="${versionLike==null?'':versionLike}">
 					<input type="button" id="btnSearch" class="form-control" value="搜索">
 				</form>
-			</div>
-		</div>
-	</nav>
-
-	<div class="container-fluid">
-		<div class="row">
-			<div class="col-sm-3 col-md-2 sidebar">
-
-				<ul class="nav nav-sidebar">
-					<li class="active"><a href="UserServlet">版本管理</a></li>
-					<!-- <li><a href="back/addVersion.jsp">添加版本</a></li> -->
-					<li class="nav-item"><a class="nav-link"
-						href="#modal-container-add" data-toggle="modal">添加版本</a></li>
-
-				</ul>
-				<ul class="nav nav-sidebar hidden">
-					<li class="active"><a href="">Nav item again</a></li>
-					<li><a href="">One more nav</a></li>
-					<li><a href="">Another nav item</a></li>
-				</ul>
 			</div>
 
 
@@ -135,7 +99,7 @@
 						<div class="modal-header">
 							<h5 class="modal-title" id="registerModalLabel">修改版本号:</h5>
 							<!-- 隐藏域存放版本ID -->
-							<h6 type="" class="modal-title hidden" id="updateVersionId"></h6>
+							<input  type="hidden" class="modal-title " id="updateVersionId"></input>
 							<button class="close" type="button" data-dismiss="modal">
 								<span aria-hidden="true">×</span>
 							</button>
@@ -146,7 +110,7 @@
 							<div class="modal-body">
 								<div class="form-group">
 									<label for="versiomNowName">当前版本号</label> 
-									<h4 name="versiomNowName" id="versiomNowName">第1.1版</h4>
+									<h4  id="versiomNowName">第1.1版</h4>
 									<!-- <p name="versiomNowName" id="versiomNowName">第1.1版</p> -->
 									<!-- <input type="text"
 										class="form-control" name="versiomNowName" id="versiomNowName"
@@ -172,24 +136,24 @@
 			
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 
-				<h2 class="sub-header">版本列表</h2>
+				<h2 class="sub-header"> </h2>
 				<div class="table-responsive">
 					<table class="table table-striped table-hover">
 						<thead>
 							<tr>
-								<th>版本号</th>
+								<h4>版本列表</h4> 
 							</tr>
 						</thead>
 						<tbody>
 							<c:if test="${versions!=null}">
 								<c:forEach items="${versions}" var="version">
-									<tr>
+									<tr style="height:30px;">
 										<td>${version.versionName}</td>
 										<td><a  href="#modal-container-update" 
-										role="button" class="btn" data-toggle="modal">
-										<button class="btn btn-info btnUpdate" value="${version.versionId}">修改</button></a>&nbsp;&nbsp;
+										role="button"  data-toggle="modal" style="height:30px;">
+										<button class="btn btn-info btnUpdate" value="${version.versionId}" style="height:35px;">修改</button></a>&nbsp;&nbsp;
 											<button class="btn btn-danger btnDel"
-												value="${version.versionId}">删除</button></td>
+												value="${version.versionId}"style="height:35px;">删除</button></td>
 									</tr>
 								</c:forEach>
 							</c:if>
@@ -302,7 +266,7 @@
 		$(".btnDel").click(function(){
 			
 			var btn=$(this);
-			console.log($(btn).val());
+			//console.log($(btn).val());
 			layer.confirm('是否确定删除？', {
   			  btn: ['确定','取消'] //按钮
   			}, function(){
@@ -383,7 +347,8 @@
 		//修改版本按钮点击事件
 		$(".btnUpdate").click(function () {
 			var btn=$(this);
-			console.log($(btn).val());
+			//location.href="#modal-container-update";
+			//console.log($(btn).val());
 			$("#updateVersionId").html($(btn).val())
 			$.post("${pageContext.request.contextPath}/VersionServlet",
 					{"key":"selectOne","versionId":$(btn).val()},function(data,status){
