@@ -56,4 +56,11 @@ public interface UserDAO extends BaseDAO<User> {
      * @throws Exception
      */
     boolean checkPhoneExist(String phone) throws Exception;
+    
+    /**
+     * 修改个人中心用户部分信息
+     * @param user 用户对象
+     * @return 修改成功返回true，否则返回false
+     */
+    boolean updatePartUser(User user);
 }

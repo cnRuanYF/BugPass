@@ -131,4 +131,10 @@ public class UserServiceImpl implements UserService {
         return isExist;
     }
 
+		@Override
+		public boolean updatePartUser(User user) {
+			UserDAO dao = new UserDAOImpl();
+			return dao.updatePartUser(user);
+		}
+
 }

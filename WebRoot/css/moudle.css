@@ -1,0 +1,269 @@
+/**公用样式**/
+body{background: #F5F7F7;font-family: "PingFang SC","Proxima Nova","Helvetica Neue","Helvetica","Hiragino Sans GB","STHeitiSC Light","Microsoft YaHei UI Light","Microsoft YaHei","Source Han Sans",Arial,sans-serif; -ms-text-size-adjust:100%;-webkit-text-size-adjust:100%;font-weight: 300;}
+.bugmanagement{width: 1180px;margin: 0 auto 60px;}
+p,h3{margin: 0px;padding: 0px;}
+.bugmanagement-left,.bugmanagement-right{width: 228px;background: #FFF; border: 1px solid #EBEBEB;box-shadow: 0px 1px 1px 0px rgba(0,0,0,0.04);border-radius: 2px;float: left;margin-top: 20px;}
+.bugmanagement-left h3,.bugmanagement .cygl{font-size: 14px;color: #333;height: 50px;line-height: 50px;padding-left: 20px;margin: 0px;}
+.bugmanagement .cygl.b-b-1{border-bottom: 1px solid #f0f0f0;}
+.bugmanagement .cygl.b-b-0{border-bottom: 0;}
+.bugmanagement .mr .cygl{border-bottom: 0px solid #ebebeb;}
+.module_list_wrapper p{padding: 20px;}
+.module_list_wrapper .input-module-name,.module_list_wrapper .input-version,.module_list_wrapper .version-build-title{padding: 0px;height: 36px;line-height: 36px;}
+.module_list_wrapper .version-build-title{float: left;margin-right: 8px;}
+.module_list_wrapper p.no-mod {border-top: 1px solid #ebebeb;}
+.bugmanagement-left ul li{width: 100%;height: 50px;line-height: 50px;border-top: 1px solid #EBEBEB;}
+.bugmanagement-left ul li i{margin: 0px 9px 0px 20px;}
+.bugmanagement-left ul li a{font-size: 14px;color: #333; display: block; width: 100%;height: 100%;}
+.bugmanagement-left ul .active,.bugmanagement-left ul li:hover{background: #1081DE;}
+.bugmanagement-left ul .active a,.bugmanagement-left ul li:hover a{color: #fff;}
+.bugmanagement-left ul li:hover{background: #1081DE;}
+.bugmanagement-right{margin: 20px 0px 0px 20px;width: 928px;float: right;}
+.bugmanagement-left ul{margin-bottom: 0px;}
+.input-radio-show,.input-radio:checked+.input-radio-show,.input-checkbox-show,.input-checkbox:checked+.input-checkbox-show{display: inline-block;width: 15px;height: 15px; background: url("../../images/bug-management/img-sprit.png") no-repeat;background-size:500px 500px;background-position:0px -57px;margin-right: 5px; }
+.input-radio:checked+.input-radio-show {background-position: 0px -86px; }
+.input-radio:disabled+.input-radio-show{ opacity: .3; -ms-filter : progid:DXImageTransform.Microsoft.Alpha(Opacity=30); filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=30);}
+.input-checkbox-show {background-position: 0px 1px;}
+.input-checkbox:checked+.input-checkbox-show {background-position: 0px -27px;}
+
+/*弹窗*/
+.testin-modal .modal-header{background: #f6f6f6;padding: 10px 20px;border-radius: 2px 2px 0 0;}
+.testin-modal .modal-footer {padding: 10px 20px 10px 0;border-top: 0;border-radius: 0 0 5px 5px;}
+.testin-modal .btn{width: 88px;height: 36px;text-align: center;line-height: 36px;padding: 0px;}
+.testin-btn-primary{background: #1081DE; box-shadow: 0px 1px 1px 0px rgba(0,0,0,0.08);border-radius: 2px;font-size: 14px;}
+.btn-default{border-radius: 2px;}
+.testin-btn-primary:hover{background: #2288dc;color: #fff;}
+.enterprise-tip .modal-body{text-align: center;padding: 65px 0px;font-size: 14px;color: #333;}
+.testin-btn-primary:hover, .testin-btn-primary:visited, .testin-btn-primary:active, .testin-btn-primary:focus {background-color: #3098F2;color: #fff;outline: none; }
+.btn-default:hover, .btn-default:visited, .btn-default:active, .btn-default:focus {background-color: #fff;color: #333;outline: none;  }
+.modal-header:hover, .modal-header:visited, .modal-header:active, .modal-header:focus{outline: none;}
+
+.layout-fixed{ position: relative;}
+.layout-fixed .fixed-item{ position: absolute; right:0; top:0; bottom:0;}
+.page-pagination{ line-height: 28px; padding: 6px 20px; border-top:1px solid #EBEBEB; border-bottom:1px solid #EBEBEB; background: #FCFCFC;}
+.page-pagination .page-btn{display: inline-block;*display: inline;*zoom:1;width:28px;height: 28px;margin-left: 6px;background: #FFFFFF;border: 1px solid #CCCCCC;box-shadow: 0 1px 1px 0 #cccccc;box-shadow: 0 1px 1px 0 rgba(0,0,0,0.05);border-radius: 2px;text-align: center;cursor: pointer;}
+/*提示信息*/
+.ebms-tip{display:none;height: 50px;line-height: 50px;font-size: 13px;color: #fff;padding:0px 20px;box-shadow: 0px 4px 6px 0px rgba(0,0,0,0.10);border-radius: 2px;position : fixed;left:50%;z-index: 1051;}
+.ebms-tip i{font-size: 20px;margin-right: 10px;float: left; margin-top: 1px;}
+.ebms-success-tip{background:#00C185;}
+.ebms-warning-tip{background:#FFB102;}
+.ebms-failed-tip{background:#EB5A3C;}
+/*展示隐藏*/
+.testin-select-set{border-radius: 2px; background-image: url(../../images/bug-management/icon_01.png);}
+.bg-info{background-color: #d9edf7; border-radius: 4px;color: #1081de;font-size: 14px; height: auto;line-height: 20px;margin: 20px 0px 0px 0px;padding:15px 10px;text-align: center;}
+.has-success .control-label{color: #333;}
+/*placeholder定义*/
+input::-webkit-input-placeholder {color: #999 !important;}
+input:-moz-placeholder {color:#999 !important;}
+input::-moz-placeholder {color: #999 !important;}
+input:-ms-input-placeholder {color: #999!important;}
+
+/*switch*/
+.enterprise-staff-title{ margin-right: 5px;}
+.enterprise-staff-title-button{ margin-right: 5px; font-size:12px; }
+.allow-enter{float: right;margin-right: 20px;}
+.b-b-0 .switch-box{top: 10px;}
+.b-b-0 .switch-box input:checked+label {background: #1081DE ;}
+
+
+.btn{
+    height :36px;
+    border:0;
+    box-shadow: 0 1px 1px 0 rgba(0,0,0,0.08);
+    border-radius: 2px;
+    font-size: 13px;
+    text-align: center;
+}
+.btn-default{
+    border:1px solid #CCCCCC;
+    background: #ffffff;
+}
+.btn-red{
+    background: #EB5A3C;
+    color:#ffffff;
+}
+.btn-red:hover{
+    color: #ffffff;
+}
+.btn-red-sm{
+    color: #ffffff;
+}
+.btn-blue{
+    background: #1081DE;
+    color:#fff;
+}
+.btn-blue.focus,.btn-blue:focus,.btn-blue:hover,
+.btn-blue-sm.focus,.btn-blue-sm:focus,.btn-blue-sm:hover{
+    background-color: #3098F2;
+    color: #ffffff;
+}
+.btn-blue-sm{
+    height :28px;
+    background: #1081DE;
+    color:#fff;
+}
+button.btn,input:button.btn,input:submit.btn{
+    line-height: 100%;
+}
+
+.ebms-tip-layout2{
+    zoom:1;
+}
+.ebms-tip-layout2:after{
+    clear : both;
+    content:'\20';
+    height: 0;
+    overflow: hidden;
+}
+.ebms-tip-layout2{
+    border: 1px solid;
+    border-left: 4px solid;
+    background-color: #FFFDE3;
+    position: relative;
+}
+.ebms-tip-layout2 .tip-icon,.ebms-tip-layout2 .tip-other{
+    position: absolute;
+}
+.ebms-tip-layout2 .tip-icon{
+    width:70px;
+    height: 62px;
+    line-height: 62px;
+    margin-top: -31px;
+    top:50%;
+    text-align: center;
+}
+.ebms-tip-layout2 .tip-icon .iconfont{
+    line-height: 1.6;
+    font-size: 45px;
+    vertical-align: middle;
+}
+.ebms-tip-layout2 .tip-other{
+    height: 28px;
+    margin-top: -14px;
+    padding:0 20px;
+    right:0;
+    top:50%;
+}
+.ebms-tip-layout2 .tip-content{
+    margin-left: 70px;
+    margin-right: 200px;
+    padding-top:12px;
+    padding-bottom: 10px;
+    box-sizing: content-box;
+    font-size: 13px;
+}
+.ebms-tip-layout2 .tip-content .tip-title{
+    font-size: 14px;
+}
+.ebms-tip-layout2 .tip-content .tip-body,.ebms-tip-layout2 .tip-other{
+    color: #333333;
+}
+.tip-layout2-warning{
+    border-top-color : #FFBE4D;
+    border-bottom-color : #FFBE4D;
+    border-right-color : #FFBE4D;
+    color: #EB5A3C;
+}
+.tip-layout2-default{
+    background-color: #E0F5FF;
+    border-top-color : #BCE8F1;
+    border-bottom-color : #BCE8F1;
+    border-right-color : #BCE8F1;
+    color: #1081DE;
+}
+.tip-layout2-success{
+    border-top-color : #CCEC9E;
+    border-bottom-color : #CCEC9E;
+    border-right-color : #CCEC9E;
+    color: #00C185;
+}
+
+.ep-footer{
+    clear: both;
+    line-height: 20px;
+    padding:15px 0;
+    background-color: #ffffff;
+    text-align: center;
+    color: #999999;
+    font-size: 12px;
+}
+.ep-footer a{
+    margin: 0 10px;
+    color : #999999;
+}
+.ep-footer a:hover{
+    color:#3098F2;
+}
+
+.badge-danger{
+    background-color: #EB5A3C;
+    color: #ffffff;
+}
+.bugmanagement-left ul .badge{
+    float: right;
+    margin-top: 15px;
+    margin-right: 20px;
+    font-weight: normal;
+}
+.form-tip{
+    font-size: 12px;
+    color: #666666;
+}
+.error{
+    color:#EB5A3C;
+}
+/*2016-12-16 邀请弹窗*/
+.invitedModal .modal-body{
+    padding-top: 30px!important;
+    padding-bottom: 15px!important;
+}
+.invitedModal .invitation-title-text{
+    font-size: 14px;
+}
+.invitedModal .bugout-table-title{
+    text-align: left;
+    font-size: 14px;
+    padding: 5px 0 5px 45px;
+}
+.invitedModal .bugout-table-area{
+    margin-bottom: 15px;
+}
+.invitedModal .table-scroll-out{
+    width: 505px;
+    margin-left: 31px;
+    // height: 112px;
+    overflow: scroll;
+}
+.invitedModal.enterprise-modal .bugout-table{
+    margin-top: 0px;
+    margin-bottom: 0px;
+    border: 1px solid #DDDDDD;
+    background: #FFFFFF;
+    border-radius: 2px;
+}
+.invitedModal.enterprise-modal .bugout-table .w300 .text-overflow{
+    width: 366px;
+    line-height: 24px;
+    text-align: left;
+}
+.invitedModal .bugout-table .text-overflow img{
+    width: 24px;
+    height: 24px;
+    float: left;
+    margin-right: 5px;
+}
+.invitedModal .bugout-table td{
+    padding: 6px 15px;
+}
+.invitedModal.enterprise-modal .btn-skip{
+    margin-top: 5px;
+    margin-bottom: 10px;
+    background-color: #1081de;
+}
+.invitedModal.enterprise-modal .btn-skip:hover,.invitedModal.enterprise-modal .btn-reject:hover{
+    background-color: #3098f2;
+}
+.invitedModal.enterprise-modal .btn-reject{
+    margin-top: 20px;
+    margin-bottom: 10px;
+    background-color: #1081de;
+}

@@ -50,8 +50,23 @@ public class User {
         this.username = username;
         this.password = password;
     }
-
+    
     /**
+     * 构造一个用户对象
+     * @param id 编号
+     * @param phone 手机号
+     * @param qq 
+     * @param realname 真实姓名
+     */
+    public User(long id, String phone, String qq, String realname) {
+			super();
+			this.id = id;
+			this.phone = phone;
+			this.qq = qq;
+			this.realname = realname;
+		}
+
+		/**
      * @return the id
      */
     public long getId() {

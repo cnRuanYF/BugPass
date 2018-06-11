@@ -67,6 +67,21 @@ public class UserDAOImpl implements UserDAO {
 
         return flag > 0;
     }
+    
+  	/*
+  	 * (non-Javadoc)
+  	 * 
+  	 * @see com.bugpass.dao.UserDAO#updatePartUser(com.bugpass.entity.User)
+  	 */
+  	@Override
+  	public boolean updatePartUser(User user) {
+  		
+  		//更新个人中心用户的真实姓名、手机号、qq
+  		String sql = "update " + TBNAME + " set phone=?,qq=?,realname=? where id=?";
+  		int flag = DBUtil.execUpdate(sql, user.getPhone(), user.getQq(), user.getRealname(), user.getId());
+
+  		return flag > 0;
+  	}
 
     /*
      * (non-Javadoc)
