@@ -7,8 +7,10 @@ import com.bugpass.entity.Version;
 
 public interface StatisticsDAO {
 	/**
-	 * 查询统计信息
-	 * @return 统计结果集
+	 * 统计表格数据接口
+	 * 
+	 * @author YeHandsome
+	 * @date 2018-06-06 21:32
 	 */
 	List<Statistics> findAllStatistics();
 }

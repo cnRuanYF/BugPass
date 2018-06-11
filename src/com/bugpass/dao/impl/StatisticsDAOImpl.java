@@ -8,7 +8,12 @@ import com.bugpass.entity.Version;
 import com.bugpass.util.DBUtil;
 
 public class StatisticsDAOImpl implements StatisticsDAO {
-
+	/**
+	 * 统计表格数据SQL语句
+	 * 
+	 * @author YeHandsome
+	 * @date 2018-06-06 21:33
+	 */
 	@Override
 	public List<Statistics> findAllStatistics() {
 		// TODO Auto-generated method stub

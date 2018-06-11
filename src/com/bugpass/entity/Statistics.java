@@ -3,10 +3,11 @@ package com.bugpass.entity;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 /**
- * 
- * @author Administrator
- * 统计实体类
+ * 统计表格数据实体类
+ * @author YeHandsome
+ * @date 2018-06-07 20:45
  */
+
 public class Statistics {
 	private String projectName;
 	private String versionName;
