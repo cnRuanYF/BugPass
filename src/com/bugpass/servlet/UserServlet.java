@@ -21,7 +21,7 @@ import com.bugpass.util.EncryptionUtils;
  * @date 2018-06-05 22:37
  */
 @SuppressWarnings("serial")
-@WebServlet(urlPatterns = { "/register.checkUsernameExist", "/register.checkPhoneExist", "/register.checkEmailExist",
+@WebServlet(urlPatterns = { "/register.checkUsernameExist", "/register.checkPhoneExist", "/register.checkEmailExist","/register.do",
         "/login.do", "/logout.do" })
 public class UserServlet extends HttpServlet {
 
@@ -134,8 +134,8 @@ public class UserServlet extends HttpServlet {
      * @throws IOException
      */
     private void userRegister(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String username = (String) request.getAttribute("username");
-        String password = (String) request.getAttribute("password");
+        String username = (String) request.getParameter("username");
+        String password = (String) request.getParameter("password");
         // XXX 表单验证
         User user = new User(username, EncryptionUtils.getSHA1(password));
 
@@ -159,12 +159,12 @@ public class UserServlet extends HttpServlet {
      * @throws IOException
      */
     private void userLogin(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String username = (String) request.getAttribute("username");
-        String password = (String) request.getAttribute("password");
+        String username = (String) request.getParameter("username");
+        String password = (String) request.getParameter("password");
         // XXX 表单验证
         UserService userService = new UserServiceImpl();
         User user = userService.findByUsername(username);
-
+        
         if (user == null) {
             request.getSession().setAttribute("actionErrors", "该用户不存在");
         } else if (!user.getPassword().equals(EncryptionUtils.getSHA1(password))) {

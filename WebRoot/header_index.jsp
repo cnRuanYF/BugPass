@@ -30,8 +30,12 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 	<%session.setAttribute("actionMessages", null); %>
 </c:if>
 
+<style>
+body{padding-top:2rem;}
+</style>
+
 <!--导航栏-->
-<header class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+<header class="navbar navbar-expand-md navbar-light">
 	<div class="container">
 		<div class="navbar-brand">
 			<h3 class="mt-1 mb-1"><i class="fa fa-bug mr-2"></i></h3>
@@ -42,19 +46,13 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav mr-auto">
 				<li class="nav-item">
-					<a class="nav-link" href="index.jsp">首页</a>
+					<a class="nav-link btnEnterSys" href="javascript:void(0)">进入系统</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="project.jsp">进入系统</a>
+					<a class="nav-link" href="#">帮助</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="#">统计</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="#">成员</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="#">设置</a>
+					<a class="nav-link" href="#">TODO</a>
 				</li>
 			</ul>
 			<ul class="navbar-nav mr-4">
@@ -73,10 +71,10 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
                             ${user.realname == null ? user.username : user.realname}
 						</a>
 						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-							<a class="dropdown-item" href="house_publish.jsp">
+							<a class="dropdown-item" href="user_profile.jsp">
 							    <i class="fa fa-fw fa-user-edit mr-2"></i>个人资料
 							</a>
-							<a class="dropdown-item" href="user.profile.action">
+							<a class="dropdown-item" href="user_change_password.jsp">
 							    <i class="fa fa-fw fa-key mr-2"></i>修改密码
 							</a>
 							<div class="dropdown-divider"></div>
@@ -96,7 +94,9 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title" id="loginModalLabel">用户登录</h5> 
+				<h5 class="modal-title" id="loginModalLabel">
+					<i class="fa fa-sign-in-alt mr-2"></i>用户登录
+				</h5> 
 				<button class="close" type="button" data-dismiss="modal">
 					<span aria-hidden="true">×</span>
 				</button>
@@ -133,7 +133,9 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title" id="registerModalLabel">新用户注册</h5> 
+				<h5 class="modal-title" id="registerModalLabel">
+					<i class="fa fa-user-plus mr-2"></i>新用户注册
+				</h5> 
 				<button class="close" type="button" data-dismiss="modal">
 					<span aria-hidden="true">×</span>
 				</button>

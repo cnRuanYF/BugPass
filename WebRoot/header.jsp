@@ -31,7 +31,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 </c:if>
 
 <!--导航栏-->
-<header class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+<header class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
 	<div class="container">
 		<div class="navbar-brand">
 			<h3 class="mt-1 mb-1"><i class="fa fa-bug mr-2"></i>BugPass</h3>

@@ -45,58 +45,58 @@
     
 	<body>
 	    <div class="container">
-		<div class="row">
-			<!-- 时间 -->
-			<div class="col-sm-6 col-md-4 col-lg-3 col-xl-4 mb-4">
-				<div class="card bg-light text-center">
-					<div class="card-header" id="currentDate"></div>
-					<div class="card-body">
-						<h1 class="card-title mb-0" id="currentTime">0:00:00</h1>
+			<div class="row">
+				<!-- 时间 -->
+				<div class="col-sm-6 col-md-4 col-lg-3 col-xl-4 mb-4">
+					<div class="card bg-light text-center">
+						<div class="card-header" id="currentDate"></div>
+						<div class="card-body">
+							<h1 class="card-title mb-0" id="currentTime">0:00:00</h1>
+						</div>
+					</div>
+				</div>
+	
+				<!-- 统计信息 -->
+				<div class="col-sm-6 col-md-4 col-lg-3 col-xl-2 mb-4">
+					<div class="card bg-primary text-white text-center">
+						<div class="card-body">
+							<h1 class="card-title mb-0">${todo}</h1>
+						</div>
+						<div class="card-footer">primary</div>
+					</div>
+				</div>
+	
+				<div class="col-sm-6 col-md-4 col-lg-3 col-xl-2 mb-4">
+					<div class="card bg-success text-white text-center">
+						<div class="card-body">
+							<h1 class="card-title mb-0">${todo}</h1>
+						</div>
+						<div class="card-footer">success</div>
+					</div>
+				</div>
+	
+				<div class="col-sm-6 col-md-4 col-lg-3 col-xl-2 mb-4">
+					<div class="card bg-warning text-white text-center">
+						<div class="card-body">
+							<h1 class="card-title mb-0">${todo}</h1>
+						</div>
+						<div class="card-footer">warning</div>
+					</div>
+				</div>
+	
+				<div class="col-sm-6 col-md-4 col-lg-3 col-xl-2 mb-4">
+					<div class="card bg-danger text-white text-center">
+						<div class="card-body">
+							<h1 class="card-title mb-0">TODO</h1>
+						</div>
+						<div class="card-footer">danger</div>
 					</div>
 				</div>
 			</div>
-
-			<!-- 统计信息 -->
-			<div class="col-sm-6 col-md-4 col-lg-3 col-xl-2 mb-4">
-				<div class="card bg-primary text-white text-center">
-					<div class="card-body">
-						<h1 class="card-title mb-0">${todo}</h1>
-					</div>
-					<div class="card-footer">primary</div>
-				</div>
-			</div>
-
-			<div class="col-sm-6 col-md-4 col-lg-3 col-xl-2 mb-4">
-				<div class="card bg-success text-white text-center">
-					<div class="card-body">
-						<h1 class="card-title mb-0">${todo}</h1>
-					</div>
-					<div class="card-footer">success</div>
-				</div>
-			</div>
-
-			<div class="col-sm-6 col-md-4 col-lg-3 col-xl-2 mb-4">
-				<div class="card bg-warning text-white text-center">
-					<div class="card-body">
-						<h1 class="card-title mb-0">${todo}</h1>
-					</div>
-					<div class="card-footer">warning</div>
-				</div>
-			</div>
-
-			<div class="col-sm-6 col-md-4 col-lg-3 col-xl-2 mb-4">
-				<div class="card bg-danger text-white text-center">
-					<div class="card-body">
-						<h1 class="card-title mb-0">TODO</h1>
-					</div>
-					<div class="card-footer">danger</div>
-				</div>
-			</div>
-        </div>
+		</div>
 
         <jsp:include page="footer.htm"></jsp:include>
         
-        <style></style>
 	</body>
 </html>
 

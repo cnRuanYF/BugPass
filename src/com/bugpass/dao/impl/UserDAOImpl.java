@@ -109,7 +109,7 @@ public class UserDAOImpl implements UserDAO {
     @SuppressWarnings("unchecked")
     @Override
     public User findByUsername(String username) throws Exception {
-        String sql = "select " + ALL_COLUMNS + " from " + TBNAME + " where username=?";
+        String sql = "select " + ALL_COLUMNS + " from " + TBNAME + " where upper(username)=upper(?)";
         List<User> list = (List<User>) DBUtil.execQuery(sql, User.class, username);
 
         if (list.size() > 0) {
@@ -127,7 +127,7 @@ public class UserDAOImpl implements UserDAO {
     @SuppressWarnings("unchecked")
     @Override
     public List<User> findByKeyword(String keyword) throws Exception {
-        String sql = "select " + ALL_COLUMNS + " from " + TBNAME + " where id=? or username=? or nickname LIKE ?";
+        String sql = "select " + ALL_COLUMNS + " from " + TBNAME + " where id=? or upper(username)=upper(?) or realname LIKE ?";
         List<User> list = (List<User>) DBUtil.execQuery(sql, User.class, keyword, keyword, "%" + keyword + "%");
 
         return list;
@@ -135,14 +135,11 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public boolean checkUsernameExist(String username) throws Exception {
-        String sql = "select count(*) from " + TBNAME + " where upper(username)=upper(?)";
+        String sql = "select count(*) from " + TBNAME + " where upperupper(username)";
         CachedRowSet crs = DBUtil.execQuery(sql, username);
         boolean isExist = false;
         if (crs.next()) {
             isExist = crs.getInt(1) > 0;
-            System.out.println(username);
-            System.out.println(isExist);
-            System.out.println(crs.getInt(1));
         }
         crs.close();
 
@@ -164,7 +161,7 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public boolean checkPhoneExist(String phone) throws Exception {
-        String sql = "select count(*) from " + TBNAME + " where upper(phone)=upper(?)";
+        String sql = "select count(*) from " + TBNAME + " where phone=?";
         CachedRowSet crs = DBUtil.execQuery(sql, phone);
         boolean isExist = false;
         if (crs.next()) {
