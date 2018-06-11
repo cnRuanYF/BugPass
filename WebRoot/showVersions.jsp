@@ -18,7 +18,7 @@
 
 
 <!-- Custom styles for this template -->
-<link href="back/dashboard.css" rel="stylesheet">
+<link href="css/dashboard.css" rel="stylesheet">
 
 <!-- 模态窗口连接 -->
 <script
@@ -260,7 +260,7 @@
 		   
 	   });
 	</script>
-	<script src="${pageContext.request.contextPath}/back/layer.js"></script>
+	<script src="${pageContext.request.contextPath}/js/layer.js"></script>
 	<script type="text/javascript">
 	$(function(){
 		$(".btnDel").click(function(){
@@ -276,7 +276,7 @@
   			$.post("${pageContext.request.contextPath}/VersionServlet",{"key":"dele","versionId":$(btn).val()},function(data,status){
   				
   				//尝试获取status data
-  				console.log("status"+status+",data :"+data);
+  				//console.log("status"+status+",data :"+data);
   				
   				if(data)
   					{
@@ -349,7 +349,7 @@
 			var btn=$(this);
 			//location.href="#modal-container-update";
 			//console.log($(btn).val());
-			$("#updateVersionId").html($(btn).val())
+			$("#updateVersionId").val($(btn).val())
 			$.post("${pageContext.request.contextPath}/VersionServlet",
 					{"key":"selectOne","versionId":$(btn).val()},function(data,status){
 						$("#versiomNowName").html(data);
@@ -371,7 +371,7 @@
 				//$("#button").addClass("disabled");
 				alert(versionNewNameMsg);
 			} else {
-				$.get("${pageContext.request.contextPath}/VersionServlet?key=update",{"versionId":$("#updateVersionId").html(),"versionNewName":$("#versionNewName").val()},function (data,status) {
+				$.get("${pageContext.request.contextPath}/VersionServlet?key=update",{"versionId":$("#updateVersionId").val(),"versionNewName":$("#versionNewName").val()},function (data,status) {
 					if (data) {
 						layer.msg('修改成功', {
   						    time: 2000, //2s后自动关闭

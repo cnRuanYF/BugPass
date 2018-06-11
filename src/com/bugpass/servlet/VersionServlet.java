@@ -39,22 +39,22 @@ public class VersionServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
 		String key = request.getParameter("key");
-		System.out.println(key);
+		//System.out.println(key);
 		if ("selectAll".equals(key)) {
 			// int projectId=Integer.parseInt(request.getParameter("projectId"));
 			List<Version> versions = vs.returnfindAllByProjectid(1);
-			for (Version version : versions) {
-				System.out.println(version);
-			}
+			//for (Version version : versions) {
+			//	System.out.println(version);
+			//}
 			request.setAttribute("versions", versions);
-			request.getRequestDispatcher("back/showVersions.jsp").forward(request, response);
+			request.getRequestDispatcher("showVersions.jsp").forward(request, response);
 		} else if ("selectVersionName".equals(key)) {
 			String versionName = request.getParameter("versionName");
 			PrintWriter out = response.getWriter();
 			if ("".equals(versionName)) {
 				out.print("版本号不能为空");
 			} else {
-				System.out.println(versionName);
+				//System.out.println(versionName);
 				boolean i = vs.returnFindByVersionName(versionName);
 				if (i) {
 					out.print("版本号已存在，请勿重复创建");
@@ -64,7 +64,7 @@ public class VersionServlet extends HttpServlet {
 			PrintWriter out = response.getWriter();
 			int projectId = Integer.parseInt(request.getParameter("projectId"));
 			String versionName=request.getParameter("versionName");
-			System.out.println(versionName);
+			//System.out.println(versionName);
 			Version v=new Version();
 			v.setProjectId(projectId);
 			v.setVersionName(versionName);
@@ -73,9 +73,9 @@ public class VersionServlet extends HttpServlet {
 			out.print(flag);
 		}else if ("dele".equals(key)) {
 			PrintWriter out = response.getWriter();
-			System.out.println("*****************");
+			//System.out.println("*****************");
 			int versionId=Integer.parseInt(request.getParameter("versionId"));
-			System.out.println(versionId);
+			//System.out.println(versionId);
 			boolean flag=vs.returndeleteByVersionId(versionId);
 			out.print(flag);
 		}else if ("selectOne".equals(key)) {
@@ -95,19 +95,19 @@ public class VersionServlet extends HttpServlet {
 			String versionName=request.getParameter("versionLike");
 			if (versionName.equals("")) {
 				List<Version> versions = vs.returnfindAllByProjectid(1);
-				for (Version version : versions) {
-					System.out.println(version);
-				}
+				//for (Version version : versions) {
+				//	System.out.println(version);
+				//}
 				request.setAttribute("versions", versions);
-				request.getRequestDispatcher("back/showVersions.jsp").forward(request, response);
+				request.getRequestDispatcher("showVersions.jsp").forward(request, response);
 			} else {
 				List<Version> versions = vs.returnListFindByVersionName(versionName);
-				for (Version version : versions) {
-					System.out.println(version);
-				}
+				//for (Version version : versions) {
+				//	System.out.println(version);
+				//}
 				request.setAttribute("versions", versions);
 				request.setAttribute("versionLike", versionName);
-				request.getRequestDispatcher("back/showVersions.jsp").forward(request, response);
+				request.getRequestDispatcher("showVersions.jsp").forward(request, response);
 			}
 			
 		}
