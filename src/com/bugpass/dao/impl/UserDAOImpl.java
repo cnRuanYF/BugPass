@@ -150,7 +150,7 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public boolean checkUsernameExist(String username) throws Exception {
-        String sql = "select count(*) from " + TBNAME + " where upperupper(username)";
+        String sql = "select count(*) from " + TBNAME + " where upper(username)=upper(?)";
         CachedRowSet crs = DBUtil.execQuery(sql, username);
         boolean isExist = false;
         if (crs.next()) {

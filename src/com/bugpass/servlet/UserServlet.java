@@ -22,8 +22,8 @@ import com.bugpass.util.EncryptionUtils;
  * @date 2018-06-05 22:37
  */
 @SuppressWarnings("serial")
-@WebServlet(urlPatterns = { "/register.checkUsernameExist", "/register.checkPhoneExist", "/register.checkEmailExist","/register.do",
-        "/login.do", "/logout.do","/editPersonalInfo.do","/changePassword.do" })
+@WebServlet(urlPatterns = { "/register.checkUsernameExist", "/register.checkPhoneExist", "/register.checkEmailExist",
+        "/register.do", "/login.do", "/logout.do", "/updateUserProfile.do", "/updateUserPassword.do" })
 public class UserServlet extends HttpServlet {
 
     private static final String REGISTER_PAGE = "index.jsp";
@@ -62,12 +62,12 @@ public class UserServlet extends HttpServlet {
         case "/login.do":
             userLogin(request, response);
             break;
-        case "/editPersonalInfo.do":
-      		userEditPersonalInfo(request,response);
-      		break;
-        case "/changePassword.do":
-      		userChangePassword(request,response);
-      		break;
+        case "/updateUserProfile.do":
+            updateUserProfile(request, response);
+            break;
+        case "/updateUserPassword.do":
+            updateUserPassword(request, response);
+            break;
         default:
             break;
         }
@@ -171,7 +171,7 @@ public class UserServlet extends HttpServlet {
         // XXX 表单验证
         UserService userService = new UserServiceImpl();
         User user = userService.findByUsername(username);
-        
+
         if (user == null) {
             request.getSession().setAttribute("actionErrors", "该用户不存在");
         } else if (!user.getPassword().equals(EncryptionUtils.getSHA1(password))) {
@@ -196,68 +196,65 @@ public class UserServlet extends HttpServlet {
         response.sendRedirect(LOGIN_PAGE);
     }
 
-		/**
+    /**
      * 修改用户个人信息
-		 * @param request
-		 * @param response
-		 * @throws Exception 
-		 */
-		private void userEditPersonalInfo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException  {
-			request.setCharacterEncoding("utf-8");
-			
-			UserService userService = new UserServiceImpl();
-			int id = Integer.parseInt(request.getParameter("id"));
-			String realname = request.getParameter("realname");
-			String phone = request.getParameter("phone");
-			String qq = request.getParameter("qq");
-			//创建一个用户对象
-			User user = new User(id, phone, qq, realname);
-			boolean flag = false;
-				//调用方法
-				try {
-					flag = userService.updatePartUser(user);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			//简单处理提示
-			if (flag) {
-				response.sendRedirect("project.jsp");
-			}
-			
-		}
-		
-		/**
-		 * 用户修改密码
-		 * @param request
-		 * @param response
-		 */
-		private void userChangePassword(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-			request.setCharacterEncoding("utf-8");
-			UserService userService = new UserServiceImpl();
-			String oldPassword = request.getParameter("oldPassword");
-			String newPassword = request.getParameter("newPassword");
-			String confirmNewPassword = request.getParameter("confirmNewPassword");
-			//获取用户对象
-			HttpSession session = request.getSession();
-			User user = (User) session.getAttribute("user");
-			
-			//测试代码
-			/*User user = null;
-			try {
-				user = ud.findById(1);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}*/
-			
-			//判断原密码是否一致
-			if (oldPassword.equals(user.getPassword())) {
-				//判断两次新密码是否一致
-				if (newPassword.equals(confirmNewPassword)) {
-					//设置新密码
-					user.setPassword(newPassword);
-				}
-			}
-			response.sendRedirect("index.jsp");
-		}
+     * 
+     * @param request
+     * @param response
+     * @throws Exception
+     */
+    private void updateUserProfile(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        UserService userService = new UserServiceImpl();
+        long id = Long.parseLong(request.getParameter("id"));
+        String realname = request.getParameter("realname");
+        String phone = request.getParameter("phone");
+        String qq = request.getParameter("qq");
+
+        User user = new User(id, phone, qq, realname);
+
+        if (userService.updatePartUser(user)) {
+            user = userService.findById(user.getId());
+            request.getSession().setAttribute("user", user);
+            response.sendRedirect("user_profile.jsp");
+        }
+
+    }
+
+    /**
+     * 用户修改密码
+     * 
+     * @param request
+     * @param response
+     */
+    private void updateUserPassword(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        UserService userService;
+        HttpSession session = request.getSession();
+
+        String oldPassword = EncryptionUtils.getSHA1(request.getParameter("oldPassword"));
+        String newPassword = EncryptionUtils.getSHA1(request.getParameter("newPassword"));
+        String confirmNewPassword = EncryptionUtils.getSHA1(request.getParameter("confirmNewPassword"));
+
+        User user = (User) session.getAttribute("user");
+
+        if (!newPassword.equals(confirmNewPassword)) {
+            session.setAttribute("actionErrors", "两次输入不一致");
+        } else if (!oldPassword.equals(user.getPassword())) {
+            session.setAttribute("actionErrors", "原密码不正确");
+        } else {
+            userService = new UserServiceImpl();
+            user.setPassword(newPassword);
+            boolean success = userService.updateUserProfile(user);
+
+            if (success) {
+                session.setAttribute("actionMessages", "修改成功");
+            } else {
+                session.setAttribute("actionErrors", "操作失败");
+            }
+        }
+
+        response.sendRedirect("user_change_password.jsp");
+    }
 }

@@ -51,9 +51,6 @@ body{padding-top:2rem;}
 				<li class="nav-item">
 					<a class="nav-link" href="#">帮助</a>
 				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="#">TODO</a>
-				</li>
 			</ul>
 			<ul class="navbar-nav mr-4">
 				<c:if test="${user == null}">
@@ -70,7 +67,7 @@ body{padding-top:2rem;}
 						    <i class="fa fa-user-circle"></i>
                             ${user.realname == null ? user.username : user.realname}
 						</a>
-						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+						<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
 							<a class="dropdown-item" href="user_profile.jsp">
 							    <i class="fa fa-fw fa-user-edit mr-2"></i>个人资料
 							</a>

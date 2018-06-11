@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="header.jsp"%>
 
 <!DOCTYPE html>
@@ -60,27 +60,27 @@
 				<div class="col-sm-6 col-md-4 col-lg-3 col-xl-2 mb-4">
 					<div class="card bg-primary text-white text-center">
 						<div class="card-body">
-							<h1 class="card-title mb-0">${todo}</h1>
+							<h1 class="card-title mb-0">TODO</h1>
 						</div>
-						<div class="card-footer">primary</div>
+						<div class="card-footer">TODO</div>
 					</div>
 				</div>
 	
 				<div class="col-sm-6 col-md-4 col-lg-3 col-xl-2 mb-4">
 					<div class="card bg-success text-white text-center">
 						<div class="card-body">
-							<h1 class="card-title mb-0">${todo}</h1>
+							<h1 class="card-title mb-0">TODO</h1>
 						</div>
-						<div class="card-footer">success</div>
+						<div class="card-footer">TODO</div>
 					</div>
 				</div>
 	
 				<div class="col-sm-6 col-md-4 col-lg-3 col-xl-2 mb-4">
 					<div class="card bg-warning text-white text-center">
 						<div class="card-body">
-							<h1 class="card-title mb-0">${todo}</h1>
+							<h1 class="card-title mb-0">TODO</h1>
 						</div>
-						<div class="card-footer">warning</div>
+						<div class="card-footer">TODO</div>
 					</div>
 				</div>
 	
@@ -89,7 +89,7 @@
 						<div class="card-body">
 							<h1 class="card-title mb-0">TODO</h1>
 						</div>
-						<div class="card-footer">danger</div>
+						<div class="card-footer">TODO</div>
 					</div>
 				</div>
 			</div>

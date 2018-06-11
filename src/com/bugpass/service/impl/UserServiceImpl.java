@@ -134,7 +134,16 @@ public class UserServiceImpl implements UserService {
 		@Override
 		public boolean updatePartUser(User user) {
 			UserDAO dao = new UserDAOImpl();
-			return dao.updatePartUser(user);
+
+	        boolean success = false;
+	        try {
+	            success = dao.updatePartUser(user);
+	        } catch (Exception e) {
+	            e.printStackTrace(); // XXX 处理异常
+	        }
+
+	        return success;
+
 		}
 
 }

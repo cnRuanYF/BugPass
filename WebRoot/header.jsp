@@ -42,19 +42,16 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav mr-auto">
 				<li class="nav-item">
-					<a class="nav-link" href="index.jsp">概述</a>
+					<a class="nav-link" href="project.jsp">概述</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="#">问题</a>
+					<a class="nav-link" href="ProjectServlet?key=findAll">项目</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="#">统计</a>
+					<a class="nav-link" href="VersionServlet?key=selectAll">版本</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="#">成员</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="#">设置</a>
+					<a class="nav-link" href="MemberRelationServlet?key=queryAll">成员</a>
 				</li>
 			</ul>
 			<ul class="navbar-nav mr-4">
@@ -63,7 +60,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 					    <i class="fa fa-user-circle"></i>
                            ${user.realname == null ? user.username : user.realname}
 					</a>
-					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+					<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
 						<a class="dropdown-item" href="index.jsp">
 						    <i class="fa fa-fw fa-home mr-2"></i>返回首页
 						</a>
