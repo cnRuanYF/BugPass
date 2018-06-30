@@ -1,0 +1,78 @@
+@CHARSET "UTF-8";
+
+/* Designed by Yaofeng Ruan */
+
+/* 防止文字换行 ================================================================ */
+.line-limit-length,
+.line-limit-length *{
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+/* 导航栏固定时页面下移 ================================================================ */
+body {
+    padding-top: 6rem;
+}
+
+/* 使footer在页面内容不足时依然在最下方 ================================================================ */
+body {
+    position: relative;
+    padding-bottom: 15rem;
+}
+
+footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+/* 提示框 ================================================================ */
+#msgbox {
+	z-index: 1000;
+	margin: 0;
+	padding: 20px;
+	width: 440px;	/* 实际 440px + padding20px * 2 = 480px */
+	position: fixed;
+	top: calc(50% - 100px);
+	left: calc(50% - 480px / 2);
+	background-color: rgba(0, 0, 0, 0.7);
+	border-radius: 20px;
+	color: white;
+	text-align: center;
+	vertical-align: middle;
+	transform: scale(0.5);
+	opacity: 0;
+	transition: all 300ms;
+}
+
+#msgbox ul {
+	margin: 0;
+	padding: 0;
+	list-style: none; 
+}
+
+/* 卡片分列 ================================================================ */
+
+@media (min-width: 576px){ /* sm */
+    .card-columns {
+        column-count: 2;
+    }
+}
+
+@media (min-width: 768px){ /* md */
+    .card-columns {
+        column-count: 2;
+    }
+}
+
+@media (min-width: 992px){ /* lg */
+    .card-columns {
+        column-count: 3;
+    }
+}
+@media (min-width: 1200px){ /* xl */
+    .card-columns {
+        column-count: 4;
+    }
+}

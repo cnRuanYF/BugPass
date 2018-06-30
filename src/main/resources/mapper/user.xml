@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bugpass.dao.UserDAO">
+
+    <insert id="add" parameterType="com.bugpass.entity.User">
+        INSERT INTO
+            user ( username, passwd_hash, passwd_salt )
+        VALUES
+            ( #{username}, #{passwordHash}, #{passwordSalt} )
+    </insert>
+
+    <select id="queryAll" resultMap="userMap">
+        SELECT
+            id,
+            username,
+            passwd_hash,
+            passwd_salt,
+            email,
+            phone,
+            qq,
+            realname,
+            register_time
+        FROM
+            user
+    </select>
+
+    <select id="queryById" resultMap="userMap">
+        SELECT
+            id,
+            username,
+            passwd_hash,
+            passwd_salt,
+            email,
+            phone,
+            qq,
+            realname,
+            register_time
+        FROM
+            user
+        WHERE
+            id = #{id}
+    </select>
+
+    <select id="queryByUsername" resultMap="userMap">
+        SELECT
+            id,
+            username,
+            passwd_hash,
+            passwd_salt,
+            email,
+            phone,
+            qq,
+            realname,
+            register_time
+        FROM
+            user
+        WHERE
+            upper(username) = upper(#{username})
+    </select>
+
+    <select id="queryByKeyword" resultMap="userMap">
+        SELECT
+            id,
+            username,
+            passwd_hash,
+            passwd_salt,
+            email,
+            phone,
+            qq,
+            realname,
+            register_time
+        FROM
+            user
+        WHERE
+            id = #{keyword}
+            OR upper(username) LIKE upper(concat('%',#{keyword},'%'))
+            OR upper(email) LIKE upper(concat('%',#{keyword},'%'))
+            OR phone = #{keyword}
+            OR upper(realname) LIKE upper(concat('%',#{keyword},'%'))
+    </select>
+
+    <update id="update" parameterType="com.bugpass.entity.User">
+        UPDATE
+            user
+        SET
+            passwd_hash = #{passwordHash},
+            passwd_salt = #{passwordSalt},
+            email = #{email},
+            phone = #{phone},
+            qq = #{qq},
+            realname = #{realname}
+        WHERE
+            id = #{id}
+    </update>
+
+    <!-- 采用Boolean返回类型，count=1时返回true，count=0或count>1都返回false，因此需要确保数据唯一性 -->
+    <select id="checkUsernameExist" resultType="boolean">
+        SELECT
+            count(*)
+        FROM
+            user
+        WHERE
+            upper(username) = upper(#{username})
+    </select>
+
+    <select id="checkEmailExist" resultType="boolean">
+        SELECT
+            count(*)
+        FROM
+            user
+        WHERE
+            upper(email) = upper(#{email})
+    </select>
+
+    <select id="checkPhoneExist" resultType="boolean">
+        SELECT
+            count(*)
+        FROM
+            user
+        WHERE
+            phone = #{phone}
+    </select>
+
+    <!-- 查询结果映射 -->
+    <resultMap id="userMap" type="com.bugpass.entity.User">
+        <id property="id" column="id"/>
+        <result property="username" column="username"/>
+        <result property="passwordHash" column="passwd_hash"/>
+        <result property="passwordSalt" column="passwd_salt"/>
+        <result property="email" column="email"/>
+        <result property="phone" column="phone"/>
+        <result property="qq" column="qq"/>
+        <result property="realname" column="realname"/>
+        <result property="registerTime" column="register_time"/>
+    </resultMap>
+</mapper>
