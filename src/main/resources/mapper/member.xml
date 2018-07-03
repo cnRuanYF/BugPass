@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bugpass.dao.MemberDao">
+
+	<!-- 添加成员 -->
+    <insert id="add" parameterType="com.bugpass.entity.Member">
+        INSERT INTO
+            member ( project_id, user_id, member_role )
+        VALUES
+            ( #{projectId}, #{userId}, #{memberRole} )
+    </insert>
+    
+    <!-- 删除成员 -->
+    <delete id="deleteMember">
+    	DELETE FROM
+    		member
+    	WHERE
+    		project_id=#{projectId}
+			AND user_id=#{userId}
+    </delete>
+    
+    <!-- 修改成员信息（即修改角色状态） -->
+    <update id="update">
+    	UPDATE
+    		member
+    	SET
+    		member_role=#{memberRole}
+    	WHERE
+    		project_id=#{projectId}
+			AND user_id=#{userId}
+    </update>
+
+    <!-- 根据项目ID查询成员 -->
+    <select id="queryByProjectId" resultMap="memberMap">
+        SELECT
+        	user.user_id,
+            user.username,
+            user.realname,
+            user.email,
+            member.user_id,
+            member.project_id,
+            member.member_role
+        FROM
+            user
+		INNER JOIN
+			member
+        ON
+        	user.user_id = member.user_id
+        	AND member.project_id = #{projectId}
+    </select>
+    
+    <!-- 根据name或email对成员模糊查询 -->
+    <select id="queryByNameOrEmail" resultMap="memberMap">
+        SELECT
+        	user.user_id,
+            user.username,
+            user.realname,
+            user.email,
+            member.user_id,
+            member.project_id,
+            member.member_role
+        FROM
+            user
+		INNER JOIN
+			member
+        ON
+        	user.user_id = member.user_id
+        	AND 
+        	(
+	        	user.username LIKE upper(concat('%',#{nameorEamil},'%'))
+	        	OR user.email LIKE upper(concat('%',#{nameorEamil},'%'))
+        	)
+    </select>
+
+	<!-- 查询结果映射 -->
+	<resultMap id="memberMap" type="com.bugpass.entity.Member">
+		<id property="projectId" column="project_id" />
+		<id property="userId" column="user_id" />
+		<result property="memberRole" column="member_role" />
+		<collection property="users" ofType="com.bugpass.entity.User">
+			<id property="id" column="user_id" />
+			<result property="username" column="username" />
+			<result property="passwordHash" column="passwd_hash" />
+			<result property="passwordSalt" column="passwd_salt" />
+			<result property="email" column="email" />
+			<result property="phone" column="phone" />
+			<result property="qq" column="qq" />
+			<result property="realname" column="realname" />
+			<result property="registerTime" column="register_time" />
+		</collection>
+	</resultMap>
+</mapper>
