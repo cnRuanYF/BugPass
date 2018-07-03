@@ -11,24 +11,29 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 /**
  * 处理用户登录注册相关操作的Controller
- */
+ *
+ * @author RuanYaofeng
+ * @date 2018/6/29 17:38
+ **/
 @Controller
 public class UserController {
 
     private static final String LOGIN_PAGE = "index";
     private static final String ERROR_PAGE = "index";
+    private static final String PAGE_USER_PROFILE = "user_profile";
+    private static final String PAGE_CHANGE_PASSWORD = "user_change_password";
 
     @Autowired
     private UserService userService;
 
-
     /**
      * [RESTful] 检查用户名是否可用
      */
-    @RequestMapping(value = "/api/checkUsername", method = RequestMethod.GET)
+    @RequestMapping(value = "api/checkUsername", method = RequestMethod.GET)
     @ResponseBody
     public boolean checkUsername(String username) {
         return !userService.checkUsernameExist(username);
@@ -37,7 +42,7 @@ public class UserController {
     /**
      * [RESTful] 查邮箱是否可用
      */
-    @RequestMapping(value = "/api/checkEmail", method = RequestMethod.GET)
+    @RequestMapping(value = "api/checkEmail", method = RequestMethod.GET)
     @ResponseBody
     public boolean checkEmailExist(String email) {
         return !userService.checkEmailExist(email);
@@ -46,16 +51,25 @@ public class UserController {
     /**
      * [RESTful] 检查手机号是否可用
      */
-    @RequestMapping(value = "/api/checkPhone", method = RequestMethod.GET)
+    @RequestMapping(value = "api/checkPhone", method = RequestMethod.GET)
     @ResponseBody
     public boolean checkPhoneExist(String phone) {
         return !userService.checkPhoneExist(phone);
     }
 
     /**
+     * [RESTful] 关键词搜索用户
+     */
+    @RequestMapping(value="api/searchUser",method=RequestMethod.GET)
+    @ResponseBody
+    public List<User> searchByKeyword(String k){
+        return userService.findByKeyword(k);
+    }
+
+    /**
      * 用户注册
      */
-    @RequestMapping(value = "/user/register.do", method = RequestMethod.POST)
+    @RequestMapping(value = "user/register", method = RequestMethod.POST)
     public String userRegister(User user, Model model) {
 
         boolean usernameExist = userService.checkUsernameExist(user.getUsername());
@@ -69,14 +83,14 @@ public class UserController {
             return LOGIN_PAGE;
         } else {
             model.addAttribute("errorMessage", "注册失败，请稍后再试");
-            return "ERROR_PAGE"; // TODO 跳转到错误页
+            return ERROR_PAGE; // TODO 跳转到错误页
         }
     }
 
     /**
      * 用户登录
      */
-    @RequestMapping(value = "/user/login.do", method = RequestMethod.POST)
+    @RequestMapping(value = "user/login", method = RequestMethod.POST)
     public String userLogin(User user, Model model) {
         User fullUser = userService.findByUsername(user.getUsername());
 
@@ -94,37 +108,54 @@ public class UserController {
     /**
      * 退出登录
      */
-    @RequestMapping(value = "/user/logout.do", method = RequestMethod.GET)
+    @RequestMapping(value = "user/logout", method = RequestMethod.GET)
     public String userLogout(HttpSession session) {
         session.removeAttribute("user");
         return LOGIN_PAGE;
     }
 
     /**
-     * TODO 修改用户个人信息
+     * 修改用户个人信息-界面
      */
-    public String updateUserProfile(User user, Model model) {
-
-//        UserService userService = new UserServiceImpl();
-//        long id = Long.parseLong(request.getParameter("id"));
-//        String realname = request.getParameter("realname");
-//        String phone = request.getParameter("phone");
-//        String qq = request.getParameter("qq");
-//
-//        User user = new User(id, phone, qq, realname);
-//
-//        if (userService.updatePartUser(user)) {
-//            user = userService.findById(user.getId());
-//            request.getSession().setAttribute("user", user);
-//            response.sendRedirect("user_profile.jsp");
-        //     }
-        return null;
+    @RequestMapping(value = "user/updateProfile", method = RequestMethod.GET)
+    public String updateProfileUI() {
+        return PAGE_USER_PROFILE;
     }
 
     /**
-     * TODO 用户修改密码
+     * 修改用户个人信息-提交
      */
-    public String updateUserPassword(User user, Model model) {
+    @RequestMapping(value = "user/updateProfile", method = RequestMethod.POST)
+    public String updateProfile(User user, Model model) {
+
+        userService.updateUserProfile(user);
+        User fullUser = userService.findById(user.getId());
+        model.addAttribute("user", fullUser);
+
+        return PAGE_USER_PROFILE;
+    }
+
+    /**
+     * 用户修改密码-界面
+     */
+    @RequestMapping(value = "user/changePassword", method = RequestMethod.GET)
+    public String changePasswordUI() {
+        return PAGE_CHANGE_PASSWORD;
+    }
+
+    /**
+     * TODO 用户修改密码-提交
+     */
+    @RequestMapping(value = "user/changePassword", method = RequestMethod.POST)
+    public String changePassword(User user, Model model) {
+
+        if(userService.updateUserPassword(user)){
+            User fullUser = userService.findById(user.getId());
+            model.addAttribute("user",fullUser);
+            model.addAttribute("successMessage", "该用户不存在");
+        }else {            model.addAttribute("errorMessage", "修改失败，");
+        }
+        return PAGE_CHANGE_PASSWORD;
 //        UserService userService;
 //        HttpSession session = request.getSession();
 //
@@ -151,6 +182,6 @@ public class UserController {
 //        }
 //
 //        response.sendRedirect("user_change_password.jsp");
-        return null;
+//        return null;
     }
 }

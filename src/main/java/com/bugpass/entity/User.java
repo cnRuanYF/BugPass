@@ -48,6 +48,11 @@ public class User {
     private String realname;
 
     /**
+     * 图片（头像）路径
+     */
+    private String picture;
+
+    /**
      * 注册日期
      */
     private Date registerTime;
@@ -132,6 +137,14 @@ public class User {
         this.registerTime = registerTime;
     }
 
+    public String getPicture() {
+        return picture;
+    }
+
+    public void setPicture(String picture) {
+        this.picture = picture;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -144,6 +157,7 @@ public class User {
                 ", phone='" + phone + '\'' +
                 ", qq='" + qq + '\'' +
                 ", realname='" + realname + '\'' +
+                ", picture='" + picture + '\'' +
                 ", registerTime=" + registerTime +
                 '}';
     }

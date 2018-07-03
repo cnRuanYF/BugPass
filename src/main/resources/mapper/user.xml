@@ -11,7 +11,7 @@
 
     <select id="queryAll" resultMap="userMap">
         SELECT
-            id,
+            user_id,
             username,
             passwd_hash,
             passwd_salt,
@@ -19,6 +19,7 @@
             phone,
             qq,
             realname,
+            picture,
             register_time
         FROM
             user
@@ -26,7 +27,7 @@
 
     <select id="queryById" resultMap="userMap">
         SELECT
-            id,
+            user_id,
             username,
             passwd_hash,
             passwd_salt,
@@ -34,16 +35,17 @@
             phone,
             qq,
             realname,
+            picture,
             register_time
         FROM
             user
         WHERE
-            id = #{id}
+            user_id = #{id}
     </select>
 
     <select id="queryByUsername" resultMap="userMap">
         SELECT
-            id,
+            user_id,
             username,
             passwd_hash,
             passwd_salt,
@@ -51,6 +53,7 @@
             phone,
             qq,
             realname,
+            picture,
             register_time
         FROM
             user
@@ -60,14 +63,13 @@
 
     <select id="queryByKeyword" resultMap="userMap">
         SELECT
-            id,
+            user_id,
             username,
-            passwd_hash,
-            passwd_salt,
             email,
             phone,
             qq,
             realname,
+            picture,
             register_time
         FROM
             user
@@ -88,9 +90,10 @@
             email = #{email},
             phone = #{phone},
             qq = #{qq},
+            picture = #{picture},
             realname = #{realname}
         WHERE
-            id = #{id}
+            user_id = #{id}
     </update>
 
     <!-- 采用Boolean返回类型，count=1时返回true，count=0或count>1都返回false，因此需要确保数据唯一性 -->
@@ -123,7 +126,7 @@
 
     <!-- 查询结果映射 -->
     <resultMap id="userMap" type="com.bugpass.entity.User">
-        <id property="id" column="id"/>
+        <id property="id" column="user_id"/>
         <result property="username" column="username"/>
         <result property="passwordHash" column="passwd_hash"/>
         <result property="passwordSalt" column="passwd_salt"/>
@@ -131,6 +134,7 @@
         <result property="phone" column="phone"/>
         <result property="qq" column="qq"/>
         <result property="realname" column="realname"/>
+        <result property="picture" column="picture"/>
         <result property="registerTime" column="register_time"/>
     </resultMap>
 </mapper>
