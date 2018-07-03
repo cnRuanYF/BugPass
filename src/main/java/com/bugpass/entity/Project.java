@@ -1,5 +1,7 @@
 package com.bugpass.entity;
 
+import java.util.Date;
+
 /**
  * 项目实体类
  * 
@@ -17,7 +19,7 @@ public class Project {
     /* 项目名 */
     private String projectName;
     /* 项目日期 */
-    private String projectDate;
+    private Date projectDate;
     /* 版本描述 */
     private String projectDesc;
     @Override
@@ -25,14 +27,14 @@ public class Project {
         return "Project [projectId=" + projectId + ", projectName=" + projectName + ", projectDate=" + projectDate
                 + ", projectDesc=" + projectDesc + "]";
     }
-    public Project(int projectId, String projectName, String projectDate, String projectDesc) {
+    public Project(int projectId, String projectName, Date projectDate, String projectDesc) {
         super();
         this.projectId = projectId;
         this.projectName = projectName;
         this.projectDate = projectDate;
         this.projectDesc = projectDesc;
     }
-    public Project(String projectName, String projectDate, String projectDesc) {
+    public Project(String projectName, Date projectDate, String projectDesc) {
         super();
         this.projectName = projectName;
         this.projectDate = projectDate;
@@ -64,11 +66,11 @@ public class Project {
         this.projectName = projectName;
     }
     
-    public String getProjectDate() {
+    public Date getProjectDate() {
         return projectDate;
     }
     
-    public void setProjectDate(String projectDate) {
+    public void setProjectDate(Date projectDate) {
         this.projectDate = projectDate;
     }
     

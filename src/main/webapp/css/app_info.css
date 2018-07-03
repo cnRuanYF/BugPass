@@ -1,0 +1,334 @@
+body {
+    font-size: 13px;
+    line-height: 1.42857143;
+    font-family: ""PingFang SC",Proxima Nova","Helvetica Neue","Helvetica","Hiragino Sans GB","STHeitiSC Light","Microsoft YaHei UI Light","Microsoft YaHei","Source Han Sans",Arial,sans-serif; -ms-text-size-adjust:100%;-webkit-text-size-adjust:100%;font-weight: 300;
+}
+.m-b-40{
+    margin-bottom: 40px!important;
+}
+.text-left {
+    text-align: left!important;
+}
+.c-gray {
+    color: #666666!important;
+}
+.control-label {
+    font-weight: 400;
+}
+.info_list_wrapper{
+    padding: 60px 15px;
+    border-top: 1px solid #f0f0f0;
+}
+.info_list_wrapper .form-group{
+    margin-bottom: 30px;
+}
+.info_list_wrapper .form-group:first-child{
+    position: relative;
+    top: 17px;
+}
+.fg-line:not(.form-group) {
+    display: inline-block;
+    width: 100%;
+}
+.fg-line {
+    position: relative;
+    vertical-align: top;
+}
+.fg-line .form-control:not(:disabled) {
+    color: #000;
+}
+.fg-line .form-control[disabled]{
+    border-color: #ebebeb;
+    background-color: #FCFCFC;
+    color: #333333;
+    box-shadow: none;
+    cursor: text;
+}
+.fg-line .form-control {
+    resize: none;
+}
+.fg-line .testin_copy_key{
+    cursor: pointer;
+    position: absolute;
+    right: 10px;
+    top: 0px;
+    line-height: 40px;
+    color: #666666;
+}
+.fg-line .testin_copy_key:hover{
+    color: #333;
+}
+.app-profile-logo {
+    position: relative;
+    max-width: 72px;
+    height: 72px;
+    display: inline-block;
+    float: left;
+}
+.webuploader-pick{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 72px;
+    height: 72px;
+}
+.app-profile-logo img{
+    display: block;
+    width: 72px;
+    height: 72px;
+    border-radius: 15px;
+}
+.add-logo-out .c-gray{float: left;
+    margin: 20px 0px 0px 0px;padding-left: 5px;}
+.webuploader-container div:nth-of-type(2){opacity: 0;z-index: 2;}
+.app-profile-logo>img {
+    width: 100%;
+}
+.app-profile-logo>.app-logo-file {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    height: 100%;
+    width: 100%;
+    cursor: pointer;
+}
+.add-logo-out{
+    top: -17px;
+}
+.add-logo-out .text-left{
+    font-size: 12px;
+}
+.add-logo-out .control-label{
+    margin-left: 10px;
+}
+.system-out{
+    padding-top: 0px;
+    margin-top: -2px;
+}
+.system-out .checkbox-inline:first-child{
+    padding-left: 0px;
+}
+.system-out .checkbox-inline .input-radio-show{
+    vertical-align: top;
+    position: relative;
+    top: 1px;
+}
+.input-sm{
+    height: 36px;
+    font-size: 13px;
+}
+.owner-out .icon-input{
+    position: relative;
+}
+.owner-out .icon-input input{
+    padding-left: 38px!important;
+}
+.owner-out .icon-input img{
+    position: absolute;
+    text-align: center;
+    width: 20px;
+    height: 20px;
+    margin: 8px 8px 0px 10px;
+    top: 0;
+    border-radius: 50%;
+}
+.save-all{
+    display: block;
+    background: #1081DE;
+    box-shadow: 0px 1px 1px 0px rgba(0,0,0,0.08);
+    border-radius: 2px;
+    width: 88px;
+    height: 36px;
+    line-height: 34px;
+    text-align: center;
+    font-size: 14px;
+    color: #FFF;
+    cursor: pointer;
+}
+.save-all:hover{
+    background-color: #3098F2;color: #fff;text-decoration: none;
+}
+/*问题列表改版1128*/
+.dropdown-menu{
+    border-radius: 2px;
+}
+.dropdown-menu li{
+    padding: 0 12px;
+}
+.dropdown .dropdown-menu li{
+    height: auto;
+    line-height :26px;
+    border-top: 0;
+}
+.dropdown .dropdown-menu li:hover{
+    background-color: transparent;
+}
+.dropdown-menu .selected img {
+    border-radius: 50%;
+}
+.navbar .dropdown .dropdown-menu li{
+    height: 50px;
+    line-height: 50px;
+    border-top: 0;
+}
+.problem-info-state .dropdown-select img{
+    width:16px;
+    height:16px;
+    border-radius: 50%;
+}
+.bugmanagement-information-right .dropdown-menu,.dropdown-select-default .dropdown-menu{
+    line-height: 36px;
+    padding: 0;
+}
+.bugmanagement-information-right .dropdown-menu .selected,.dropdown-select-default .dropdown-menu .selected{
+    background-color: #F5F7F7;
+}
+.dropdown-menu .selected img{
+    border-radius: 50%;
+}
+.bugmanagement-information-right .dropdown-menu li:hover,.dropdown-select-default .dropdown-menu li:hover{
+    background-color: #E6F4FF;
+}
+.dropdown-select-default .dropdown-menu li .iconfont{
+    line-height: 1;
+    vertical-align: middle;
+}
+.bugmanagement-information-right .dropdown-select,.bugmanagement-information-right .dropdown-select-btn{
+    display: block;
+    width: 100%;
+    text-align: left;
+    position: relative;
+}
+.bugmanagement-information-right .dropdown-select-btn{
+    float: none;
+    height: 28px;
+    line-height: 16px;
+}
+.bugmanagement-information-right .dropdown-select-btn .caret{
+    position: absolute;
+    right:10px;
+    top:15px;
+}
+.bugmanagement-information-right .dropdown-select .dropdown-menu{
+    width:100%;
+    max-height: 180px;
+    min-width: 90px;
+    overflow: auto;
+}
+.bugmanagement-information-right .dropdown-select li{
+    line-height: 36px;
+    font-size: 12px;
+    text-align: center;
+    cursor:pointer;
+}
+.bugmanagement-information-right .dropdown-select li i{
+    margin-left: 0;
+    margin-right: 0;
+}
+.bugmanagement-information-right .dropdown-text {
+    display: block;
+    margin-left: 5px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.bugmanagement-information-right .dropdown-text .iconfont{
+    font-weight: normal!important;
+    position: relative;
+    top: 1px;
+}
+.bugmanagement-information-right .dropdown-text .v-middle {
+    display: inline;
+    font-size: 12px;
+}
+.dropdown-select .v-middle {
+    margin-left: 5px;
+}
+.bugmanagement-information-right .cygl .project-select-out{
+    width: 90px;
+    height: 28px;
+    float: right;
+    margin: 11px 20px 0;
+}
+.transfer-project .modal-body{
+    padding: 25px 40px!important;
+}
+.transfer-project .tac{
+    text-align: center;
+    font-size: 14px;
+}
+.transfer-project .modal-body .project-select-out{
+    width: 200px;
+    margin: 0 auto;
+}
+span.dropdown-text img {
+    border-radius: 50%;
+}
+.transfer-project .select-group{
+    margin-top: 15px;
+    height: 140px;
+}
+.transfer-project .dropdown-select,.transfer-project .dropdown-select-btn{
+    display: block;
+    width: 100%;
+    text-align: left;
+    position: relative;
+}
+.transfer-project .dropdown-select-btn{
+    float: none;
+    padding: 6px 12px;
+    line-height: 11px;
+}
+.transfer-project .dropdown-select-btn .dropdown-text{
+    line-height: 22px;
+}
+.transfer-project .dropdown-select-btn .dropdown-text img{
+    position: relative;
+    top: -2px;
+}
+.transfer-project .dropdown-select-btn .dropdown-text .v-middle{
+    width: 130px;
+    display: inline-block;
+    line-height: 18px;
+    vertical-align: text-top;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.transfer-project .dropdown-select-btn .caret{
+    position: absolute;
+    right:10px;
+    top:15px;
+}
+.transfer-project .dropdown-select .dropdown-menu{
+    font-size: 13px;
+    width:100%;
+    max-height: 180px;
+    overflow: auto;
+}
+.transfer-project .dropdown-select li{
+    line-height: 36px;
+    padding-left: 35px;
+}
+.transfer-project .dropdown-select li img{
+    position: relative;
+    top: -2px;
+}
+.transfer-project .dropdown-select li i{
+    margin-left: 0;
+    margin-right: 0;
+}
+.transfer-project .dropdown-select li .v-middle{
+    width: 107px;
+    display: inline-block;
+    line-height: 18px;
+    vertical-align: text-top;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.transfer-project-title{
+    font-weight: 400;
+    margin-left: 18px;
+}
