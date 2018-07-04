@@ -16,12 +16,12 @@ public interface VersionService {
 	Version returnFindByVersionId(long id);
 
 	/**
-	 * 根据版本名字查询
+	 * 查询版本名是否存在
 	 * 
 	 * @param versionName
 	 * @return
 	 */
-	boolean returnFindByVersionName(String versionName);
+	boolean returnFindVersionNameByProjectId(String versionName,long projectId);
 
 	/**
 	 * 根据版本名模糊查询
@@ -29,7 +29,7 @@ public interface VersionService {
 	 * @param versionName
 	 * @return
 	 */
-	List<Version> returnListFindByVersionName(String versionName);
+	List<Version> returnListFindByVersionName(String versionName,long projectId);
 
 	/**
 	 * 根据项目ID查询
@@ -37,7 +37,7 @@ public interface VersionService {
 	 * @param projectId
 	 * @return
 	 */
-	List<Version> returnFindAllByProjectid(int projectId);
+	List<Version> returnFindAllByProjectid(long projectId);
 
 	/**
 	 * 根据版本ID删除
@@ -45,7 +45,7 @@ public interface VersionService {
 	 * @param versionId
 	 * @return
 	 */
-	boolean returndeleteByVersionId(int versionId);
+	boolean returndeleteByVersionId(long versionId);
 
 	/**
 	 * 修改

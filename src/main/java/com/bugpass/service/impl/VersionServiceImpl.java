@@ -4,23 +4,24 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bugpass.dao.VersionDAO;
 import com.bugpass.entity.Version;
 import com.bugpass.service.VersionService;
 
-@Service(value = "versionService")
+@Service("versionService")
 public class VersionServiceImpl implements VersionService {
 	
-	@Resource(name="versionDAO")
+	@Autowired
 	private VersionDAO versionDAO ;
 
 	/**
 	 * 根据项目ID查询
 	 */
 	@Override
-	public List<Version> returnFindAllByProjectid(int projectId) {
+	public List<Version> returnFindAllByProjectid(long projectId) {
 		try {
 			return versionDAO.findAllByProjectid(projectId);
 		} catch (Exception e) {
@@ -52,13 +53,13 @@ public class VersionServiceImpl implements VersionService {
 	}
 
 	/**
-	 * 根据版本名查询
+	 * 查询版本名是否存在
 	 */
 	@Override
-	public boolean returnFindByVersionName(String versionName) {
+	public boolean returnFindVersionNameByProjectId(String versionName,long projectId) {
 		List<Version> list;
 		try {
-			list = versionDAO.findByVersionname(versionName);
+			list = versionDAO.findVersionNameByProjectId(versionName, projectId);
 			if (list.size()==0) {
 				return false;
 			} else {
@@ -76,8 +77,8 @@ public class VersionServiceImpl implements VersionService {
 	 * 根据版本名模糊查询
 	 */
 	@Override
-	public List<Version> returnListFindByVersionName(String versionName) {
-		List<Version>list =versionDAO.findByLikename(versionName);
+	public List<Version> returnListFindByVersionName(String versionName,long projectId) {
+		List<Version>list =versionDAO.findByLikename(versionName,projectId);
 		return list;
 	}
 
@@ -85,7 +86,7 @@ public class VersionServiceImpl implements VersionService {
 	 * 删除
 	 */
 	@Override
-	public boolean returndeleteByVersionId(int versionId) {
+	public boolean returndeleteByVersionId(long versionId) {
 		try {
 			return versionDAO.deleteByVersionId(versionId);
 		} catch (Exception e) {

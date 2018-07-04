@@ -2,13 +2,13 @@ package com.bugpass.entity;
 
 public class Version {
 	/*版本ID*/
-	private int versionId;
+	private long versionId;
 	/*版本号*/
 	private String versionName;
 	/*版本说明*/
 	//private String versionExplanation;
 	/*项目ID*/
-	private int projectId;
+	private long projectId;
 	/*版本设置时间*/
 	//private String versionSetTime;
 	
@@ -22,7 +22,7 @@ public class Version {
 		this.projectId = projectId;
 	}
 
-	public int getVersionId() {
+	public long getVersionId() {
 		return versionId;
 	}
 
@@ -38,7 +38,7 @@ public class Version {
 		this.versionName = versionName;
 	}
 
-	public int getProjectId() {
+	public long getProjectId() {
 		return projectId;
 	}
 
