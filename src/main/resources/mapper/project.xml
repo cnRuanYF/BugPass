@@ -5,14 +5,23 @@
 <mapper namespace="com.bugpass.dao.ProjectDao">
 
 	<!-- 根据ID查询一条项目记录 -->
-	<select id="queryById" parameterType="long" resultMap="projectMap">
+	<select id="queryById" parameterType="long"
+		resultMap="projectMap">
 		select *
 		from project where project_id=#{project_id}
 	</select>
 
 	<!-- 根据显示ID编号查询一条项目记录 -->
-	<select id="queryByDisplayId" parameterType="String" resultMap="projectMap">
+	<select id="queryByDisplayId" parameterType="String"
+		resultMap="projectMap">
 		select * from project where display_id=#{displayId}
+	</select>
+
+	<!-- 根据用户id查询用户参与的所有项目 -->
+	<select id="queryProjectByUserId" parameterType="long" resultType="com.bugpass.entity.Project">
+		select project.project_name,project.project_desc,project.create_time 
+		from member,project 
+		where project.project_id=member.project_id and member.user_id=#{user.getId()}
 	</select>
 
 	<!-- 增加一条项目记录 -->

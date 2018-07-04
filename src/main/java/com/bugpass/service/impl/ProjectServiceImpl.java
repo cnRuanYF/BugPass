@@ -2,6 +2,8 @@ package com.bugpass.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.bugpass.dao.MemberDao;
@@ -19,7 +21,7 @@ import com.bugpass.util.EncryptUtil;
  * @date 2018-07-03 14:18
  */
 @Service(value = "projectService")
-@Transactional
+@Transactional(propagation=Propagation.REQUIRED,isolation=Isolation.READ_COMMITTED)
 public class ProjectServiceImpl implements ProjectService {
 
 	@Autowired
@@ -45,12 +47,12 @@ public class ProjectServiceImpl implements ProjectService {
 			//添加项目记录
 			boolean flagPro = projectDao.add(project);
 			if (flagPro) {
-				//获取已添加项目的记录
-				Project newProject = projectDao.queryByDisplayId(displayId);
+				//获取已添加项目记录的id
+				long projectId = projectDao.queryByDisplayId(displayId).getProjectId();
 				//TODO 获取session用户id
 				System.out.println("serviceUser:"+user.getId());
-				System.out.println("serviceProject:"+newProject.getProjectId());
-				Member member = new Member(newProject.getProjectId(),user.getId(),1);
+				System.out.println("serviceProject:"+projectId);
+				Member member = new Member(projectId,user.getId(),1);
 				//添加成员记录
 				boolean flagMem = memberDao.add(member);
 				if (flagMem) {

@@ -15,7 +15,7 @@
 </br>
 创建时间:${project.projectDate }
 </br>
-所有者:
+所有者:${usernameStr }
 </br>
 </br>
 </br>
