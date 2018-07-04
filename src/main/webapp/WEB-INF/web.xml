@@ -8,15 +8,15 @@
 
     <!-- 默认主页 -->
     <welcome-file-list>
-        <welcome-file>test.html</welcome-file>
+        <welcome-file>welcome.jsp</welcome-file>
     </welcome-file-list>
 
     <!-- JSP属性 -->
     <jsp-config>
         <jsp-property-group>
             <url-pattern>*.jsp</url-pattern>
-            <url-pattern>*.js</url-pattern>
-            <url-pattern>*.css</url-pattern>
+            <!--<url-pattern>*.js</url-pattern>-->
+            <!--<url-pattern>*.css</url-pattern>-->
             <page-encoding>UTF-8</page-encoding>
         </jsp-property-group>
     </jsp-config>

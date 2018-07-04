@@ -15,7 +15,8 @@
     </style>
 </head>
 <body>
-<%@ include file="header_index.jsp" %>
+
+<%@ include file="navbar_index.jsp" %>
 
 <div class="container">
     <div class="text-center">
@@ -25,9 +26,7 @@
         <h3 class="mt-4">开发团队必备的缺陷管理平台</h3>
         <h4>开源、安全、稳定、高效、易用</h4>
         <div class="mt-5">
-            <a class="btn btn-lg btn-outline-primary btnEnterSys" href="javascript:void(0)">
-                &emsp;进入系统&emsp;
-            </a>
+            <a class="btn btn-lg btn-outline-primary btnEnterSys" href="javascript:void(0)">&emsp;进入系统&emsp;</a>
         </div>
         <p class="text-muted mt-4">当前版本：v0.1 beta (更新于: 2018-06-07)</p>
     </div>
@@ -35,8 +34,8 @@
 
 <script type="text/javascript">
     $('.btnEnterSys').on('click', function () {
-        if (1 == ${user != null ? 1 : 0}) {
-            location.href = 'project.jsp';
+        if (1 == ${currentUser != null ? 1 : 0}) {
+            location.href = 'project/index';
         } else {
             $('#loginLink').click();
         }
@@ -46,12 +45,15 @@
 <%@ include file="footer.jsp" %>
 
 <!-- 背景 -->
-<canvas id="bgCanvas" style="width:100%;height:100%;position:absolute;top:-25%;left:-25%;z-index:-1"></canvas>
+<canvas id="bgCanvas" style="position:fixed;top:0;left:0;z-index:-1"></canvas>
 <script>
     //定义画布宽高和生成点的个数
-    var WIDTH = window.innerWidth * 1.5,
-        HEIGHT = window.innerHeight * 1.5,
-        POINT = window.innerWidth * window.innerHeight / 16384;
+    // var WIDTH = window.innerWidth * 1.5,
+    //     HEIGHT = window.innerHeight * 1.5,
+    //     POINT = window.innerWidth * window.innerHeight / 16384;
+    var WIDTH = window.innerWidth,
+        HEIGHT = window.innerHeight,
+        POINT = 30;
 
     var canvas = document.getElementById('bgCanvas');
     canvas.width = WIDTH;

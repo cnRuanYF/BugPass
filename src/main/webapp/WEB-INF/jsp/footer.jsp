@@ -1,8 +1,30 @@
+<%@ page import="com.bugpass.constant.MessageType" %>
+
+<!-- 信息显示 -->
+<c:if test="${warningMessage != null}">
+    <script type="text/javascript">
+        layer.msg('${warningMessage}', {icon: 0, offset:'200px'});
+    </script>
+    <% session.setAttribute(MessageType.WARNING, null); %>
+</c:if>
+<c:if test="${successMessage != null}">
+    <script type="text/javascript">
+        layer.msg('${successMessage}', {icon: 1, offset:'200px'});
+    </script>
+    <%session.setAttribute(MessageType.SUCCESS, null); %>
+</c:if>
+<c:if test="${errorMessage != null}">
+    <script type="text/javascript">
+        layer.msg('${errorMessage}', {icon: 2, offset:'200px'});
+    </script>
+    <% session.setAttribute(MessageType.ERROR, null); %>
+</c:if>
+
 <!-- 底栏 -->
 <footer class="footer mt-4 bg-light text-muted">
     <div class="container p-3">
         <ul class="list-unstyled">
-            <li class="list-item list-inline-item"><a href="index.jsp">首页</a></li>
+            <li class="list-item list-inline-item"><a href="index">首页</a></li>
             <li class="list-item list-inline-item"><a href="#modal-container-about" data-toggle="modal">关于</a></li>
             <li class="list-item list-inline-item"><a href="mailto:me@ryf.space">联系我们</a></li>
         </ul>
@@ -11,16 +33,21 @@
             <br>
             A defect management system.
             <br>
-            Server-side based on
-            <a target="_blank" href="https://www.oracle.com/java/technologies/java-ee.html">JavaEE</a>;
+            Server-side powered by
+            <a target="_blank" href="https://spring.io">Spring</a>,
+            <a target="_blank" href="https://spring.io">SpringMVC</a>,
+            <a target="_blank" href="http://www.mybatis.org">Mybatis</a>,
+            based on
+            <a target="_blank" href="https://www.java.com">Java</a>;
             Front-end powered by
             <a target="_blank" href="https://jquery.com">jQuery</a>,
-            <a target="_blank" href="https://getbootstrap.com" target="_blank">Bootstrap</a>;
+            <a target="_blank" href="https://getbootstrap.com" target="_blank">Bootstrap</a>,
+            <a target="_blank" href="http://layer.layui.com" target="_blank">Layer</a>;
             Database powered by
             <a target="_blank" href="https://www.mysql.com">MySQL</a>.
             <br>
             Designed and built with all the love in the world by
-            <a href="#modal-container-team" data-toggle="modal">DFHQYJ</a>
+            <a href="#modal-container-team" data-toggle="modal">TeamXHH</a>
             in
             <a href="http://www.etcxm.com" target="_blank">XMETC</a>
             .

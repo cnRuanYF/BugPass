@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file="header.jsp"%>
+<%@ include file="navbar.jsp"%>
 
 <!DOCTYPE html>
 <html>
@@ -10,8 +10,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="../../css/bootstrap.css" rel="stylesheet">
-<link href="../../css/fontawesome-all.css" rel="stylesheet">
-<script src="../../js/jquery-3.3.1.min.js"></script>
+<link href="../../libs/fontawesome/css/fontawesome-all.css" rel="stylesheet">
+<script src="../../libs/jquery/jquery-3.3.1.min.js"></script>
 <script src="../../js/bootstrap.js"></script>
   </head>
 
