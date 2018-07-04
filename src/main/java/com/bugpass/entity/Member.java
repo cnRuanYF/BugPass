@@ -9,42 +9,52 @@ import java.util.List;
  * @author VisonSun
  * @date 2018-07-03 11:16
  */
-public class Member implements Serializable{
+public class Member implements Serializable {
 
     private static final long serialVersionUID = -2627788005217266716L;
-    
+    /**
+     * 创建者
+     */
+    public static final int ROLE_CREATOR = 1;
+    /**
+     * 成员
+     */
+    public static final int ROLE_MEMBER = 2;
+    /**
+     * 未确认
+     */
+    public static final int ROLE_UNCOMFIRMED = 0;
+
+    /****************************************************************************/
+
     /**
      * 项目ID
      */
-    private int projectId;
+    private long projectId;
+
     /**
-     * 成员的集合
+     * 本用户的实体
      */
-    private List<User> users;
-    /**
-     * 用户ID
-     */
-    private int userId;
+    private User user;
+
     /**
      * 角色
      */
     private int memberRole;
 
-    
-    public Member(int projectId, int userId, int memberRole) {
+    /**
+     * 成员类的构造
+     * 
+     * @param projectId 项目ID
+     * @param userId 成员用户ID
+     * @param memberRole 成员角色
+     */
+    public Member(long projectId, long userId, int memberRole) {
         super();
         this.projectId = projectId;
-        this.userId = userId;
         this.memberRole = memberRole;
-    }
-
-    /* (non-Javadoc)
-     * @see java.lang.Object#toString()
-     */
-    @Override
-    public String toString() {
-        return "Member [projectId=" + projectId + ", users=" + users + ", userId=" + userId + ", memberRole="
-                + memberRole + "]";
+        User u = null;
+        u.setId(userId);
     }
 
     public Member() {
@@ -52,45 +62,31 @@ public class Member implements Serializable{
     }
 
     /**
-     * @return the userId
-     */
-    public int getUserId() {
-        return userId;
-    }
-
-    /**
-     * @param userId the userId to set
-     */
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
-
-    /**
      * @return the projectId
      */
-    public int getProjectId() {
+    public long getProjectId() {
         return projectId;
     }
 
     /**
      * @param projectId the projectId to set
      */
-    public void setProjectId(int projectId) {
+    public void setProjectId(long projectId) {
         this.projectId = projectId;
     }
 
     /**
-     * @return the users
+     * @return the user
      */
-    public List<User> getUsers() {
-        return users;
+    public User getUser() {
+        return user;
     }
 
     /**
-     * @param users the users to set
+     * @param user the user to set
      */
-    public void setUsers(List<User> users) {
-        this.users = users;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     /**

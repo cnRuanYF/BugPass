@@ -37,6 +37,7 @@
             user.username,
             user.realname,
             user.email,
+            user.picture,
             member.user_id,
             member.project_id,
             member.member_role
@@ -56,6 +57,7 @@
             user.username,
             user.realname,
             user.email,
+            user.picture,
             member.user_id,
             member.project_id,
             member.member_role
@@ -75,9 +77,8 @@
 	<!-- 查询结果映射 -->
 	<resultMap id="memberMap" type="com.bugpass.entity.Member">
 		<id property="projectId" column="project_id" />
-		<id property="userId" column="user_id" />
 		<result property="memberRole" column="member_role" />
-		<collection property="users" ofType="com.bugpass.entity.User">
+		<association property="user" column="user_id" javaType="com.bugpass.entity.User">
 			<id property="id" column="user_id" />
 			<result property="username" column="username" />
 			<result property="passwordHash" column="passwd_hash" />
@@ -87,6 +88,6 @@
 			<result property="qq" column="qq" />
 			<result property="realname" column="realname" />
 			<result property="registerTime" column="register_time" />
-		</collection>
+		</association>
 	</resultMap>
 </mapper>
