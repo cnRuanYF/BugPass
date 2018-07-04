@@ -1,16 +1,15 @@
 package com.bugpass.test;
 
 import com.bugpass.dao.ProjectDao;
-import com.bugpass.dao.UserDAO;
 import com.bugpass.entity.Project;
-import com.bugpass.entity.User;
+import com.bugpass.service.ProjectService;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import java.util.List;
 
 /**
  * TestUserDao
@@ -24,11 +23,29 @@ public class TestProjectDao {
 
 	@Autowired
 	private ProjectDao projectDao;
+	@Autowired
+	private ProjectService projectService;
 
 	@Test
 	public void testFindById() {
 		Project project = projectDao.queryById(1);
 		System.out.println(project);
 	}
+	
+	@Test
+	public void testFindByDisplayId() {
+		Project project = projectDao.queryByDisplayId("3d5fb58aa496042c39ec4bd88737849e");
+		System.out.println(project);
+	}
 
+	@Test
+	public void testAddProject() {
+		Project project = new Project();
+		project.setProjectName("测试数据002");
+		project.setProjectDesc("测试数据002");
+		
+		boolean flag = projectService.addProject(project);
+		
+		System.out.println(flag);
+	}
 }

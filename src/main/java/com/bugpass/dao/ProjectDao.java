@@ -13,6 +13,12 @@ import com.bugpass.entity.Project;
 @Repository(value="projectDao")
 public interface ProjectDao extends BaseDAO<Project> {
 	
-	
+	/**
+	 * 根据显示ID查找对象
+	 * 
+	 * @param displayId 显示ID
+	 * @return Project对象
+	 */
+	Project queryByDisplayId(String displayId);
 	
 }

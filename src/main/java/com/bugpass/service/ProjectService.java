@@ -1,6 +1,7 @@
 package com.bugpass.service;
 
 import com.bugpass.entity.Project;
+import com.bugpass.entity.User;
 
 /**
  * 项目相关的业务接口
@@ -16,6 +17,22 @@ public interface ProjectService {
 	 * @param projectId
 	 * @return
 	 */
-	Project findById(long projectId);
+	Project findProjectById(long projectId);
+	
+	/**
+	 * 根据显示ID查找对象
+	 * 
+	 * @param displayId
+	 * @return
+	 */
+	Project findProjectByDisplayId(String displayId);
+	
+	/**
+	 * 添加项目信息
+	 * 
+	 * @param project
+	 * @return
+	 */
+	boolean addProject(Project project,User user);
 	
 }
