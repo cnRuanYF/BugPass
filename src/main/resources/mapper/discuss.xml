@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!-- 映射文件 有一个 namespace -->
+<mapper namespace="com.bugpass.dao.DiscussDao">
+	<!-- 根据问题id查找对应的讨论返回list -->
+	<select id="queryByProblemId" resultMap="discussMap">
+		<!-- select * from disscuss -->
+		SELECT
+			user.user_id,user.username,user.picture,
+			discuss_id,discuss.problem_id,discuss.publisher,discuss.publish_time,discuss.discuss_content
+		FROM
+			discuss 
+		JOIN user ON discuss.publisher=user.user_id
+		JOIN problem ON discuss.problem_id = problem.problem_id
+		WHERE problem.problem_id=#{problemId}
+	</select>
+	
+	<select id="queryById" resultMap="discussMap">
+		SELECT
+		user.user_id,user.username,user.picture,
+		discuss_id,discuss.problem_id,discuss.publisher,discuss.publish_time,discuss.discuss_content
+		FROM
+		discuss 
+		JOIN user ON discuss.publisher=user.user_id
+		JOIN problem ON discuss.problem_id = problem.problem_id
+		WHERE problem.problem_id=#{problemId}
+	</select>
+	<!-- id对应的是接口中定义的方法名， -->
+	<!-- -->
+	<!-- 使用了resultMap的写法 -->
+	<select id="queryAll" resultMap="discussMap">
+		<!-- select * from disscuss -->
+		SELECT
+		user.user_id,user.username,user.picture,
+		discuss_id,discuss.problem_id,discuss.publisher,discuss.publish_time,discuss.discuss_content
+		FROM
+		discuss 
+		JOIN user ON discuss.publisher=user.user_id
+		JOIN problem ON discuss.problem_id = problem.problem_id
+	</select>
+	
+	<!-- 插入记录 -->
+	<insert id="add" parameterType="com.bugpass.entity.Discuss">
+		insert into discuss
+		values(null,#{problemId},#{publisherUser.id},now(),#{discussContent})
+	</insert>
+	
+	<delete id="delete">
+		delete from discuss where discuss_id=#{discussId}
+	</delete>
+	
+	<!-- 动态更新 -->
+	<update id="update">
+		update discuss
+		<set>
+			<if test="problem_id != null">problem_id=#{problemId},</if>
+			<if test="publisher != null">publisher=#{publisher},</if>
+			<if test="discuss_content != null">discuss_content=#{discussContent}</if>
+		</set>
+		where discuss_id=#{discussId}
+	</update>
+
+	<!-- 动态sql foreach使用 批量删除 -->
+	<delete id="deleteDiscussByManyId">
+		delete from discuss where discussId in
+		<foreach collection="list" open="(" close=")" separator=","
+			item="item">
+			#{item}
+		</foreach>
+	</delete>
+	
+	<!-- 自定义一个resultMap -->
+	<!-- type="blog"表示别名com.etc.Entity -->
+	<resultMap type="com.bugpass.entity.Discuss" id="discussMap">
+		<!-- id表示的是主属性property="" 实体类中的属性名，clumm表中列名 -->
+		<id property="discussId" column="discuss_id" /><!-- 主键 -->
+		<result property="problemId" column="problem_id" />
+		<!-- <result property="publisher" column="publisher" /> -->
+		<result property="publishTime" column="publish_time" />
+		<result property="discussContent" column="discuss_content" />
+		<result property="publisherId" column="publisher" />
+		
+		<!-- 发布者 -->
+		<association property="publisherUser" column="publisher"
+			javaType="com.bugpass.entity.User">
+			<!-- 这里的id reuslt 指的是problem类已经关联的那个表的信息 -->
+			<id property="id" column="user_id" /><!-- 对应的关联 主键  其他列属性 -->
+			<result property="username" column="username"/>
+			<result property="passwdHash" column="passwd_hash" />
+			<result property="passwdSalt" column="passwd_salt" />
+			<result property="email" column="email" />
+			<result property="phone" column="phone" />
+			<result property="qq" column="qq" />
+			<result property="realName" column="realname" />
+			<result property="picture" column="picture" />
+			<result property="registerTime" column="register_time" />
+		</association>
+		
+		<!-- 今天新增一个列problem但是实体类中是一个problem类型的对象 ，这里是从N(disscuss)的一端访问1（problem）的一端 -->
+		<!-- property="problem"是 problem中的-属性名 column="authorId"表中的列名 -->
+		<!-- <association property="problem" column="problem_id"
+			javaType="com.bugpass.entity.Problem">
+			这里的id reuslt 指的是problem类已经关联的那个表的信息
+			<id property="problemId" column="problem_id" />对应的关联 主键  其他列属性
+			<result property="problemTitle" column="problem_title" />
+			<result property="problemType" column="problem_type" />
+			<result property="problemDesc" column="problem_desc" />
+			<result property="problemLevel" column="problem_level" />
+			<result property="problemStatus" column="problem_status" />
+			<result property="publisher" column="publisher" />
+			<result property="assignedTo" column="assigned_to" />
+			<result property="moduleId" column="module_id" />
+			<result property="versionId" column="version_id" />
+			<result property="createTime" column="create_time" />
+			<result property="updateTime" column="update_time" />
+		</association> -->
+	</resultMap>
+	
+	<!-- 加入一个二级缓存的最简单的配置 -->
+	<cache>
+	
+	</cache>
+</mapper>
