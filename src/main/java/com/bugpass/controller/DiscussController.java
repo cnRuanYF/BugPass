@@ -1,6 +1,7 @@
 package com.bugpass.controller;
 
 import com.bugpass.entity.Discuss;
+import com.bugpass.entity.User;
 import com.bugpass.service.DiscussService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -43,15 +44,32 @@ public class DiscussController {
     }
     
     /**
+     * 跳转到添加评论界面
+     * 
+     * @return
+     */
+    @RequestMapping(value = "api/toAddDiscuss")
+    public String toAddDiscuss() {
+        return "discuss_add";
+    }
+    
+    /**
      * 添加评论
      */
     @RequestMapping(value = "api/discuss", method = RequestMethod.POST)
-    public String addDiscuss(@RequestBody Discuss discuss, Model model) {
-
+    public String addDiscuss(Discuss discuss,HttpSession session, Model model) {
+        //获取登录的用户
+        User user = (User) session.getAttribute("currentUser");
+        System.out.println("controllerUser:"+user.getId());
+        discuss.setPublisherUser(user);
+        
+        int problemId = (int)session.getAttribute("problemId");
+        System.out.println(problemId);
+        //添加评论
         boolean flag = discussService.addDiscuss(discuss);
         if (flag) {
             model.addAttribute("discuss", discuss);
-            return DISCUSS_PAGE; // TODO 跳转到错误页
+            return "redirect:/api/discuss/"+problemId; 
         }else {
             return ERROR_PAGE; // TODO 跳转到错误页
         }
@@ -63,10 +81,11 @@ public class DiscussController {
      * 删除评论
      */
     @RequestMapping(value = "api/discuss/{discussId}", method = RequestMethod.DELETE)
-    public String delDiscuss(@PathVariable("discussId")long discussId) {
+    public String delDiscuss(@PathVariable("discussId")long discussId,HttpSession session) {
+        int problemId = (int)session.getAttribute("problemId");
+        System.out.println(problemId);
         discussService.delDiscussById(discussId);
-        
-        return "redirect:api/discuss";//重新获取讨论列表
+        return "redirect:/api/discuss/"+problemId;//重新获取讨论列表
     }
 
 
