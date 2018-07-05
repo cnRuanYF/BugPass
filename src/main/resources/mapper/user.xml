@@ -4,9 +4,9 @@
 
     <insert id="add" parameterType="com.bugpass.entity.User">
         INSERT INTO
-            user ( username, passwd_hash, passwd_salt )
+            user ( username, passwd_hash, passwd_salt, picture )
         VALUES
-            ( #{username}, #{passwordHash}, #{passwordSalt} )
+            ( #{username}, #{passwordHash}, #{passwordSalt}, #{picture} )
     </insert>
 
     <select id="queryAll" resultMap="userMap">
@@ -79,6 +79,8 @@
             OR upper(email) LIKE upper(concat('%',#{keyword},'%'))
             OR phone = #{keyword}
             OR upper(realname) LIKE upper(concat('%',#{keyword},'%'))
+        LIMIT
+            10
     </select>
 
     <update id="update" parameterType="com.bugpass.entity.User">

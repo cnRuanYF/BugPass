@@ -1,11 +1,11 @@
 package com.bugpass.controller;
 
+import com.bugpass.constant.MessageType;
 import com.bugpass.entity.User;
 import com.bugpass.service.UserService;
 import com.bugpass.util.EncryptUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -22,10 +22,14 @@ import java.util.List;
 @Controller
 public class UserController {
 
-    private static final String LOGIN_PAGE = "index";
-    private static final String ERROR_PAGE = "index";
     private static final String PAGE_USER_PROFILE = "user_profile";
     private static final String PAGE_CHANGE_PASSWORD = "user_change_password";
+
+    private static final String REDIRECT_INDEX = "redirect:/index";
+    private static final String REDIRECT_USER_PROFILE = "redirect:/user/updateProfile";
+    private static final String REDIRECT_CHANGE_PASSWORD = "redirect:/user/changePassword";
+
+    private static final String ATTRIB_CURRENT_USER = "currentUser";
 
     @Autowired
     private UserService userService;
@@ -60,9 +64,9 @@ public class UserController {
     /**
      * [RESTful] 关键词搜索用户
      */
-    @RequestMapping(value="api/searchUser",method=RequestMethod.GET)
+    @RequestMapping(value = "api/searchUser", method = RequestMethod.GET)
     @ResponseBody
-    public List<User> searchByKeyword(String k){
+    public List<User> searchByKeyword(String k) {
         return userService.findByKeyword(k);
     }
 
@@ -70,39 +74,40 @@ public class UserController {
      * 用户注册
      */
     @RequestMapping(value = "user/register", method = RequestMethod.POST)
-    public String userRegister(User user, Model model) {
+    public String userRegister(User user, HttpSession session) {
 
         boolean usernameExist = userService.checkUsernameExist(user.getUsername());
         if (usernameExist) {
-            model.addAttribute("errorMessage", "用户名已存在");
-            return ERROR_PAGE; // TODO 跳转到错误页
+            session.setAttribute(MessageType.ERROR, "用户名已存在，注册失败");
+            return REDIRECT_INDEX;
         }
 
         boolean success = userService.register(user);
         if (success) {
-            return LOGIN_PAGE;
+            session.setAttribute(MessageType.SUCCESS, "注册成功");
+            session.setAttribute(ATTRIB_CURRENT_USER, userService.findByUsername(user.getUsername()));
         } else {
-            model.addAttribute("errorMessage", "注册失败，请稍后再试");
-            return ERROR_PAGE; // TODO 跳转到错误页
+            session.setAttribute(MessageType.ERROR, "注册失败，请稍后再试");
         }
+        return REDIRECT_INDEX;
     }
 
     /**
      * 用户登录
      */
     @RequestMapping(value = "user/login", method = RequestMethod.POST)
-    public String userLogin(User user, Model model) {
+    public String userLogin(User user, HttpSession session) {
         User fullUser = userService.findByUsername(user.getUsername());
 
         if (fullUser == null) {
-            model.addAttribute("errorMessage", "该用户不存在");
+            session.setAttribute(MessageType.ERROR, "该用户不存在");
         } else if (EncryptUtil.getSHA1(user.getPassword() + fullUser.getPasswordSalt()).equals(fullUser.getPasswordHash())) {
-            model.addAttribute("successMessage", "登录成功");
-            model.addAttribute("user", fullUser);
+            session.setAttribute(MessageType.SUCCESS, "登录成功");
+            session.setAttribute(ATTRIB_CURRENT_USER, fullUser);
         } else {
-            model.addAttribute("errorMessage", "密码不正确");
+            session.setAttribute(MessageType.ERROR, "密码不正确");
         }
-        return LOGIN_PAGE;
+        return REDIRECT_INDEX;
     }
 
     /**
@@ -110,78 +115,69 @@ public class UserController {
      */
     @RequestMapping(value = "user/logout", method = RequestMethod.GET)
     public String userLogout(HttpSession session) {
-        session.removeAttribute("user");
-        return LOGIN_PAGE;
+        session.removeAttribute(ATTRIB_CURRENT_USER);
+        return REDIRECT_INDEX;
     }
 
     /**
-     * 修改用户个人信息-界面
+     * 修改用户个人信息 - 界面
      */
     @RequestMapping(value = "user/updateProfile", method = RequestMethod.GET)
-    public String updateProfileUI() {
+    public String updateProfileGet() {
         return PAGE_USER_PROFILE;
     }
 
     /**
-     * 修改用户个人信息-提交
+     * 修改用户个人信息 - 提交
      */
     @RequestMapping(value = "user/updateProfile", method = RequestMethod.POST)
-    public String updateProfile(User user, Model model) {
+    public String updateProfilePost(User user, HttpSession session) {
 
-        userService.updateUserProfile(user);
-        User fullUser = userService.findById(user.getId());
-        model.addAttribute("user", fullUser);
+        if (userService.updateUserProfile(user)) {
+            User fullUser = userService.findById(user.getId());
+            session.setAttribute(ATTRIB_CURRENT_USER, fullUser);
+            session.setAttribute(MessageType.SUCCESS, "个人资料修改成功");
+        } else {
+            session.setAttribute(MessageType.SUCCESS, "操作失败，请稍后再试");
+        }
 
-        return PAGE_USER_PROFILE;
+        return REDIRECT_USER_PROFILE;
     }
 
     /**
-     * 用户修改密码-界面
+     * 用户修改密码 - 界面
      */
     @RequestMapping(value = "user/changePassword", method = RequestMethod.GET)
-    public String changePasswordUI() {
+    public String changePasswordGet() {
         return PAGE_CHANGE_PASSWORD;
     }
 
     /**
-     * TODO 用户修改密码-提交
+     * 用户修改密码 - 提交
+     * TODO 流程待优化
      */
     @RequestMapping(value = "user/changePassword", method = RequestMethod.POST)
-    public String changePassword(User user, Model model) {
+    public String changePasswordPost(String oldPassword, String newPassword, String confirmNewPassword, HttpSession session) {
 
-        if(userService.updateUserPassword(user)){
-            User fullUser = userService.findById(user.getId());
-            model.addAttribute("user",fullUser);
-            model.addAttribute("successMessage", "该用户不存在");
-        }else {            model.addAttribute("errorMessage", "修改失败，");
+        User currentUser = (User) session.getAttribute(ATTRIB_CURRENT_USER);
+
+        if (!newPassword.equals(confirmNewPassword)) {
+            session.setAttribute(MessageType.ERROR, "两次输入不一致");
+        } else if (!EncryptUtil.getSHA1(oldPassword + currentUser.getPasswordSalt()).equals(currentUser.getPasswordHash())) {
+            session.setAttribute(MessageType.ERROR, "原密码不正确");
+        } else {
+            currentUser.setPassword(newPassword);
+            boolean success = userService.updateUserPassword(currentUser);
+
+            if (success) {
+                session.setAttribute(MessageType.SUCCESS, "密码修改成功");
+            } else {
+                session.setAttribute(MessageType.ERROR, "操作失败，请稍后再试");
+            }
         }
-        return PAGE_CHANGE_PASSWORD;
-//        UserService userService;
-//        HttpSession session = request.getSession();
-//
-//        String oldPassword = EncryptUtil.getSHA1(request.getParameter("oldPassword"));
-//        String newPassword = EncryptUtil.getSHA1(request.getParameter("newPassword"));
-//        String confirmNewPassword = EncryptUtil.getSHA1(request.getParameter("confirmNewPassword"));
-//
-//        User user = (User) session.getAttribute("user");
-//
-//        if (!newPassword.equals(confirmNewPassword)) {
-//            session.setAttribute("actionErrors", "两次输入不一致");
-//        } else if (!oldPassword.equals(user.getPassword())) {
-//            session.setAttribute("actionErrors", "原密码不正确");
-//        } else {
-//            userService = new UserServiceImpl();
-//            user.setPassword(newPassword);
-//            boolean success = userService.updateUserProfile(user);
-//
-//            if (success) {
-//                session.setAttribute("actionMessages", "修改成功");
-//            } else {
-//                session.setAttribute("actionErrors", "操作失败");
-//            }
-//        }
-//
-//        response.sendRedirect("user_change_password.jsp");
-//        return null;
+
+        session.setAttribute(ATTRIB_CURRENT_USER, userService.findById(currentUser.getId()));
+
+        return REDIRECT_CHANGE_PASSWORD;
     }
 }

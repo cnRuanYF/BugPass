@@ -4,6 +4,8 @@ import com.bugpass.dao.ProjectDao;
 import com.bugpass.entity.Project;
 import com.bugpass.service.ProjectService;
 
+import java.util.List;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +39,12 @@ public class TestProjectDao {
 		Project project = projectDao.queryByDisplayId("3d5fb58aa496042c39ec4bd88737849e");
 		System.out.println(project);
 	}
+	
+	@Test
+	public void testQueryProjectByUserId() {
+		List<Project> project = projectDao.queryProjectByUserId(2);
+		System.out.println(project);
+	}
 
 	@Test
 	public void testAddProject() {
@@ -44,7 +52,7 @@ public class TestProjectDao {
 		project.setProjectName("测试数据002");
 		project.setProjectDesc("测试数据002");
 		
-		boolean flag = projectService.addProject(project);
+		boolean flag = projectService.addProject(project, null);
 		
 		System.out.println(flag);
 	}

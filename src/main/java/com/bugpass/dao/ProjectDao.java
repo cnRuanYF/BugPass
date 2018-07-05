@@ -1,5 +1,7 @@
 package com.bugpass.dao;
 
+import java.util.List;
+
 import org.springframework.stereotype.Repository;
 
 import com.bugpass.entity.Project;
@@ -20,5 +22,12 @@ public interface ProjectDao extends BaseDAO<Project> {
 	 * @return Project对象
 	 */
 	Project queryByDisplayId(String displayId);
+	
+	/**
+	 * 根据用户id查询用户参与的所有项目
+	 * @param userId
+	 * @return List<Project>
+	 */
+	List<Project> queryProjectByUserId(long userId);
 	
 }

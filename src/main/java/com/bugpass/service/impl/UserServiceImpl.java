@@ -24,9 +24,11 @@ public class UserServiceImpl implements UserService {
     private UserDAO userDao;
 
     public boolean register(User user) {
-        // 密码加密
         user.setPasswordSalt(EncryptUtil.createSalt());
         user.setPasswordHash(EncryptUtil.getSHA1(user.getPassword() + user.getPasswordSalt()));
+
+        user.setPicture((int) (Math.random() * 189) + "");
+
         return userDao.add(user);
     }
 
@@ -38,6 +40,7 @@ public class UserServiceImpl implements UserService {
             fullUser.setPhone(user.getPhone());
             fullUser.setQq(user.getQq());
             fullUser.setRealname(user.getRealname());
+            fullUser.setPicture(user.getPicture());
             return userDao.update(fullUser);
         }
         return false;

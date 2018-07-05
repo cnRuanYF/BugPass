@@ -1,5 +1,6 @@
 package com.bugpass.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -7,7 +8,7 @@ import java.util.Date;
  *
  * @date 2018/6/29 17:20
  **/
-public class User {
+public class User implements Serializable{
 
     /**
      * 用户ID
