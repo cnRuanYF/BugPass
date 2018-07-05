@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.bugpass.dao.DiscussDao;
@@ -16,7 +18,7 @@ import com.bugpass.service.DiscussService;
  * @date 2018年7月4日 下午12:47:18
  */
 @Service("discussService")
-@Transactional
+@Transactional(propagation=Propagation.REQUIRED,isolation=Isolation.READ_COMMITTED)
 public class DiscussServiceImpl implements DiscussService {
 
     @Autowired
