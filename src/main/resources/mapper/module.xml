@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!-- 映射文件 有一个 namespace -->
+<mapper namespace="com.bugpass.dao.ModuleDao">
+	<!-- 根据问题id查找对应的讨论返回模块list -->
+	<select id="queryByProjectId" resultMap="moduleMap">
+		SELECT
+			module_id,module_name,project_id
+		FROM
+			module 
+		WHERE 
+			project_id=#{projectId}
+	</select>
+	
+	<!-- id对应的是接口中定义的方法名， -->
+	<!-- 使用了resultMap的写法 -->
+	<select id="queryAll" resultMap="moduleMap">
+		SELECT
+			*
+		FROM
+			module 
+	</select>
+	
+	<select id="queryById" resultMap="moduleMap">
+		SELECT
+			*
+		FROM
+			module 
+		WHERE 
+			module_id=#{moduleId}
+	</select>
+	
+	<!-- 插入记录 -->
+	<insert id="add" parameterType="com.bugpass.entity.Module">
+		insert into module
+		values(null,#{moduleName},#{projectId})
+	</insert>
+	
+	<delete id="delete">
+		delete from module where module_id=#{moduleId}
+	</delete>
+	
+	<!-- 动态更新 -->
+	<update id="update">
+		update module
+		<set>
+			<if test="moduleName != null">module_name=#{moduleName},</if>
+		</set>
+		where module_id=#{moduleId}
+	</update>
+
+	<!-- 动态sql foreach使用 批量删除 -->
+	<delete id="deleteDiscussByManyId">
+		delete from module where module_id in
+		<foreach collection="list" open="(" close=")" separator=","
+			item="item">
+			#{item}
+		</foreach>
+	</delete>
+	
+	<!-- 查询结果映射 -->
+	<resultMap type="com.bugpass.entity.Module" id="moduleMap">
+		<!-- property=实体类属性名，column=表中列名 -->
+		<id property="moduleId" column="module_id" />
+		<result property="moduleName" column="module_name" />
+		<result property="projectId" column="project_id" />
+	</resultMap>
+		
+		
+	
+	<!-- 加入一个二级缓存的最简单的配置 -->
+	<cache>
+	
+	</cache>
+</mapper>
