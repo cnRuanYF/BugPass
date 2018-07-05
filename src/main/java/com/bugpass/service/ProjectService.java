@@ -1,5 +1,7 @@
 package com.bugpass.service;
 
+import java.util.List;
+
 import com.bugpass.entity.Project;
 import com.bugpass.entity.User;
 
@@ -10,29 +12,54 @@ import com.bugpass.entity.User;
  * @date 2018-07-03 14:12
  */
 public interface ProjectService {
-	
-	/**
-	 * 根据ID查找项目
-	 * 
-	 * @param projectId
-	 * @return
-	 */
-	Project findProjectById(long projectId);
-	
-	/**
-	 * 根据显示ID查找对象
-	 * 
-	 * @param displayId
-	 * @return
-	 */
-	Project findProjectByDisplayId(String displayId);
-	
-	/**
-	 * 添加项目信息
-	 * 
-	 * @param project
-	 * @return
-	 */
-	boolean addProject(Project project,User user);
-	
+
+    /**
+     * 添加项目记录
+     * 
+     * @param project
+     * @return
+     */
+    boolean addProject(Project project,User user);
+    
+    /**
+     * 删除项目记录
+     * 
+     * @param projectId
+     * @return
+     */
+    boolean delProjectById(long projectId);
+    
+    /**
+     * 更新项目记录
+     * 
+     * @param project
+     * @return
+     */
+    boolean updProject(Project project);
+    
+    
+    /**
+     * 根据ID查找项目记录
+     * 
+     * @param projectId
+     * @return
+     */
+    Project findProjectById(long projectId);
+
+    /**
+     * 根据显示ID查找对象
+     * 
+     * @param displayId
+     * @return
+     */
+    Project findProjectByDisplayId(String displayId);
+
+    /**
+     * 根据用户id查询用户参与的所有项目
+     * 
+     * @param userId
+     * @return List<Project>
+     */
+    List<Project> queryProjectByUserId(long userId);
+
 }

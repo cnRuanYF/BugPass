@@ -4,25 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.bugpass.dao.ProjectDao">
 
-	<!-- 根据ID查询一条项目记录 -->
-	<select id="queryById" parameterType="long"
-		resultMap="projectMap">
-		select *
-		from project where project_id=#{project_id}
-	</select>
-
-	<!-- 根据显示ID编号查询一条项目记录 -->
-	<select id="queryByDisplayId" parameterType="String"
-		resultMap="projectMap">
-		select * from project where display_id=#{displayId}
-	</select>
-
-	<!-- 根据用户id查询用户参与的所有项目 -->
-	<select id="queryProjectByUserId" parameterType="long" resultType="com.bugpass.entity.Project">
-		select project.project_name,project.project_desc,project.create_time 
-		from member,project 
-		where project.project_id=member.project_id and member.user_id=#{user.getId()}
-	</select>
+	<!-- 增 -->
 
 	<!-- 增加一条项目记录 -->
 	<insert id="add" parameterType="com.bugpass.entity.Project">
@@ -32,13 +14,79 @@
 	</insert>
 
 
+	<!-- 删 -->
+
+	<delete id="delete" parameterType="long">
+		delete from project where
+		project_id=#{id}
+	</delete>
+
+	<!-- 改 -->
+
+	<update id="update" parameterType="com.bugpass.entity.Project">
+
+		update project
+		<set>
+			<if test="projectName != null">project_name=#{projectName},</if>
+			<if test="projectDesc != null">project_desc=#{projectDesc},</if>
+			<if test="projectDate != null">create_time=#{projectDate},</if>
+			<if test="displayId != null">display_id=#{displayId},</if>
+		</set>
+		where project_id=#{id}
+	</update>
+
+	<!-- 查 -->
+
+	<!-- 根据ID查询一条项目记录 -->
+	<select id="queryById" parameterType="long" resultMap="projectMap">
+		select *
+		from project where project_id=#{id}
+	</select>
+
+	<!-- 根据显示ID编号查询一条项目记录 -->
+	<select id="queryByDisplayId" parameterType="String" resultMap="projectMap">
+		select * from project where display_id=#{displayId}
+	</select>
+
+	<!-- 根据用户id查询用户参与的所有项目 -->
+	<select id="queryProjectByUserId" parameterType="long"
+		resultMap="projectMap">
+		select * from project inner join member on
+		project.project_id=member.project_id where member.user_id=#{userId}
+	</select>
+
+
+	<!-- 多表查询所有 -->
+	
+
+	<!-- 映射 -->
+
 	<!-- 查询结果映射 -->
 	<resultMap type="com.bugpass.entity.Project" id="projectMap">
 		<!-- property=实体类属性名，column=表中列名 -->
+		<id property="id" column="project_id" />
+		<result property="projectName" column="project_name" />
+		<result property="projectDesc" column="project_desc" />
+		<result property="createTime" column="create_time" />
+		<result property="displayId" column="display_id" />
+	</resultMap>
+
+	<!-- 查询结果映射,映射模块类和版本类 
+	<resultMap type="com.bugpass.entity.Project" id="projectModuleVersion">
+		property=实体类属性名，column=表中列名
 		<id property="projectId" column="project_id" />
 		<result property="projectName" column="project_name" />
 		<result property="projectDesc" column="project_desc" />
 		<result property="projectDate" column="create_time" />
 		<result property="displayId" column="display_id" />
-	</resultMap>
+		<collection property="list" ofType="com.bugpass.entity.Module">
+			主键
+			<id property="moduleId" column="module_id" />
+			其他部分
+			<result property="moduleName" column="module_name" />
+			<result property="moduleId" column="" />
+
+		</collection>
+		
+	</resultMap> -->
 </mapper>

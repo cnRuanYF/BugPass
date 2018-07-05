@@ -1,63 +1,39 @@
 package com.bugpass.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * 项目实体类
  * 
- * @author QiuWenYi
- * @date 2018年6月10日 下午2:03:44
+ * @author QiuWenYi, ChenZhiJun
+ * @date 2018-07-05 14:21
  */
-public class Project {
+public class Project implements Serializable{
 
-    /**
-     * projectId projectName projectDate projectDesc
-     * 
-     */
     /* 项目ID */
-    private long projectId;
+    private long id;
     /* 项目名 */
     private String projectName;
     /* 项目日期 */
-    private Date projectDate;
+    private Date createTime;
     /* 版本描述 */
     private String projectDesc;
     /* 显示ID */
     private String displayId;
     
-		public Project() {
-			super();
-		}
-
-		public Project(String projectName, Date projectDate, String projectDesc, String displayId) {
-			super();
-			this.projectName = projectName;
-			this.projectDate = projectDate;
-			this.projectDesc = projectDesc;
-			this.displayId = displayId;
-		}
-
-		public Project(long projectId, String projectName, Date projectDate, String projectDesc, String displayId) {
-			super();
-			this.projectId = projectId;
-			this.projectName = projectName;
-			this.projectDate = projectDate;
-			this.projectDesc = projectDesc;
-			this.displayId = displayId;
-		}
-
 		@Override
 		public String toString() {
-			return "Project [projectId=" + projectId + ", projectName=" + projectName + ", projectDate=" + projectDate
+			return "Project [projectId=" + id + ", projectName=" + projectName + ", projectDate=" + createTime
 					+ ", projectDesc=" + projectDesc + ", displayId=" + displayId + "]";
 		}
 
-		public long getProjectId() {
-			return projectId;
+		public long getId() {
+			return id;
 		}
 		
-		public void setProjectId(long projectId) {
-			this.projectId = projectId;
+		public void setId(long id) {
+			this.id = id;
 		}
 		
 		public String getProjectName() {
@@ -68,12 +44,12 @@ public class Project {
 			this.projectName = projectName;
 		}
 		
-		public Date getProjectDate() {
-			return projectDate;
+		public Date getCreateTime() {
+			return createTime;
 		}
 		
-		public void setProjectDate(Date projectDate) {
-			this.projectDate = projectDate;
+		public void setCreateTime(Date createTime) {
+			this.createTime = createTime;
 		}
 		
 		public String getProjectDesc() {

@@ -7,15 +7,18 @@
 <title>Insert title here</title>
 </head>
 <body>
-项目ID:${project.projectId }
+项目ID:${project.id }
 </br>
 项目名称:${project.projectName }
 </br>
 项目描述:${project.projectDesc }
 </br>
-创建时间:${project.projectDate }
+创建时间:${project.createTime }
 </br>
-所有者:${usernameStr }
+创建者:${projectCreator.username }
+</br>
+真实姓名:${projectCreator.realname }
+
 </br>
 </br>
 </br>
