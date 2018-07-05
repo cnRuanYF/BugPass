@@ -1,27 +1,23 @@
 package com.bugpass.controller;
 
-import java.util.List;
-
-import javax.servlet.http.HttpSession;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.Mapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.bugpass.constant.MemberRoleType;
 import com.bugpass.entity.Member;
 import com.bugpass.entity.Project;
 import com.bugpass.entity.User;
 import com.bugpass.service.MemberService;
 import com.bugpass.service.ProjectService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import javax.servlet.http.HttpSession;
+import java.util.List;
 
 /**
- * @author ChenZhiJun
+ * @author ChenZhiJunSB
  * @date 2018-07-03 14:27
  */
 @Controller
@@ -40,8 +36,8 @@ public class ProjectCotroller {
      * @param model
      * @return
      */
-    @RequestMapping(value = "/api/addProject", method = RequestMethod.POST)
-    public String addProject(Project project, HttpSession session, Model model) {
+    @RequestMapping(value = "project/create", method = RequestMethod.POST)
+    public String createProjectPost(Project project, HttpSession session, Model model) {
         // 获取登录的用户
         User user = (User) session.getAttribute("currentUser");
         System.out.println("controllerUser:" + user.getId());
@@ -59,7 +55,7 @@ public class ProjectCotroller {
      * @param projectId
      * @return
      */
-    @RequestMapping(value = "/api/delProject/{projectId}", method = RequestMethod.GET)
+    @RequestMapping(value = "project/delete/{projectId}", method = RequestMethod.GET)
     public String delProject(@PathVariable(value = "projectId") long projectId) {
         boolean flag = projectService.delProjectById(projectId);
         return "project_info";

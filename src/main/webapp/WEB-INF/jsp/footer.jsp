@@ -24,12 +24,21 @@
 <footer class="footer mt-4 bg-light text-muted">
     <div class="container p-3">
         <ul class="list-unstyled">
-            <li class="list-item list-inline-item"><a href="index">首页</a></li>
-            <li class="list-item list-inline-item"><a href="#modal-container-about" data-toggle="modal">关于</a></li>
-            <li class="list-item list-inline-item"><a href="mailto:me@ryf.space">联系我们</a></li>
+            <li class="list-item list-inline-item">
+                <a href="index">首页</a>
+            </li>
+            <li class="list-item list-inline-item">
+                <a href="#modal-container-about" data-toggle="modal">关于</a>
+            </li>
+            <li class="list-item list-inline-item">
+                <a class="btnHelp" href="javascript:void(0)">帮助</a>
+            </li>
+            <li class="list-item list-inline-item">
+                <a href="mailto:me@ryf.space">联系我们</a>
+            </li>
         </ul>
         <p id="copyrightInfo">
-            Copyright &copy; 2018 <a href="index.jsp" target="_blank" rel="noopener">BugPass</a> 版权所有
+            Copyright &copy; 2018 <a href="index" rel="noopener">BugPass</a> 版权所有
             <br>
             A defect management system.
             <br>
@@ -79,7 +88,7 @@
 
 <!-- 成员模态窗口 -->
 <div class="modal fade" id="modal-container-team" role="dialog" aria-hidden="true" aria-labelledby="teamModalLabel">
-    <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="teamModalLabel">
@@ -90,7 +99,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <img alt="Team members" src="../../img/team_member.png">
+                <h1>厦门理工牛逼！</h1>
             </div>
             <div class="modal-footer">
                 <a class="btn btn-primary" href="#modal-container-team" data-toggle="modal">厉害了</a>
@@ -103,6 +112,13 @@
 <script type="text/javascript">
     $(document).ready(function () {
         $('#copyrightModal').html($('#copyrightInfo').html());
+    });
+</script>
+
+<!-- TODO提示 -->
+<script type="text/javascript">
+    $('.btnHelp').click(function () {
+        layer.msg('开发中，敬请期待', {icon:0});
     });
 </script>
 

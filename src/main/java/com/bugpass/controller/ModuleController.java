@@ -62,8 +62,8 @@ public class ModuleController {
     public String addModule(Module module,HttpSession session, Model model) {
         //获取当前项目的id
         Project project = (Project) session.getAttribute("currentProject");
-        System.out.println("currentProjectId:"+project.getProjectId());
-        long currentProjectId = project.getProjectId();
+        System.out.println("currentProjectId:"+project.getId());
+        long currentProjectId = project.getId();
 //        discuss.setPublisherUser(user);
         
         int problemId = (int)session.getAttribute("problemId");
@@ -83,13 +83,13 @@ public class ModuleController {
     /**
      * 删除模块
      */
-    @RequestMapping(value = "api/discuss/{discussId}", method = RequestMethod.DELETE)
-    public String delDiscuss(@PathVariable("discussId")long discussId,HttpSession session) {
-        int problemId = (int)session.getAttribute("problemId");
-        System.out.println(problemId);
-        discussService.delDiscussById(discussId);
-        return "redirect:/api/discuss/"+problemId;//重新获取讨论列表
-    }
+//    @RequestMapping(value = "api/discuss/{discussId}", method = RequestMethod.DELETE)
+//    public String delDiscuss(@PathVariable("discussId")long discussId,HttpSession session) {
+//        int problemId = (int)session.getAttribute("problemId");
+//        System.out.println(problemId);
+//        discussService.delDiscussById(discussId);
+//        return "redirect:/api/discuss/"+problemId;//重新获取讨论列表
+//    }
     
 
 }

@@ -1,3 +1,11 @@
+<%-- 权限控制 --%>
+<c:if test="${currentUser == null}">
+    <%
+        session.setAttribute("warningMessage","请先登录！");
+        response.sendRedirect("index");
+    %>
+</c:if>
+
 <!--导航栏-->
 <header class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
     <div class="container">
@@ -28,29 +36,29 @@
                             <c:forEach items="${projectList}" var="proj">
                                 <a class="dropdown-item ${proj.projectId == currentProject.projectId ? 'active' : ''}"
                                    href="project/chooseProject/${proj.projectID}">
-                                    <i class="fa fa-fw fa-project-diagram mr-2"></i>${proj.projectName}
+                                    <i class="fa fa-fw fa-cube mr-2"></i>${proj.projectName}
                                 </a>
                             </c:forEach>
                             <div class="dropdown-divider"></div>
                         </c:if>
-                        <a class="dropdown-item" href="#">
-                            <i class="fa fa-fw fa-plus mr-2"></i>创建／加入工程项目
+                        <a class="dropdown-item" href="project/create">
+                            <i class="fa fa-fw fa-plus mr-2"></i>创建工程项目
                         </a>
                     </div>
                 </li>
             </ul>
             <ul class="navbar-nav mr-auto">
                 <c:if test="${currentProject != null}">
-                    <li class="nav-item"><a class="nav-link" href="project/summary">
+                    <li class="nav-item"><a class="nav-link ${navItem == 'summary' ? 'active' : ''}" href="project/summary">
                         <i class="fa fa-file-alt mr-2"></i>概述</a>
                     </li>
-                    <li class="nav-item"><a class="nav-link" href="project/problemList">
+                    <li class="nav-item"><a class="nav-link ${navItem == 'problem' ? 'active' : ''}" href="project/problemList">
                         <i class="fa fa-bug mr-2"></i>问题</a>
                     </li>
-                    <li class="nav-item"><a class="nav-link" href="project/statistics">
+                    <li class="nav-item"><a class="nav-link ${navItem == 'statistics' ? 'active' : ''}" href="project/statistics">
                         <i class="fa fa-chart-line mr-2"></i>统计</a>
                     </li>
-                    <li class="nav-item"><a class="nav-link" href="project/settings">
+                    <li class="nav-item"><a class="nav-link ${navItem == 'setting' ? 'active' : ''}" href="project/settings">
                         <i class="fa fa-sliders-h mr-2"></i>设置</a>
                     </li>
                 </c:if>
@@ -84,4 +92,53 @@
         </div>
     </div>
 </header>
+
+<!-- TODO 创建工程模态窗口 -->
+<div class="modal fade" id="modal-container-create-project" role="dialog" aria-hidden="true"
+     aria-labelledby="createProjectModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="createProjectModalLabel">
+                    <i class="fa fa-user-plus mr-2"></i>新用户注册
+                </h5>
+                <button class="close" type="button" data-dismiss="modal">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <form class="mb-0" role="form" id="registerForm" action="user/register" method="post"
+                  onsubmit="return validateReg()">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="regUsername">用户名</label>
+                        <input class="form-control lastpassClearHidden" id="regUsername" name="username" type="text"
+                               placeholder="4~16位字母或数字，不能以数字开头" required/>
+                    </div>
+                    <div class="form-group">
+                        <div class="text-danger" id="usernameCheck"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="regPassword">密码</label>
+                        <input class="form-control lastpassClearHidden" id="regPassword" name="password" type="password"
+                               placeholder="4~16位字母或数字" required/>
+                    </div>
+                    <div class="form-group">
+                        <label for="regPassword2">重复密码</label>
+                        <input class="form-control lastpassClearHidden" id="regPassword2" type="password"
+                               placeholder="再次输入密码" required/>
+                    </div>
+                    <div class="form-group text-danger" id="regError">
+                        <i class="fa fa-exclamation-circle mr-2"></i><span id="regErrorMsg"></span>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary btn-block" id="btnRegister" type="submit">
+                        <i class="fa fa-spinner fa-spin mr-2"></i>注册
+                    </button>
+                    <a class="btn btn-link" href="#modal-container-login" data-dismiss="modal" data-toggle="modal">已有账号？点此登录</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 

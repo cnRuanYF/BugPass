@@ -116,6 +116,7 @@ public class UserController {
     @RequestMapping(value = "user/logout", method = RequestMethod.GET)
     public String userLogout(HttpSession session) {
         session.removeAttribute(ATTRIB_CURRENT_USER);
+        session.setAttribute(MessageType.SUCCESS, "用户已退出登录");
         return REDIRECT_INDEX;
     }
 

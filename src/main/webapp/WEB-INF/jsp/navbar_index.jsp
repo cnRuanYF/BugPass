@@ -14,7 +14,7 @@
                     <a class="nav-link btnEnterSys" href="javascript:void(0)">进入系统</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">帮助</a>
+                    <a class="nav-link btnHelp" href="javascript:void(0)">帮助</a>
                 </li>
             </ul>
             <ul class="navbar-nav mr-4">

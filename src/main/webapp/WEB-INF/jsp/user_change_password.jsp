@@ -5,7 +5,7 @@
 <head>
     <title>个人中心 - BugPass</title>
 
-    <%@ include file="common_html_head.jsp" %>
+    <%@ include file="common_head.jsp" %>
 
 </head>
 <body>
@@ -15,38 +15,29 @@
 <div class="container">
     <div class="row">
 
-        <div class="col-md-3 mb-4">
-            <div class="list-group">
-                <h5 class="list-group-item">个人中心</h5>
-                <a href="user/updateProfile" class="list-group-item list-group-item-action">
-                    <i class="fa fa-fw fa-user-edit mr-2"></i>个人资料
-                </a>
-                <a href="user/changePassword" class="list-group-item list-group-item-action active">
-                    <i class="fa fa-fw fa-key mr-2"></i>修改密码
-                </a>
-            </div>
-        </div>
+        <% request.setAttribute("sidebarItem", "password");%>
+        <%@ include file="user_sidebar.jsp" %>
 
         <div class="col-md-9">
             <div class="card card-body">
                 <h5 class="mb-4">修改密码</h5>
                 <form action="user/changePassword" method="post">
                     <div class="form-group row">
-                        <label class="col-md-3 col-form-label text-right" for="oldPassword">原密码</label>
+                        <label class="col-md-3 col-form-label text-md-right" for="oldPassword">原密码</label>
                         <div class="col-md-9 col-lg-6">
                             <input type="password" id="oldPassword" class="form-control" name="oldPassword"
                                    placeholder="请输入原密码" required>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-md-3 col-form-label text-right" for="newPassword">新密码</label>
+                        <label class="col-md-3 col-form-label text-md-right" for="newPassword">新密码</label>
                         <div class="col-md-9 col-lg-6">
                             <input type="password" id="newPassword" class="form-control" name="newPassword"
                                    placeholder="请输入新密码" required>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-md-3 col-form-label text-right" for="confirmNewPassword">确认密码</label>
+                        <label class="col-md-3 col-form-label text-md-right" for="confirmNewPassword">确认密码</label>
                         <div class="col-md-9 col-lg-6">
                             <input type="password" id="confirmNewPassword" class="form-control"
                                    name="confirmNewPassword" placeholder="请确认新密码" required>

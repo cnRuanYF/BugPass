@@ -5,7 +5,7 @@
 <head>
     <title>BugPass</title>
 
-    <%@ include file="common_html_head.jsp" %>
+    <%@ include file="common_head.jsp" %>
 
     <!-- 首页样式 -->
     <style>
