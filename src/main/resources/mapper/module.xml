@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <!-- 映射文件 有一个 namespace -->
 <mapper namespace="com.bugpass.dao.ModuleDao">
-	<!-- 根据问题id查找对应的讨论返回模块list -->
+	<!-- 根据项目id查找对应的讨论返回模块list -->
 	<select id="queryByProjectId" resultMap="moduleMap">
 		SELECT
 			module_id,module_name,project_id
@@ -12,15 +12,14 @@
 			project_id=#{projectId}
 	</select>
 	
-	<!-- id对应的是接口中定义的方法名， -->
-	<!-- 使用了resultMap的写法 -->
+	<!-- 查询所有模块 -->
 	<select id="queryAll" resultMap="moduleMap">
 		SELECT
 			*
 		FROM
 			module 
 	</select>
-	
+	<!-- 根据模块的id查询模块 -->
 	<select id="queryById" resultMap="moduleMap">
 		SELECT
 			*
@@ -30,7 +29,7 @@
 			module_id=#{moduleId}
 	</select>
 	
-	<!-- 插入记录 -->
+	<!-- 插入 -->
 	<insert id="add" parameterType="com.bugpass.entity.Module">
 		insert into module
 		values(null,#{moduleName},#{projectId})
@@ -40,7 +39,7 @@
 		delete from module where module_id=#{moduleId}
 	</delete>
 	
-	<!-- 动态更新 -->
+	<!-- 更新 -->
 	<update id="update">
 		update module
 		<set>

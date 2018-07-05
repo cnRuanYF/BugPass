@@ -12,10 +12,10 @@
 		<%
 		//Problem problem=new Problem();//这里需要问题的id传入
 		
-		session.setAttribute("problemId",1);//先写死(等问题)
-		int problemId=(int)session.getAttribute("problemId");
+		session.setAttribute("projectId",1);//测试用 
+		int projectId=(int)session.getAttribute("projectId");
 	%>
-	<%=problemId %><br>
+	<%=projectId %><br>
 		<!-- 用ajax实现添加,废弃用discuss_add.jsp -->
 		讨论:<textarea type="text" id="discussContent" value="" ></textarea><br/>
 		<!-- 用户id --><%-- <input type="hidden" id="publisherUser" value="${publisherUser.id}" /><br/> --%>
@@ -26,7 +26,7 @@
 		<input type="button" id="btn02" value="更新" />
 		<input type="button" id="btn03" value="删除" />
 		
-		<a href="${pageContext.request.contextPath}/api/toAddDiscuss">添加</a>
+		<a href="${pageContext.request.contextPath}/api/module">添加</a>
 	<table class="table table-striped table-hover">
 		<thead>
 			<tr>
@@ -50,7 +50,7 @@
 							<button class="btn btn-success" id="btn01" href="javascript:void(0)" onclick="updFunction(${module.moduleId})">
 									修改
 							</button> 
-							<button class="btn btn-danger" id="btn02" href="javascript:void(0)" onclick="delFunction(${module.moduleId})">
+							<button  class="btn btn-danger" id="btn02" href="javascript:void(0)" onclick="delFunction(${module.moduleId})">
 									删除
 							</button>	
 						</td>
@@ -62,21 +62,20 @@
 </body>
 <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
 	<script>
-		/*  function delFunction(discussId) {
-			var flag = confirm("是否确定删除文章编号为" + discussId);
+		  function delFunction(moduleId) {
+			var flag = confirm("是否确定删除文章编号为" + moduleId);
 			if (flag) {
 				
-				location.href = "${pageContext.request.contextPath}/api/discuss/"+discussId;
+				location.href = "${pageContext.request.contextPath}/api/delModule/"+moduleId;
 						
 
 			}
-		}  */
-		//未实现
-/* 		function updFunction(discussId) {
+		}  
+		//更新
+		function updFunction(moduleId) {
 	  		
-	  		location.href="${pageContext.request.contextPath}/api/discuss="+discussId;
+	  		location.href="${pageContext.request.contextPath}/api/toUpdModule/"+moduleId;
 	  	}
-		 */
 		 
 		 //用ajax实现局部添加和删除,未实现
 		/* $(function() {
@@ -94,13 +93,13 @@
 						/* $.each(result, function(index, dept) {
 							console.log(dept.dName);
 						}); */
-					},
+					/* },
 					error: function(result) {
 						console.log("error :" + result);
 					}
 				});
 
-			});
+			}); */
 
 		/*	$("#btn02").click(function() {
 				$.ajax({
