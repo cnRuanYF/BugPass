@@ -45,7 +45,7 @@ public interface MemberService {
      * @param projectId 项目ID
      * @return 查找到的成员对象的集合
      */
-    List<Member> queryByProjectId(int projectId);
+    List<Member> queryByProjectId(long projectId);
 
     /**
      * 根据name或email对成员模糊查询
@@ -53,6 +53,6 @@ public interface MemberService {
      * @param NameorEamil 要查询的字符串
      * @return 查询出的成员集合
      */
-    List<Member> queryByNameOrEmail(String nameorEamil);
+    List<Member> queryByNameOrEmail(long projectId,String nameorEamil);
 
 }

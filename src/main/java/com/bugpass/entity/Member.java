@@ -1,7 +1,6 @@
 package com.bugpass.entity;
 
 import java.io.Serializable;
-import java.util.List;
 
 /**
  * 成员实体类
@@ -12,21 +11,12 @@ import java.util.List;
 public class Member implements Serializable {
 
     private static final long serialVersionUID = -2627788005217266716L;
-    /**
-     * 创建者
-     */
-    public static final int ROLE_CREATOR = 1;
-    /**
-     * 成员
-     */
-    public static final int ROLE_MEMBER = 2;
-    /**
-     * 未确认
-     */
-    public static final int ROLE_UNCOMFIRMED = 0;
 
-    /****************************************************************************/
-
+    /**
+     * 用于联表查询定位结果
+     */
+    private int id;
+    
     /**
      * 项目ID
      */
@@ -42,23 +32,47 @@ public class Member implements Serializable {
      */
     private int memberRole;
 
+    private int userId;
+    
     /**
-     * 成员类的构造
-     * 
-     * @param projectId 项目ID
-     * @param userId 成员用户ID
-     * @param memberRole 成员角色
+     * @return the userId
      */
-    public Member(long projectId, long userId, int memberRole) {
+    public int getUserId() {
+        return userId;
+    }
+    
+    /**
+     * @param userId the userId to set
+     */
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    public Member(long projectId, int userId, int memberRole) {
         super();
         this.projectId = projectId;
         this.memberRole = memberRole;
-        User u = null;
-        u.setId(userId);
+        this.userId = userId;
     }
 
     public Member() {
         super();
+    }
+
+    
+    /**
+     * @return the id
+     */
+    public int getId() {
+        return id;
+    }
+
+    
+    /**
+     * @param id the id to set
+     */
+    public void setId(int id) {
+        this.id = id;
     }
 
     /**
@@ -101,6 +115,14 @@ public class Member implements Serializable {
      */
     public void setMemberRole(int memberRole) {
         this.memberRole = memberRole;
+    }
+
+    /* (non-Javadoc)
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+        return "Member [projectId=" + projectId + ", user=" + user + ", memberRole=" + memberRole + "]";
     }
 
 }

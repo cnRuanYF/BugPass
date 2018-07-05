@@ -38,19 +38,18 @@
             user.realname,
             user.email,
             user.picture,
-            member.user_id,
             member.project_id,
             member.member_role
         FROM
-            user
-		INNER JOIN
-			member
-        ON
+            member,user
+        WHERE
         	user.user_id = member.user_id
         	AND member.project_id = #{projectId}
+        ORDER BY 
+        	member_role ASC
     </select>
     
-    <!-- 根据name或email对成员模糊查询 -->
+    <!-- 根据name或email模糊查询指定项目的成员 -->
     <select id="queryByNameOrEmail" resultMap="memberMap">
         SELECT
         	user.user_id,
@@ -58,25 +57,25 @@
             user.realname,
             user.email,
             user.picture,
-            member.user_id,
             member.project_id,
             member.member_role
         FROM
-            user
-		INNER JOIN
-			member
-        ON
+            user,member
+        WHERE
         	user.user_id = member.user_id
+        	AND member.project_id = #{arg0}
         	AND 
         	(
-	        	user.username LIKE upper(concat('%',#{nameorEamil},'%'))
-	        	OR user.email LIKE upper(concat('%',#{nameorEamil},'%'))
+	        	user.username LIKE upper(concat('%',#{arg1},'%'))
+	        	OR user.email LIKE upper(concat('%',#{arg1},'%'))
         	)
     </select>
 
 	<!-- 查询结果映射 -->
 	<resultMap id="memberMap" type="com.bugpass.entity.Member">
-		<id property="projectId" column="project_id" />
+		<id property="id" column="id"/>
+		<result property="projectId" column="project_id" />
+		<result property="userId" column="user_id"/>
 		<result property="memberRole" column="member_role" />
 		<association property="user" column="user_id" javaType="com.bugpass.entity.User">
 			<id property="id" column="user_id" />

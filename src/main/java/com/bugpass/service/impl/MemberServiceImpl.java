@@ -36,15 +36,15 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public List<Member> queryByProjectId(int projectId) {
+    public List<Member> queryByProjectId(long projectId) {
         // TODO Auto-generated method stub
         return memberDao.queryByProjectId(projectId);
     }
 
     @Override
-    public List<Member> queryByNameOrEmail(String nameorEamil) {
+    public List<Member> queryByNameOrEmail(long projectId,String nameorEamil) {
         // TODO Auto-generated method stub
-        return memberDao.queryByNameOrEmail(nameorEamil);
+        return memberDao.queryByNameOrEmail(projectId,nameorEamil);
     }
 
 }

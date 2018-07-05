@@ -5,18 +5,29 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>成员界面</title>
 </head>
 <body>
 (情况1：登录账号是该项目的创建者)假设在项目ID为1中，登录账号ID是1，项目创建者是1.<br/>
 项目成员：<br/>
-<table>
+<table border="1" cellspacing="0" cellpadding="0">
 	<tr><td>姓名</td><td>角色</td><td>操作</td></tr>
 	<c:forEach items="${memberList}" var="member">
 		<tr>
-			<td>${member.user.realname}</td>
+			<td>${member.user.picture},${member.user.realname},${member.user.email}</td>
 			<td>${member.memberRole == 1 ? "创建者" : "成员"}</td>
-			<td><c:if test="${member.memberRole != 1}"><a href="api/deleteMember">移除</a></c:if></td>
+			<td><c:if test="${member.memberRole != 1}"><a href="api/delete/${member}">移除</a></c:if></td>
+		</tr>
+	</c:forEach>
+</table><br/>
+未确认：<br/>
+<table border="1" cellspacing="0" cellpadding="0">
+	<tr><td>姓名</td><td>角色</td><td>操作</td></tr>
+	<c:forEach items="${unconfirmList}" var="member">
+		<tr>
+			<td>${member.user.picture},${member.user.realname},${member.user.email}</td>
+			<td>未确认</td>
+			<td><a href="api/delete/${member}">移除</a></td>
 		</tr>
 	</c:forEach>
 </table>

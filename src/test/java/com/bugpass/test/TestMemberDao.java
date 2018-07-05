@@ -10,6 +10,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.bugpass.dao.MemberDao;
 import com.bugpass.entity.Member;
+import com.bugpass.entity.User;
 
 /**
  * TestMemberDao
@@ -25,15 +26,18 @@ public class TestMemberDao {
     @Autowired
     private MemberDao memberDao;
 
+    private User u = new User();
     /* 测试用Member对象 */
-    private Member member = new Member(2, 1, 1);
+    private Member member = new Member(2, 2, 0);
 
+    
     /**
      * 测试添加成员信息<br/>
      * result - success
      */
     @Test
     public void testAdd() {
+        u.setId(2);
         System.out.println(memberDao.add(member));
     }
 
@@ -71,7 +75,7 @@ public class TestMemberDao {
      */
     @Test
     public void testQueryLike() {
-        List<Member> list = memberDao.queryByNameOrEmail("ad");
+        List<Member> list = memberDao.queryByNameOrEmail(1,"a");
         list.forEach(System.out::println);
     }
 
