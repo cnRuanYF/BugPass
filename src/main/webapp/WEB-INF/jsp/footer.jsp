@@ -3,19 +3,19 @@
 <%-- 信息显示 --%>
 <c:if test="${warningMessage != null}">
     <script type="text/javascript">
-        layer.msg('${warningMessage}', {icon: 0, offset:'200px'});
+        layer.msg('${warningMessage}', {icon: 0, offset: '200px'});
     </script>
     <% session.setAttribute(MessageType.WARNING, null); %>
 </c:if>
 <c:if test="${successMessage != null}">
     <script type="text/javascript">
-        layer.msg('${successMessage}', {icon: 1, offset:'200px'});
+        layer.msg('${successMessage}', {icon: 1, offset: '200px'});
     </script>
     <%session.setAttribute(MessageType.SUCCESS, null); %>
 </c:if>
 <c:if test="${errorMessage != null}">
     <script type="text/javascript">
-        layer.msg('${errorMessage}', {icon: 2, offset:'200px'});
+        layer.msg('${errorMessage}', {icon: 2, offset: '200px'});
     </script>
     <% session.setAttribute(MessageType.ERROR, null); %>
 </c:if>
@@ -35,6 +35,16 @@
             </li>
             <li class="list-item list-inline-item">
                 <a href="mailto:me@ryf.space">联系我们</a>
+            </li>
+            <li class="nav-item list-inline-item dropdown">
+                <a class="list-item dropdown-toggle" href="#" id="errorTestDropdown" role="button"
+                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    错误测试
+                </a>
+                <div class="dropdown-menu" aria-labelledby="errorTestDropdown">
+                    <a class="dropdown-item" href="HeiHeiHei">404 - Not Found</a>
+                    <a class="dropdown-item" href="test/divisionByZero">500 - Internal Server Error</a>
+                </div>
             </li>
         </ul>
         <p id="copyrightInfo">
@@ -118,7 +128,7 @@
 <!-- TODO提示 -->
 <script type="text/javascript">
     $('.btnHelp').click(function () {
-        layer.msg('开发中，敬请期待', {icon:0});
+        layer.msg('开发中，敬请期待', {icon: 0});
     });
 </script>
 

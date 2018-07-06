@@ -29,8 +29,6 @@
 		<set>
 			<if test="projectName != null">project_name=#{projectName},</if>
 			<if test="projectDesc != null">project_desc=#{projectDesc},</if>
-			<if test="projectDate != null">create_time=#{projectDate},</if>
-			<if test="displayId != null">display_id=#{displayId},</if>
 		</set>
 		where project_id=#{id}
 	</update>

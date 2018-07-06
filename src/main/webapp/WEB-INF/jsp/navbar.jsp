@@ -29,7 +29,7 @@
                             <i class="fa fa-fw fa-expand mr-2"></i> 选择一个工程项目
                         </c:if>
                         <c:if test="${currentProject != null}">
-                            <i class="fa fa-fw ${currentProjectCreator == currentUser ? 'fa-crown' : 'fa-cube'} mr-2"></i>${currentProject.projectName}
+                            <i class="fa fa-fw ${currentProjectCreator.id == currentUser.id ? 'fa-crown' : 'fa-cube'} mr-2"></i>${currentProject.projectName}
                         </c:if>
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -78,8 +78,7 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="userNavbarDropdown" role="button"
                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="padding:0">
-                        <img class="mr-2" src="img/avatar/${currentUser.picture}.png"
-                             style="width:40px;height:40px;border-radius:100%"/>
+                        <img class="user-head mr-2" src="img/avatar/${currentUser.picture}.png"/>
                         ${currentUser.realname == null ? currentUser.username : currentUser.realname}
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userNavbarDropdown">

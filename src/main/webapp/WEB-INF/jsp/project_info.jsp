@@ -23,12 +23,12 @@
         <div class="col-md-9">
             <div class="card card-body">
                 <h5 class="mb-4">项目信息</h5>
-                <form action="project/updateInfo" method="post">
+                <form action="project/info" method="post">
                     <input type="hidden" name="id" value="${currentProject.id}">
                     <div class="form-group row">
                         <label class="col-md-3 col-form-label text-md-right">项目ID</label>
                         <div class="col-md-9 col-lg-6">
-                            <input type="text" class="form-control" value="${currentProject.displayID}" readonly>
+                            <input type="text" class="form-control" value="${currentProject.displayId}" readonly>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -41,9 +41,8 @@
                     <div class="form-group row">
                         <label class="col-md-3 col-form-label text-md-right" for="projectDesc">项目描述</label>
                         <div class="col-md-9 col-lg-6">
-                            <textarea id="projectDesc" class="form-control" name="projectDesc" placeholder="请输入项目描述">
-                                ${currentProject.projectDesc}
-                            </textarea>
+                            <textarea id="projectDesc" class="form-control" name="projectDesc"
+                                      placeholder="请输入项目描述">${currentProject.projectDesc}</textarea>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -57,8 +56,7 @@
                     <div class="form-group row">
                         <label class="col-md-3 col-form-label text-md-right">创建人</label>
                         <div class="col-md-9 col-lg-6">
-                            <img class="mr-2" src="img/avatar/${projectCreator.picture}.png"
-                                 style="width:40px;height:40px;border-radius:100%"/>
+                            <img class="user-head mr-2" src="img/avatar/${projectCreator.picture}.png"/>
                             ${projectCreator.realname == null ? projectCreator.username : projectCreator.realname}
                         </div>
                     </div>

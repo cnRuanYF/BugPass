@@ -136,6 +136,10 @@ public class ProjectController {
         }
         model.addAttribute("projectCreator",projectCreator);
 
+        if(currentProject.getProjectDesc() == null ||currentProject.getProjectDesc().equals("")){
+            session.setAttribute(MessageType.WARNING,"建议完善项目描述信息哦");
+        }
+
         return PAGE_PROJECT_INFO;
     }
 
@@ -144,6 +148,15 @@ public class ProjectController {
      */
     @RequestMapping(value = CTRL_PROJECT_INFO,method = RequestMethod.POST)
     public String projectInfoPost(Project project , HttpSession session){
+
+        if (projectService.updProject(project)) {
+            Project updatedProject = projectService.findProjectById(project.getId());
+            session.setAttribute(ATTRIB_CURRENT_PROJECT, updatedProject);
+            session.setAttribute(MessageType.SUCCESS, "项目信息修改成功");
+        } else {
+            session.setAttribute(MessageType.SUCCESS, "操作失败，请稍后再试");
+        }
+
         return redirect(CTRL_PROJECT_INFO);
     }
 

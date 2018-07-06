@@ -74,10 +74,9 @@
         FROM
             user
         WHERE
-            id = #{keyword}
+            phone = #{keyword}
             OR upper(username) LIKE upper(concat('%',#{keyword},'%'))
             OR upper(email) LIKE upper(concat('%',#{keyword},'%'))
-            OR phone = #{keyword}
             OR upper(realname) LIKE upper(concat('%',#{keyword},'%'))
         LIMIT
             10

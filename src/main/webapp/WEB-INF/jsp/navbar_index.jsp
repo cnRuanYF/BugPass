@@ -30,11 +30,11 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="padding:0">
-                            <img class="mr-2" src="img/avatar/${currentUser.picture}.png"
-                                 style="width:40px;height:40px;border-radius:100%"/>
+                            <img class="user-head mr-2" src="img/avatar/${currentUser.picture}.png"/>
                                 ${currentUser.realname == null ? currentUser.username : currentUser.realname}
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            <!--
                             <a class="dropdown-item" href="user/updateProfile">
                                 <i class="fa fa-fw fa-user-edit mr-2"></i>个人资料
                             </a>
@@ -42,6 +42,7 @@
                                 <i class="fa fa-fw fa-key mr-2"></i>修改密码
                             </a>
                             <div class="dropdown-divider"></div>
+                            -->
                             <a class="dropdown-item" href="user/logout">
                                 <i class="fa fa-fw fa-sign-out-alt mr-2"></i>退出登录
                             </a>

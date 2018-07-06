@@ -1,97 +1,99 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app id="WebApp_ID" version="3.1"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
-	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
                              http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
-	<display-name>BugPass</display-name>
 
-	<!-- 默认主页 -->
-	<welcome-file-list>
-		<welcome-file>welcome.jsp</welcome-file>
-	</welcome-file-list>
+    <display-name>BugPass</display-name>
 
-	<!-- JSP属性 -->
-	<jsp-config>
-		<jsp-property-group>
-			<url-pattern>*.jsp</url-pattern>
-			<page-encoding>UTF-8</page-encoding>
-		</jsp-property-group>
-	</jsp-config>
+    <!-- 默认主页 -->
+    <welcome-file-list>
+        <welcome-file>welcome.jsp</welcome-file>
+    </welcome-file-list>
 
-	<!-- Spring上下文配置 -->
-	<!-- needed for ContextLoaderListener -->
-	<context-param>
-		<param-name>contextConfigLocation</param-name>
-		<param-value>classpath:applicationContext.xml,classpath:mybatis-config.xml</param-value>
-	</context-param>
-	<!-- Bootstraps the root web application context before servlet initialization -->
-	<listener>
-		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-	</listener>
+    <!-- 错误页面 -->
+    <error-page>
+        <error-code>404</error-code>
+        <location>/WEB-INF/error_404.jsp</location>
+    </error-page>
+    <error-page>
+        <error-code>500</error-code>
+        <location>/WEB-INF/error_500.jsp</location>
+    </error-page>
 
-	<!-- SpringMVC配置 -->
-	<!-- The front controller of this Spring Web application, responsible for 
-		handling all application requests -->
-	<servlet>
-		<servlet-name>springDispatcherServlet</servlet-name>
-		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-		<init-param>
-			<param-name>contextConfigLocation</param-name>
-			<param-value>classpath:springmvc-servlet.xml</param-value>
-		</init-param>
-		<load-on-startup>1</load-on-startup>
-	</servlet>
-	<!-- Map all requests to the DispatcherServlet for handling -->
-	<servlet-mapping>
-		<servlet-name>springDispatcherServlet</servlet-name>
-		<url-pattern>/</url-pattern>
-	</servlet-mapping>
+    <!-- JSP属性 -->
+    <jsp-config>
+        <jsp-property-group>
+            <url-pattern>*.jsp</url-pattern>
+            <page-encoding>UTF-8</page-encoding>
+        </jsp-property-group>
+    </jsp-config>
 
-	<!-- 解决put和delete传参   开始 ，在编码过滤器之前 -->
-	<!--提供PUT表单传参支持 -->
-	<filter>
-		<filter-name>httpPutFormContentFilter</filter-name>
-		<filter-class>org.springframework.web.filter.HttpPutFormContentFilter</filter-class>
-	</filter>
-	<filter-mapping>
-		<filter-name>httpPutFormContentFilter</filter-name>
-		<url-pattern>/*</url-pattern>
-	</filter-mapping>
+    <!-- Spring上下文配置 -->
+    <!-- needed for ContextLoaderListener -->
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>classpath:applicationContext.xml,classpath:mybatis-config.xml</param-value>
+    </context-param>
+    <!-- Bootstraps the root web application context before servlet initialization -->
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
 
-	<filter>
+    <!-- SpringMVC配置 -->
+    <!-- The front controller of this Spring Web application, responsible for
+        handling all application requests -->
+    <servlet>
+        <servlet-name>springDispatcherServlet</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>classpath:springmvc-servlet.xml</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <!-- Map all requests to the DispatcherServlet for handling -->
+    <servlet-mapping>
+        <servlet-name>springDispatcherServlet</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
 
-		<!--该过滤器用于处理post请求转换为标准的delete -->
+    <!-- 解决put和delete传参开始 (在编码过滤器配置之前) -->
+    <!-- 提供PUT表单传参支持 -->
+    <filter>
+        <filter-name>httpPutFormContentFilter</filter-name>
+        <filter-class>org.springframework.web.filter.HttpPutFormContentFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>httpPutFormContentFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
 
-		<filter-name>HiddenHttpMethodFilter</filter-name>
+    <!-- 该过滤器用于处理post请求转换为标准的delete -->
+    <filter>
+        <filter-name>HiddenHttpMethodFilter</filter-name>
+        <filter-class>org.springframework.web.filter.HiddenHttpMethodFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>HiddenHttpMethodFilter</filter-name>
+        <!--servlet为springMvc的servlet名 -->
+        <servlet-name>VersionController</servlet-name>
+    </filter-mapping>
+    <!-- 解决put和delete传参结束 -->
 
-		<filter-class>org.springframework.web.filter.HiddenHttpMethodFilter</filter-class>
-
-	</filter>
-
-	<filter-mapping>
-
-		<filter-name>HiddenHttpMethodFilter</filter-name>
-
-		<!--servlet为springMvc的servlet名 -->
-
-		<servlet-name>VersionController</servlet-name>
-
-	</filter-mapping>
-	<!-- 解决put和delete传参结束 -->
-
-	<!-- Spring字符编码过滤器 (用于Post请求) -->
-	<filter>
-		<filter-name>characterEncodingFilter</filter-name>
-		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
-		<init-param>
-			<param-name>encoding</param-name>
-			<param-value>UTF-8</param-value>
-		</init-param>
-	</filter>
-	<filter-mapping>
-		<filter-name>characterEncodingFilter</filter-name>
-		<url-pattern>/*</url-pattern>
-	</filter-mapping>
+    <!-- Spring字符编码过滤器 (用于Post请求) -->
+    <filter>
+        <filter-name>characterEncodingFilter</filter-name>
+        <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>UTF-8</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>characterEncodingFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
 
 </web-app>

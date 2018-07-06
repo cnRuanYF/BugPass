@@ -42,7 +42,7 @@
                         <label class="col-md-3 col-form-label text-md-right" for="realname">头像</label>
                         <div class="col-md-9 col-lg-6">
                             <img id="userPictureImg" src="img/avatar/${currentUser.picture}.png"/>
-                            <span class="text-secondary ml-2"><i class="fa fa-hand-point-left mr-2"></i>点击更换</span>
+                            <span class="text-secondary ml-2"><i class="far fa-hand-point-left mr-2"></i>点击换一张</span>
                         </div>
                     </div>
                     <div class="form-group row">

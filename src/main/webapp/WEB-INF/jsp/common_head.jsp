@@ -11,7 +11,7 @@
 
 <!-- 引入Bootstrap -->
 <link href="libs/bootstrap/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap/bootstrap.min.js"></script>
+<script src="libs/bootstrap/bootstrap.bundle.min.js"></script>
 
 <!-- 引入FontAwesome -->
 <link href="libs/fontawesome/fontawesome-all.css" rel="stylesheet">

@@ -2,14 +2,14 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.bugpass.dao.MemberDao">
 
-	<!-- 添加成员 -->
+    <!-- 添加成员 -->
     <insert id="add" parameterType="com.bugpass.entity.Member">
         INSERT INTO
             member ( project_id, user_id, member_role )
         VALUES
             ( #{projectId}, #{userId}, #{memberRole} )
     </insert>
-    
+
     <!-- 删除成员 -->
     <delete id="deleteMember">
     	DELETE FROM
@@ -18,7 +18,7 @@
     		project_id=#{projectId}
 			AND user_id=#{userId}
     </delete>
-    
+
     <!-- 修改成员信息（即修改角色状态） -->
     <update id="update">
     	UPDATE
@@ -48,7 +48,7 @@
         ORDER BY 
         	member_role ASC
     </select>
-    
+
     <!-- 根据name或email模糊查询指定项目的成员 -->
     <select id="queryByNameOrEmail" resultMap="memberMap">
         SELECT
@@ -71,22 +71,23 @@
         	)
     </select>
 
-	<!-- 查询结果映射 -->
-	<resultMap id="memberMap" type="com.bugpass.entity.Member">
-		<id property="id" column="id"/>
-		<result property="projectId" column="project_id" />
-		<result property="userId" column="user_id"/>
-		<result property="memberRole" column="member_role" />
-		<association property="user" column="user_id" javaType="com.bugpass.entity.User">
-			<id property="id" column="user_id" />
-			<result property="username" column="username" />
-			<result property="passwordHash" column="passwd_hash" />
-			<result property="passwordSalt" column="passwd_salt" />
-			<result property="email" column="email" />
-			<result property="phone" column="phone" />
-			<result property="qq" column="qq" />
-			<result property="realname" column="realname" />
-			<result property="registerTime" column="register_time" />
-		</association>
-	</resultMap>
+    <!-- 查询结果映射 -->
+    <resultMap id="memberMap" type="com.bugpass.entity.Member">
+        <id property="id" column="id"/>
+        <result property="projectId" column="project_id"/>
+        <result property="userId" column="user_id"/>
+        <result property="memberRole" column="member_role"/>
+        <association property="user" column="user_id" javaType="com.bugpass.entity.User">
+            <id property="id" column="user_id"/>
+            <result property="username" column="username"/>
+            <result property="passwordHash" column="passwd_hash"/>
+            <result property="passwordSalt" column="passwd_salt"/>
+            <result property="email" column="email"/>
+            <result property="phone" column="phone"/>
+            <result property="qq" column="qq"/>
+            <result property="realname" column="realname"/>
+            <result property="picture" column="picture"/>
+            <result property="registerTime" column="register_time"/>
+        </association>
+    </resultMap>
 </mapper>

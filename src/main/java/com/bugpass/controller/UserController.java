@@ -6,6 +6,7 @@ import com.bugpass.service.UserService;
 import com.bugpass.util.EncryptUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -59,10 +60,17 @@ public class UserController {
     /**
      * [RESTful] 关键词搜索用户
      */
-    @RequestMapping(value = "api/searchUser", method = RequestMethod.GET)
+    @RequestMapping(value = "api/searchUser/{key}", method = RequestMethod.GET)
     @ResponseBody
-    public List<User> searchByKeyword(String k) {
-        return userService.findByKeyword(k);
+    public List<User> searchByKeyword(@PathVariable("key") String key) {
+        //TODO 模拟延时
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        return userService.findByKeyword(key);
     }
 
     /**
@@ -110,7 +118,7 @@ public class UserController {
      */
     @RequestMapping(value = "user/logout", method = RequestMethod.GET)
     public String userLogout(HttpSession session) {
-        session.removeAttribute(ATTRIB_CURRENT_USER);
+        session.invalidate();
         session.setAttribute(MessageType.SUCCESS, "用户已退出登录");
         return redirect(CTRL_INDEX);
     }
@@ -119,7 +127,11 @@ public class UserController {
      * 修改用户个人信息 - 界面
      */
     @RequestMapping(value = CTRL_USER_PROFILE, method = RequestMethod.GET)
-    public String updateProfileGet() {
+    public String updateProfileGet(HttpSession session) {
+        User currentUser = (User) session.getAttribute(ATTRIB_CURRENT_USER);
+        if (currentUser.getRealname() == null || currentUser.getRealname().equals("")) {
+            session.setAttribute(MessageType.WARNING, "建议尽快完善个人信息哦~");
+        }
         return PAGE_USER_PROFILE;
     }
 

@@ -50,4 +50,12 @@ public class IndexController {
         return redirect(CTRL_PROJECT_SUMMARY);
     }
 
+    /**
+     * 除零错误测试
+     */
+    @RequestMapping(value = "test/divisionByZero",method = RequestMethod.GET)
+    public String testDivisionByZero(){
+        return 1/0 + "";
+    }
+
 }

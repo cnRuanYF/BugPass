@@ -3,6 +3,7 @@ package com.bugpass.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.bugpass.entity.Project;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +14,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bugpass.entity.Member;
 import com.bugpass.service.MemberService;
+
+import javax.servlet.http.HttpSession;
 
 /**
  * TODO 处理成员相关操作的Controller
@@ -67,15 +70,19 @@ public class MemberController {
     }
 
     /**
-     * [RESTful] 根据项目ID查询成员
+     * 查询当前项目成员
      */
-    @RequestMapping(value = "/api/projectMember/{projectId}", method = RequestMethod.GET)
-    public String queryByProjectId(Model model, @PathVariable(value = "projectId") int projectId) {
-        List<Member> m = memberService.queryByProjectId(projectId);
+    @RequestMapping(value = "project/member", method = RequestMethod.GET)
+    public String queryByProjectId(HttpSession session,Model model) {
+        // 从session中获取当前项目
+        Project project = (Project) session.getAttribute("currentProject");
+
+
+        List<Member> m = memberService.queryByProjectId(project.getId());
         // 成员列表
-        List<Member> memberList = new ArrayList<Member>();
+        List<Member> memberList = new ArrayList<>();
         // 未确认列表
-        List<Member> unconfirmList = new ArrayList<Member>();
+        List<Member> unconfirmList = new ArrayList<>();
         // 将成员与未确认分开
         m.forEach(item->{
             if (item.getMemberRole() == 0) {
@@ -86,7 +93,8 @@ public class MemberController {
         });
         model.addAttribute("memberList", memberList);
         model.addAttribute("unconfirmList", unconfirmList);
-        return "member";
+
+        return "project_member";
     }
 
     /**
