@@ -1,23 +1,28 @@
 package com.bugpass.entity;
 
 
-
+/**
+ * 问题类型实体
+ * @author xhh
+ *
+ */
 public class ProblemType {
-private int problemtype_id;
-private String problemtype_name;
-public int getProblemtype_id() {
-	return problemtype_id;
-}
-public String getProblemtype_name() {
-	return problemtype_name;
-}
-public void setProblemtype_id(int problemtype_id) {
-	this.problemtype_id = problemtype_id;
-}
-public void setProblemtype_name(String problemtype_name) {
-	this.problemtype_name = problemtype_name;
-}
-
+	/** 问题类型ID */
+	private int problemTypeId;
+	/** 问题类型名称 */
+	private String problemTypeName;
+	public int getProblemTypeId() {
+		return problemTypeId;
+	}
+	public String getProblemTypeName() {
+		return problemTypeName;
+	}
+	public void setProblemTypeId(int problemTypeId) {
+		this.problemTypeId = problemTypeId;
+	}
+	public void setProblemTypeName(String problemTypeName) {
+		this.problemTypeName = problemTypeName;
+	}
 
 
 }

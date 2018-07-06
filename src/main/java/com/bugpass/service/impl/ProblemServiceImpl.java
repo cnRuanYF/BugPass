@@ -14,6 +14,11 @@ import com.bugpass.entity.ProblemLevel;
 import com.bugpass.entity.ProblemStatus;
 import com.bugpass.entity.ProblemType;
 import com.bugpass.service.ProblemService;
+/**
+ * 问题业务实现类
+ * @author xhh
+ *
+ */
 @Service("problemService")
 public class ProblemServiceImpl implements ProblemService{
 	@Resource

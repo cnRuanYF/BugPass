@@ -3,99 +3,125 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-  <!-- 映射文件  有一个  namespace -->
+  
 <mapper namespace="com.bugpass.dao.ProblemDao">
-  <!-- select  查询  Id 是定义的dao接口中的方法名   resultType 方法的返回值是什么类型   #{id}  参数信息-->
+ 
   
   <select id="getProblemCount" resultType="Integer">
 select count(*) from problem where publisher=#{publisher}
   </select>
   
   <select id="getStatusCount" resultType="Integer" parameterType="java.util.Map">
-select count(*) from problem,problem_status where problem.problem_status=problem_status.problemstatus_id and problemstatus_name=#{problemstatus_name} and problem.publisher=#{publisher}
+select count(*) from problem,problem_status where problem.problem_status=problem_status.problemstatus_id and problemstatus_name=#{problemStatusName} and problem.publisher=#{publisher}
   </select>
   
-  <select id="getAllType" resultType="com.bugpass.entity.ProblemType">
+  <select id="getAllType" resultMap="problemTypeMap">
     select * from problem_type
   </select>
   
-  <select id="getProblemAll" resultType="com.bugpass.entity.ProblemAll">
+  <select id="getProblemAll" resultMap="problemAllMap">
      select * from problem,problem_level,problem_status,problem_type where problem.problem_level=problem_level.problemlevel_id and problem_status.problemstatus_id=problem.problem_status and problem.problem_type=problem_type.problemtype_id and problem.publisher=#{publisher}
   </select>
   
-  <select id="getProblemByStatus" resultType="com.bugpass.entity.ProblemAll" parameterType="java.util.Map">
-      select * from problem,problem_level,problem_status,problem_type where problem.problem_level=problem_level.problemlevel_id and problem_status.problemstatus_id=problem.problem_status and problem.problem_type=problem_type.problemtype_id and problem_status.problemstatus_name=#{problemstatus_name} and problem.publisher=#{publisher}
+  <select id="getProblemByStatus" resultMap="problemAllMap" parameterType="java.util.Map">
+      select * from problem,problem_level,problem_status,problem_type where problem.problem_level=problem_level.problemlevel_id and problem_status.problemstatus_id=problem.problem_status and problem.problem_type=problem_type.problemtype_id and problem_status.problemstatus_name=#{problemStatusName} and problem.publisher=#{publisher}
   </select>
   
-   <select id="getAllLevel" resultType="com.bugpass.entity.ProblemLevel">
+   <select id="getAllLevel" resultMap="problemLevelMap">
     select * from problem_level
   </select>
   
-   <select id="getAllStatus" resultType="com.bugpass.entity.ProblemStatus">
+   <select id="getAllStatus" resultMap="problemStatusMap">
     select * from problem_status
   </select>
   
-  <select id="getAllProblem" resultType="com.bugpass.entity.Problem">
+  <select id="getAllProblem" resultMap="problemMap">
     select * from problem
   </select>
-  <!-- 
-  
-   <select id="getAll" resultMap="problemMap">
-select * from problem,problem_type where problem.problem_type=problem_type.problemtype_id and problem.problem_type=#{problemTypeId}
-  </select>
-   -->
+
  
   
  
   
-  <select id="getAllTypeById" resultType="com.bugpass.entity.ProblemAll" parameterType="java.util.Map">
-  select * from problem,problem_type,user where user.user_id=problem.publisher and problem.problem_type=problem_type.problemtype_id and problem_type.problemtype_id=#{problemtype_id} and problem.publisher=#{publisher}
+  <select id="getAllTypeById" resultMap="problemAllMap" parameterType="java.util.Map">
+  select * from problem,problem_type,user where user.user_id=problem.publisher and problem.problem_type=problem_type.problemtype_id and problem_type.problemtype_id=#{problemTypeId} and problem.publisher=#{publisher}
   </select>
   
-  <select id="getAllLevelById" resultType="com.bugpass.entity.ProblemAll" parameterType="java.util.Map">
-  select * from problem,problem_level,user where user.user_id=problem.publisher and problem.problem_level=problem_level.problemlevel_id and problem_level.problemlevel_id=#{problemlevel_id} and problem.publisher=#{publisher}
+  <select id="getAllLevelById" resultMap="problemAllMap" parameterType="java.util.Map">
+  select * from problem,problem_level,user where user.user_id=problem.publisher and problem.problem_level=problem_level.problemlevel_id and problem_level.problemlevel_id=#{problemLevelId} and problem.publisher=#{publisher}
   </select>
   
-  <select id="getAllStatusById" resultType="com.bugpass.entity.ProblemAll" parameterType="java.util.Map">
-   select * from problem,problem_status,user where user.user_id=problem.publisher and problem.problem_status=problem_status.problemstatus_id and problem_status.problemstatus_id=#{problemstatus_id} and problem.publisher=#{publisher}
+  <select id="getAllStatusById" resultMap="problemAllMap" parameterType="java.util.Map">
+   select * from problem,problem_status,user where user.user_id=problem.publisher and problem.problem_status=problem_status.problemstatus_id and problem_status.problemstatus_id=#{problemStatusId} and problem.publisher=#{publisher}
   </select>
   
   <select id="getCountByUid" resultType="Integer" parameterType="java.util.Map">
-select count(*) from user,problem,problem_status where user.user_id=problem.publisher and problem.problem_status=problem_status.problemstatus_id and problem.publisher=#{publisher} and problemstatus_name=#{problemstatus_name}
+select count(*) from user,problem,problem_status where user.user_id=problem.publisher and problem.problem_status=problem_status.problemstatus_id and problem.publisher=#{publisher} and problemstatus_name=#{problemStatusName}
   </select>
-  <!--  
-  
-  <select id="getCountByIsTrack" resultType="Integer" parameterType="java.util.Map">
-select count(*) from user,problem,problem_status where user.user_id=problem.publisher and problem.problem_status=problem_status.problemstatus_id and problem.publisher=#{publisher} and problemstatus_name=#{problemStatusName} and istrack=#{istrack}
-  </select>
-  -->
-  
-  <!--  
-  <select id="getCountByUsubmit" resultType="Integer" parameterType="java.util.Map">
-select count(*) from user,problem,problem_status where user.user_id=problem.assigned_to and problem.problem_status=problem_status.problemstatus_id and problem.publisher=#{publisher} and problemstatus_name=#{problemstatus_name}
-  </select>
-  
-  -->
+ 
   
   
-  <select id="getProblemByUid" resultType="com.bugpass.entity.ProblemAll" parameterType="java.util.Map">
-select * from user,problem,problem_level,problem_status,problem_type where user.user_id=problem.publisher and problem.problem_level=problem_level.problemlevel_id and problem_status.problemstatus_id=problem.problem_status and problem.problem_type=problem_type.problemtype_id and problem.publisher=#{publisher} and problemstatus_name=#{problemstatus_name}
+  <select id="getProblemByUid" resultMap="problemAllMap" parameterType="java.util.Map">
+select * from user,problem,problem_level,problem_status,problem_type where user.user_id=problem.publisher and problem.problem_level=problem_level.problemlevel_id and problem_status.problemstatus_id=problem.problem_status and problem.problem_type=problem_type.problemtype_id and problem.publisher=#{publisher} and problemstatus_name=#{problemStatusName}
   </select>
-  <!-- 
-   <select id="getProblemByIsTrack" resultType="com.bugpass.entity.ProblemAll" parameterType="java.util.Map">
-select * from user,problem,problem_level,problem_status,problem_type where user.user_id=problem.publisher and problem.problem_level=problem_level.problemlevel_id and problem_status.problemstatus_id=problem.problem_status and problem.problem_type=problem_type.problemtype_id and problem.publisher=#{publisher} and problemstatus_name=#{problemStatusName} and istrack=#{istrack}
-  </select>
-   -->
+ 
  
   
  
   
   <insert id="addProblem" parameterType="java.util.Map">
-  insert into problem(problem_id,problem_title,problem_desc,problem_type,problem_level,problem_status,publisher) values(null,#{problem_title},#{problem_desc},#{problem_type},#{problem_level},#{problem_status},#{publisher})
+  insert into problem(problem_id,problem_title,problem_desc,problem_type,problem_level,problem_status,publisher) values(null,#{problemTitle},#{problemDesc},#{problemType},#{problemLevel},#{problemStatus},#{publisher})
   </insert>
  
   <delete id="deleteProblemById">
-   delete from problem where problem_id=#{problem_id}
+   delete from problem where problem_id=#{problemId}
   </delete>
   
+  
+  <resultMap type="com.bugpass.entity.ProblemType" id="problemTypeMap">
+  <!-- 主键 其他列属性 -->
+		<id property="problemTypeId" column="problemtype_id" />
+		<result property="problemTypeName" column="problemtype_name" />
+        
+  </resultMap>
+  
+  <resultMap type="com.bugpass.entity.ProblemLevel" id="problemLevelMap">
+  <!-- 主键 其他列属性 -->
+		<id property="problemLevelId" column="problemlevel_id" />
+		<result property="problemLevelName" column="problemlevel_name" />
+        
+  </resultMap>
+  
+   <resultMap type="com.bugpass.entity.ProblemStatus" id="problemStatusMap">
+  <!-- 主键 其他列属性 -->
+		<id property="problemStatusId" column="problemstatus_id" />
+		<result property="problemStatusName" column="problemstatus_name" />
+        
+  </resultMap>
+  
+  <resultMap type="com.bugpass.entity.ProblemAll" id="problemAllMap">
+  <!-- 主键 其他列属性 -->
+		<id property="problemId" column="problem_id" />
+		<result property="problemTitle" column="problem_title" />
+		<result property="problemDesc" column="problem_desc" />
+		<result property="problemLevelName" column="problemlevel_name" />
+		<result property="problemStatusName" column="problemstatus_name" />
+		<result property="problemTypeName" column="problemtype_name" />
+        
+  </resultMap>
+  
+   <resultMap type="com.bugpass.entity.Problem" id="problemMap">
+  <!-- 主键 其他列属性 -->
+		<id property="problemId" column="problem_id" />
+		<result property="problemTitle" column="problem_title" />
+		<result property="problemDesc" column="problem_desc" />
+		<result property="problemLevel" column="problem_level" />
+		<result property="problemStatus" column="problem_status" />
+		<result property="problemType" column="problem_type" />
+		<result property="publisher" column="publisher" />
+		<result property="assignedTo" column="assigned_to" />
+		<result property="moduleId" column="module_id" />
+		<result property="versionId" column="version_id" />
+        
+  </resultMap>
 </mapper>

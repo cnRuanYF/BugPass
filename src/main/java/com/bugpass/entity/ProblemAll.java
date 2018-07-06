@@ -1,57 +1,66 @@
 package com.bugpass.entity;
-
+/**
+ * 问题信息实体
+ * @author xhh
+ *
+ */
 public class ProblemAll {
-	private int problem_id;
-	private String problem_title;
-	private String problem_desc;
-	private String problemlevel_name;
-	private String problemstatus_name;
-	private String problemtype_name;
+	/** 问题ID */
+	private int problemId;
+	/** 问题标题 */
+	private String problemTitle;
+	/** 问题描述 */
+	private String problemDesc;
+	/** 问题级别名称 */
+	private String problemLevelName;
+	/** 问题状态名称 */
+	private String problemStatusName;
+	/** 问题类型名称 */
+	private String problemTypeName;
+	/** 发布者 */
 	private int publisher;
-	public int getProblem_id() {
-		return problem_id;
+	public int getProblemId() {
+		return problemId;
 	}
-	public String getProblem_title() {
-		return problem_title;
+	public String getProblemTitle() {
+		return problemTitle;
 	}
-	public String getProblem_desc() {
-		return problem_desc;
+	public String getProblemDesc() {
+		return problemDesc;
 	}
-	public String getProblemlevel_name() {
-		return problemlevel_name;
+	public String getProblemLevelName() {
+		return problemLevelName;
 	}
-	public String getProblemstatus_name() {
-		return problemstatus_name;
+	public String getProblemStatusName() {
+		return problemStatusName;
 	}
-	public String getProblemtype_name() {
-		return problemtype_name;
+	public String getProblemTypeName() {
+		return problemTypeName;
 	}
 	public int getPublisher() {
 		return publisher;
 	}
-	public void setProblem_id(int problem_id) {
-		this.problem_id = problem_id;
+	public void setProblemId(int problemId) {
+		this.problemId = problemId;
 	}
-	public void setProblem_title(String problem_title) {
-		this.problem_title = problem_title;
+	public void setProblemTitle(String problemTitle) {
+		this.problemTitle = problemTitle;
 	}
-	public void setProblem_desc(String problem_desc) {
-		this.problem_desc = problem_desc;
+	public void setProblemDesc(String problemDesc) {
+		this.problemDesc = problemDesc;
 	}
-	public void setProblemlevel_name(String problemlevel_name) {
-		this.problemlevel_name = problemlevel_name;
+	public void setProblemLevelName(String problemLevelName) {
+		this.problemLevelName = problemLevelName;
 	}
-	public void setProblemstatus_name(String problemstatus_name) {
-		this.problemstatus_name = problemstatus_name;
+	public void setProblemStatusName(String problemStatusName) {
+		this.problemStatusName = problemStatusName;
 	}
-	public void setProblemtype_name(String problemtype_name) {
-		this.problemtype_name = problemtype_name;
+	public void setProblemTypeName(String problemTypeName) {
+		this.problemTypeName = problemTypeName;
 	}
 	public void setPublisher(int publisher) {
 		this.publisher = publisher;
 	}
-	
-	
 	
 	
 }
