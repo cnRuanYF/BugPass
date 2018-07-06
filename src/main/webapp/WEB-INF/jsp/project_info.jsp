@@ -11,12 +11,13 @@
 
 <body>
 
+<% request.setAttribute("navItem", "setting"); %>
 <%@ include file="navbar.jsp" %>
 
 <div class="container">
     <div class="row">
 
-        <% request.setAttribute("sidebarItem", "info"); %>
+        <% request.setAttribute("sideNavItem", "info"); %>
         <%@ include file="project_sidebar.jsp" %>
 
         <div class="col-md-9">
@@ -49,14 +50,14 @@
                         <label class="col-md-3 col-form-label text-md-right">创建时间</label>
                         <div class="col-md-9 col-lg-6">
                             <input type="text" class="form-control"
-                                   value="<fmt:formatDate value="${currentProject.createTime}" pattern="yyyy年M月d日 H:mm">"
+                                   value="<fmt:formatDate value="${currentProject.createTime}" pattern="yyyy年M月d日 H:mm"/>"
                                    readonly>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-md-3 col-form-label text-md-right">创建人</label>
                         <div class="col-md-9 col-lg-6">
-                            <img class="mr-2" src="../../img/avatar/${projectCreator.picture}.png"
+                            <img class="mr-2" src="img/avatar/${projectCreator.picture}.png"
                                  style="width:40px;height:40px;border-radius:100%"/>
                             ${projectCreator.realname == null ? projectCreator.username : projectCreator.realname}
                         </div>
@@ -75,7 +76,7 @@
 <script type="text/javascript">
     $('#userPictureImg').click(function () {
         var random = Math.floor(Math.random() * 189);
-        $('#userPictureImg').attr('src', '../../img/avatar/' + random + '.png');
+        $('#userPictureImg').attr('src', 'img/avatar/' + random + '.png');
         $('#userPictureValue').attr('value', random);
     });
 </script>

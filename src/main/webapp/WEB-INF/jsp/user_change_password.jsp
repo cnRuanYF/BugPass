@@ -15,7 +15,7 @@
 <div class="container">
     <div class="row">
 
-        <% request.setAttribute("sidebarItem", "password");%>
+        <% request.setAttribute("sideNavItem", "password");%>
         <%@ include file="user_sidebar.jsp" %>
 
         <div class="col-md-9">

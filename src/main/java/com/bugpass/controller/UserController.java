@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
+import static com.bugpass.constant.PageConst.*;
+
 /**
  * 处理用户登录注册相关操作的Controller
  *
@@ -21,13 +23,6 @@ import java.util.List;
  **/
 @Controller
 public class UserController {
-
-    private static final String PAGE_USER_PROFILE = "user_profile";
-    private static final String PAGE_CHANGE_PASSWORD = "user_change_password";
-
-    private static final String REDIRECT_INDEX = "redirect:/index";
-    private static final String REDIRECT_USER_PROFILE = "redirect:/user/updateProfile";
-    private static final String REDIRECT_CHANGE_PASSWORD = "redirect:/user/changePassword";
 
     private static final String ATTRIB_CURRENT_USER = "currentUser";
 
@@ -79,7 +74,7 @@ public class UserController {
         boolean usernameExist = userService.checkUsernameExist(user.getUsername());
         if (usernameExist) {
             session.setAttribute(MessageType.ERROR, "用户名已存在，注册失败");
-            return REDIRECT_INDEX;
+            return redirect(CTRL_INDEX);
         }
 
         boolean success = userService.register(user);
@@ -89,7 +84,7 @@ public class UserController {
         } else {
             session.setAttribute(MessageType.ERROR, "注册失败，请稍后再试");
         }
-        return REDIRECT_INDEX;
+        return redirect(CTRL_INDEX);
     }
 
     /**
@@ -107,7 +102,7 @@ public class UserController {
         } else {
             session.setAttribute(MessageType.ERROR, "密码不正确");
         }
-        return REDIRECT_INDEX;
+        return redirect(CTRL_INDEX);
     }
 
     /**
@@ -117,13 +112,13 @@ public class UserController {
     public String userLogout(HttpSession session) {
         session.removeAttribute(ATTRIB_CURRENT_USER);
         session.setAttribute(MessageType.SUCCESS, "用户已退出登录");
-        return REDIRECT_INDEX;
+        return redirect(CTRL_INDEX);
     }
 
     /**
      * 修改用户个人信息 - 界面
      */
-    @RequestMapping(value = "user/updateProfile", method = RequestMethod.GET)
+    @RequestMapping(value = CTRL_USER_PROFILE, method = RequestMethod.GET)
     public String updateProfileGet() {
         return PAGE_USER_PROFILE;
     }
@@ -131,7 +126,7 @@ public class UserController {
     /**
      * 修改用户个人信息 - 提交
      */
-    @RequestMapping(value = "user/updateProfile", method = RequestMethod.POST)
+    @RequestMapping(value = CTRL_USER_PROFILE, method = RequestMethod.POST)
     public String updateProfilePost(User user, HttpSession session) {
 
         if (userService.updateUserProfile(user)) {
@@ -142,22 +137,22 @@ public class UserController {
             session.setAttribute(MessageType.SUCCESS, "操作失败，请稍后再试");
         }
 
-        return REDIRECT_USER_PROFILE;
+        return redirect(CTRL_USER_PROFILE);
     }
 
     /**
      * 用户修改密码 - 界面
      */
-    @RequestMapping(value = "user/changePassword", method = RequestMethod.GET)
+    @RequestMapping(value = CTRL_USER_CHANGE_PASSWORD, method = RequestMethod.GET)
     public String changePasswordGet() {
-        return PAGE_CHANGE_PASSWORD;
+        return PAGE_USER_CHANGE_PASSWORD;
     }
 
     /**
      * 用户修改密码 - 提交
      * TODO 流程待优化
      */
-    @RequestMapping(value = "user/changePassword", method = RequestMethod.POST)
+    @RequestMapping(value = CTRL_USER_CHANGE_PASSWORD, method = RequestMethod.POST)
     public String changePasswordPost(String oldPassword, String newPassword, String confirmNewPassword, HttpSession session) {
 
         User currentUser = (User) session.getAttribute(ATTRIB_CURRENT_USER);
@@ -179,6 +174,6 @@ public class UserController {
 
         session.setAttribute(ATTRIB_CURRENT_USER, userService.findById(currentUser.getId()));
 
-        return REDIRECT_CHANGE_PASSWORD;
+        return redirect(CTRL_USER_CHANGE_PASSWORD);
     }
 }

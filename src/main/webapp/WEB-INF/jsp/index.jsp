@@ -28,14 +28,14 @@
         <div class="mt-5">
             <a class="btn btn-lg btn-outline-primary btnEnterSys" href="javascript:void(0)">&emsp;进入系统&emsp;</a>
         </div>
-        <p class="text-muted mt-4">当前版本：v0.1 beta (更新于: 2018-06-07)</p>
+        <p class="text-muted mt-4">当前版本：v0.1 beta (更新于: 2018-07-06)</p>
     </div>
 </div>
 
 <script type="text/javascript">
     $('.btnEnterSys').on('click', function () {
         if (1 == ${currentUser != null ? 1 : 0}) {
-            location.href = 'project/index';
+            location.href = 'enter';
         } else {
             $('#loginLink').click();
         }

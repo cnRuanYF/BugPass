@@ -29,7 +29,7 @@
 <div class="container">
     <div class="row">
 
-        <% request.setAttribute("sidebarItem", "profile");%>
+        <% request.setAttribute("sideNavItem", "profile");%>
         <%@ include file="user_sidebar.jsp" %>
 
         <div class="col-md-9">
@@ -41,7 +41,7 @@
                     <div class="form-group row">
                         <label class="col-md-3 col-form-label text-md-right" for="realname">头像</label>
                         <div class="col-md-9 col-lg-6">
-                            <img id="userPictureImg" src="../../img/avatar/${currentUser.picture}.png"/>
+                            <img id="userPictureImg" src="img/avatar/${currentUser.picture}.png"/>
                             <span class="text-secondary ml-2"><i class="fa fa-hand-point-left mr-2"></i>点击更换</span>
                         </div>
                     </div>
@@ -87,7 +87,7 @@
 <script type="text/javascript">
     $('#userPictureImg').click(function () {
         var random = Math.floor(Math.random() * 189);
-        $('#userPictureImg').attr('src', '../../img/avatar/' + random + '.png');
+        $('#userPictureImg').attr('src', 'img/avatar/' + random + '.png');
         $('#userPictureValue').attr('value', random);
     });
 </script>

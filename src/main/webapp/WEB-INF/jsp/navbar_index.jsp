@@ -30,7 +30,7 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="padding:0">
-                            <img class="mr-2" src="../../img/avatar/${currentUser.picture}.png"
+                            <img class="mr-2" src="img/avatar/${currentUser.picture}.png"
                                  style="width:40px;height:40px;border-radius:100%"/>
                                 ${currentUser.realname == null ? currentUser.username : currentUser.realname}
                         </a>

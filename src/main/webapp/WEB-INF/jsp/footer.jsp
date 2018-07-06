@@ -1,6 +1,6 @@
 <%@ page import="com.bugpass.constant.MessageType" %>
 
-<!-- 信息显示 -->
+<%-- 信息显示 --%>
 <c:if test="${warningMessage != null}">
     <script type="text/javascript">
         layer.msg('${warningMessage}', {icon: 0, offset:'200px'});
@@ -123,4 +123,4 @@
 </script>
 
 <!-- 社会主义核心价值观 -->
-<script type="text/javascript" src="../../js/csv.js"></script>
+<script type="text/javascript" src="js/csv.js"></script>
