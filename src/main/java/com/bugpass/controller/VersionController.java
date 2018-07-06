@@ -23,11 +23,12 @@ public class VersionController {
 	 * 查询所有版本
 	 */
 	@RequestMapping(value = "api/selectAllVersion", method = RequestMethod.GET)
-	public String selectVersionByProjectId(Model model) {
-		List<Version> list = versionService.returnFindAllByProjectid(1);
+	@ResponseBody
+	public List<Version> selectVersionByProjectId(long projectId,Model model) {
+		List<Version> list = versionService.returnFindAllByProjectid(projectId);
 		list.forEach(System.out::println);
 		model.addAttribute("versions", list);
-		return "showVersions";
+		return list;
 	}
 	/**
 	 * 修改版本
@@ -81,7 +82,7 @@ public class VersionController {
 	/**
 	 * 删除
 	 */
-	@RequestMapping(value="api/deleteVersion",method=RequestMethod.DELETE)
+	@RequestMapping(value="api/deleteVersion",method=RequestMethod.POST)
 	@ResponseBody
 	public boolean deleteVersion(long versionId) {
 		return versionService.returndeleteByVersionId(versionId);
