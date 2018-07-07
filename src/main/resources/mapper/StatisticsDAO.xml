@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 映射哪个路径下的哪个文件 -->
+<mapper namespace="com.bugpass.dao.StatisticsDAO">
+<!-- 根据查询项目名查找对应项目各个版本的bug数，存入实体类，id为该DAO类中需要用到以下SQL语句的方法名，reultType则为将查询结果存入的实体类路径 -->
+	<select id="queryProjectBugsByname" resultType="com.bugpass.entity.Statistics">
+	<!-- 查询 工程名，版本号，版本名，bug数 -->
+	    SELECT version.version_id,project.project_name , version.version_name , COUNT(problem.version_id) AS BugNumber FROM project,version,problem WHERE project.project_id=version.project_id AND version.version_id=problem.version_id AND project.project_name LIKE concat('%',#{projectName},'%') GROUP BY version_id
+	</select>
+</mapper>
