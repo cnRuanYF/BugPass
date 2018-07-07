@@ -7,11 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.bugpass.constant.MemberRoleType;
 import com.bugpass.dao.MemberDao;
 import com.bugpass.entity.Member;
 import com.bugpass.entity.User;
 import com.bugpass.service.MemberService;
+
+import static com.bugpass.constant.MemberRoleType.ROLE_UNCOMFIRMED;
+import static com.bugpass.constant.MemberRoleType.ROLE_CREATOR;
 
 @Service("memberService")
 @Transactional
@@ -68,7 +70,7 @@ public class MemberServiceImpl implements MemberService {
         if (list != null) {
             for (Member item : list) {
                 if (item.getUserId() == member.getUserId() && item.getProjectId() == member.getProjectId()) {
-                    if (member.getMemberRole() == MemberRoleType.ROLE_CREATOR) {
+                    if (member.getMemberRole() == ROLE_CREATOR) {
                         return true;
                     }
                 }
@@ -106,7 +108,7 @@ public class MemberServiceImpl implements MemberService {
         List<Member> memberList = new ArrayList<>();
         // 将成员与未确认分开
         list.forEach(member -> {
-            if (member.getMemberRole() != 0) {
+            if (member.getMemberRole() != ROLE_UNCOMFIRMED) {
                 memberList.add(member);
             }
         });
@@ -119,7 +121,7 @@ public class MemberServiceImpl implements MemberService {
         List<Member> unconfirmList = new ArrayList<>();
         // 将成员与未确认分开
         list.forEach(member -> {
-            if (member.getMemberRole() != 0) {
+            if (member.getMemberRole() == ROLE_UNCOMFIRMED) {
                 unconfirmList.add(member);
             }
         });
