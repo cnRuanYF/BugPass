@@ -33,7 +33,7 @@
                         <th width="1px"></th>
                         <th>姓名</th>
                         <th>角色</th>
-                        <th width="1px">操作</th>
+                        <th width="2px">操作</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -134,7 +134,7 @@
             $('#searchFailed').fadeOut();
             $('#searching').fadeIn();
 
-            $.get('api/searchUser/' + key, function (data, status) {
+            $.get('api/userWithoutProject/' + key, function (data, status) {
                 $('#searchResultTable').fadeOut();
                 $('#searchNoResult').fadeOut();
                 $('#searchFailed').fadeOut();

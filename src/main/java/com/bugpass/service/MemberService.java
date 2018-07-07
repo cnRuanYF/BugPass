@@ -3,6 +3,7 @@ package com.bugpass.service;
 import java.util.List;
 
 import com.bugpass.entity.Member;
+import com.bugpass.entity.User;
 
 /**
  * 成员相关业务接口
@@ -26,7 +27,7 @@ public interface MemberService {
      * 
      * @param member 成员对象<br/>
      *            （包含项目ID及用户ID）
-     * @return 是否删除成功
+     * @return 删除返回的信息
      */
     boolean deleteMember(Member member);
 
@@ -53,6 +54,49 @@ public interface MemberService {
      * @param NameorEamil 要查询的字符串
      * @return 查询出的成员集合
      */
-    List<Member> queryByNameOrEmail(long projectId,String nameorEamil);
+    List<Member> queryByNameOrEmail(long projectId, String nameorEamil);
 
+    /**
+     * 模糊搜索当前项目之外的用户
+     * 
+     * @param userList 模糊搜索出的用户集合
+     * @param memberList 该项目的成员集合
+     * @return 筛选掉已经是成员的用户集合
+     */
+    List<User> searchWithoutProject(List<User> userList, List<Member> memberList);
+
+    /**
+     * 当前项目的成员和创建者
+     * 
+     * @param list 所有状态的成员
+     * @return 成员集合
+     */
+    List<Member> memberForProject(List<Member> list);
+
+    /**
+     * 当前项目的未确定者
+     * 
+     * @param list 所有状态的成员
+     * @return 成员集合
+     */
+    List<Member> unconfirmForProject(List<Member> list);
+
+    /**
+     * 判断是否为项目成员
+     * 
+     * @param projectId 项目ID
+     * @param member 成员对象
+     * @return 是否为项目成员
+     */
+    boolean isProjectMember(long projectId, long userId);
+
+    /**
+     * 判断是否为项目组长
+     * 
+     * @param projectId 项目ID
+     * @param member 成员对象
+     * @return 是否为项目组长
+     */
+    boolean isProjectCreator(long projectId, Member member);
+    
 }

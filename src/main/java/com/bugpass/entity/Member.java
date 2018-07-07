@@ -8,58 +8,35 @@ import java.io.Serializable;
  * @author VisonSun
  * @date 2018-07-03 11:16
  */
+@SuppressWarnings("serial")
 public class Member implements Serializable {
 
-    private static final long serialVersionUID = -2627788005217266716L;
-
-    /**
-     * 用于联表查询定位结果
-     */
+    /** 用于联表查询定位结果 */
     private int id;
-    
-    /**
-     * 项目ID
-     */
+
+    /** 项目ID */
     private long projectId;
 
-    /**
-     * 本用户的实体
-     */
+    /** 用户ID */
+    private long userId;
+
+    /** 本用户的实体 */
     private User user;
 
-    /**
-     * 角色
-     */
+    /** 角色 */
     private int memberRole;
-
-    private int userId;
-    
-    /**
-     * @return the userId
-     */
-    public int getUserId() {
-        return userId;
-    }
-    
-    /**
-     * @param userId the userId to set
-     */
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
-
-    public Member(long projectId, int userId, int memberRole) {
-        super();
-        this.projectId = projectId;
-        this.memberRole = memberRole;
-        this.userId = userId;
-    }
 
     public Member() {
         super();
     }
 
-    
+    public Member(long projectId, long userId, int memberRole) {
+        super();
+        this.projectId = projectId;
+        this.userId = userId;
+        this.memberRole = memberRole;
+    }
+
     /**
      * @return the id
      */
@@ -67,7 +44,6 @@ public class Member implements Serializable {
         return id;
     }
 
-    
     /**
      * @param id the id to set
      */
@@ -80,6 +56,20 @@ public class Member implements Serializable {
      */
     public long getProjectId() {
         return projectId;
+    }
+
+    /**
+     * @return the userId
+     */
+    public long getUserId() {
+        return userId;
+    }
+
+    /**
+     * @param userId the userId to set
+     */
+    public void setUserId(long userId) {
+        this.userId = userId;
     }
 
     /**
@@ -117,7 +107,9 @@ public class Member implements Serializable {
         this.memberRole = memberRole;
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see java.lang.Object#toString()
      */
     @Override
