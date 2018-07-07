@@ -3,6 +3,7 @@ package com.bugpass.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.bugpass.entity.Project;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,6 +13,7 @@ import com.bugpass.entity.Member;
 import com.bugpass.entity.User;
 import com.bugpass.service.MemberService;
 
+import static com.bugpass.constant.MemberRoleType.ROLE_MEMBER;
 import static com.bugpass.constant.MemberRoleType.ROLE_UNCOMFIRMED;
 import static com.bugpass.constant.MemberRoleType.ROLE_CREATOR;
 
@@ -26,7 +28,7 @@ public class MemberServiceImpl implements MemberService {
     public boolean addMember(Member member) {
         return memberDao.add(member);
     }
-    
+
     @Override
     public boolean deleteMember(Member member) {
         return memberDao.deleteMember(member);
@@ -61,7 +63,7 @@ public class MemberServiceImpl implements MemberService {
         }
         return false;
     }
-    
+
     @Override
     public boolean isProjectCreator(long projectId, Member member) {
         // 查出所有该项目的成员
@@ -78,7 +80,39 @@ public class MemberServiceImpl implements MemberService {
         }
         return false;
     }
-    
+
+    @Override
+    public boolean isMember(long projectId, long userId) {
+        Member member = memberDao.queryByProjectIdAndUserId(projectId, userId);
+        if (member != null) {
+            return member.getMemberRole() == ROLE_MEMBER;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean isInvited(long projectId, long userId) {
+        Member member = memberDao.queryByProjectIdAndUserId(projectId, userId);
+        if (member != null) {
+            return member.getMemberRole() == ROLE_UNCOMFIRMED;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean isCreator(long projectId, long userId) {
+        Member member = memberDao.queryByProjectIdAndUserId(projectId, userId);
+        if (member != null) {
+            return member.getMemberRole() == ROLE_CREATOR;
+        }
+        return false;
+    }
+
+    @Override
+    public List<Project> getInvitation(long userId) {
+        return memberDao.getProjectByRoleIsZero(userId);
+    }
+
     @Override
     public List<User> searchWithoutProject(List<User> userList, List<Member> memberList) {
         // 模糊查找去除成员后的集合
