@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import static com.bugpass.constant.PageConst.redirect;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -36,7 +37,7 @@ public class MemberController {
     /**
      * 添加成员信息
      */
-    @RequestMapping(value = "member/add", method = RequestMethod.POST)
+    @RequestMapping(value = "member/add", method = RequestMethod.GET)
     public String addMember(HttpSession session, Member member) {
         // 从session中获取当前项目
         Project project = (Project) session.getAttribute("currentProject");
@@ -52,13 +53,13 @@ public class MemberController {
         else {
             session.setAttribute(MessageType.ERROR, "添加成员失败,我也不懂,应该是DAO错了。");
         }
-        return "project_member";
+        return redirect("member/list");
     }
 
     /**
      * 删除成员信息
      */
-    @RequestMapping(value = "member/remove/{id}", method = RequestMethod.POST)
+    @RequestMapping(value = "member/remove/{id}", method = RequestMethod.GET)
     public String deleteMember(@PathVariable(value = "id") long userId, HttpSession session) {
         // 从session中获取当前项目
         Project project = (Project) session.getAttribute("currentProject");
@@ -82,7 +83,7 @@ public class MemberController {
         else {
             session.setAttribute(MessageType.ERROR, "删除成员失败,我也不懂,应该是DAO错了。");
         }
-        return "project_member";
+        return redirect("member/list");
     }
 
     /**
@@ -95,7 +96,7 @@ public class MemberController {
         } else {
             session.setAttribute(MessageType.ERROR, "修改成员信息失败。");
         }
-        return "project_member";
+        return redirect("member/list");
     }
 
     /**

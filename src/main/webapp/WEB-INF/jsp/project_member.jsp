@@ -46,7 +46,7 @@
                             <td>${member.memberRole == 1 ? "创建者" : "成员"}</td>
                             <td>
                                 <c:if test="${member.memberRole != 1}">
-                                    <a class="btn btn-sm btn-outline-danger" href="api/delete/${member}">移除</a>
+                                    <a class="btn btn-sm btn-outline-danger" href="member/remove/${member.user.id}">移除</a>
                                 </c:if>
                             </td>
                         </tr>
@@ -76,7 +76,7 @@
                                 <td>${member.user.realname == null ? member.user.username : member.user.realname}</td>
                                 <td>
                                     <c:if test="${member.memberRole != 1}">
-                                        <a class="btn btn-sm btn-outline-secondary" href="api/delete/${member}">取消邀请</a>
+                                        <a class="btn btn-sm btn-outline-secondary" href="member/remove/${member.user.id}">取消邀请</a>
                                     </c:if>
                                 </td>
                             </tr>

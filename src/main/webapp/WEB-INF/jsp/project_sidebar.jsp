@@ -10,7 +10,7 @@
         <a href="project/version" class="list-group-item list-group-item-action ${sideNavItem == 'version' ? 'active' : ''}">
             <i class="fa fa-fw fa-code-branch mr-2"></i>版本管理
         </a>
-        <a href="project/member" class="list-group-item list-group-item-action ${sideNavItem == 'member' ? 'active' : ''}">
+        <a href="member/list" class="list-group-item list-group-item-action ${sideNavItem == 'member' ? 'active' : ''}">
             <i class="fa fa-fw fa-users mr-2"></i>成员管理
         </a>
     </div>
