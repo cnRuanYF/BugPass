@@ -76,7 +76,7 @@
 
 <!-- 关于模态窗口 -->
 <div class="modal fade" id="modal-container-about" role="dialog" aria-hidden="true" aria-labelledby="aboutModalLabel">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="aboutModalLabel">
@@ -98,7 +98,7 @@
 
 <!-- 成员模态窗口 -->
 <div class="modal fade" id="modal-container-team" role="dialog" aria-hidden="true" aria-labelledby="teamModalLabel">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="teamModalLabel">
@@ -108,7 +108,7 @@
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body text-center">
                 <h1>厦门理工牛逼！</h1>
             </div>
             <div class="modal-footer">

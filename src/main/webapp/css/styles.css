@@ -84,3 +84,84 @@ footer {
     height: 40px;
     border-radius: 100%;
 }
+
+/*
+ * Layer弹窗自定义
+ */
+/*
+.layui-layer-btn > .layui-layer-btn0,
+.layui-layer-btn > .layui-layer-btn1 {
+    border-radius: .2rem;
+    transition: background-color .15s ease-in-out;
+
+}
+
+.layui-layer-btn > .layui-layer-btn0 {
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.layui-layer-btn > .layui-layer-btn0:hover {
+    background-color: #0069d9;
+    border-color: #0062cc;
+}
+
+.layui-layer-btn > .layui-layer-btn1 {
+    color: #6c757d;
+    background-color: transparent;
+    border-color: #6c757d;
+}
+
+.layui-layer-btn > .layui-layer-btn1:hover {
+    color: #fff;
+    background-color: #6c757d;
+    border-color: #6c757d;
+}
+*/
+
+/*
+ * 手指动画
+ */
+@keyframes hand-pointer-anim {
+    50% {
+        left: 64px;
+        top: -128px;
+    }
+}
+
+#chooseProjectAnim {
+    position: relative;
+    left: 0px;
+    top: 0px;
+    transform: rotate(30deg);
+    animation: hand-pointer-anim 1s infinite;
+}
+
+/* sm */
+@media (min-width: 576px) {
+    @keyframes hand-pointer-anim {
+        50% {
+            left: 128px;
+            top: -128px;
+        }
+    }
+
+    #chooseProjectAnim {
+        transform: rotate(45deg);
+    }
+}
+
+/* lg */
+@media (min-width: 992px) {
+    @keyframes hand-pointer-anim {
+        50% {
+            left: -128px;
+            top: -128px;
+        }
+    }
+
+    #chooseProjectAnim {
+        transform: rotate(-45deg);
+    }
+}

@@ -17,7 +17,7 @@
                     <a class="nav-link btnHelp" href="javascript:void(0)">帮助</a>
                 </li>
             </ul>
-            <ul class="navbar-nav mr-4">
+            <ul class="navbar-nav">
                 <c:if test="${currentUser == null}">
                     <li class="nav-item">
                         <a id="loginLink" class="nav-link" href="#modal-container-login" data-toggle="modal">登录</a>
@@ -56,7 +56,7 @@
 
 <!-- 登录模态窗口 -->
 <div class="modal fade" id="modal-container-login" role="dialog" aria-hidden="true" aria-labelledby="loginModalLabel">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="loginModalLabel">
@@ -99,7 +99,7 @@
 <!-- 注册模态窗口 -->
 <div class="modal fade" id="modal-container-register" role="dialog" aria-hidden="true"
      aria-labelledby="registerModalLabel">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="registerModalLabel">

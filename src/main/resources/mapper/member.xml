@@ -123,7 +123,7 @@
 
 
     <!-- 查询结果映射,映射项目实体类和成员实体类  -->
-    <resultMap type="com.bugpass.entity.Project" id="projectMemberMap">
+    <resultMap id="projectMemberMap" type="com.bugpass.entity.Project">
         <!-- property=实体类属性名，column=表中列名 -->
         <id property="id" column="project_id" />
         <result property="projectName" column="project_name" />

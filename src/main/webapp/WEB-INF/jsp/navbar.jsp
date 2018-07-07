@@ -37,9 +37,7 @@
                             <c:forEach items="${projectList}" var="proj">
                                 <a class="dropdown-item ${proj.id == currentProject.id ? 'active' : ''}"
                                    href="project/switch/${proj.id}">
-                                    <i class="fa fa-fw fa-cube mr-2"></i>${proj.projectName}
-                                    <c:if test="${currentProjectCreator == currentUser}"><i
-                                            class="fa fa-fw fa-cube mr-2"></i></c:if>
+                                    <i class="fa fa-fw ${proj.creator.id == currentUser.id ? 'fa-crown' : 'fa-cube'} mr-2"></i>${proj.projectName}
                                 </a>
                             </c:forEach>
                         </c:if>
@@ -77,7 +75,12 @@
                     </li>
                 </c:if>
             </ul>
-            <ul class="navbar-nav mr-4">
+            <ul class="navbar-nav">
+                <li class="nav-item mr-3">
+                    <a class="nav-link"  href="#modal-container-invitation-list" data-toggle="modal">
+                        <span class="badge badge-pill badge-danger mr-1">6</span>有新消息
+                    </a>
+                </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="userNavbarDropdown" role="button"
                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="padding:0">
@@ -109,7 +112,7 @@
 <!-- 创建工程模态窗口 -->
 <div class="modal fade" id="modal-container-create-project" role="dialog" aria-hidden="true"
      aria-labelledby="createProjectModalLabel">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="createProjectModalLabel">
@@ -142,6 +145,27 @@
     </div>
 </div>
 
+<!-- 邀请列表模态窗口 -->
+<div class="modal fade" id="modal-container-invitation-list" role="dialog" aria-hidden="true"
+     aria-labelledby="invitationListModalLabel">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="invitationListModalLabel">
+                    <i class="fas fa-cubes mr-2"></i>这些项目邀请你加入
+                </h5>
+                <button class="close" type="button" data-dismiss="modal">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <table id="invitationListTable" class="table table-borderless table-hover">
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- 表单效果 -->
 <script type="text/javascript">
     $(document).ready(function () {
@@ -153,4 +177,53 @@
             $('#btnCreateProject i').show();
         });
     });
+</script>
+
+<script type="text/javascript">
+    // 开局先来一波检查
+    setTimeout(function () {
+        checkInvitation();
+    },3000);
+
+    // 每隔一定时间检查一次
+    setInterval(function () {
+        checkInvitation();
+    }, 10000);
+
+    /**
+     * 检查邀请列表
+     */
+    function checkInvitation() {
+        $.ajax({
+            url: 'api/member/getInvitationList',
+            type: 'GET',
+            success: function (data) {
+                console.log(data)
+                if (data.length > 0) {
+                    var invitationListTable = $('#invitationListTable');
+                    invitationListTable.html('<caption>共收到 ' + data.length + ' 个项目邀请</caption>' +
+                        '<thead><tr>' +
+                        '<th class="text-center" width="1px"><i class="fa fa-angle-down"></i></th>' +
+                        '<th>创建者</th>' +
+                        '<th>工程名</th>' +
+                        '<th width="1px">操作</th>' +
+                        '</tr></thead>' +
+                        '<tbody>');
+                    $.each(data, function (index, proj) {
+                        invitationListTable.append('<tr>' +
+                            '<td class="align-middle"><img class="user-head mr-2" src="img/avatar/' + proj.creator.picture + '.png"/></td>' +
+                            '<td class="align-middle">' + proj.creator.realname +
+                            '    <span class="text-secondary">(' + proj.creator.username + ')</span>' +
+                            '</td>' +
+                            '<td class="align-middle">' + proj.projectName + '</td>' +
+                            '<td class="align-middle"><a class="btn btn-info" href="member/acceptInvitation/' + proj.id + '">加入</a></td>' +
+                            '</tr>');
+                    });
+                    invitationListTable.append('</tbody>');
+                } else {
+
+                }
+            }
+        });
+    }
 </script>

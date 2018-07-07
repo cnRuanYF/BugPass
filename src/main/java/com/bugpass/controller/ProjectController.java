@@ -7,7 +7,6 @@ import com.bugpass.entity.Project;
 import com.bugpass.entity.User;
 import com.bugpass.service.MemberService;
 import com.bugpass.service.ProjectService;
-import com.sun.xml.internal.ws.developer.ServerSideException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -88,7 +87,7 @@ public class ProjectController {
      * [RESTful] 创建新项目
      */
     @RequestMapping(value = CTRL_PROJECT_CREATE, method = RequestMethod.POST)
-    public String createProject(Project project, HttpSession session, Model model) {
+    public String createProject(Project project, HttpSession session) {
         // 获取登录的用户
         User currentUser = (User) session.getAttribute("currentUser");
 
