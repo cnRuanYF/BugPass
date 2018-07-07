@@ -5,20 +5,24 @@ import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.bugpass.entity.Statistics;
 import com.bugpass.service.StatisticsService;
 
 @Controller
-@RequestMapping
+@RequestMapping(value="/api")
 public class StatisticsController {
-	
+	//注入StatisticsService
 	@Resource(name="statisticsService")
 	private StatisticsService statisticsService;
 	
-	public String getBugNumberByProjectName(String projectName,Model model) {
-		List<Statistics> list=statisticsService.returnQueryProjectBugsByname(projectName);
+	//转发至Statistics_info页面
+	@RequestMapping(value="/statistics",method=RequestMethod.GET)
+	public String getBugNumberByProjectName(Model model) {
+		List<Statistics> list=statisticsService.returnQueryProjectBugsByname("疯");
 		model.addAttribute("statistics", list);
-		return "statistics";
+		System.out.println(list);//测试
+		return "Statistics_info";
 	}
 }

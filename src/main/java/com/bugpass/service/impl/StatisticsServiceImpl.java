@@ -21,7 +21,9 @@ public class StatisticsServiceImpl implements StatisticsService {
 		// TODO Auto-generated method stub
 		return statisticsDao.queryALLProjcetBugs();
 	}*/
-
+	
+	
+//调用dao
 	@Override
 	public List<Statistics> returnQueryProjectBugsByname(String projectName) {
 		// TODO Auto-generated method stub

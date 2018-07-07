@@ -11,6 +11,7 @@ import java.util.Date;
  */
 
 public class Statistics {
+	//此处必须应用骆驼命名方法，否则无法正常查询到字段
 	/*// 显示ID
 	private long display_id;*/
 
@@ -24,7 +25,7 @@ public class Statistics {
 	private String version_name;
 	
 	//版本问题数
-	private long BugNumber;
+	private long bugNumber;
 
 	/*// 问题标题
 	private String problem_title;
@@ -47,8 +48,8 @@ public class Statistics {
 	// 指派给
 	private String assigned_to;*/
 	
-	//转日期格式语句，暂留
-	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+	//转日期格式语句
+	//SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
 	public Statistics() {
 		// TODO Auto-generated constructor stub
@@ -70,12 +71,13 @@ public class Statistics {
 		this.version_name = version_name;
 	}
 
+
 	public long getBugNumber() {
-		return BugNumber;
+		return bugNumber;
 	}
 
 	public void setBugNumber(long bugNumber) {
-		BugNumber = bugNumber;
+		this.bugNumber = bugNumber;
 	}
 
 	public long getVersion_id() {
@@ -89,8 +91,10 @@ public class Statistics {
 	@Override
 	public String toString() {
 		return "Statistics [project_name=" + project_name + ", version_id=" + version_id + ", version_name="
-				+ version_name + ", BugNumber=" + BugNumber + "]";
+				+ version_name + ", bugNumber=" + bugNumber + "]";
 	}
+
+	
 
 	
 	

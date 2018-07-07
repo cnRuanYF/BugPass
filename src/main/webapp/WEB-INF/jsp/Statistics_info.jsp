@@ -5,11 +5,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>统计页面</title>
 </head>
 <body>
-<c:catch items="${statistics}" var="Statistics">
-${Statistics. }
-</c:catch>
+<!-- jstl,在prefix处命名c,使用.forEach方法 -->
+<!-- 查询项目名，版本号 -->
+<c:forEach items="${statistics}" var="statistics">
+${statistics.project_name},${statistics.version_name},${statistics.bugNumber}
+</c:forEach>
 </body>
 </html>
