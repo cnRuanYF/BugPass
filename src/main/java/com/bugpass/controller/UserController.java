@@ -33,9 +33,9 @@ public class UserController {
     /**
      * [RESTful] 检查用户名是否可用
      */
-    @RequestMapping(value = "api/checkUsername", method = RequestMethod.GET)
+    @RequestMapping(value = "api/checkUsername/{username}", method = RequestMethod.GET)
     @ResponseBody
-    public boolean checkUsername(String username) {
+    public boolean checkUsername(@PathVariable("username") String username) {
         return !userService.checkUsernameExist(username);
     }
 
@@ -63,13 +63,6 @@ public class UserController {
     @RequestMapping(value = "api/searchUser/{key}", method = RequestMethod.GET)
     @ResponseBody
     public List<User> searchByKeyword(@PathVariable("key") String key) {
-        //TODO 模拟延时
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
         return userService.findByKeyword(key);
     }
 
@@ -118,7 +111,10 @@ public class UserController {
      */
     @RequestMapping(value = "user/logout", method = RequestMethod.GET)
     public String userLogout(HttpSession session) {
-        session.invalidate();
+        session.removeAttribute(ATTRIB_CURRENT_USER);
+        session.removeAttribute("currentProject");
+        session.removeAttribute("projectList");
+
         session.setAttribute(MessageType.SUCCESS, "用户已退出登录");
         return redirect(CTRL_INDEX);
     }

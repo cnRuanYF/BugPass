@@ -1,4 +1,4 @@
-<div class="col-md-3 mb-4">
+<div class="col-md-3 mb-4" >
     <div class="list-group">
         <h5 class="list-group-item">项目设置</h5>
         <a href="project/info" class="list-group-item list-group-item-action ${sideNavItem == 'info' ? 'active' : ''}">

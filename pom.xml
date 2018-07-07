@@ -88,11 +88,6 @@
             <artifactId>javax.servlet-api</artifactId>
             <version>3.0.1</version>
         </dependency>
-        <!--<dependency>-->
-            <!--<groupId>javax.servlet.jsp</groupId>-->
-            <!--<artifactId>javax.servlet.jsp-api</artifactId>-->
-            <!--<version>2.3.2-b01</version>-->
-        <!--</dependency>-->
 
         <!-- jstl -->
         <dependency>
@@ -120,7 +115,7 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- jackson (用于RESTful接口)-->
+        <!-- Jackson (用于RESTful接口)-->
         <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core -->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
@@ -139,7 +134,6 @@
             <artifactId>jackson-annotations</artifactId>
             <version>2.9.6</version>
         </dependency>
-
 
     </dependencies>
     <build>

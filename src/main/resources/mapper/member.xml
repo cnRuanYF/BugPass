@@ -37,6 +37,8 @@
             user.username,
             user.realname,
             user.email,
+            user.phone,
+            user.qq,
             user.picture,
             member.project_id,
             member.member_role
@@ -56,6 +58,8 @@
             user.username,
             user.realname,
             user.email,
+            user.phone,
+            user.qq,
             user.picture,
             member.project_id,
             member.member_role

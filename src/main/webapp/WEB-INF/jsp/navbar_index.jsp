@@ -166,7 +166,7 @@
             $('#usernameCheck').html('<i class="fa fa-spinner fa-spin mr-2"></i>正在检查用户名');
             $('#usernameCheck').show(200);
 
-            $.get('api/checkUsername?username=' + username, function (data, status) {
+            $.get('api/checkUsername/' + username, function (data, status) {
                 $('#usernameCheck').removeClass();
                 if (status == 'success' && data == true) {
                     $('#usernameCheck').addClass('text-success');

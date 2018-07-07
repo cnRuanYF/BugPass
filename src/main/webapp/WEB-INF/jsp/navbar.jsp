@@ -1,4 +1,4 @@
-<%-- 权限控制 --%>
+<%-- 简易权限控制 --%>
 <c:if test="${currentUser == null}">
     <%
         session.setAttribute("warningMessage", "请先登录！");
@@ -33,7 +33,7 @@
                         </c:if>
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <c:if test="${projectList != null}">
+                        <c:if test="${projectList.size() > 0}">
                             <c:forEach items="${projectList}" var="proj">
                                 <a class="dropdown-item ${proj.id == currentProject.id ? 'active' : ''}"
                                    href="project/switch/${proj.id}">
@@ -42,10 +42,13 @@
                                             class="fa fa-fw fa-cube mr-2"></i></c:if>
                                 </a>
                             </c:forEach>
-                            <div class="dropdown-divider"></div>
                         </c:if>
+                        <c:if test="${projectList.size() == 0}">
+                            <span class="dropdown-item-text text-secondary mt-2 mb-2">你还没有加入项目</span>
+                        </c:if>
+                        <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="#modal-container-create-project" data-toggle="modal">
-                            <i class="fa fa-fw fa-plus mr-2"></i>创建工程项目
+                            <i class="fa fa-fw fa-plus mr-2"></i>创建新的项目
                         </a>
                     </div>
                 </li>
@@ -103,7 +106,7 @@
     </div>
 </header>
 
-<!- 创建工程模态窗口 -->
+<!-- 创建工程模态窗口 -->
 <div class="modal fade" id="modal-container-create-project" role="dialog" aria-hidden="true"
      aria-labelledby="createProjectModalLabel">
     <div class="modal-dialog" role="document">
@@ -116,7 +119,7 @@
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
-            <form class="mb-0" role="form" id="registerForm" action="project/create" method="post">
+            <form class="mb-0" role="form" id="createProjectForm" action="project/create" method="post">
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="createProjectName">项目名称</label>
@@ -130,8 +133,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-primary btn-block" id="btnRegister" type="submit">
-                        <i class="fa fa-spinner fa-spin"></i>确认创建
+                    <button class="btn btn-primary btn-block" id="btnCreateProject" type="submit">
+                        <i class="fa fa-spinner fa-spin mr-2"></i>确认创建
                     </button>
                 </div>
             </form>
@@ -139,3 +142,15 @@
     </div>
 </div>
 
+<!-- 表单效果 -->
+<script type="text/javascript">
+    $(document).ready(function () {
+        // 隐藏提交动画
+        $('#btnCreateProject i').hide();
+
+        // 提交时显示动画
+        $('#createProjectForm').on('submit', function () {
+            $('#btnCreateProject i').show();
+        });
+    });
+</script>

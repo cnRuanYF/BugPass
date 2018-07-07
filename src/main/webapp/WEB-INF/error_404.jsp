@@ -53,7 +53,7 @@
 
 <!-- 自动跳转 -->
 <script type="text/javascript">
-    var timeSec = 5;
+    var timeSec = 10;
     $('#timer').html(timeSec);
 
     var redirectTimer = setInterval(function () {

@@ -14,7 +14,7 @@
 <script src="libs/bootstrap/bootstrap.bundle.min.js"></script>
 
 <!-- 引入FontAwesome -->
-<link href="libs/fontawesome/fontawesome-all.css" rel="stylesheet">
+<link href="libs/fontawesome/css/all.css" rel="stylesheet">
 
 <!-- 引入layer -->
 <script src="libs/layer/layer.js"></script>
