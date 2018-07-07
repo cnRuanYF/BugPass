@@ -16,7 +16,7 @@ import com.bugpass.entity.Project;
 public interface ProjectDao extends BaseDAO<Project> {
 	
 	/**
-	 * 根据显示ID查找对象
+	 * 根据显示ID查找项目对象
 	 * 
 	 * @param displayId 显示ID
 	 * @return Project对象
@@ -29,5 +29,13 @@ public interface ProjectDao extends BaseDAO<Project> {
 	 * @return List<Project>
 	 */
 	List<Project> queryProjectByUserId(long userId);
+	
+	/**
+	 * 根据项目id查询项目对象(包含项目成员)
+	 * 
+	 * @param projectId
+	 * @return Project对象
+	 */
+	Project getProjectMemberByProjectId(long projectId);
 	
 }

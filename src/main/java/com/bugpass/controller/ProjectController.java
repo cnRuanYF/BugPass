@@ -35,7 +35,7 @@ public class ProjectController {
     private MemberService memberService;
 
     /**
-     * 项目概述
+     * [RESTful] 项目概述
      */
     @RequestMapping(value = CTRL_PROJECT_SUMMARY, method = RequestMethod.GET)
     public String showSummary(HttpSession session) {
@@ -48,23 +48,14 @@ public class ProjectController {
         session.setAttribute("projectList", projectList);
 
         // 查询项目创建者
-        List<Member> members = memberService.queryByProjectId(currentProject.getId());
-        User projectCreator = null;
-        for(Member member:members){
-            if(member.getMemberRole() == MemberRoleType.ROLE_CREATOR){
-                projectCreator = member.getUser();
-                break;
-            }
-        }
+        User projectCreator = projectService.getProjectCreatorByProjectId(currentProject.getId());
         session.setAttribute("currentProjectCreator",projectCreator);
-
         // TODO 获取问题统计
-
         return PAGE_PROJECT_SUMMARY;
     }
 
     /**
-     * 选择项目
+     * [RESTful] 选择项目
      */
     @RequestMapping(value = CTRL_PROJECT_SWITCH,method = RequestMethod.GET)
     public String switchProject(@PathVariable("id")long id,HttpSession session){
@@ -94,7 +85,7 @@ public class ProjectController {
     }
 
     /**
-     * 创建新项目
+     * [RESTful] 创建新项目
      */
     @RequestMapping(value = CTRL_PROJECT_CREATE, method = RequestMethod.POST)
     public String createProject(Project project, HttpSession session, Model model) {
@@ -118,7 +109,7 @@ public class ProjectController {
     }
 
     /**
-     * 项目信息（设置） - 显示
+     * [RESTful] 项目信息（设置） - 显示
      */
     @RequestMapping(value = CTRL_PROJECT_INFO,method = RequestMethod.GET)
     public String projectInfoGet(HttpSession session,Model model){
@@ -144,7 +135,7 @@ public class ProjectController {
     }
 
     /**
-     * 项目信息(设置) - 提交
+     * [RESTful] 项目信息(设置) - 提交
      */
     @RequestMapping(value = CTRL_PROJECT_INFO,method = RequestMethod.POST)
     public String projectInfoPost(Project project , HttpSession session){
@@ -162,14 +153,14 @@ public class ProjectController {
 
 
 
-//    /**
-//     * 删除项目
-//     */
-//    @RequestMapping(value = "project/delete/{id}", method = RequestMethod.GET)
-//    public String deleteProject(@PathVariable(value = "id") long id) {
-//        boolean flag = projectService.delProjectById(id);
-//        return "project_info";
-//    }
+    /**
+     * [RESTful] 项目信息(设置) - 删除
+     */
+    @RequestMapping(value = CTRL_PROJECT_DELETE, method = RequestMethod.DELETE)
+    public String deleteProject(@PathVariable(value = "id") long id) {
+        boolean flag = projectService.delProjectById(id);
+        return "";
+    }
 
 
 //    /**
@@ -191,15 +182,5 @@ public class ProjectController {
 //        model.addAttribute("projectCreator", projectCreator);
 //        return "project_info";
 //    }
-
-    /**
-     * 根据用户id查询用户参与的所有项目
-     */
-    @RequestMapping(value = "/api/getProjectByUserId/{userId}", method = RequestMethod.GET)
-    public String getProjectByUserId(@PathVariable(value = "userId") long userId, Model model) {
-        List<Project> listPro = projectService.queryProjectByUserId(userId);
-        model.addAttribute("listPro", listPro);
-        return "project_showList";
-    }
-
+    
 }

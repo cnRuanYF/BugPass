@@ -61,5 +61,20 @@ public interface ProjectService {
      * @return List<Project>
      */
     List<Project> queryProjectByUserId(long userId);
+    
+    /**
+     * 根据项目id获取项目创建者
+     * 
+     * @param projectId
+     * @return User对象:项目创建者
+     */
+    User getProjectCreatorByProjectId(long projectId);
+    
+    /**
+     * 根据项目id查询项目对象(包含项目成员和创建者)
+     * @param projectId
+     * @return Project对象
+     */
+    Project getMemberCreatorOfProjectByProjectId(long projectId);
 
 }

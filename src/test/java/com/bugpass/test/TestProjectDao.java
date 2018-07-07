@@ -79,8 +79,16 @@ public class TestProjectDao {
 
     @Test
     public void testQueryProjectByUserId() {
-        List<Project> project = projectService.queryProjectByUserId(2);
+        List<Project> project = projectService.queryProjectByUserId(1);
         System.out.println(project);
     }
+    
+    @Test
+    public void testQueryProjectMemberByProjectId() {
+        Project project = projectService.getMemberCreatorOfProjectByProjectId(1);
+        System.out.println(project);
+    }
+    
+    
 
 }

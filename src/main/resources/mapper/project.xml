@@ -9,23 +9,30 @@
 	<!-- 增加一条项目记录 -->
 	<insert id="add" parameterType="com.bugpass.entity.Project">
 		insert into
-		project(project_name,project_desc,display_id)
-		values(#{projectName},#{projectDesc},#{displayId})
+		project(project_name,
+				project_desc,
+				display_id)
+		values( #{projectName},
+				#{projectDesc},
+				#{displayId})
 	</insert>
 
 
 	<!-- 删 -->
 
 	<delete id="delete" parameterType="long">
-		delete from project where
-		project_id=#{id}
+		update 
+			project
+		set
+			is_deleted=1
+		where project_id=#{id}
 	</delete>
 
 	<!-- 改 -->
 
 	<update id="update" parameterType="com.bugpass.entity.Project">
-
-		update project
+		update 
+			project
 		<set>
 			<if test="projectName != null">project_name=#{projectName},</if>
 			<if test="projectDesc != null">project_desc=#{projectDesc},</if>
@@ -37,25 +44,58 @@
 
 	<!-- 根据ID查询一条项目记录 -->
 	<select id="queryById" parameterType="long" resultMap="projectMap">
-		select *
-		from project where project_id=#{id}
+		select 
+			*
+		from 
+			project 
+		where 
+			project_id=#{id}
 	</select>
 
 	<!-- 根据显示ID编号查询一条项目记录 -->
 	<select id="queryByDisplayId" parameterType="String" resultMap="projectMap">
-		select * from project where display_id=#{displayId}
+		select 
+			* 
+		from 
+			project 
+		where 
+			display_id=#{displayId}
 	</select>
 
 	<!-- 根据用户id查询用户参与的所有项目 -->
-	<select id="queryProjectByUserId" parameterType="long"
-		resultMap="projectMap">
-		select * from project inner join member on
-		project.project_id=member.project_id where member.user_id=#{userId}
+	<select id="queryProjectByUserId" parameterType="long" resultMap="projectMap">
+		select 
+			* 
+		from 
+			project 
+		inner join 
+			member 
+		on
+			project.project_id=member.project_id 
+		where 
+			member.user_id=#{userId}
 	</select>
 
 
-	<!-- 多表查询所有 -->
-	
+	<!-- 根据项目id查询项目对象(包含项目成员) -->
+	<select id="getProjectMemberByProjectId" parameterType="long" resultMap="projectMemberMap">
+		select 
+			p.project_id,
+			p.project_name,
+			p.project_desc,
+			p.create_time,
+			p.display_id,
+			m.user_id,
+			m.project_id,
+			m.member_role 
+		from 
+			project p,
+			member m 
+		where 
+			p.project_id=m.project_id 
+			and p.project_id=#{projectId}
+			
+	</select>
 
 	<!-- 映射 -->
 
@@ -69,22 +109,22 @@
 		<result property="displayId" column="display_id" />
 	</resultMap>
 
-	<!-- 查询结果映射,映射模块类和版本类 
-	<resultMap type="com.bugpass.entity.Project" id="projectModuleVersion">
-		property=实体类属性名，column=表中列名
-		<id property="projectId" column="project_id" />
+	<!-- 查询结果映射,映射项目实体类和成员实体类  -->
+	<resultMap type="com.bugpass.entity.Project" id="projectMemberMap">
+		<!-- property=实体类属性名，column=表中列名 -->
+		<id property="id" column="project_id" />
 		<result property="projectName" column="project_name" />
 		<result property="projectDesc" column="project_desc" />
-		<result property="projectDate" column="create_time" />
+		<result property="createTime" column="create_time" />
 		<result property="displayId" column="display_id" />
-		<collection property="list" ofType="com.bugpass.entity.Module">
-			主键
-			<id property="moduleId" column="module_id" />
-			其他部分
-			<result property="moduleName" column="module_name" />
-			<result property="moduleId" column="" />
-
+		<!-- 项目成员的collection -->
+		<collection property="memberList" ofType="com.bugpass.entity.Member">
+			<!-- 主键 -->
+			<id property="id" column="member_id" />
+			<!-- 其他部分 -->
+			<result property="userId" column="user_id" />
+			<result property="memberRole" column="member_role" />
 		</collection>
 		
-	</resultMap> -->
+	</resultMap>
 </mapper>

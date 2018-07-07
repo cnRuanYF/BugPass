@@ -28,6 +28,7 @@ public class PageConst {
     public static final String CTRL_PROJECT_SWITCH = "project/switch/{id}";
     public static final String CTRL_PROJECT_SUMMARY = "project/summary";
     public static final String CTRL_PROJECT_INFO = "project/info";
+    public static final String CTRL_PROJECT_DELETE = "project/delete/{id}";
 
     public static final String CTRL_USER_PROFILE = "user/updateProfile";
     public static final String CTRL_USER_CHANGE_PASSWORD = "user/changePassword";
