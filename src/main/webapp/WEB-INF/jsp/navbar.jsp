@@ -1,4 +1,4 @@
-<%-- 简易权限控制 --%>
+<%--简易权限控制--%>
 <c:if test="${currentUser == null}">
     <%
         session.setAttribute("warningMessage", "请先登录！");
@@ -119,7 +119,7 @@
     </div>
 </header>
 
-<!-- 创建工程模态窗口 -->
+<!--创建工程模态窗口-->
 <div class="modal fade" id="modal-container-create-project" role="dialog" aria-hidden="true"
      aria-labelledby="createProjectModalLabel">
     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -155,7 +155,7 @@
     </div>
 </div>
 
-<!-- 邀请列表模态窗口 -->
+<!--邀请列表模态窗口-->
 <div class="modal fade" id="modal-container-invitation-list" role="dialog" aria-hidden="true"
      aria-labelledby="invitationListModalLabel">
     <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
@@ -179,7 +179,37 @@
     </div>
 </div>
 
-<!-- 表单效果 -->
+<c:if test="${currentProject != null}">
+    <!--新建问题按钮-->
+    <style>
+        #btnAddProblem {
+            position: fixed;
+            top: 25%;
+            right: -48px;
+            width: 96px;
+            height: 96px;
+            border-radius: 48px 48px 0 0;
+            z-index: 9;
+            transform: rotate(-90deg);
+            transition: right .2s, padding-top .2s;
+        }
+
+        #btnAddProblem:hover {
+            right: -32px;
+            padding-top: 1em;
+        }
+    </style>
+    <a id="btnAddProblem" class="btn btn-lg btn-success" href="problem/add" data-toggle="tooltip" data-placement="left"
+       title="新建问题">
+        <i class="fa fa-fw fa-plus"></i>
+    </a>
+    <!--启用Tooltips-->
+    <script type="text/javascript">
+        $('[data-toggle="tooltip"]').tooltip();
+    </script>
+</c:if>
+
+<!--表单效果-->
 <script type="text/javascript">
     $(document).ready(function () {
         // 隐藏提交动画

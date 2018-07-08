@@ -91,7 +91,7 @@ public class VersionController {
     public String addModule(Version version, HttpSession session, Model model) {
 
         if (versionService.returnAdd(version)) {
-            session.setAttribute(MessageType.SUCCESS, "模块添加成功");
+            session.setAttribute(MessageType.SUCCESS, "版本添加成功");
         } else {
             session.setAttribute(MessageType.ERROR, "操作失败，请稍后再试");
         }
@@ -100,9 +100,9 @@ public class VersionController {
     }
 
     /**
-     * 删除
+     * [RESTful] 删除
      */
-    @RequestMapping(value = CTRL_VERSION_DELETE, method = RequestMethod.DELETE)
+    @RequestMapping(value = "api/version/delete/{id}", method = RequestMethod.DELETE)
     @ResponseBody
     public boolean deleteVersion(@PathVariable("id") long versionId) {
         return versionService.returndeleteByVersionId(versionId);

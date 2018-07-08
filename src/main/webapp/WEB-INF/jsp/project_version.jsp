@@ -50,7 +50,7 @@
                             <tr id="tableRow${version.versionId}">
                                 <td class="align-middle">${version.versionName}</td>
                                 <c:if test="${currentProject.creator.id == currentUser.id}">
-                                    <td class="align-middle line-limit-length" >
+                                    <td class="align-middle line-limit-length">
                                         <button class="btn btn-sm btn-outline-warning"
                                                 onclick="editItem(${version.versionId})">修改
                                         </button>
@@ -87,13 +87,13 @@
                         <label for="addVersionName">版本名称</label>
                         <input name="projectId" type="hidden" value="${currentProject.id}">
                         <input class="form-control" id="addVersionName" name="versionName" type="text"
-                               placeholder="输入版本的名称" required  onkeyup="checkAdd()"/>
+                               placeholder="输入版本的名称" required onkeyup="checkAdd()"/>
                         <h5 id="checkAddMessage"></h5>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" data-dismiss="modal">取消</button>
-                    <button class="btn btn-success btn_add" type="submit" >确认添加</button>
+                    <button class="btn btn-success btn_add" type="submit">确认添加</button>
                 </div>
             </form>
         </div>
@@ -125,7 +125,7 @@
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" data-dismiss="modal">取消</button>
-                    <button class="btn btn-warning btn_update" type="submit" >提交修改</button>
+                    <button class="btn btn-warning btn_update" type="submit">提交修改</button>
                 </div>
             </form>
         </div>
@@ -134,62 +134,63 @@
 
 <script type="text/javascript">
     function checkAdd() {
-        var val=$("#addVersionName").val();
-        if (val=="") {
-            $("#checkAddMessage").html('<span style=" color: #18720e">版本名不能为空</span>');
+        var val = $("#addVersionName").val();
+        if (val == "") {
+            $("#checkAddMessage").attr('class', 'mt-3 ml-2 text-danger');
+            $("#checkAddMessage").html('<i class="fas fa-exclamation-circle mr-2"></i>版本名不能为空');
             $(".btn_add").attr("disabled", true);
-        }else{
+        } else {
             $.ajax({
-                type : "post",
-                url : "${pageContext.request.contextPath}/api/checkVersionName",
-                data : {
-                    "versionName" :  $("#addVersionName").val(),
-                    "projectId" : "${currentProject.id}"
+                type: "post",
+                url: "${pageContext.request.contextPath}/api/checkVersionName",
+                data: {
+                    "versionName": $("#addVersionName").val(),
+                    "projectId": "${currentProject.id}"
                 },
-                dataType : "JSON",
-                success : function(flag) {
-                    if (flag){
-                        $("#checkAddMessage").html('<span style=" color: #18720e">版本名已存在，不可使用</span>');
-                        $(".btn_submit").attr("disabled", true);
-                    }else {
-                        $("#checkAddMessage").html('<span style="color: #1E9FFF">版本名可用</span>');
+                dataType: "JSON",
+                success: function (flag) {
+                    if (flag) {
+                        $("#checkAddMessage").attr('class', 'mt-3 ml-2 text-danger');
+                        $("#checkAddMessage").html('<i class="fas fa-exclamation-circle mr-2"></i>版本名已存在，不可使用');
+                        $(".btn_add").attr("disabled", true);
+                    } else {
+                        $("#checkAddMessage").attr('class', 'mt-3 ml-2 text-success');
+                        $("#checkAddMessage").html('<i class="fas fa-check-circle mr-2"></i>版本名可用');
                         $(".btn_add").attr("disabled", false);
                     }
-
-                },
-
+                }
             });
         }
-
     }
+
     function checkUpdate() {
-        var val=$("#editVersionName").val();
-        if (val=="") {
-            $("#checkUpdateMessage").html('<span style=" color: #18720e">版本名不能为空</span>');
+        var val = $("#editVersionName").val();
+        if (val == "") {
+            $("#checkUpdateMessage").attr('class', 'mt-3 ml-2 text-danger');
+            $("#checkUpdateMessage").html('<i class="fas fa-exclamation-circle mr-2"></i>版本名不能为空');
             $(".btn_update").attr("disabled", true);
-        }else{
+        } else {
             $.ajax({
-                type : "post",
-                url : "${pageContext.request.contextPath}/api/checkVersionName",
-                data : {
-                    "versionName" :  $("#editVersionName").val(),
-                    "projectId" : "${currentProject.id}"
+                type: "post",
+                url: "${pageContext.request.contextPath}/api/checkVersionName",
+                data: {
+                    "versionName": $("#editVersionName").val(),
+                    "projectId": "${currentProject.id}"
                 },
-                dataType : "JSON",
-                success : function(flag) {
-                    if (flag){
-                        $("#checkUpdateMessage").html('<span style=" color: #18720e">版本名已存在，不可使用</span>');
+                dataType: "JSON",
+                success: function (flag) {
+                    if (flag) {
+                        $("#checkUpdateMessage").attr('class', 'mt-3 ml-2 text-danger');
+                        $("#checkUpdateMessage").html('<i class="fas fa-exclamation-circle mr-2"></i>版本名已存在，不可使用');
                         $(".btn_update").attr("disabled", true);
-                    }else {
-                        $("#checkUpdateMessage").html('<span style="color: #1E9FFF">版本名可用</span>');
+                    } else {
+                        $("#checkUpdateMessage").attr('class', 'mt-3 ml-2 text-success');
+                        $("#checkUpdateMessage").html('<i class="fas fa-check-circle mr-2"></i>版本名可用');
                         $(".btn_update").attr("disabled", false);
                     }
-
-                },
-
+                }
             });
         }
-
     }
 
     /**
@@ -220,12 +221,12 @@
 
             // 弹窗成功时改变按钮样式（解决Bootstrap样式冲突）
             success: function () {
-                $('.layui-layer-btn > .layui-layer-btn0').css('color', '#FFF');
+                $('.layui-layer-btn .layui-layer-btn0').css('color', '#FFF');
             },
             // 点击确定按钮时执行
             yes: function () {
                 $.ajax({
-                    url: 'version/delete/' + id,
+                    url: 'api/version/delete/' + id,
                     type: 'DELETE',
                     timeout: 5000,
                     success: function (data) {

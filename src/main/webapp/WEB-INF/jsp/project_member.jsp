@@ -17,14 +17,14 @@
 <div class="container">
     <div class="row">
 
-        <%--侧边栏--%>
+        <!--侧边栏-->
         <% request.setAttribute("sideNavItem", "member"); %>
         <%@ include file="project_sidenav.jsp" %>
 
-        <%--主区域--%>
+        <!--主区域-->
         <div class="col-md-9">
 
-            <%--成员列表--%>
+            <!--成员列表-->
             <div class="card card-body">
                 <h5 class="mb-4">项目成员</h5>
                 <table class="table table-borderless table-hover">
@@ -50,30 +50,31 @@
                                 <span class="text-secondary">(${member.user.username})</span>
                             </td>
                             <td class="align-middle">
-                                <c:if test="${member.user.phone != null}">
-                                    <button class="btn btn-sm btn-outline-success mr-1" data-toggle="tooltip"
-                                            title="手机号: ${member.user.phone}" style="">
+                                <c:if test="${member.user.phone != null && member.user.phone != ''}">
+                                    <a class="btn btn-sm btn-outline-success mr-1" data-toggle="tooltip"
+                                       href="tel:${member.user.phone}" title="手机号: ${member.user.phone}" style="">
                                         <i class="fa fa-fw fa-phone"></i>
-                                    </button>
+                                    </a>
                                 </c:if>
-                                <c:if test="${member.user.email != null}">
-                                    <button class="btn btn-sm btn-outline-info mr-1" data-toggle="tooltip"
-                                            title="邮箱: ${member.user.email}">
+                                <c:if test="${member.user.email != null && member.user.email != ''}">
+                                    <a class="btn btn-sm btn-outline-info mr-1" data-toggle="tooltip"
+                                       href="mailto:${member.user.email}" title="邮箱: ${member.user.email}">
                                         <i class="fa fa-fw fa-at"></i>
-                                    </button>
+                                    </a>
                                 </c:if>
-                                <c:if test="${member.user.qq != null}">
-                                    <button class="btn btn-sm btn-outline-primary" data-toggle="tooltip"
-                                            title="QQ: ${member.user.qq}">
+                                <c:if test="${member.user.qq != null && member.user.qq != ''}">
+                                    <a class="btn btn-sm btn-outline-primary" data-toggle="tooltip"
+                                       href="http://wpa.qq.com/msgrd?v=3&uin=${member.user.qq}&site=qq&menu=yes"
+                                       target="_blank" title="QQ: ${member.user.qq}">
                                         <i class="fab fa-fw fa-qq"></i>
-                                    </button>
+                                    </a>
                                 </c:if>
                             </td>
                             <td class="align-middle">${member.memberRole == 1 ? "创建者" : "成员"}</td>
                             <c:if test="${currentProject.creator.id == currentUser.id}">
                                 <td class="align-middle">
                                     <c:if test="${member.memberRole == 1}">
-                                        <button class="btn btn-sm btn-outline-secondary disabled")">移除</button>
+                                        <button class="btn btn-sm btn-outline-secondary disabled">移除</button>
                                     </c:if>
                                     <c:if test="${member.memberRole != 1}">
                                         <button class="btn btn-sm btn-outline-danger"
@@ -89,7 +90,7 @@
                 </table>
             </div>
 
-            <%--待确认列表--%>
+            <!--待确认列表-->
             <div id="unconfirmListDiv" class="card card-body mt-3">
                 <h5 class="mb-4">待确认</h5>
                 <table class="table table-borderless table-hover">
@@ -130,7 +131,7 @@
                 </table>
             </div>
 
-            <%--添加成员--%>
+            <!--添加成员-->
             <c:if test="${currentProject.creator.id == currentUser.id}">
                 <div class="card card-body mt-3">
                     <h5 class="mb-4">添加成员</h5>

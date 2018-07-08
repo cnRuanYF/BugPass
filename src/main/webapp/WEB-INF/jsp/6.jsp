@@ -11,124 +11,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     
     <title>新建问题 | Bugout - xxxx</title>
     
-	<meta http-equiv="pragma" content="no-cache">
-	<meta http-equiv="cache-control" content="no-cache">
-	<meta http-equiv="expires" content="0">    
-	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
-	<meta http-equiv="description" content="This is my page">
-	<!--
-	<link rel="stylesheet" type="text/css" href="styles.css">
-	-->
-<link rel="shortcut icon" href="./image/testin.png">
-<link href="./css/bootstrap.css" rel="stylesheet">
-<link href="./css/normalize.css" rel="stylesheet">
-<link href="./css/iconfont.css" rel="stylesheet">
-<link href="./css/style.css" rel="stylesheet">
-<link href="./css/moudle.css" rel="stylesheet">
-<link href="./css/nav.css" rel="stylesheet">
-<link href="./css/mod.css" rel="stylesheet">
-<link href="./css/problem_list.css" rel="stylesheet" 0="frontend\assets\AppAsset">
-<link href="./css/webuploader.css" rel="stylesheet" 0="frontend\assets\AppAsset">
   </head>
   
-  <body key="0ca4010a456ddf1ecff9c76341a0f64f" style="">
+  <body >
 
-
-<div class="ebms-tip ebms-success-tip"><i class="iconfont"></i><span class="tip-content"></span></div>
-<div class="ebms-tip ebms-warning-tip"><i class="iconfont"></i><span class="tip-content"></span></div>
-<div class="ebms-tip ebms-failed-tip"><i class="iconfont"></i><span class="tip-content"></span></div>
-
-    <div class="bugmanagement-nav">
-    <nav class="navbar navbar-default" role="navigation">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#example-navbar-collapse">
-                <span class="sr-only">切换导航</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand bugout-navbar-brand" href="http://bugout.testin.cn/"><img src="./image/Bugout_logo2.png" alt=""> </a>
-        </div>
-        <div class="collapse navbar-collapse" id="example-navbar-collapse">
-            <ul class="nav navbar-nav">
-                <li class="active dropdown">
-                                        <a href="http://bugout.testin.cn/add-bug?key=0ca4010a456ddf1ecff9c76341a0f64f#" class="dropdown-toggle" data-toggle="dropdown">
-                        <i class="iconfont apple-icon" id="nav_project_type">
-                                                                                                   
-                                                                                        </i>
-                        <span id="nav_project_name">
-                                                            xxxx                                                    </span>
-                        
-                        <i id="get_project" class="iconfont arrow-icon"></i>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-left">
-                        <ul id="nav_project_ul">
-
-                        </ul>
-                        <div class="add-app">
-                            <a href="http://bugout.testin.cn/create-project">
-                                <img src="./image/add-app.png" alt="">
-                                添加项目
-                            </a>
-                        </div>
-                    </div>
-
-                </li>
-            </ul>
-
-            <ul class="nav navbar-nav navbar-nav-right">
-                <li><a href="http://docs.testin.cn/" target="_blank" class="dropdown-toggle">帮助中心</a></li>
-                                <li class="dropdown">
-                    <a href="http://bugout.testin.cn/add-bug?key=0ca4010a456ddf1ecff9c76341a0f64f#" class="dropdown-toggle" data-toggle="dropdown">
-                        <span class="user-mail"></span><i class="iconfont arrow-icon"></i>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right">
-                        <ul>
-                            <li class="clearfix">
-                                <a href="http://bugout.testin.cn/user-info">
-                                    个人中心
-                                </a>
-                            </li>
-                            <li class="clearfix">
-                                <a href="http://bugout.testin.cn/logout">
-                                    退出
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-                            </ul>
-        </div>
-    </nav>
-</div>
-    
-<style type="text/css" media="screen">
-.red_point{display:block; width: 7px; height: 7px;border-radius:50%; position:absolute; right:0px; top:10px; color:#f44336;background-color:#f44336;}
-</style>
-
-
-<!--二级导航-->
-<div class="bugmanagement-nav-second">
-    <div class="personal-nav clearfix">
-        <ul class="clearfix">
-
-        
-           <li><a href="summary?publisher=${publisher}"><i class="icon iconfont"></i>概述</a></li>
-            <li class="active"><a href="problem?publisher=${publisher}"><i class="icon iconfont"></i>问题</a></li>
-            <li><a href="3.jsp"><i class="icon iconfont"></i>统计</a></li>
-            <li style="position:relative;"><a href="4.jsp"><i class="icon iconfont"></i>成员 <span class="apply_join_count"></span></a></li>
-            <li><a href="5.jsp"><i class="icon iconfont"></i>设置</a></li>
-        </ul>
-                <a href="newproblem?publisher=${publisher}" class="new-create">新建问题</a>
-            </div>
-</div>
-
-
-<script async="" src="./js/analytics.js"></script><script>
-    var modules = [];
-    var versionList = [];
-    var uploadUrl = 'http://fs.testin.cn/form.upload';
-</script>
 
 
 <!--模块-->
@@ -419,7 +305,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <!--成员右侧 END-->
 
 
-    <!-- 添加主模块 弹框 -->
+    <!--添加主模块 弹框-->
     <div class="vm_alert">
         <div class="modal fade testin-modal enterprise-tip" id="add-main" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
             <div class="modal-dialog">
@@ -447,7 +333,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         </div>
     </div>
 
-    <!-- 添加版本 弹框 -->
+    <!--添加版本 弹框-->
     <div class="vm_alert">
         <div class="modal fade testin-modal enterprise-tip" id="add-version" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
             <div class="modal-dialog">
@@ -492,41 +378,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </script>
 
 
-
-<script src="./js/jquery.js"></script>
-<script src="./js/yii.js"></script>
-<script src="./js/bootstrap.js"></script>
-<script src="./js/jquery.cookie.js"></script>
-<script src="./js/jquery.tip.js"></script>
-<script src="./js/main.js"></script>
-<script src="./js/clipboard.min.js"></script>
-<script src="./js/testinBS_norely.js"></script>
-<script src="./js/add-bug.js" 0="frontend\assets\AppAsset"></script>
-<script src="./js/webuploader.js" 0="frontend\assets\AppAsset"></script>
-<script src="./js/socket.io.js" 0="frontend\assets\AppAsset"></script>
-<script src="./js/chat.js" 0="frontend\assets\AppAsset"></script>
-<script src="./js/yii.validation.js"></script>
-<script src="./js/yii.activeForm.js"></script>
-<script type="text/javascript">    chat.init({
-        uuid : '108366742174485169',
-        nodeService : 'ws://ws.testin.cn:3000',
-        initObj : {
-            action: 'create',
-            projectInfo: {
-                projectName: "xxxx",
-            },
-            staffInfo: {
-                staffName: "xhh",
-                staffPortrait: "/images/bug-management/default-portrait.png"
-            }
-        }
-    });
-
-var projectInvitedIds = '';
-</script>
-<script type="text/javascript">jQuery(document).ready(function () {
-jQuery('#bug-form').yiiActiveForm([{"id":"buginfomodel-bug_status","name":"bug_status","container":".field-buginfomodel-bug_status","input":"#buginfomodel-bug_status","validate":function (attribute, value, messages, deferred, $form) {yii.validation.number(value, messages, {"pattern":/^\s*[+-]?\d+\s*$/,"message":"Bug Status必须是整数。","skipOnEmpty":1});}},{"id":"buginfomodel-bug_type","name":"bug_type","container":".field-buginfomodel-bug_type","input":"#buginfomodel-bug_type","validate":function (attribute, value, messages, deferred, $form) {yii.validation.number(value, messages, {"pattern":/^\s*[+-]?\d+\s*$/,"message":"Bug Type必须是整数。","skipOnEmpty":1});}},{"id":"buginfomodel-bug_level","name":"bug_level","container":".field-buginfomodel-bug_level","input":"#buginfomodel-bug_level","validate":function (attribute, value, messages, deferred, $form) {yii.validation.number(value, messages, {"pattern":/^\s*[+-]?\d+\s*$/,"message":"Bug Level必须是整数。","skipOnEmpty":1});}},{"id":"buginfomodel-module_id","name":"module_id","container":".field-buginfomodel-module_id","input":"#buginfomodel-module_id","validate":function (attribute, value, messages, deferred, $form) {yii.validation.number(value, messages, {"pattern":/^\s*[+-]?\d+\s*$/,"message":"Module Id必须是整数。","skipOnEmpty":1});}},{"id":"buginfomodel-appointee_user_id","name":"appointee_user_id","container":".field-buginfomodel-appointee_user_id","input":"#buginfomodel-appointee_user_id","validate":function (attribute, value, messages, deferred, $form) {yii.validation.number(value, messages, {"pattern":/^\s*[+-]?\d+\s*$/,"message":"Appointee User Id必须是整数。","skipOnEmpty":1});}},{"id":"buginfomodel-screenshot_list","name":"screenshot_list","container":".field-buginfomodel-screenshot_list","input":"#buginfomodel-screenshot_list","validate":function (attribute, value, messages, deferred, $form) {yii.validation.string(value, messages, {"message":"Screenshot List必须是一条字符串。","max":5000,"tooLong":"Screenshot List只能包含至多5,000个字符。","skipOnEmpty":1});}},{"id":"buginfomodel-annex_list","name":"annex_list","container":".field-buginfomodel-annex_list","input":"#buginfomodel-annex_list","validate":function (attribute, value, messages, deferred, $form) {yii.validation.string(value, messages, {"message":"Annex List必须是一条字符串。","max":5000,"tooLong":"Annex List只能包含至多5,000个字符。","skipOnEmpty":1});}},{"id":"buginfomodel-bug_title","name":"bug_title","container":".field-buginfomodel-bug_title","input":"#buginfomodel-bug_title","validate":function (attribute, value, messages, deferred, $form) {yii.validation.string(value, messages, {"message":"Bug Title必须是一条字符串。","max":255,"tooLong":"Bug Title只能包含至多255个字符。","skipOnEmpty":1});yii.validation.required(value, messages, {"message":"请输入问题标题"});}},{"id":"buginfomodel-version_id","name":"version_id","container":".field-buginfomodel-version_id","input":"#buginfomodel-version_id","validate":function (attribute, value, messages, deferred, $form) {yii.validation.number(value, messages, {"pattern":/^\s*[+-]?\d+\s*$/,"message":"Version Id必须是整数。","skipOnEmpty":1});}},{"id":"buginfomodel-bug_detail","name":"bug_detail","container":".field-buginfomodel-bug_detail","input":"#buginfomodel-bug_detail","validate":function (attribute, value, messages, deferred, $form) {yii.validation.string(value, messages, {"message":"Bug Detail必须是一条字符串。","max":5000,"tooLong":"Bug Detail只能包含至多5,000个字符。","skipOnEmpty":1});yii.validation.required(value, messages, {"message":"请输入问题描述"});}}], []);
-});</script>
 
 
 </body>

@@ -9,7 +9,7 @@
 
     <%@ include file="jsp/common_head.jsp" %>
 
-    <!-- 首页样式 -->
+    <!--首页样式-->
     <style>
         body {
             padding-top: 2rem;
@@ -55,7 +55,7 @@
 
 <%@ include file="jsp/common_footer.jsp" %>
 
-<!-- 背景 -->
+<!--背景-->
 <canvas id="bgCanvas"></canvas>
 <script type="text/javascript" src="js/bg_animation.js"></script>
 

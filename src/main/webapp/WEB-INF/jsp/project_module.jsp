@@ -50,7 +50,7 @@
                             <tr id="tableRow${module.moduleId}">
                                 <td class="align-middle">${module.moduleName}</td>
                                 <c:if test="${currentProject.creator.id == currentUser.id}">
-                                    <td class="align-middle">
+                                    <td class="align-middle line-limit-length">
                                         <button class="btn btn-sm btn-outline-warning"
                                                 onclick="editItem(${module.moduleId})">修改
                                         </button>
@@ -69,7 +69,7 @@
     </div>
 </div>
 
-<!-- 新增模块模态窗口 -->
+<!--新增模块模态窗口-->
 <div class="modal fade" id="modal-container-add-module" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
@@ -98,7 +98,7 @@
     </div>
 </div>
 
-<!-- 修改模块模态窗口 -->
+<!--修改模块模态窗口-->
 <div class="modal fade" id="modal-container-edit-module" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
@@ -129,7 +129,7 @@
     </div>
 </div>
 
-<script type="text/javascript">s
+<script type="text/javascript">
 
     /**
      * 修改条目

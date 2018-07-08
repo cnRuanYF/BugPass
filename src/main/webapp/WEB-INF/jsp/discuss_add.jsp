@@ -10,13 +10,13 @@
 </head>
 <body>
 
-	<%-- 讨论:<textarea type="text" id="discussContent" value="" ></textarea><br/>
-		<!-- 用户id --><input type="hidden" id="publisherUser" value="${publisherUser.id}" /><br/>
-		<!-- 用户id --><input type="hidden" id="publisherId" value="${discuss.publisherId}" /><br/>
-		<!-- 讨论id --><input type="hidden" id="discussId" value="${discuss.discussId}" /><br/>
-		<!-- 问题id: --><input type="hidden" id="problemId" value="${discuss.problemId}" /><br/>
-		<!-- <input type="button" id="btn01" value="Ajax请求(get)" /> -->
-		<input type="button" id="btn02" value="增加讨论" /> --%>
+	<%--讨论:<textarea type="text" id="discussContent" value="" ></textarea><br/>
+		<!--用户id--><input type="hidden" id="publisherUser" value="${publisherUser.id}" /><br/>
+		<!--用户id--><input type="hidden" id="publisherId" value="${discuss.publisherId}" /><br/>
+		<!--讨论id--><input type="hidden" id="discussId" value="${discuss.discussId}" /><br/>
+		<!--问题id:--><input type="hidden" id="problemId" value="${discuss.problemId}" /><br/>
+		<!--<input type="button" id="btn01" value="Ajax请求(get)" />-->
+		<input type="button" id="btn02" value="增加讨论" />--%>
 
 	<%
 	
@@ -39,9 +39,9 @@
 			<tr>
 				<td>讨论:<textarea type="text" id="discussContent" value="" name="discussContent"></textarea></td>
 			</tr>
-			<%-- <tr>
+			<%--<tr>
 				<td><input type="hidden" id="publisherUser" value="${user}" /></td>
-			</tr> --%>
+			</tr>--%>
 			<tr>
 				<td><input type="hidden" id="problemId" value="${problemId}" name="problemId"/></td>
 			</tr>

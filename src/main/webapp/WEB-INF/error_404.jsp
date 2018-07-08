@@ -7,7 +7,7 @@
 
     <%@ include file="jsp/common_head.jsp" %>
 
-    <!-- 首页样式 -->
+    <!--首页样式-->
     <style>
         body {
             padding-top: 2rem;
@@ -51,7 +51,7 @@
     </div>
 </div>
 
-<!-- 自动跳转 -->
+<!--自动跳转-->
 <script type="text/javascript">
     var timeSec = 10;
     $('#timer').html(timeSec);
@@ -70,7 +70,7 @@
 
 <%@ include file="jsp/common_footer.jsp" %>
 
-<!-- 背景 -->
+<!--背景-->
 <canvas id="bgCanvas"></canvas>
 <script type="text/javascript" src="js/bg_animation.js"></script>
 

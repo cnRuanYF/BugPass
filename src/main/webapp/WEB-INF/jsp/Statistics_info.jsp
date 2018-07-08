@@ -8,8 +8,8 @@
 <title>统计页面</title>
 </head>
 <body>
-<!-- jstl,在prefix处命名c,使用.forEach方法 -->
-<!-- 查询项目名，版本号 -->
+<!--jstl,在prefix处命名c,使用.forEach方法-->
+<!--查询项目名，版本号-->
 <c:forEach items="${statistics}" var="statistics">
 ${statistics.project_name},${statistics.version_name},${statistics.bugNumber}
 </c:forEach>

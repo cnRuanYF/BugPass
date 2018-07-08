@@ -42,7 +42,7 @@
                                 <i class="fa fa-fw fa-key mr-2"></i>修改密码
                             </a>
                             <div class="dropdown-divider"></div>
-                            -->
+                           -->
                             <a class="dropdown-item" href="user/logout">
                                 <i class="fa fa-fw fa-sign-out-alt mr-2"></i>退出登录
                             </a>
@@ -54,7 +54,7 @@
     </div>
 </header>
 
-<!-- 登录模态窗口 -->
+<!--登录模态窗口-->
 <div class="modal fade" id="modal-container-login" role="dialog" aria-hidden="true" aria-labelledby="loginModalLabel">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
@@ -96,7 +96,7 @@
     </div>
 </div>
 
-<!-- 注册模态窗口 -->
+<!--注册模态窗口-->
 <div class="modal fade" id="modal-container-register" role="dialog" aria-hidden="true"
      aria-labelledby="registerModalLabel">
     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -145,7 +145,7 @@
     </div>
 </div>
 
-<!-- 登陆注册表单验证 -->
+<!--登陆注册表单验证-->
 <script type="text/javascript">
     var usernameVerified = false;
 

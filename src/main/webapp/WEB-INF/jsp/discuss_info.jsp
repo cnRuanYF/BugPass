@@ -16,14 +16,14 @@
 		int problemId=(int)session.getAttribute("problemId");
 	%>
 	<%=problemId %><br>
-		<!-- 用ajax实现添加,废弃用discuss_add.jsp -->
+		<!--用ajax实现添加,废弃用discuss_add.jsp-->
 		讨论:<textarea type="text" id="discussContent" value="" ></textarea><br/>
-		<!-- 用户id --><%-- <input type="hidden" id="publisherUser" value="${publisherUser.id}" /><br/> --%>
-		<!-- 用户id --><input type="hidden" id="publisherId" value="${discuss.publisherId}" /><br/>
-		<!-- 讨论id --><input type="hidden" id="discussId" value="${discuss.discussId}" /><br/>
-		<!-- 问题id: --><input type="hidden" id="problemId" value="${discuss.problemId}" /><br/>
-		<!-- <input type="button" id="btn01" value="Ajax请求(get)" /> -->
-		<!-- <input type="button" id="btn02" value="增加讨论" /> -->
+		<!--用户id--><%--<input type="hidden" id="publisherUser" value="${publisherUser.id}" /><br/>--%>
+		<!--用户id--><input type="hidden" id="publisherId" value="${discuss.publisherId}" /><br/>
+		<!--讨论id--><input type="hidden" id="discussId" value="${discuss.discussId}" /><br/>
+		<!--问题id:--><input type="hidden" id="problemId" value="${discuss.problemId}" /><br/>
+		<!--<input type="button" id="btn01" value="Ajax请求(get)" />-->
+		<!--<input type="button" id="btn02" value="增加讨论" />-->
 		
 		<a href="${pageContext.request.contextPath}/api/toAddDiscuss">添加</a>
 	<table class="table table-striped table-hover">
@@ -34,18 +34,18 @@
 			<tr>
 				<td>头像</td>
 				<td>发布者</td>
-				<!-- 可以写入隐藏域 -->
+				<!--可以写入隐藏域-->
 				<td>用户Id</td>				
 				<td>讨论id</td>
 				<td>问题id</td>
-				<!-- 可以写入隐藏域  -->
+				<!--可以写入隐藏域 -->
 				<td>发布时间</td>
 				<td>发布内容</td>
 				<td>发布者Id</td>
 			</tr>
 		</thead>
 		<tbody>
-			<%-- <c:if test="${discussList!=null}"> --%>
+			<%--<c:if test="${discussList!=null}">--%>
 				<c:forEach items="${discussList}" var="discuss">
 					<tr style="height: 30px;">
 						<td>${discuss.publisherUser.picture}</td>
@@ -60,14 +60,14 @@
 							<button class="btn btn-success" id="btn01" href="javascript:updFunction(${discuss.discussId})">
 									修改
 							</button> 
-<%-- 						<button class="btn btn-danger" id="btn02" href="javascript:delFunction(${discuss.discussId})"> --%>
+<%--						<button class="btn btn-danger" id="btn02" href="javascript:delFunction(${discuss.discussId})">--%>
 							<button class="btn btn-danger" id="btn01" href="javascript:void(0)" onclick="delFunction(${discuss.discussId})">
 									删除
 							</button>	
 						</td>
 					</tr>
 				</c:forEach>
-			<%-- </c:if> --%>
+			<%--</c:if>--%>
 		</tbody>
 	</table>
 </body>

@@ -7,18 +7,16 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 
+import com.bugpass.constant.PageConst;
+import com.bugpass.entity.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 
-
-import com.bugpass.entity.ProblemAll;
-import com.bugpass.entity.ProblemLevel;
-import com.bugpass.entity.ProblemStatus;
-import com.bugpass.entity.ProblemType;
 import com.bugpass.service.ProblemService;
 
 
@@ -40,11 +38,14 @@ public class ProblemController {
 	 * @param model
 	 * @param publisher
 	 * @return
+	 * TODO Editing by RuanYaofeng
 	 */
-	@RequestMapping(value= "/newproblem")
-	public String getProblem(Model model,int publisher)
+	@RequestMapping(value= "problem/add")
+	public String getProblem(Model model,HttpSession session)
 	{
-		
+		User currentUser = (User) session.getAttribute("currentUser");
+		int publisher = (int) currentUser.getId();
+
 		List<ProblemType> list=problemService.getAllType();
 		List<ProblemLevel> list2=problemService.getAllLevel();
 		List<ProblemStatus> list3=problemService.getAllStatus();
@@ -538,15 +539,16 @@ public class ProblemController {
  * @param model
  * @param publisher
  * @return
+ * TODO Editing by RuanYaofeng
  */
-	@RequestMapping(value= "/summary")
-	    public String summary(Model model,int publisher)
+	@RequestMapping(value= "xhh/summary")
+	    public String summary(Model model, HttpSession session)
 	    {
-	    	
-	    	
-	        
-	    	
-	    	Map map1 = new HashMap();
+
+			User currentUser = (User) session.getAttribute("currentUser");
+int publisher = (int) currentUser.getId();
+
+			Map map1 = new HashMap();
 	    	map1.put("publisher",publisher);
 	    	map1.put("problemStatusName","新建");
 	    	
@@ -624,7 +626,7 @@ public class ProblemController {
 	    	model.addAttribute("publisher",publisher);
 	    	
 	
-	    return "1";
+	    return PageConst.PAGE_PROJECT_SUMMARY;
 	    }
 	
 	

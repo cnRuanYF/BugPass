@@ -1,6 +1,6 @@
 <%@ page import="com.bugpass.constant.MessageType" %>
 
-<%-- 信息显示 --%>
+<%--信息显示--%>
 <c:if test="${warningMessage != null}">
     <script type="text/javascript">
         layer.msg('${warningMessage}', {icon: 0, offset: '200px'});
@@ -20,7 +20,7 @@
     <% session.setAttribute(MessageType.ERROR, null); %>
 </c:if>
 
-<!-- 底栏 -->
+<!--底栏-->
 <footer class="footer mt-4 bg-light text-muted">
     <div class="container p-3">
         <ul class="list-unstyled">
@@ -74,7 +74,7 @@
     </div>
 </footer>
 
-<!-- 关于模态窗口 -->
+<!--关于模态窗口-->
 <div class="modal fade" id="modal-container-about" role="dialog" aria-hidden="true" aria-labelledby="aboutModalLabel">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
@@ -96,7 +96,7 @@
     </div>
 </div>
 
-<!-- 成员模态窗口 -->
+<!--成员模态窗口-->
 <div class="modal fade" id="modal-container-team" role="dialog" aria-hidden="true" aria-labelledby="teamModalLabel">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
@@ -118,19 +118,19 @@
     </div>
 </div>
 
-<!-- 复制关于信息 -->
+<!--复制关于信息-->
 <script type="text/javascript">
     $(document).ready(function () {
         $('#copyrightModal').html($('#copyrightInfo').html());
     });
 </script>
 
-<!-- TODO提示 -->
+<!--TODO提示-->
 <script type="text/javascript">
     $('.btnHelp').click(function () {
         layer.msg('开发中，敬请期待', {icon: 0});
     });
 </script>
 
-<%--<!-- 社会主义核心价值观 -->--%>
-<%--<script type="text/javascript" src="js/csv.js"></script>--%>
+<!--社会主义核心价值观-->
+<!--<script type="text/javascript" src="js/csv.js"></script>-->
