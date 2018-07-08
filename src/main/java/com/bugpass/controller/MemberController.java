@@ -256,7 +256,6 @@ public class MemberController {
     @ResponseBody
     public List<Project> invitationProject(HttpSession session) {
         User user = (User) session.getAttribute("currentUser");
-        System.out.println(memberService.getInvitation(user.getId()));
         return memberService.getInvitation(user.getId());
     }
 }
