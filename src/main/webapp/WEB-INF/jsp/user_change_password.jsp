@@ -16,7 +16,7 @@
     <div class="row">
 
         <% request.setAttribute("sideNavItem", "password");%>
-        <%@ include file="user_sidebar.jsp" %>
+        <%@ include file="user_sidenav.jsp" %>
 
         <div class="col-md-9">
             <div class="card card-body">
@@ -54,7 +54,7 @@
     </div>
 </div>
 
-<%@ include file="footer.jsp" %>
+<%@ include file="common_footer.jsp" %>
 
 </body>
 </html>

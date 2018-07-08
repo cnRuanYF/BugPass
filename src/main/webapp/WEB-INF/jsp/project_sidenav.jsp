@@ -4,10 +4,10 @@
         <a href="project/info" class="list-group-item list-group-item-action ${sideNavItem == 'info' ? 'active' : ''}">
             <i class="fa fa-fw fa-cube mr-2"></i>项目信息
         </a>
-        <a href="project/module" class="list-group-item list-group-item-action ${sideNavItem == 'module' ? 'active' : ''}">
+        <a href="module" class="list-group-item list-group-item-action ${sideNavItem == 'module' ? 'active' : ''}">
             <i class="fa fa-fw fa-puzzle-piece mr-2"></i>模块管理
         </a>
-        <a href="project/version" class="list-group-item list-group-item-action ${sideNavItem == 'version' ? 'active' : ''}">
+        <a href="version" class="list-group-item list-group-item-action ${sideNavItem == 'version' ? 'active' : ''}">
             <i class="fa fa-fw fa-code-branch mr-2"></i>版本管理
         </a>
         <a href="member/list" class="list-group-item list-group-item-action ${sideNavItem == 'member' ? 'active' : ''}">

@@ -17,7 +17,6 @@
  */
 .line-limit-length,
 .line-limit-length * {
-    display: inline-block;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -124,45 +123,71 @@ footer {
 /*
  * 手指动画
  */
-@keyframes hand-pointer-anim {
+@keyframes kf-hand-pointer {
     50% {
-        left: 64px;
-        top: -128px;
+        transform: rotate(15deg) translate(128px, -192px);
+    }
+}
+
+@keyframes kf-hand-pointer-sm {
+    50% {
+        transform: rotate(30deg) translate(160px, -256px);
+    }
+}
+
+@keyframes kf-hand-pointer-lg {
+    50% {
+        transform: rotate(-15deg) translate(-160px, -192px);
+    }
+}
+
+@keyframes kf-hand-pointer-xl {
+    50% {
+        transform: rotate(-15deg) translate(-240px, -214px);
     }
 }
 
 #chooseProjectAnim {
-    position: relative;
-    left: 0px;
-    top: 0px;
-    transform: rotate(30deg);
-    animation: hand-pointer-anim 1s infinite;
+    transform: rotate(45deg);
+    animation: kf-hand-pointer 1s infinite;
 }
 
 /* sm */
 @media (min-width: 576px) {
-    @keyframes hand-pointer-anim {
-        50% {
-            left: 128px;
-            top: -128px;
-        }
-    }
-
     #chooseProjectAnim {
-        transform: rotate(45deg);
+        transform: rotate(60deg);
+        animation: kf-hand-pointer-sm 1s infinite;
     }
 }
 
 /* lg */
 @media (min-width: 992px) {
-    @keyframes hand-pointer-anim {
-        50% {
-            left: -128px;
-            top: -128px;
-        }
-    }
-
     #chooseProjectAnim {
         transform: rotate(-45deg);
+        animation: kf-hand-pointer-lg 1s infinite;
     }
+}
+
+/* xl */
+@media (min-width: 1200px) {
+    #chooseProjectAnim {
+        transform: rotate(-45deg);
+        animation: kf-hand-pointer-xl 1s infinite;
+    }
+}
+
+/*
+ * 闪烁动画
+ */
+@keyframes kf-flick {
+    0%, 40%, 100% {
+        opacity: 0.5;
+    }
+    20%, 60% {
+        opacity: 1;
+    }
+}
+
+.anim-flick {
+    animation: kf-flick 1s infinite;
 }

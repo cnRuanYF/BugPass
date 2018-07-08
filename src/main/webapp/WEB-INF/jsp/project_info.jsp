@@ -18,7 +18,7 @@
     <div class="row">
 
         <% request.setAttribute("sideNavItem", "info"); %>
-        <%@ include file="project_sidebar.jsp" %>
+        <%@ include file="project_sidenav.jsp" %>
 
         <div class="col-md-9">
             <div class="card card-body">
@@ -79,7 +79,7 @@
     });
 </script>
 
-<%@ include file="footer.jsp" %>
+<%@ include file="common_footer.jsp" %>
 
 </body>
 </html>

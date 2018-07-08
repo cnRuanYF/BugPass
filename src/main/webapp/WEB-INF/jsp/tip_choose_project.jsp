@@ -13,7 +13,7 @@
 
 <%@ include file="navbar.jsp" %>
 
-<div class="container">
+<div class="container" style="overflow:hidden">
     <div class="text-center text-secondary">
         <h1 class="mt-5">&nbsp;</h1>
         <h1 id="chooseProjectAnim" class="mt-5" style="font-size:128px"><i class="far fa-hand-point-up"></i></h1>
@@ -22,7 +22,7 @@
     </div>
 </div>
 
-<%@ include file="footer.jsp" %>
+<%@ include file="common_footer.jsp" %>
 
 </body>
 </html>

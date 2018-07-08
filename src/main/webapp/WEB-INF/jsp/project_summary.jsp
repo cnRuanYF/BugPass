@@ -94,12 +94,15 @@
             </div>
             <!-- 项目信息 -->
             <div class="card card-body">
-                <div class="row mb-4">
-                    <h5 class="col-9">项目信息</h5>
-                    <h5 class="col-3 text-right">
-                        <a href="project/info"><i class="fa fa-pencil-alt"></i></a>
-                    </h5>
-                </div>
+                <h5 class="mb-3">
+                    项目信息
+                    <c:if test="${currentProject.creator.id == currentUser.id}">
+                        <a class="btn p-1 btn-outline-secondary float-right" href="project/info"
+                           style="border:none">
+                            <i class="fa fa-fw fa-pencil-alt"></i>
+                        </a>
+                    </c:if>
+                </h5>
                 <div class="form-group">
                     <label class="small text-secondary">项目ID</label>
                     <input type="text" class="form-control-plaintext" value="${currentProject.displayId}" readonly>
@@ -110,7 +113,8 @@
                 </div>
                 <div class="form-group">
                     <label class="small text-secondary">项目描述</label>
-                    <input type="text" class="form-control-plaintext" value="${currentProject.projectDesc == '' ? '（暂无）' : currentProject.projectDesc}" readonly>
+                    <input type="text" class="form-control-plaintext"
+                           value="${currentProject.projectDesc == '' ? '（暂无）' : currentProject.projectDesc}" readonly>
                 </div>
                 <div class="form-group">
                     <label class="small text-secondary">创建时间</label>
@@ -131,7 +135,7 @@
     </div>
 </div>
 
-<%@ include file="footer.jsp" %>
+<%@ include file="common_footer.jsp" %>
 
 </body>
 </html>

@@ -19,7 +19,7 @@
 
         <%--侧边栏--%>
         <% request.setAttribute("sideNavItem", "member"); %>
-        <%@ include file="project_sidebar.jsp" %>
+        <%@ include file="project_sidenav.jsp" %>
 
         <%--主区域--%>
         <div class="col-md-9">
@@ -53,19 +53,19 @@
                                 <c:if test="${member.user.phone != null}">
                                     <button class="btn btn-sm btn-outline-success mr-1" data-toggle="tooltip"
                                             title="手机号: ${member.user.phone}" style="">
-                                        <i class="fa fa-phone"></i>
+                                        <i class="fa fa-fw fa-phone"></i>
                                     </button>
                                 </c:if>
                                 <c:if test="${member.user.email != null}">
                                     <button class="btn btn-sm btn-outline-info mr-1" data-toggle="tooltip"
                                             title="邮箱: ${member.user.email}">
-                                        <i class="fa fa-at"></i>
+                                        <i class="fa fa-fw fa-at"></i>
                                     </button>
                                 </c:if>
                                 <c:if test="${member.user.qq != null}">
                                     <button class="btn btn-sm btn-outline-primary" data-toggle="tooltip"
                                             title="QQ: ${member.user.qq}">
-                                        <i class="fab fa-qq"></i>
+                                        <i class="fab fa-fw fa-qq"></i>
                                     </button>
                                 </c:if>
                             </td>
@@ -159,7 +159,7 @@
     </div>
 </div>
 
-<%@ include file="footer.jsp" %>
+<%@ include file="common_footer.jsp" %>
 
 <script type="text/javascript">
 

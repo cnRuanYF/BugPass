@@ -25,7 +25,7 @@
                     <a class="nav-link dropdown-toggle ${currentProject != null ? 'active' : ''}" href="#"
                        id="navbarDropdown"
                        role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <span class="line-limit-length" style="max-width:160px">
+                        <span class="line-limit-length" style="display:inline-block;max-width:160px;line-height:100%">
                             <c:if test="${currentProject == null}">
                                 <i class="fa fa-fw fa-expand mr-1"></i> 选择一个工程项目
                             </c:if>
@@ -221,8 +221,8 @@
                         '<thead><tr>' +
                         '  <th class="text-center" width="1px"><i class="fa fa-angle-down"></i></th>' +
                         '  <th>创建者</th>' +
-                        '  <th>工程</th>' +
-                        '  <th class="text-right">操作</th>' +
+                        '  <th>项目</th>' +
+                        '  <th>操作</th>' +
                         '</tr></thead>' +
                         '<tbody>');
                     $.each(data, function (index, proj) {
@@ -236,7 +236,7 @@
                             '<td>' + proj.projectName + '<br>' +
                             '  <span class="text-secondary">' + proj.projectDesc + '</span><br>' +
                             '</td>' +
-                            '<td class="text-right">' +
+                            '<td class="line-limit-length">' +
                             '  <a class="btn btn-info" href="member/acceptInvitation/' + proj.id + '">加入</a>' +
                             '  <a class="btn btn-outline-secondary" href="javascript:void(0)" onclick="refuseInvitation()">拒绝</a>' +
                             '</td>' +
@@ -250,7 +250,8 @@
                         navMessagePill.fadeOut(500, function () {
                             navMessagePill.html(
                                 '<a class="nav-link active" href="#modal-container-invitation-list" data-toggle="modal">' +
-                                '  <span class="badge badge-pill badge-danger mr-1">' + data.length + '</span>新消息' +
+                                '  <span class="badge badge-pill badge-danger ">' + data.length + '</span>' +
+                                '  <span class="anim-flick">新消息</span>' +
                                 '</a>');
                             navMessagePill.fadeIn(500);
                         });

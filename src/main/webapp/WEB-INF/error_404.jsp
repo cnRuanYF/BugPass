@@ -68,7 +68,7 @@
     }, 1000);
 </script>
 
-<%@ include file="jsp/footer.jsp" %>
+<%@ include file="jsp/common_footer.jsp" %>
 
 <!-- 背景 -->
 <canvas id="bgCanvas"></canvas>

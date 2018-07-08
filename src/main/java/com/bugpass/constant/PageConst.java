@@ -5,31 +5,65 @@ package com.bugpass.constant;
  */
 public class PageConst {
 
-    /* ****************
-     * 页面地址
-     * **************** */
+    /*
+     * 页面地址 --------------------------------
+     */
+
+    // 首页
     public static final String PAGE_INDEX = "index";
 
+    // 提示页
     public static final String PAGE_TIP_CHOOSE_PROJECT = "tip_choose_project";
 
-    public static final String PAGE_USER_PROFILE = "user_profile";
-    public static final String PAGE_USER_CHANGE_PASSWORD = "user_change_password";
-
+    // 项目相关
     public static final String PAGE_PROJECT_SUMMARY = "project_summary";
     public static final String PAGE_PROJECT_INFO = "project_info";
 
-    /* ****************
-     * 控制器地址
-     * **************** */
+    // 模块
+    public static final String PAGE_MODULE_MANAGE = "project_module";
+
+    // 版本
+    public static final String PAGE_VERSION_MANAGE = "project_version";
+
+    // 成员
+    public static final String PAGE_MEMBER_MANAGE = "project_member";
+
+    // 个人中心相关
+    public static final String PAGE_USER_PROFILE = "user_profile";
+    public static final String PAGE_USER_CHANGE_PASSWORD = "user_change_password";
+
+    /*
+     * 控制器地址 --------------------------------
+     */
+
+    // 首页
     public static final String CTRL_INDEX = "index";
+
+    // 进入系统
     public static final String CTRL_ENTER = "enter";
 
+    // 项目相关
     public static final String CTRL_PROJECT_CREATE = "project/create";
     public static final String CTRL_PROJECT_SWITCH = "project/switch/{id}";
     public static final String CTRL_PROJECT_SUMMARY = "project/summary";
     public static final String CTRL_PROJECT_INFO = "project/info";
-    public static final String CTRL_PROJECT_DELETE = "project/delete/{id}";
+    public static final String CTRL_PROJECT_DELETE = "project/delete/{id}"; // TODO 未接入/未测试的功能
 
+    // 模块管理
+    public static final String CTRL_MODULE = "module";
+    public static final String CTRL_MODULE_ADD = "module/add";
+    public static final String CTRL_MODULE_DELETE = "module/delete/{id}";
+    public static final String CTRL_MODULE_UPDATE = "module/update";
+
+    // 版本管理
+    public static final String CTRL_VERSION = "version";
+    public static final String CTRL_VERSION_ADD = "version/add";
+    public static final String CTRL_VERSION_DELETE = "version/delete/{id}";
+    public static final String CTRL_VERSION_UPDATE = "version/update";
+
+    // TODO 成员管理待优化
+
+    // 个人中心相关
     public static final String CTRL_USER_PROFILE = "user/updateProfile";
     public static final String CTRL_USER_CHANGE_PASSWORD = "user/changePassword";
 

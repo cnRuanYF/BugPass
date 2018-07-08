@@ -16,7 +16,7 @@
 </head>
 <body>
 
-<%@ include file="navbar_index.jsp" %>
+<%@ include file="index_navbar.jsp" %>
 
 <div class="container">
     <div class="text-center">
@@ -42,7 +42,7 @@
     });
 </script>
 
-<%@ include file="footer.jsp" %>
+<%@ include file="common_footer.jsp" %>
 
 <!-- 背景 -->
 <canvas id="bgCanvas"></canvas>
