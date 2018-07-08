@@ -3,6 +3,7 @@ package com.bugpass.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.bugpass.dao.UserDAO;
 import com.bugpass.entity.Project;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,6 +24,9 @@ public class MemberServiceImpl implements MemberService {
 
     @Autowired
     private MemberDao memberDao;
+    @Autowired
+    private UserDAO userDAO;
+
 
     @Override
     public boolean addMember(Member member) {
@@ -83,7 +87,7 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public boolean isMember(long projectId, long userId) {
-        Member member = memberDao.queryByProjectIdAndUserId(projectId, userId);
+        Member member = memberDao.queryByProjectIdAndUserId(userId,projectId);
         if (member != null) {
             return member.getMemberRole() == ROLE_MEMBER;
         }
@@ -92,7 +96,7 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public boolean isInvited(long projectId, long userId) {
-        Member member = memberDao.queryByProjectIdAndUserId(projectId, userId);
+        Member member = memberDao.queryByProjectIdAndUserId(userId,projectId);
         if (member != null) {
             return member.getMemberRole() == ROLE_UNCOMFIRMED;
         }
@@ -101,7 +105,7 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public boolean isCreator(long projectId, long userId) {
-        Member member = memberDao.queryByProjectIdAndUserId(projectId, userId);
+        Member member = memberDao.queryByProjectIdAndUserId(userId,projectId);
         if (member != null) {
             return member.getMemberRole() == ROLE_CREATOR;
         }
@@ -110,7 +114,23 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public List<Project> getInvitation(long userId) {
-        return memberDao.getProjectByRoleIsZero(userId);
+        // 查询出所有该用户未确认的项目
+        List<Project> list = memberDao.getProjectByRoleIsZero(userId);
+        // 遍历项目, 查每个项目的成员
+        for (int i = 0; i < list.size(); i++) {
+            List<Member> memberList = memberDao.queryByProjectId(list.get(i).getId());
+            // 遍历每个项目成员
+            for (int j = 0; j < memberList.size(); j++) {
+                // 如果该成员为创建者
+                if (memberList.get(j).getMemberRole() == 1) {
+                    // 把这个创建者的信息取出，并存入该项目中
+                    Project project = list.get(i);
+                    project.setCreator(userDAO.queryById(memberList.get(j).getUserId()));
+                    list.set(i, project);
+                }
+            }
+        }
+        return list;
     }
 
     @Override

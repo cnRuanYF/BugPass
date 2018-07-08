@@ -6,7 +6,7 @@
     <insert id="add" parameterType="com.bugpass.entity.Member">
         INSERT INTO
             member (project_id, user_id, member_role)
-        VALUES
+            VALUES
             (#{projectId}, #{userId}, #{memberRole})
     </insert>
 
@@ -41,6 +41,7 @@
             user.qq,
             user.picture,
             member.project_id,
+            member.user_id,
             member.member_role
         FROM
             member, user
@@ -54,16 +55,17 @@
 
     <!-- 根据项目ID查询成员 -->
     <select id="queryByProjectIdAndUserId" resultMap="memberMap">
-        SELECT member_role
+        SELECT
+            *
         FROM
             member
         WHERE
-            user_id = #{userId}
-            AND project_id = #{projectId}
+            user_id = #{arg0}
+            AND project_id = #{arg1}
     </select>
 
     <!-- 根据角色为0 + 用户ID查询项目 -->
-    <select id="getProjectByRoleIsZero" resultMap="memberMap">
+    <select id="getProjectByRoleIsZero" resultMap="projectMemberMap">
         SELECT
             project.project_id,
             project.project_name,

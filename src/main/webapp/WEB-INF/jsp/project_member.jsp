@@ -341,7 +341,7 @@
             // 点击确定按钮时执行
             yes: function () {
                 $.ajax({
-                    url: 'api/member/remove/' + uid,
+                    url: op === '移除' ? 'api/member/remove/' + uid : 'api/member/cancelInvitation/' + uid,
                     type: 'GET',
                     timeout: 5000,
                     success: function (data) {

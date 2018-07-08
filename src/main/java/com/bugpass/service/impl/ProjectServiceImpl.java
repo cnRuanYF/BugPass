@@ -22,7 +22,7 @@ import com.bugpass.util.EncryptUtil;
 
 /**
  * 项目业务实现类
- * 
+ *
  * @author ChenZhiJun
  * @date 2018-07-03 14:18
  */
@@ -52,7 +52,7 @@ public class ProjectServiceImpl implements ProjectService {
             // TODO 获取session用户id
             System.out.println("serviceUser:" + user.getId());
             System.out.println("serviceProject:" + projectId);
-            Member member = new Member(projectId,(int)user.getId(),1);
+            Member member = new Member(projectId, (int) user.getId(), 1);
             // 添加成员记录
             boolean flagMem = memberDao.add(member);
             if (flagMem) {
@@ -69,14 +69,14 @@ public class ProjectServiceImpl implements ProjectService {
     public boolean delProjectById(long projectId) {
         return projectDao.delete(projectId);
     }
-    
+
     // 改
-    
+
     @Override
     public boolean updProject(Project project) {
         return projectDao.update(project);
     }
-    
+
     // 查
 
     @Override
@@ -91,25 +91,30 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public List<Project> queryProjectByUserId(long userId) {
-        //TODO
-        //查询当前用户加入项目的所有信息
+        // TODO
+        // 查询当前用户加入项目的所有信息
         List<Project> projectList = projectDao.queryProjectByUserId(userId);
-        //遍历每个项目获取每个项目的成员和创建者
+        // 遍历每个项目获取每个项目的成员和创建者
         for (int i = 0; i < projectList.size(); i++) {
-            //将每个项目的对象完整化
-            projectList.set(i, getMemberCreatorOfProjectByProjectId(projectList.get(i).getId()));
+            // 判断如果在该项目中，该用户是被邀请状态，则移除
+            if (memberDao.queryByProjectIdAndUserId(userId, projectList.get(i).getId()).getMemberRole() == MemberRoleType.ROLE_UNCOMFIRMED) {
+                projectList.remove(i);
+            } else {
+                // 将每个项目的对象完整化
+                projectList.set(i, getMemberCreatorOfProjectByProjectId(projectList.get(i).getId()));
+            }
         }
         return projectList;
     }
 
     @Override
     public User getProjectCreatorByProjectId(long projectId) {
-        //根据项目id查询参加项目的所有成员
+        // 根据项目id查询参加项目的所有成员
         List<Member> members = memberService.queryByProjectId(projectId);
         User projectCreator = null;
-        //遍历参见项目成员找出创建者
-        for(Member member:members){
-            if(member.getMemberRole() == MemberRoleType.ROLE_CREATOR){
+        // 遍历参见项目成员找出创建者
+        for (Member member : members) {
+            if (member.getMemberRole() == MemberRoleType.ROLE_CREATOR) {
                 projectCreator = member.getUser();
                 break;
             }
@@ -119,11 +124,11 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public Project getMemberCreatorOfProjectByProjectId(long projectId) {
-        //根据项目id获得参加项目的成员
+        // 根据项目id获得参加项目的成员
         Project project = projectDao.getProjectMemberByProjectId(projectId);
-        //查找项目成员的信息并设置
+        // 查找项目成员的信息并设置
         project.setMemberList(memberService.queryByProjectId(projectId));
-        //查找项目创建者的信息并设置
+        // 查找项目创建者的信息并设置
         project.setCreator(getProjectCreatorByProjectId(projectId));
         return project;
     }
