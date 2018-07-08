@@ -24,32 +24,15 @@
 	<div class="container">
 		<%
 		//Problem problem=new Problem();//这里需要问题的id传入
-           /*  Project currentProject=new Project();
+            Project currentProject=new Project();
             currentProject.setId(1);
             session.setAttribute("currentProject",currentProject);//测试用
- */
-            Project currentProject=(Project)session.getAttribute("currentProject");
+ 
+            //Project currentProject=(Project)session.getAttribute("currentProject");
 
 //		session.setAttribute("projectId",1);//测试用
 //		int projectId=(int)session.getAttribute("projectId");
 	%>
-		<%--<%=projectId %><br>--%>
-		<!-- 用ajax实现添加,废弃用discuss_add.jsp -->
-		讨论:
-		<textarea type="text" id="discussContent" value=""></textarea>
-		<br />
-		<!-- 用户id -->
-		<%-- <input type="hidden" id="publisherUser" value="${publisherUser.id}" /><br/> --%>
-		<!-- 用户id -->
-		<input type="hidden" id="moduleId" value="${module.moduleId}" /><br />
-		<!-- 讨论id -->
-		<input type="text" id="moduleName" value="${module.moduleName}" /><br />
-		<!-- 问题id: -->
-		<input type="hidden" id="projectId" value="${module.projectId}" /><br />
-		<input type="button" id="btn01" value="添加" /> <input type="button"
-			id="btn02" value="更新" /> <input type="button" id="btn03" value="删除" />
-
-		<a href="${pageContext.request.contextPath}/api/module">添加</a>
 
 		<table>
 			<thead>
@@ -61,11 +44,14 @@
 					<td>模块id</td>
 					<td>模块名</td>
 					<td>项目id</td>
+					<td>操作</td>
 				</tr>
 			</thead>
 			<tbody>
 				<%-- <c:if test="${discussList!=null}"> --%>
 				<c:forEach items="${moduleList}" var="module">
+					<form action="${pageContext.request.contextPath}/module/update/"
+						method="post">
 					<tr style="height: 30px;">
 						<td><input type="hidden" id="moduleId"
 							value="${module.moduleId}" name="moduleId"></input></td>
@@ -74,32 +60,16 @@
 						<td><input type="hidden" id="projectId"
 							value="${module.projectId}" name="projectId"></input></td>
 						<td>
-
-							<form action="${pageContext.request.contextPath}/module/update/"
-								+moduleId" method="post">
-								<!-- <button  id="btn01" href="javascript:void(0)" onclick="updFunction(${module.moduleId})"> -->
-
-								<input type="hidden" id="moduleId" value="${module.moduleId}"
-									name="moduleId"></input>
-								<td><input type="text" id="moduleName"
-									value="${module.moduleName}" name="moduleName"></input></td>
-								<td><input type="hidden" id="projectId"
-									value="${module.projectId}" name="projectId"></input></td> <input
-									type="submit" href="javascript:void(0)"
-									onclick="updFunction(${module.moduleId})"> 修改
-								</button>
-							</form>
-
-							<button id="btn02" href="javascript:void(0)"
-								onclick="delFunction(${module.moduleId})">删除</button>
+						<td><input type="submit" value="修改"> </inpput></td>
+						</form>
+						<td><button id="btn02" href="javascript:void(0)"
+								onclick="delFunction(${module.moduleId})">删除</button></td>
 						</td>
 					</tr>
 				</c:forEach>
 				<%-- </c:if> --%>
 			</tbody>
 		</table>
-		xxxxx
-		<div>${module.moduleName}</div>
 		<%-- 添加模块遮罩层--%>
 
 		<div class="row clearfix">
@@ -143,7 +113,7 @@
 		</div>
 
 
-		<%-- 修改模块遮罩层--%>
+		<%-- 弃用修改模块遮罩层--%>
 
 		<div class="row clearfix">
 			<div class="col-md-12 column">

@@ -44,7 +44,7 @@ public class ModuleController {
         // moduleService.findByProjectId(project.getId());
         List<Module> moduleList = moduleService.findByProjectId(1);// 测试用
         model.addAttribute("moduleList", moduleList);
-        moduleList.forEach(System.out::println);// 测试用
+       // moduleList.forEach(System.out::println);// 测试用
         return MODULE_PAGE;
     }
 
@@ -87,13 +87,13 @@ public class ModuleController {
      * 
      * @return
      */
-    @RequestMapping(value = "module/update/{moduleId}", method = RequestMethod.GET)
+   /* @RequestMapping(value = "module/update/{moduleId}", method = RequestMethod.GET)
     public String toUpdModule(@PathVariable(value = "moduleId") long moduleId, Model model) {
         Module currentModule = moduleService.findByModuleId(moduleId);
         System.out.println(currentModule);// 测试用
         model.addAttribute("currentModule", currentModule);
         return PAGE_UPD_MODULE;
-    }
+    }*/
 
     /**
      * 修改
@@ -110,7 +110,7 @@ public class ModuleController {
         } else {
             System.out.println("失败");
         }
-        return "redirect:/api/module/" + currentProjectId;// 重新获取列表
+        return "redirect:/module/list";// 重新获取列表
     }
 
     /**
