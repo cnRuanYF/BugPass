@@ -28,9 +28,9 @@ public class TestMemberDao {
 
     private User u = new User();
     /* 测试用Member对象 */
-    private Member member = new Member(2, 2, 0);
+    private Member member = new Member(19, 5, 0);
 
-    
+
     /**
      * 测试添加成员信息<br/>
      * result - success
@@ -39,6 +39,15 @@ public class TestMemberDao {
     public void testAdd() {
         u.setId(2);
         System.out.println(memberDao.add(member));
+    }
+
+    /**
+     * 测试添加成员信息<br/>
+     * result - success
+     */
+    @Test
+    public void testQueryByProjectIdAndUserId() {
+        System.out.println(memberDao.queryByProjectIdAndUserId(8,19));
     }
 
     /**

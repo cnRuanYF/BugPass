@@ -67,35 +67,6 @@ public class MemberController {
         return redirect("member/list");
     }
 
-    /**
-     * 删除成员信息
-     */
-    @RequestMapping(value = "member/remove/{id}", method = RequestMethod.GET)
-    public String deleteMember(@PathVariable(value = "id") long userId, HttpSession session) {
-        // 从session中获取当前项目
-        Project project = (Project) session.getAttribute("currentProject");
-        // 成员对象
-        Member member = new Member();
-        member.setProjectId(project.getId());
-        member.setUserId(userId);
-        // 如果是项目成员
-        if (!memberService.isMember(project.getId(), userId)) {
-            session.setAttribute(MessageType.ERROR, "删除成员失败,该成员不是该项目的成员。");
-        }
-        // 如果是项目组长
-        else if (memberService.isCreator(project.getId(), userId)) {
-            session.setAttribute(MessageType.ERROR, "删除成员失败,怎么能删除组长呢？");
-        }
-        // 非成员则执行添加
-        else if (memberService.deleteMember(member)) {
-            session.setAttribute(MessageType.SUCCESS, "删除成员成功。");
-        }
-        // 执行添加失败
-        else {
-            session.setAttribute(MessageType.ERROR, "删除成员失败,我也不懂,应该是DAO错了。");
-        }
-        return redirect("member/list");
-    }
 
     /**
      * 接受成员邀请
@@ -151,7 +122,7 @@ public class MemberController {
     /**
      * [RESTful] 根据name或email对成员模糊查询
      */
-    @RequestMapping(value = "api/memberLike", method = RequestMethod.GET)
+    @RequestMapping(value = "api/memberLike", produces = "text/plain;charset=UTF-8", method = RequestMethod.GET)
     @ResponseBody
     public List<Member> queryByNameOrEmail(HttpSession session, String nameorEamil) {
         // 从session中获取当前项目
@@ -162,7 +133,7 @@ public class MemberController {
     /**
      * [RESTful] 模糊搜索当前项目之外的用户
      */
-    @RequestMapping(value = "api/member/searchUserWithoutProjectMemberByKeyword/{key}", method = RequestMethod.GET)
+    @RequestMapping(value = "api/member/searchUserWithoutProjectMemberByKeyword/{key}", produces = "text/plain;charset=UTF-8", method = RequestMethod.GET)
     @ResponseBody
     public List<User> searchByKeyword(HttpSession session, @PathVariable("key") String key) {
         // 从session中获取当前项目
@@ -178,7 +149,7 @@ public class MemberController {
     /**
      * [RESTful] 邀请成员
      */
-    @RequestMapping(value = "api/member/invite/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "api/member/invite/{id}", produces = "text/plain;charset=UTF-8", method = RequestMethod.GET)
     @ResponseBody
     public String inviteMember(HttpSession session, @PathVariable(value = "id") long userId) {
 
@@ -212,7 +183,7 @@ public class MemberController {
     /**
      * [RESTful] 移除邀请
      */
-    @RequestMapping(value = "api/member/remove/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "api/member/cancelInvitation/{id}", produces = "text/plain;charset=UTF-8", method = RequestMethod.GET)
     @ResponseBody
     public String removeMember(@PathVariable(value = "id") long userId, HttpSession session) {
 
@@ -247,12 +218,45 @@ public class MemberController {
     }
 
     /**
+     * [RESTful] 删除成员
+     */
+    @RequestMapping(value = "api/member/remove/{id}", produces = "text/plain;charset=UTF-8", method = RequestMethod.GET)
+    @ResponseBody
+    public String deleteMember(@PathVariable(value = "id") long userId, HttpSession session) {
+        // 从session中获取当前项目
+        Project project = (Project) session.getAttribute("currentProject");
+
+        // 成员对象
+        Member member = new Member();
+        member.setProjectId(project.getId());
+        member.setUserId(userId);
+
+        // 如果是项目成员
+        if (!memberService.isMember(project.getId(), userId)) {
+            return "删除成员失败,该成员不是该项目的成员。";
+        }
+        // 如果是项目组长
+        else if (memberService.isCreator(project.getId(), userId)) {
+            return "删除成员失败,怎么能删除组长呢？";
+        }
+        // 非成员则执行添加
+        else if (memberService.deleteMember(member)) {
+            return "success";
+        }
+        // 执行添加失败
+        else {
+            return "删除成员失败，我也不懂，应该是你把库误删了，快跑路吧。";
+        }
+    }
+
+    /**
      * [RESTful] 获取被邀请的项目列表
      */
     @RequestMapping(value = "api/member/getInvitationList", method = RequestMethod.GET)
     @ResponseBody
     public List<Project> invitationProject(HttpSession session) {
         User user = (User) session.getAttribute("currentUser");
+        System.out.println(memberService.getInvitation(user.getId()));
         return memberService.getInvitation(user.getId());
     }
 }
