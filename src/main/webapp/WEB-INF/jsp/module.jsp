@@ -1,4 +1,5 @@
 <%@page import="com.bugpass.entity.User"%>
+<%@ page import="com.bugpass.entity.Project"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -7,66 +8,205 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+
+<%--cdn 测试用--%>
+<link
+	href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	rel="stylesheet">
+
+<script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+
+<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+<script
+	src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
+	<div class="container">
 		<%
 		//Problem problem=new Problem();//这里需要问题的id传入
-		
-		session.setAttribute("projectId",1);//测试用 
-		int projectId=(int)session.getAttribute("projectId");
+           /*  Project currentProject=new Project();
+            currentProject.setId(1);
+            session.setAttribute("currentProject",currentProject);//测试用
+ */
+            Project currentProject=(Project)session.getAttribute("currentProject");
+
+//		session.setAttribute("projectId",1);//测试用
+//		int projectId=(int)session.getAttribute("projectId");
 	%>
-	<%=projectId %><br>
+		<%--<%=projectId %><br>--%>
 		<!-- 用ajax实现添加,废弃用discuss_add.jsp -->
-		讨论:<textarea type="text" id="discussContent" value="" ></textarea><br/>
-		<!-- 用户id --><%-- <input type="hidden" id="publisherUser" value="${publisherUser.id}" /><br/> --%>
-		<!-- 用户id --><input type="hidden" id="moduleId" value="${module.moduleId}" /><br/>
-		<!-- 讨论id --><input type="text" id="moduleName" value="${module.moduleName}" /><br/>
-		<!-- 问题id: --><input type="hidden" id="projectId" value="${module.projectId}" /><br/>
-		<input type="button" id="btn01" value="添加" />
-		<input type="button" id="btn02" value="更新" />
-		<input type="button" id="btn03" value="删除" />
-		
+		讨论:
+		<textarea type="text" id="discussContent" value=""></textarea>
+		<br />
+		<!-- 用户id -->
+		<%-- <input type="hidden" id="publisherUser" value="${publisherUser.id}" /><br/> --%>
+		<!-- 用户id -->
+		<input type="hidden" id="moduleId" value="${module.moduleId}" /><br />
+		<!-- 讨论id -->
+		<input type="text" id="moduleName" value="${module.moduleName}" /><br />
+		<!-- 问题id: -->
+		<input type="hidden" id="projectId" value="${module.projectId}" /><br />
+		<input type="button" id="btn01" value="添加" /> <input type="button"
+			id="btn02" value="更新" /> <input type="button" id="btn03" value="删除" />
+
 		<a href="${pageContext.request.contextPath}/api/module">添加</a>
-	<table class="table table-striped table-hover">
-		<thead>
-			<tr>
-				<h4>讨论</h4>
-			</tr>
-			<tr>
-				<!-- 可以写入隐藏域 -->
-				<td>模块id</td>				
-				<td>模块名</td>
-				<td>项目id</td>
-			</tr>
-		</thead>
-		<tbody>
-			<%-- <c:if test="${discussList!=null}"> --%>
+
+		<table>
+			<thead>
+				<tr>
+					<h4>模块</h4>
+				</tr>
+				<tr>
+					<!-- 可以写入隐藏域 -->
+					<td>模块id</td>
+					<td>模块名</td>
+					<td>项目id</td>
+				</tr>
+			</thead>
+			<tbody>
+				<%-- <c:if test="${discussList!=null}"> --%>
 				<c:forEach items="${moduleList}" var="module">
 					<tr style="height: 30px;">
-						<td>${module.moduleId}</td>
-						<td>${module.moduleName}</td>
-						<td>${module.projectId}</td>
+						<td><input type="hidden" id="moduleId"
+							value="${module.moduleId}" name="moduleId"></input></td>
+						<td><input type="text" id="moduleName"
+							value="${module.moduleName}" name="moduleName"></input></td>
+						<td><input type="hidden" id="projectId"
+							value="${module.projectId}" name="projectId"></input></td>
 						<td>
-							<button class="btn btn-success" id="btn01" href="javascript:void(0)" onclick="updFunction(${module.moduleId})">
-									修改
-							</button> 
-							<button  class="btn btn-danger" id="btn02" href="javascript:void(0)" onclick="delFunction(${module.moduleId})">
-									删除
-							</button>	
+
+							<form action="${pageContext.request.contextPath}/module/update/"
+								+moduleId" method="post">
+								<!-- <button  id="btn01" href="javascript:void(0)" onclick="updFunction(${module.moduleId})"> -->
+
+								<input type="hidden" id="moduleId" value="${module.moduleId}"
+									name="moduleId"></input>
+								<td><input type="text" id="moduleName"
+									value="${module.moduleName}" name="moduleName"></input></td>
+								<td><input type="hidden" id="projectId"
+									value="${module.projectId}" name="projectId"></input></td> <input
+									type="submit" href="javascript:void(0)"
+									onclick="updFunction(${module.moduleId})"> 修改
+								</button>
+							</form>
+
+							<button id="btn02" href="javascript:void(0)"
+								onclick="delFunction(${module.moduleId})">删除</button>
 						</td>
 					</tr>
 				</c:forEach>
-			<%-- </c:if> --%>
-		</tbody>
-	</table>
+				<%-- </c:if> --%>
+			</tbody>
+		</table>
+		xxxxx
+		<div>${module.moduleName}</div>
+		<%-- 添加模块遮罩层--%>
+
+		<div class="row clearfix">
+			<div class="col-md-12 column">
+				<a id="modal-879477" href="#modal-container-879477" role="button"
+					class="btn" data-toggle="modal">添加模块</a>
+
+				<div class="modal fade" id="modal-container-879477" role="dialog"
+					aria-labelledby="myModalLabel" aria-hidden="true">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal"
+									aria-hidden="true">×</button>
+								<h4 class="modal-title" id="myModalLabel">添加模块</h4>
+							</div>
+							<div class="modal-body">
+								<%--添加模块--%>
+								<form action="${pageContext.request.contextPath}/module/add"
+									method="post">
+									<table>
+										<tr>
+											<td>模块名:<input type="text" id="moduleName" value=""
+												name="moduleName"></input>
+										</tr>
+									</table>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default"
+									data-dismiss="modal">关闭</button>
+								<button type="submit" class="btn btn-primary">保存</button>
+							</div>
+							</form>
+						</div>
+
+					</div>
+
+				</div>
+
+			</div>
+		</div>
+
+
+		<%-- 修改模块遮罩层--%>
+
+		<div class="row clearfix">
+			<div class="col-md-12 column">
+				<a id="modal-879471" href="#modal-container-879471" role="button"
+					class="btn" data-toggle="modal">修改模块</a>
+
+				<div class="modal fade" id="modal-container-879471/${module}"
+					role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal"
+									aria-hidden="true">×</button>
+								<h4 class="modal-title" id="myModalLabel">修改</h4>
+							</div>
+							<div class="modal-body">
+								<%--修改模块--%>
+								<form action="${pageContext.request.contextPath}/module/update"
+									method="post">
+									<table>
+										<tr>
+											<td>模块名:<input type="text" id="moduleName"
+												value="${module.moduleName}" name="moduleName"></input></td>
+										</tr>
+										<tr>
+											<td><input type="text" id="moduleId"
+												value="${module.moduleId}" name="moduleId"></input></td>
+										</tr>
+										<tr>
+											<td><input type="text" id="projectId"
+												value="${module.projectId}" name="projectId"></input></td>
+										</tr>
+										<tr>
+											<td><input type="submit">提交</td>
+										</tr>
+									</table>
+								</form>
+
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default"
+									data-dismiss="modal">关闭</button>
+								<button type="button" class="btn btn-primary">保存</button>
+							</div>
+						</div>
+
+					</div>
+
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+
 </body>
 <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
-	<script>
+<script>
 		  function delFunction(moduleId) {
 			var flag = confirm("是否确定删除文章编号为" + moduleId);
 			if (flag) {
 				
-				location.href = "${pageContext.request.contextPath}/api/delModule/"+moduleId;
+				location.href = "${pageContext.request.contextPath}/module/remove/"+moduleId;
 						
 
 			}
@@ -74,7 +214,7 @@
 		//更新
 		function updFunction(moduleId) {
 	  		
-	  		location.href="${pageContext.request.contextPath}/api/toUpdModule/"+moduleId;
+	  		location.href="${pageContext.request.contextPath}/module/update/"+moduleId;
 	  	}
 		 
 		 //用ajax实现局部添加和删除,未实现
