@@ -17,6 +17,7 @@
  */
 .line-limit-length,
 .line-limit-length * {
+    display: inline-block;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;

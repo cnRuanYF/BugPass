@@ -26,7 +26,7 @@
         <h3 class="mt-4">开发团队必备的缺陷管理平台</h3>
         <h4>开源、安全、稳定、高效、易用</h4>
         <div class="mt-5">
-            <a class="btn btn-lg btn-outline-primary btnEnterSys" href="javascript:void(0)">&emsp;进入系统&emsp;</a>
+            <a class="btn btn-lg btn-outline-primary pl-5 pr-5 btnEnterSys" href="javascript:void(0)">进入系统</a>
         </div>
         <p class="text-muted mt-4">当前版本：v0.1 beta (更新于: 2018-07-06)</p>
     </div>

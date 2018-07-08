@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
 
@@ -53,9 +54,18 @@ public class IndexController {
     /**
      * 除零错误测试
      */
-    @RequestMapping(value = "test/divisionByZero",method = RequestMethod.GET)
-    public String testDivisionByZero(){
-        return 1/0 + "";
+    @RequestMapping(value = "test/divisionByZero", method = RequestMethod.GET)
+    public String testDivisionByZero() {
+        return 1 / 0 + "";
+    }
+
+    /**
+     * [RESTful] 传递中文测试
+     */
+    @RequestMapping(value = "test/getString", produces = "text/plain;charset=UTF-8")
+    @ResponseBody
+    public String testGetString() {
+        return "Hello world, 你好世界。";
     }
 
 }

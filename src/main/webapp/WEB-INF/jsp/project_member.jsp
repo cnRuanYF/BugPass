@@ -11,7 +11,7 @@
 
 <body>
 
-<% request.setAttribute("navItem", "setting"); %>
+<% request.setAttribute("navItem", "member"); %>
 <%@ include file="navbar.jsp" %>
 
 <div class="container">
@@ -34,7 +34,9 @@
                         <th>用户</th>
                         <th>联系方式</th>
                         <th>角色</th>
-                        <th width="1px">操作</th>
+                        <c:if test="${currentProject.creator.id == currentUser.id}">
+                            <th width="1px">操作</th>
+                        </c:if>
                     </tr>
                     </thead>
                     <tbody>
@@ -68,17 +70,19 @@
                                 </c:if>
                             </td>
                             <td class="align-middle">${member.memberRole == 1 ? "创建者" : "成员"}</td>
-                            <td class="align-middle">
-                                <c:if test="${member.memberRole == 1}">
-                                    <a class="btn btn-sm btn-outline-secondary disabled">移除</a>
-                                </c:if>
-                                <c:if test="${member.memberRole != 1}">
-                                    <button class="btn btn-sm btn-outline-danger"
-                                            onclick="removeMember(this, '移除', ${member.user.id})">
-                                        移除
-                                    </button>
-                                </c:if>
-                            </td>
+                            <c:if test="${currentProject.creator.id == currentUser.id}">
+                                <td class="align-middle">
+                                    <c:if test="${member.memberRole == 1}">
+                                        <button class="btn btn-sm btn-outline-secondary disabled")">移除</button>
+                                    </c:if>
+                                    <c:if test="${member.memberRole != 1}">
+                                        <button class="btn btn-sm btn-outline-danger"
+                                                onclick="removeMember(this, '移除', ${member.user.id})">
+                                            移除
+                                        </button>
+                                    </c:if>
+                                </td>
+                            </c:if>
                         </tr>
                     </c:forEach>
                     </tbody>
@@ -86,67 +90,71 @@
             </div>
 
             <%--待确认列表--%>
-            <c:if test="${unconfirmList.size() > 0}">
-                <div id="unconfirmListDiv" class="card card-body mt-3">
-                    <h5 class="mb-4">待确认</h5>
-                    <table class="table table-borderless table-hover">
-                        <thead>
-                        <tr>
-                            <th class="text-center" width="1px"><i class="fa fa-angle-down"></i></th>
-                            <th>用户</th>
-                            <th>邮箱</th>
-                            <th>手机</th>
+            <div id="unconfirmListDiv" class="card card-body mt-3">
+                <h5 class="mb-4">待确认</h5>
+                <table class="table table-borderless table-hover">
+                    <thead>
+                    <tr>
+                        <th class="text-center" width="1px"><i class="fa fa-angle-down"></i></th>
+                        <th>用户</th>
+                        <th>邮箱</th>
+                        <th>手机</th>
+                        <c:if test="${currentProject.creator.id == currentUser.id}">
                             <th width="1px">操作</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <c:forEach items="${unconfirmList}" var="member">
-                            <tr>
-                                <td class="align-middle">
-                                    <img class="user-head mr-2" src="img/avatar/${member.user.picture}.png"/>
-                                </td>
-                                <td class="align-middle">
-                                    <span>${member.user.realname}</span>
-                                    <span class="text-secondary">(${member.user.username})</span>
-                                </td>
-                                <td class="align-middle">${member.user.email}</td>
-                                <td class="align-middle">${member.user.phone}</td>
+                        </c:if>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <c:forEach items="${unconfirmList}" var="member">
+                        <tr>
+                            <td class="align-middle">
+                                <img class="user-head mr-2" src="img/avatar/${member.user.picture}.png"/>
+                            </td>
+                            <td class="align-middle">
+                                <span>${member.user.realname}</span>
+                                <span class="text-secondary">(${member.user.username})</span>
+                            </td>
+                            <td class="align-middle">${member.user.email}</td>
+                            <td class="align-middle">${member.user.phone}</td>
+                            <c:if test="${currentProject.creator.id == currentUser.id}">
                                 <td class="align-middle">
                                     <button class="btn btn-sm btn-outline-warning"
                                             onclick="removeMember(this, '取消邀请', ${member.user.id})">
                                         取消邀请
                                     </button>
                                 </td>
-                            </tr>
-                        </c:forEach>
-                        </tbody>
-                    </table>
-                </div>
-            </c:if>
+                            </c:if>
+                        </tr>
+                    </c:forEach>
+                    </tbody>
+                </table>
+            </div>
 
             <%--添加成员--%>
-            <div class="card card-body mt-3">
-                <h5 class="mb-4">添加成员</h5>
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"><i class="fa fa-search"></i></span>
+            <c:if test="${currentProject.creator.id == currentUser.id}">
+                <div class="card card-body mt-3">
+                    <h5 class="mb-4">添加成员</h5>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fa fa-search"></i></span>
+                        </div>
+                        <input type="text" class="form-control" id="searchKeyword" placeholder="输入关键字"
+                               oninput="searchUser(this.value)">
                     </div>
-                    <input type="text" class="form-control" id="searchKeyword" placeholder="输入关键字"
-                           oninput="searchUser(this.value)">
+                    <table id="searchResultTable"
+                           class="table table-borderless table-hover ml-auto mr-auto align-self-center">
+                    </table>
+                    <h3 id="searchingTip" class="align-self-center text-info mt-3 mb-3">
+                        <i class="fa fa-circle-notch fa-spin mr-3"></i>Searching...
+                    </h3>
+                    <h3 id="searchNoResultTip" class="align-self-center text-secondary mt-3 mb-3">
+                        <i class="far fa-frown mr-3"></i>No result.
+                    </h3>
+                    <h3 id="searchFailedTip" class="align-self-center text-warning mt-3 mb-3">
+                        <i class="fa fa-exclamation-circle mr-3"></i>出现错误，请稍后再试
+                    </h3>
                 </div>
-                <table id="searchResultTable"
-                       class="table table-borderless table-hover ml-auto mr-auto align-self-center">
-                </table>
-                <h3 id="searchingTip" class="align-self-center text-info mt-3 mb-3">
-                    <i class="fa fa-circle-notch fa-spin mr-3"></i>Searching...
-                </h3>
-                <h3 id="searchNoResultTip" class="align-self-center text-secondary mt-3 mb-3">
-                    <i class="far fa-frown mr-3"></i>No result.
-                </h3>
-                <h3 id="searchFailedTip" class="align-self-center text-warning mt-3 mb-3">
-                    <i class="fa fa-exclamation-circle mr-3"></i>出现错误，请稍后再试
-                </h3>
-            </div>
+            </c:if>
         </div>
     </div>
 </div>
@@ -157,6 +165,9 @@
 
     // 待确认列表用户数
     var unconfirmCount = ${unconfirmList.size()};
+    if (unconfirmCount == 0) {
+        $('#unconfirmListDiv').hide();
+    }
 
     // 激活页面中的Tooltip
     $(function () {
@@ -264,7 +275,7 @@
     }
 
     /**
-     * 将标红的关键字复原（邀请后元素转移）
+     * 将标红的关键字复原（用于邀请成功后元素转移）
      */
     function unmarkKeyword(input) {
         return input
@@ -287,15 +298,12 @@
                     // 获取表格行元素&转移目标元素
                     var tableRow = $(e.parentNode.parentNode);
                     $(e.parentNode).html('<button class="btn btn-sm btn-outline-warning" onclick="removeMember(this, \'取消邀请\', ' + uid + ')">取消邀请</button>');
-                    var lastUnconfirmTableRow = $('#unconfirmListDiv > table > tbody > tr:last');
+                    var lastUnconfirmTableBody = $('#unconfirmListDiv > table > tbody');
 
                     // 表格行转移
                     tableRow.hide(500, function () {
-                        tableRow.insertAfter(lastUnconfirmTableRow);
-                        tableRow.html(unmarkKeyword(tableRow.html()));
-                        tableRow.html(unmarkKeyword(tableRow.html()));
-                        tableRow.html(unmarkKeyword(tableRow.html()));
-                        tableRow.html(unmarkKeyword(tableRow.html()));
+                        tableRow.html(unmarkKeyword(unmarkKeyword(unmarkKeyword(unmarkKeyword(tableRow.html())))));
+                        lastUnconfirmTableBody.append(tableRow);
                         tableRow.show(500);
                         // 源表为空则隐藏
                         if ($('#searchResultTable > tbody > tr').length === 0) {

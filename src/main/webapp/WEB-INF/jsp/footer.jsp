@@ -60,8 +60,8 @@
             <a target="_blank" href="https://www.java.com">Java</a>;
             Front-end powered by
             <a target="_blank" href="https://jquery.com">jQuery</a>,
-            <a target="_blank" href="https://getbootstrap.com" target="_blank">Bootstrap</a>,
-            <a target="_blank" href="http://layer.layui.com" target="_blank">Layer</a>;
+            <a target="_blank" href="https://getbootstrap.com">Bootstrap</a>,
+            <a target="_blank" href="http://layer.layui.com">Layer</a>;
             Database powered by
             <a target="_blank" href="https://www.mysql.com">MySQL</a>.
             <br>

@@ -63,14 +63,14 @@
                         <label class="col-md-3 col-form-label text-md-right" for="phone">手机</label>
                         <div class="col-md-9 col-lg-6">
                             <input type="text" id="phone" class="form-control" name="phone"
-                                   value="${currentUser.phone}" placeholder="请输入手机号码" required>
+                                   value="${currentUser.phone}" placeholder="请输入手机号码">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-md-3 col-form-label text-md-right" for="qq">QQ</label>
                         <div class="col-md-9 col-lg-6">
                             <input type="text" id="qq" class="form-control" name="qq"
-                                   value="${currentUser.qq}" maxlength="11" placeholder="请输入QQ" required>
+                                   value="${currentUser.qq}" maxlength="11" placeholder="请输入QQ">
                         </div>
                     </div>
                     <div class="form-group row">

@@ -25,12 +25,14 @@
                     <a class="nav-link dropdown-toggle ${currentProject != null ? 'active' : ''}" href="#"
                        id="navbarDropdown"
                        role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <c:if test="${currentProject == null}">
-                            <i class="fa fa-fw fa-expand mr-2"></i> 选择一个工程项目
-                        </c:if>
-                        <c:if test="${currentProject != null}">
-                            <i class="fa fa-fw ${currentProjectCreator.id == currentUser.id ? 'fa-crown' : 'fa-cube'} mr-2"></i>${currentProject.projectName}
-                        </c:if>
+                        <span class="line-limit-length" style="max-width:160px">
+                            <c:if test="${currentProject == null}">
+                                <i class="fa fa-fw fa-expand mr-1"></i> 选择一个工程项目
+                            </c:if>
+                            <c:if test="${currentProject != null}">
+                                <i class="fa fa-fw ${currentProjectCreator.id == currentUser.id ? 'fa-crown' : 'fa-cube'} mr-2"></i>${currentProject.projectName}
+                            </c:if>
+                        </span>
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <c:if test="${projectList.size() > 0}">
@@ -55,43 +57,51 @@
                 <c:if test="${currentProject != null}">
                     <li class="nav-item">
                         <a class="nav-link ${navItem == 'summary' ? 'active' : ''}" href="project/summary">
-                            <i class="fa fa-file-alt mr-2"></i>概述
+                            <i class="fas fa-fw fa-th-list mr-1"></i>概述
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link ${navItem == 'problem' ? 'active' : ''}" href="project/problemList">
-                            <i class="fa fa-bug mr-2"></i>问题
+                            <i class="fas fa-fw fa-exclamation-circle mr-1"></i>问题
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link ${navItem == 'statistics' ? 'active' : ''}" href="project/statistics">
-                            <i class="fa fa-chart-line mr-2"></i>统计
+                            <i class="fas fa-fw fa-chart-line mr-1"></i>统计
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link ${navItem == 'member' ? 'active' : ''}" href="member/list">
+                            <i class="fas fa-fw fa-users mr-1"></i>成员
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link ${navItem == 'setting' ? 'active' : ''}" href="project/info">
-                            <i class="fa fa-sliders-h mr-2"></i>设置
+                            <i class="fas fa-fw fa-cog mr-1"></i>设置
                         </a>
                     </li>
                 </c:if>
             </ul>
             <ul class="navbar-nav">
-                <li class="nav-item mr-3">
-                    <a class="nav-link"  href="#modal-container-invitation-list" data-toggle="modal">
-                        <span class="badge badge-pill badge-danger mr-1">6</span>有新消息
+                <li id="navMessagePill" class="nav-item mr-3">
+                    <a class="nav-link" href="javascript:layer.msg('暂无新消息', {icon: 0});">
+                        <i class="far fa-fw fa-envelope mr-1"></i>消息
                     </a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="userNavbarDropdown" role="button"
                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="padding:0">
-                        <img class="user-head mr-2" src="img/avatar/${currentUser.picture}.png"/>
-                        ${currentUser.realname == null ? currentUser.username : currentUser.realname}
+                        <img class="user-head" src="img/avatar/${currentUser.picture}.png"/>
+                        <span class="ml-1 d-lg-none d-xl-inline">${currentUser.realname == null ? currentUser.username : currentUser.realname}</span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userNavbarDropdown">
                         <a class="dropdown-item" href="index">
                             <i class="fa fa-fw fa-home mr-2"></i>返回首页
                         </a>
                         <div class="dropdown-divider"></div>
+                        <span class="dropdown-item-text text-secondary d-none d-lg-block d-xl-none">
+                            ${currentUser.realname == null ? currentUser.username : currentUser.realname}
+                        </span>
                         <a class="dropdown-item" href="user/updateProfile">
                             <i class="fa fa-fw fa-user-edit mr-2"></i>个人资料
                         </a>
@@ -162,6 +172,9 @@
                 <table id="invitationListTable" class="table table-borderless table-hover">
                 </table>
             </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+            </div>
         </div>
     </div>
 </div>
@@ -180,15 +193,16 @@
 </script>
 
 <script type="text/javascript">
+    var lastInvitationCount = 0;
+    var navMessagePill = $('#navMessagePill');
+
     // 开局先来一波检查
-    setTimeout(function () {
-        checkInvitation();
-    },3000);
+    checkInvitation();
 
     // 每隔一定时间检查一次
     setInterval(function () {
         checkInvitation();
-    }, 10000);
+    }, 5000);
 
     /**
      * 检查邀请列表
@@ -198,32 +212,79 @@
             url: 'api/member/getInvitationList',
             type: 'GET',
             success: function (data) {
-                console.log(data)
+                // 判断是否有邀请
                 if (data.length > 0) {
+                    // 模态窗口内容更新
                     var invitationListTable = $('#invitationListTable');
-                    invitationListTable.html('<caption>共收到 ' + data.length + ' 个项目邀请</caption>' +
+                    invitationListTable.html(
+                        '<caption>共收到 ' + data.length + ' 个项目邀请</caption>' +
                         '<thead><tr>' +
-                        '<th class="text-center" width="1px"><i class="fa fa-angle-down"></i></th>' +
-                        '<th>创建者</th>' +
-                        '<th>工程名</th>' +
-                        '<th width="1px">操作</th>' +
+                        '  <th class="text-center" width="1px"><i class="fa fa-angle-down"></i></th>' +
+                        '  <th>创建者</th>' +
+                        '  <th>工程</th>' +
+                        '  <th class="text-right">操作</th>' +
                         '</tr></thead>' +
                         '<tbody>');
                     $.each(data, function (index, proj) {
-                        invitationListTable.append('<tr>' +
-                            '<td class="align-middle"><img class="user-head mr-2" src="img/avatar/' + proj.creator.picture + '.png"/></td>' +
-                            '<td class="align-middle">' + proj.creator.realname +
-                            '    <span class="text-secondary">(' + proj.creator.username + ')</span>' +
+                        invitationListTable.append(
+                            '<tr>' +
+                            '<td><img class="user-head mr-2" src="img/avatar/' + proj.creator.picture + '.png"/></td>' +
+                            '<td>' + proj.creator.realname +
+                            '  <span class="text-secondary">(' + proj.creator.username + ')</span><br>' +
+                            '  <span class="text-secondary">' + proj.creator.email + '</span>' +
                             '</td>' +
-                            '<td class="align-middle">' + proj.projectName + '</td>' +
-                            '<td class="align-middle"><a class="btn btn-info" href="member/acceptInvitation/' + proj.id + '">加入</a></td>' +
+                            '<td>' + proj.projectName + '<br>' +
+                            '  <span class="text-secondary">' + proj.projectDesc + '</span><br>' +
+                            '</td>' +
+                            '<td class="text-right">' +
+                            '  <a class="btn btn-info" href="member/acceptInvitation/' + proj.id + '">加入</a>' +
+                            '  <a class="btn btn-outline-secondary" href="javascript:void(0)" onclick="refuseInvitation()">拒绝</a>' +
+                            '</td>' +
                             '</tr>');
                     });
                     invitationListTable.append('</tbody>');
-                } else {
 
+                    // 若消息数量有变化
+                    if (data.length != lastInvitationCount) {
+                        // 导航栏提示更新
+                        navMessagePill.fadeOut(500, function () {
+                            navMessagePill.html(
+                                '<a class="nav-link active" href="#modal-container-invitation-list" data-toggle="modal">' +
+                                '  <span class="badge badge-pill badge-danger mr-1">' + data.length + '</span>新消息' +
+                                '</a>');
+                            navMessagePill.fadeIn(500);
+                        });
+
+                        // 记录消息数量
+                        lastInvitationCount = data.length;
+                    }
+                } else {
+                    // 若消息数量有变化
+                    if (data.length != lastInvitationCount) {
+                        // 隐藏邀请列表模态框
+                        $('#modal-container-invitation-list').modal('hide');
+
+                        // 导航栏提示更新
+                        navMessagePill.fadeOut(500, function () {
+                            navMessagePill.html(
+                                '<a class="nav-link" href="javascript:layer.msg(\'暂无新消息\', {icon: 0});">' +
+                                '  <i class="far fa-fw fa-envelope mr-1"></i>消息' +
+                                '</a>');
+                            navMessagePill.fadeIn(500);
+                        });
+
+                        // 记录消息数量
+                        lastInvitationCount = data.length;
+                    }
                 }
             }
         });
+    }
+
+    /**
+     * 拒绝邀请
+     */
+    function refuseInvitation() {
+        layer.msg('人家好心邀请你，你居然想拒绝？<br>不开心……', {icon: 5});
     }
 </script>

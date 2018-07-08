@@ -133,7 +133,7 @@ public class MemberController {
     /**
      * [RESTful] 模糊搜索当前项目之外的用户
      */
-    @RequestMapping(value = "api/member/searchUserWithoutProjectMemberByKeyword/{key}", produces = "text/plain;charset=UTF-8", method = RequestMethod.GET)
+    @RequestMapping(value = "api/member/searchUserWithoutProjectMemberByKeyword/{key}", method = RequestMethod.GET)
     @ResponseBody
     public List<User> searchByKeyword(HttpSession session, @PathVariable("key") String key) {
         // 从session中获取当前项目
