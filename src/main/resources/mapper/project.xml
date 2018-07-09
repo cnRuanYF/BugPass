@@ -94,7 +94,36 @@
 		where 
 			p.project_id=m.project_id 
 			and p.project_id=#{projectId}
-			
+	</select>
+	
+	<!-- 根据项目id查询项目对象(包含项目所有信息:成员、模块、版本，创建者在服务层调用方法得到) -->
+	<select id="getProjectAllInfoByProjectId" parameterType="long" resultMap="projectAllInfoMap">
+		select 
+			pro.project_id,
+			pro.project_name,
+			pro.project_desc,
+			pro.create_time,
+			pro.display_id,
+			pro.is_deleted,
+			mem.user_id,
+			mem.project_id,
+			mem.member_role,
+			modu.module_id,
+			modu.module_name,
+			modu.project_id,
+			ver.version_id,
+			ver.version_name,
+			ver.project_id
+		from 
+			project pro,
+			member mem,
+			module modu,
+			version ver
+		where 
+			pro.project_id=mem.project_id
+			and pro.project_id=modu.project_id
+			and pro.project_id=ver.project_id
+			and pro.project_id=#{projectId}
 	</select>
 
 	<!-- 映射 -->
@@ -125,6 +154,39 @@
 			<result property="userId" column="user_id" />
 			<result property="memberRole" column="member_role" />
 		</collection>
-		
+	</resultMap>
+	
+	<!-- 查询结果映射,映射项目实体类和成员实体类、模块实体类、版本实体类  -->
+	<resultMap type="com.bugpass.entity.Project" id="projectAllInfoMap">
+		<!-- property=实体类属性名，column=表中列名 -->
+		<id property="id" column="project_id" />
+		<result property="projectName" column="project_name" />
+		<result property="projectDesc" column="project_desc" />
+		<result property="createTime" column="create_time" />
+		<result property="displayId" column="display_id" />
+		<!-- 项目成员的collection -->
+		<collection property="memberList" ofType="com.bugpass.entity.Member">
+			<!-- 主键 -->
+			<id property="id" column="member_id" />
+			<!-- 其他部分 -->
+			<result property="userId" column="user_id" />
+			<result property="memberRole" column="member_role" />
+		</collection>
+		<!-- 模块成员的collection -->
+		<collection property="moduleList" ofType="com.bugpass.entity.Module">
+			<!-- 主键 -->
+			<id property="moduleId" column="module_id" />
+			<!-- 其他部分 -->
+			<result property="moduleName" column="module_name" />
+			<result property="projectId" column="project_id" />
+		</collection>
+		<!-- 版本成员的collection -->
+		<collection property="versionList" ofType="com.bugpass.entity.Version">
+			<!-- 主键 -->
+			<id property="versionId" column="version_id" />
+			<!-- 其他部分 -->
+			<result property="versionName" column="version_name" />
+			<result property="projectId" column="project_id" />
+		</collection>
 	</resultMap>
 </mapper>

@@ -26,14 +26,20 @@ public class Project implements Serializable {
     private List<Member> memberList;
     /** 创建者 */
     private User creator;
+    /** 模块列表 */
+    private List<Module> meduleList;
+    /** 版本列表 */
+    private List<Version> versionList;
+    
+    
     
     @Override
     public String toString() {
         return "Project [id=" + id + ", projectName=" + projectName + ", createTime=" + createTime + ", projectDesc="
                 + projectDesc + ", displayId=" + displayId + ", memberList=" + memberList + ", creator=" + creator
-                + "]";
+                + ", meduleList=" + meduleList + ", versionList=" + versionList + "]";
     }
-    
+
     public long getId() {
         return id;
     }
@@ -93,5 +99,26 @@ public class Project implements Serializable {
     public void setCreator(User creator) {
         this.creator = creator;
     }
+
+    
+    public List<Module> getMeduleList() {
+        return meduleList;
+    }
+
+    
+    public void setMeduleList(List<Module> meduleList) {
+        this.meduleList = meduleList;
+    }
+
+    
+    public List<Version> getVersionList() {
+        return versionList;
+    }
+
+    
+    public void setVersionList(List<Version> versionList) {
+        this.versionList = versionList;
+    }
+    
     
 }

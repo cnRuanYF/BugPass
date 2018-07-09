@@ -89,6 +89,10 @@ public class TestProjectDao {
         System.out.println(project);
     }
     
-    
+    @Test
+    public void testQueryProjectAllInfoByProjectId() {
+        Project project = projectService.getProjectAllInfoByProjectId(1);
+        System.out.println(project);
+    }
 
 }

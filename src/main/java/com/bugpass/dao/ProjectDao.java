@@ -38,4 +38,11 @@ public interface ProjectDao extends BaseDAO<Project> {
 	 */
 	Project getProjectMemberByProjectId(long projectId);
 	
+	/**
+   * 根据项目id查询项目对象(包含项目所有信息:成员、模块、版本，创建者在服务层调用方法得到)
+   * 
+   * @param projectId
+   * @return Project对象
+   */
+  Project getProjectAllInfoByProjectId(long projectId);
 }

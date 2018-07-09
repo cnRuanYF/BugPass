@@ -1,7 +1,5 @@
 package com.bugpass.service.impl;
 
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +15,9 @@ import com.bugpass.entity.Member;
 import com.bugpass.entity.Project;
 import com.bugpass.entity.User;
 import com.bugpass.service.MemberService;
+import com.bugpass.service.ModuleService;
 import com.bugpass.service.ProjectService;
+import com.bugpass.service.VersionService;
 import com.bugpass.util.EncryptUtil;
 
 /**
@@ -36,7 +36,11 @@ public class ProjectServiceImpl implements ProjectService {
     private MemberDao memberDao;
     @Autowired
     private MemberService memberService;
-
+    @Autowired
+    private ModuleService moduleService;
+    @Autowired
+    private VersionService versionService;
+    
     // 增
 
     @Override
@@ -49,10 +53,8 @@ public class ProjectServiceImpl implements ProjectService {
         if (flagPro) {
             // 获取已添加项目记录的id
             long projectId = projectDao.queryByDisplayId(displayId).getId();
-            // TODO 获取session用户id
-            System.out.println("serviceUser:" + user.getId());
-            System.out.println("serviceProject:" + projectId);
-            Member member = new Member(projectId, (int) user.getId(), 1);
+            // 初始化成员信息
+            Member member = new Member(projectId, user.getId(), MemberRoleType.ROLE_CREATOR);
             // 添加成员记录
             boolean flagMem = memberDao.add(member);
             if (flagMem) {
@@ -97,7 +99,8 @@ public class ProjectServiceImpl implements ProjectService {
         // 遍历每个项目获取每个项目的成员和创建者
         for (int i = 0; i < projectList.size(); i++) {
             // 判断如果在该项目中，该用户是被邀请状态，则移除
-            if (memberDao.queryByProjectIdAndUserId(userId, projectList.get(i).getId()).getMemberRole() == MemberRoleType.ROLE_UNCOMFIRMED) {
+            if (memberDao.queryByProjectIdAndUserId(userId, projectList.get(i).getId())
+                    .getMemberRole() == MemberRoleType.ROLE_UNCOMFIRMED) {
                 projectList.remove(i);
             } else {
                 // 将每个项目的对象完整化
@@ -130,6 +133,21 @@ public class ProjectServiceImpl implements ProjectService {
         project.setMemberList(memberService.queryByProjectId(projectId));
         // 查找项目创建者的信息并设置
         project.setCreator(getProjectCreatorByProjectId(projectId));
+        return project;
+    }
+
+    @Override
+    public Project getProjectAllInfoByProjectId(long projectId) {
+        // 根据项目id获得参加项目的成员
+        Project project = projectDao.getProjectMemberByProjectId(projectId);
+        // 查找项目成员的信息并设置
+        project.setMemberList(memberService.queryByProjectId(projectId));
+        // 查找项目创建者的信息并设置
+        project.setCreator(getProjectCreatorByProjectId(projectId));
+        // 查找项目模块的信息并设置
+        project.setMeduleList(moduleService.findByProjectId(projectId));
+        // 查找版本模块的信息并设置
+        project.setVersionList(versionService.returnFindAllByProjectid(projectId));
         return project;
     }
 }

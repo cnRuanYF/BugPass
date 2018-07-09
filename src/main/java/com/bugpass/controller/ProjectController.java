@@ -34,7 +34,7 @@ public class ProjectController {
     private MemberService memberService;
 
     /**
-     * [RESTful] 项目概述
+     * 项目概述
      */
     @RequestMapping(value = CTRL_PROJECT_SUMMARY, method = RequestMethod.GET)
     public String showSummary(HttpSession session) {
@@ -54,7 +54,7 @@ public class ProjectController {
     }
 
     /**
-     * [RESTful] 选择项目
+     * 选择项目
      */
     @RequestMapping(value = CTRL_PROJECT_SWITCH,method = RequestMethod.GET)
     public String switchProject(@PathVariable("id")long id,HttpSession session){
@@ -84,7 +84,7 @@ public class ProjectController {
     }
 
     /**
-     * [RESTful] 创建新项目
+     * 创建新项目
      */
     @RequestMapping(value = CTRL_PROJECT_CREATE, method = RequestMethod.POST)
     public String createProject(Project project, HttpSession session) {
@@ -108,7 +108,7 @@ public class ProjectController {
     }
 
     /**
-     * [RESTful] 项目信息（设置） - 显示
+     * 项目信息（设置） - 显示
      */
     @RequestMapping(value = CTRL_PROJECT_INFO,method = RequestMethod.GET)
     public String projectInfoGet(HttpSession session,Model model){
@@ -134,7 +134,7 @@ public class ProjectController {
     }
 
     /**
-     * [RESTful] 项目信息(设置) - 提交
+     * 项目信息(设置) - 提交
      */
     @RequestMapping(value = CTRL_PROJECT_INFO,method = RequestMethod.POST)
     public String projectInfoPost(Project project , HttpSession session){
@@ -153,15 +153,14 @@ public class ProjectController {
 
 
     /**
-     * [RESTful] 项目信息(设置) - 删除
+     * 项目信息(设置) - 删除
      */
     @RequestMapping(value = CTRL_PROJECT_DELETE, method = RequestMethod.DELETE)
     public String deleteProject(@PathVariable(value = "id") long id) {
         boolean flag = projectService.delProjectById(id);
         return "";
     }
-
-
+    
 //    /**
 //     * 根据项目ID查询一条记录
 //     */
