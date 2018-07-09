@@ -74,6 +74,7 @@
 			project.project_id=member.project_id 
 		where 
 			member.user_id=#{userId}
+			and project.is_deleted != 1
 	</select>
 
 
