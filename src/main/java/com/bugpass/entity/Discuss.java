@@ -12,7 +12,7 @@ public class Discuss implements Serializable{
     /** 讨论ID */
     private long discussId;
     /** 问题Id */
-    private int problemId;
+    private long problemId;
     /** 发布者 */
     private User publisherUser;
     /** 发布时间 */
@@ -42,11 +42,11 @@ public class Discuss implements Serializable{
         this.discussId = discussId;
     }
     
-    public int getProblemId() {
+    public long getProblemId() {
         return problemId;
     }
     
-    public void setProblemId(int problemId) {
+    public void setProblemId(long problemId) {
         this.problemId = problemId;
     }
     

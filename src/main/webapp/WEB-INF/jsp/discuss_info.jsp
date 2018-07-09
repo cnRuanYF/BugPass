@@ -1,3 +1,4 @@
+<%@page import="com.bugpass.entity.Problem"%>
 <%@page import="com.bugpass.entity.User"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -9,23 +10,49 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<!-- 假装有用户id为2 -->
 		<%
+			
+			User user = new User();
+			user.setId(2);
+			session.setAttribute("currentUser",user ); 
+		%>
+	<%=session.getAttribute("currentUser") %><br>
+	<%=user %><br>
+	<!-- 假装有问题id为1 -->
+	<%-- <% 
+			Problem currentProblem=new Problem();
+			currentProblem.setId(1);
+			session.setAttribute("currentProblem", currentProblem);
+		%>
+		当前问题：<%=currentProblem %><br> --%>
+	<%-- <%
 		//Problem problem=new Problem();//这里需要问题的id传入
 		
-		session.setAttribute("problemId",1);//先写死(等问题)
-		int problemId=(int)session.getAttribute("problemId");
-	%>
-	<%=problemId %><br>
-		<!--用ajax实现添加,废弃用discuss_add.jsp-->
-		讨论:<textarea type="text" id="discussContent" value="" ></textarea><br/>
-		<!--用户id--><%--<input type="hidden" id="publisherUser" value="${publisherUser.id}" /><br/>--%>
-		<!--用户id--><input type="hidden" id="publisherId" value="${discuss.publisherId}" /><br/>
-		<!--讨论id--><input type="hidden" id="discussId" value="${discuss.discussId}" /><br/>
-		<!--问题id:--><input type="hidden" id="problemId" value="${discuss.problemId}" /><br/>
-		<!--<input type="button" id="btn01" value="Ajax请求(get)" />-->
-		<!--<input type="button" id="btn02" value="增加讨论" />-->
-		
-		<a href="${pageContext.request.contextPath}/api/toAddDiscuss">添加</a>
+			session.setAttribute("problemId",1);//先写死(等问题)
+			int problemId=(int)session.getAttribute("problemId");
+		%>
+	当前问题id：<%=problemId %> --%>
+	<form action="${pageContext.request.contextPath }/discuss/add"
+		method="post">
+		<table>
+			<tr>
+				<td>讨论:<textarea type="text" id="discussContent" value=""
+						name="discussContent"></textarea></td>
+			</tr>
+			<%--<tr>
+				<td><input type="hidden" id="publisherUser" value="${user}" /></td>
+			</tr>--%>
+			<tr>
+				<td><input type="hidden" id="problemId" value="${problemId}"
+					name="problemId" /></td>
+			</tr>
+			<tr>
+				<td><input type="submit"></td>
+			</tr>
+		</table>
+	</form>
+
 	<table class="table table-striped table-hover">
 		<thead>
 			<tr>
@@ -35,7 +62,7 @@
 				<td>头像</td>
 				<td>发布者</td>
 				<!--可以写入隐藏域-->
-				<td>用户Id</td>				
+				<td>用户Id</td>
 				<td>讨论id</td>
 				<td>问题id</td>
 				<!--可以写入隐藏域 -->
@@ -46,33 +73,31 @@
 		</thead>
 		<tbody>
 			<%--<c:if test="${discussList!=null}">--%>
-				<c:forEach items="${discussList}" var="discuss">
-					<tr style="height: 30px;">
-						<td>${discuss.publisherUser.picture}</td>
-						<td>${discuss.publisherUser.username}</td>
-						<td>${discuss.publisherUser.id}</td>
-						<td>${discuss.discussId}</td>
-						<td>${discuss.problemId}</td>
-						<td>${discuss.publishTime}</td>
-						<td>${discuss.discussContent}</td>
-						<td>${discuss.publisherId}</td>
-						<td>
-							<button class="btn btn-success" id="btn01" href="javascript:updFunction(${discuss.discussId})">
-									修改
-							</button> 
-<%--						<button class="btn btn-danger" id="btn02" href="javascript:delFunction(${discuss.discussId})">--%>
-							<button class="btn btn-danger" id="btn01" href="javascript:void(0)" onclick="delFunction(${discuss.discussId})">
-									删除
-							</button>	
-						</td>
-					</tr>
-				</c:forEach>
+			<c:forEach items="${discussList}" var="discuss">
+				<tr style="height: 30px;">
+					<td>${discuss.publisherUser.picture}</td>
+					<td>${discuss.publisherUser.username}</td>
+					<td>${discuss.publisherUser.id}</td>
+					<td>${discuss.discussId}</td>
+					<td>${discuss.problemId}</td>
+					<td>${discuss.publishTime}</td>
+					<td>${discuss.discussContent}</td>
+					<td>${discuss.publisherId}</td>
+					<td>
+						<button class="btn btn-success" id="btn01"
+							href="javascript:updFunction(${discuss.discussId})">修改</button> <%--						<button class="btn btn-danger" id="btn02" href="javascript:delFunction(${discuss.discussId})">--%>
+						<button class="btn btn-danger" id="btn01"
+							href="javascript:void(0)"
+							onclick="delFunction(${discuss.discussId})">删除</button>
+					</td>
+				</tr>
+			</c:forEach>
 			<%--</c:if>--%>
 		</tbody>
 	</table>
 </body>
 <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
-	<script>
+<script>
 		/*  function delFunction(discussId) {
 			var flag = confirm("是否确定删除文章编号为" + discussId);
 			if (flag) {
