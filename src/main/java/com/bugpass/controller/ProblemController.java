@@ -91,79 +91,79 @@ public class ProblemController {
 
 		boolean flag=problemService.addProblem(map);
 		if(flag){
-			Map mapXinJian = new HashMap();
-			mapXinJian.put("publisher",publisher);
-			mapXinJian.put("problemStatusName","新建");
+			Map mapNewBuild = new HashMap();
+			mapNewBuild.put("publisher",publisher);
+			mapNewBuild.put("problemStatusName","新建");
 			
-			Map mapJinXingZhong = new HashMap();
-			mapJinXingZhong.put("publisher",publisher);
-			mapJinXingZhong.put("problemStatusName","进行中");
+			Map mapRunning = new HashMap();
+			mapRunning.put("publisher",publisher);
+			mapRunning.put("problemStatusName","进行中");
 			
-			Map mapChongXinOpen = new HashMap();
-			mapChongXinOpen.put("publisher",publisher);
-			mapChongXinOpen.put("problemStatusName","重新打开");
+			Map mapReOpen = new HashMap();
+			mapReOpen.put("publisher",publisher);
+			mapReOpen.put("problemStatusName","重新打开");
 			
-			Map mapYiJieJue = new HashMap();
-			mapYiJieJue.put("publisher",publisher);
-			mapYiJieJue.put("problemStatusName","已解决");
+			Map mapResolved = new HashMap();
+			mapResolved.put("publisher",publisher);
+			mapResolved.put("problemStatusName","已解决");
 			
-			Map mapLiuDaiJieJue = new HashMap();
-			mapLiuDaiJieJue.put("publisher",publisher);
-			mapLiuDaiJieJue.put("problemStatusName","留待解决");
+			Map mapWaitSolve = new HashMap();
+			mapWaitSolve.put("publisher",publisher);
+			mapWaitSolve.put("problemStatusName","留待解决");
 			
-			Map mapYiHuLve = new HashMap();
-			mapYiHuLve.put("publisher",publisher);
-			mapYiHuLve.put("problemStatusName","已忽略");
+			Map mapIgnored = new HashMap();
+			mapIgnored.put("publisher",publisher);
+			mapIgnored.put("problemStatusName","已忽略");
 			
-			Map mapYiGuanBi = new HashMap();
-			mapYiGuanBi.put("publisher",publisher);
-			mapYiGuanBi.put("problemStatusName","已关闭");
+			Map mapClosed = new HashMap();
+			mapClosed.put("publisher",publisher);
+			mapClosed.put("problemStatusName","已关闭");
 			
-		int XinJianCount=problemService.getStatusCount(mapXinJian);
-		int JinXingZhongCount=problemService.getStatusCount(mapJinXingZhong);	
-		int ChongXinOpenCount=problemService.getStatusCount(mapChongXinOpen);	
-		int YiJieJueCount=problemService.getStatusCount(mapYiJieJue);	
-		int LiuDaiJieJueCount=problemService.getStatusCount(mapLiuDaiJieJue);	
-		int YiHuLveCount=problemService.getStatusCount(mapYiHuLve);	
-		int YiGuanBiCount=problemService.getStatusCount(mapYiGuanBi);
-		int problemcount=problemService.getProblemCount(publisher);
+		int newBuildCount=problemService.getStatusCount(mapNewBuild);
+		int runningCount=problemService.getStatusCount(mapRunning);	
+		int reOpenCount=problemService.getStatusCount(mapReOpen);	
+		int resolvedCount=problemService.getStatusCount(mapResolved);	
+		int waitSolveCount=problemService.getStatusCount(mapWaitSolve);	
+		int ignoredCount=problemService.getStatusCount(mapIgnored);	
+		int closedCount=problemService.getStatusCount(mapClosed);
+		int problemCount=problemService.getProblemCount(publisher);
 		
-		Map mapTiJiaoXinJian = new HashMap();
-		mapTiJiaoXinJian.put("publisher",publisher);
-		mapTiJiaoXinJian.put("problemStatusName","新建");
+		Map mapSubmitNewBulid = new HashMap();
+		mapSubmitNewBulid.put("publisher",publisher);
+		mapSubmitNewBulid.put("problemStatusName","新建");
 		
-		Map mapTiJiaoJinXinZhong = new HashMap();
-		mapTiJiaoJinXinZhong.put("publisher",publisher);
-		mapTiJiaoJinXinZhong.put("problemStatusName","进行中");
+		Map mapSubmitRunning = new HashMap();
+		mapSubmitRunning.put("publisher",publisher);
+		mapSubmitRunning.put("problemStatusName","进行中");
 		
-		Map mapTiJiaoChongXinOpen = new HashMap();
-		mapTiJiaoChongXinOpen.put("publisher",publisher);
-		mapTiJiaoChongXinOpen.put("problemStatusName","重新打开");
+		Map mapSubmitReOpen = new HashMap();
+		mapSubmitReOpen.put("publisher",publisher);
+		mapSubmitReOpen.put("problemStatusName","重新打开");
 		
-		Map mapTiJiaoYiJieJue = new HashMap();
-		mapTiJiaoYiJieJue.put("publisher",publisher);
-		mapTiJiaoYiJieJue.put("problemStatusName","已解决");
-		int TiJiaoXinJianCount=problemService.getCountByUid(mapTiJiaoXinJian);
-		int TiJiaoJinXinZhongCount=problemService.getCountByUid(mapTiJiaoJinXinZhong);
-		int TiJiaoChongXinOpenCount=problemService.getCountByUid(mapTiJiaoChongXinOpen);
-		int TiJiaoYiJieJueCount=problemService.getCountByUid(mapTiJiaoYiJieJue);
+		Map mapSubmitResolved = new HashMap();
+		mapSubmitResolved.put("publisher",publisher);
+		mapSubmitResolved.put("problemStatusName","已解决");
+		int submitNewBuildCount=problemService.getCountByUid(mapSubmitNewBulid);
+		int submitRunningCount=problemService.getCountByUid(mapSubmitRunning);
+		int submitReOpenCount=problemService.getCountByUid(mapSubmitReOpen);
+		int submitResolvedCount=problemService.getCountByUid(mapSubmitResolved);
 		
 		
 		
 		
 		   
-		model.addAttribute("TiJiaoXinJianCount",TiJiaoXinJianCount);
-		model.addAttribute("TiJiaoJinXinZhongCount",TiJiaoJinXinZhongCount);
-		model.addAttribute("TiJiaoChongXinOpenCount",TiJiaoChongXinOpenCount);
-		model.addAttribute("TiJiaoYiJieJueCount",TiJiaoYiJieJueCount);
-		model.addAttribute("problemcount", problemcount);//每个人提交问题的全部数量
-		model.addAttribute("XinJianCount", XinJianCount);
-		model.addAttribute("JinXingZhongCount",JinXingZhongCount);
-		model.addAttribute("ChongXinOpenCount",ChongXinOpenCount);
-		model.addAttribute("YiJieJueCount", YiJieJueCount);
-		model.addAttribute("LiuDaiJieJueCount",LiuDaiJieJueCount);
-		model.addAttribute("YiHuLveCount", YiHuLveCount);
-		model.addAttribute("YiGuanBiCount",YiGuanBiCount);
+		model.addAttribute("submitNewBuildCount",submitNewBuildCount);
+		model.addAttribute("submitRunningCount",submitRunningCount);
+		model.addAttribute("submitReOpenCount",submitReOpenCount);
+		model.addAttribute("submitResolvedCount",submitResolvedCount);
+		model.addAttribute("problemCount", problemCount);//每个人提交问题的全部数量
+		model.addAttribute("newBuildCount", newBuildCount);
+		model.addAttribute("runningCount",runningCount);
+		model.addAttribute("reOpenCount",reOpenCount);
+		model.addAttribute("resolvedCount", resolvedCount);
+		model.addAttribute("waitSolveCount",waitSolveCount);
+		model.addAttribute("ignoredCount", ignoredCount);
+		model.addAttribute("closedCount",closedCount);
 		model.addAttribute("publisher", publisher);
 		
 		
@@ -535,79 +535,79 @@ int publisher = (int) currentUser.getId();
 
 
 
-Map mapXinJian = new HashMap();
-mapXinJian.put("publisher",publisher);
-mapXinJian.put("problemStatusName","新建");
+Map mapNewBuild = new HashMap();
+mapNewBuild.put("publisher",publisher);
+mapNewBuild.put("problemStatusName","新建");
 
-Map mapJinXingZhong = new HashMap();
-mapJinXingZhong.put("publisher",publisher);
-mapJinXingZhong.put("problemStatusName","进行中");
+Map mapRunning = new HashMap();
+mapRunning.put("publisher",publisher);
+mapRunning.put("problemStatusName","进行中");
 
-Map mapChongXinOpen = new HashMap();
-mapChongXinOpen.put("publisher",publisher);
-mapChongXinOpen.put("problemStatusName","重新打开");
+Map mapReOpen = new HashMap();
+mapReOpen.put("publisher",publisher);
+mapReOpen.put("problemStatusName","重新打开");
 
-Map mapYiJieJue = new HashMap();
-mapYiJieJue.put("publisher",publisher);
-mapYiJieJue.put("problemStatusName","已解决");
+Map mapResolved = new HashMap();
+mapResolved.put("publisher",publisher);
+mapResolved.put("problemStatusName","已解决");
 
-Map mapLiuDaiJieJue = new HashMap();
-mapLiuDaiJieJue.put("publisher",publisher);
-mapLiuDaiJieJue.put("problemStatusName","留待解决");
+Map mapWaitSolve = new HashMap();
+mapWaitSolve.put("publisher",publisher);
+mapWaitSolve.put("problemStatusName","留待解决");
 
-Map mapYiHuLve = new HashMap();
-mapYiHuLve.put("publisher",publisher);
-mapYiHuLve.put("problemStatusName","已忽略");
+Map mapIgnored = new HashMap();
+mapIgnored.put("publisher",publisher);
+mapIgnored.put("problemStatusName","已忽略");
 
-Map mapYiGuanBi = new HashMap();
-mapYiGuanBi.put("publisher",publisher);
-mapYiGuanBi.put("problemStatusName","已关闭");
+Map mapClosed = new HashMap();
+mapClosed.put("publisher",publisher);
+mapClosed.put("problemStatusName","已关闭");
 
-int XinJianCount=problemService.getStatusCount(mapXinJian);
-int JinXingZhongCount=problemService.getStatusCount(mapJinXingZhong);	
-int ChongXinOpenCount=problemService.getStatusCount(mapChongXinOpen);	
-int YiJieJueCount=problemService.getStatusCount(mapYiJieJue);	
-int LiuDaiJieJueCount=problemService.getStatusCount(mapLiuDaiJieJue);	
-int YiHuLveCount=problemService.getStatusCount(mapYiHuLve);	
-int YiGuanBiCount=problemService.getStatusCount(mapYiGuanBi);
-int problemcount=problemService.getProblemCount(publisher);
+int newBuildCount=problemService.getStatusCount(mapNewBuild);
+int runningCount=problemService.getStatusCount(mapRunning);	
+int reOpenCount=problemService.getStatusCount(mapReOpen);	
+int YiJieJueCount=problemService.getStatusCount(mapResolved);	
+int waitSolveCount=problemService.getStatusCount(mapWaitSolve);	
+int ignoredCount=problemService.getStatusCount(mapIgnored);	
+int closedCount=problemService.getStatusCount(mapClosed);
+int problemCount=problemService.getProblemCount(publisher);
 
-Map mapTiJiaoXinJian = new HashMap();
-mapTiJiaoXinJian.put("publisher",publisher);
-mapTiJiaoXinJian.put("problemStatusName","新建");
+Map mapSubmitNewBulid = new HashMap();
+mapSubmitNewBulid.put("publisher",publisher);
+mapSubmitNewBulid.put("problemStatusName","新建");
 
-Map mapTiJiaoJinXinZhong = new HashMap();
-mapTiJiaoJinXinZhong.put("publisher",publisher);
-mapTiJiaoJinXinZhong.put("problemStatusName","进行中");
+Map mapSubmitRunning = new HashMap();
+mapSubmitRunning.put("publisher",publisher);
+mapSubmitRunning.put("problemStatusName","进行中");
 
-Map mapTiJiaoChongXinOpen = new HashMap();
-mapTiJiaoChongXinOpen.put("publisher",publisher);
-mapTiJiaoChongXinOpen.put("problemStatusName","重新打开");
+Map mapSubmitReOpen = new HashMap();
+mapSubmitReOpen.put("publisher",publisher);
+mapSubmitReOpen.put("problemStatusName","重新打开");
 
-Map mapTiJiaoYiJieJue = new HashMap();
-mapTiJiaoYiJieJue.put("publisher",publisher);
-mapTiJiaoYiJieJue.put("problemStatusName","已解决");
-int TiJiaoXinJianCount=problemService.getCountByUid(mapTiJiaoXinJian);
-int TiJiaoJinXinZhongCount=problemService.getCountByUid(mapTiJiaoJinXinZhong);
-int TiJiaoChongXinOpenCount=problemService.getCountByUid(mapTiJiaoChongXinOpen);
-int TiJiaoYiJieJueCount=problemService.getCountByUid(mapTiJiaoYiJieJue);
-
-
+Map mapSubmitResolved = new HashMap();
+mapSubmitResolved.put("publisher",publisher);
+mapSubmitResolved.put("problemStatusName","已解决");
+int submitNewBuildCount=problemService.getCountByUid(mapSubmitNewBulid);
+int submitRunningCount=problemService.getCountByUid(mapSubmitRunning);
+int submitReOpenCount=problemService.getCountByUid(mapSubmitReOpen);
+int submitResolvedCount=problemService.getCountByUid(mapSubmitResolved);
 
 
 
-model.addAttribute("TiJiaoXinJianCount",TiJiaoXinJianCount);
-model.addAttribute("TiJiaoJinXinZhongCount",TiJiaoJinXinZhongCount);
-model.addAttribute("TiJiaoChongXinOpenCount",TiJiaoChongXinOpenCount);
-model.addAttribute("TiJiaoYiJieJueCount",TiJiaoYiJieJueCount);
-model.addAttribute("problemcount", problemcount);//每个人提交问题的全部数量
-model.addAttribute("XinJianCount", XinJianCount);
-model.addAttribute("JinXingZhongCount",JinXingZhongCount);
-model.addAttribute("ChongXinOpenCount",ChongXinOpenCount);
+
+
+model.addAttribute("submitNewBuildCount",submitNewBuildCount);
+model.addAttribute("submitRunningCount",submitRunningCount);
+model.addAttribute("submitReOpenCount",submitReOpenCount);
+model.addAttribute("submitResolvedCount",submitResolvedCount);
+model.addAttribute("problemCount", problemCount);//每个人提交问题的全部数量
+model.addAttribute("newBuildCount", newBuildCount);
+model.addAttribute("runningCount",runningCount);
+model.addAttribute("reOpenCount",reOpenCount);
 model.addAttribute("YiJieJueCount", YiJieJueCount);
-model.addAttribute("LiuDaiJieJueCount",LiuDaiJieJueCount);
-model.addAttribute("YiHuLveCount", YiHuLveCount);
-model.addAttribute("YiGuanBiCount",YiGuanBiCount);
+model.addAttribute("waitSolveCount",waitSolveCount);
+model.addAttribute("ignoredCount", ignoredCount);
+model.addAttribute("closedCount",closedCount);
 model.addAttribute("publisher", publisher);
 	    	
 	
