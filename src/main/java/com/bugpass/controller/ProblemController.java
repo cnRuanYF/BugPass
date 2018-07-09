@@ -46,13 +46,13 @@ public class ProblemController {
 		User currentUser = (User) session.getAttribute("currentUser");
 		int publisher = (int) currentUser.getId();
 
-		List<ProblemType> list=problemService.getAllType();
-		List<ProblemLevel> list2=problemService.getAllLevel();
-		List<ProblemStatus> list3=problemService.getAllStatus();
+		List<ProblemType> listType=problemService.getAllType();
+		List<ProblemLevel> listLevel=problemService.getAllLevel();
+		List<ProblemStatus> listStatus=problemService.getAllStatus();
 	
-		model.addAttribute("list", list);
-		model.addAttribute("list2", list2);
-		model.addAttribute("list3", list3);
+		model.addAttribute("listType", listType);
+		model.addAttribute("listLevel", listLevel);
+		model.addAttribute("listStatus", listStatus);
 		
 		model.addAttribute("publisher", publisher);
 		return "6";
@@ -91,96 +91,79 @@ public class ProblemController {
 
 		boolean flag=problemService.addProblem(map);
 		if(flag){
-			Map map1 = new HashMap();
-			map1.put("publisher",publisher);
-			map1.put("problemStatusName","新建");
+			Map mapXinJian = new HashMap();
+			mapXinJian.put("publisher",publisher);
+			mapXinJian.put("problemStatusName","新建");
 			
-			Map map2 = new HashMap();
-			map2.put("publisher",publisher);
-			map2.put("problemStatusName","进行中");
+			Map mapJinXingZhong = new HashMap();
+			mapJinXingZhong.put("publisher",publisher);
+			mapJinXingZhong.put("problemStatusName","进行中");
 			
-			Map map3 = new HashMap();
-			map3.put("publisher",publisher);
-			map3.put("problemStatusName","重新打开");
+			Map mapChongXinOpen = new HashMap();
+			mapChongXinOpen.put("publisher",publisher);
+			mapChongXinOpen.put("problemStatusName","重新打开");
 			
-			Map map4 = new HashMap();
-			map4.put("publisher",publisher);
-			map4.put("problemStatusName","已解决");
+			Map mapYiJieJue = new HashMap();
+			mapYiJieJue.put("publisher",publisher);
+			mapYiJieJue.put("problemStatusName","已解决");
 			
-			Map map5 = new HashMap();
-			map5.put("publisher",publisher);
-			map5.put("problemStatusName","留待解决");
+			Map mapLiuDaiJieJue = new HashMap();
+			mapLiuDaiJieJue.put("publisher",publisher);
+			mapLiuDaiJieJue.put("problemStatusName","留待解决");
 			
-			Map map6 = new HashMap();
-			map6.put("publisher",publisher);
-			map6.put("problemStatusName","已忽略");
+			Map mapYiHuLve = new HashMap();
+			mapYiHuLve.put("publisher",publisher);
+			mapYiHuLve.put("problemStatusName","已忽略");
 			
-			Map map7 = new HashMap();
-			map7.put("publisher",publisher);
-			map7.put("problemStatusName","已关闭");
+			Map mapYiGuanBi = new HashMap();
+			mapYiGuanBi.put("publisher",publisher);
+			mapYiGuanBi.put("problemStatusName","已关闭");
 			
-		int scount=problemService.getStatusCount(map1);
-		int scount2=problemService.getStatusCount(map2);	
-		int scount3=problemService.getStatusCount(map3);	
-		int scount4=problemService.getStatusCount(map4);	
-		int scount5=problemService.getStatusCount(map5);	
-		int scount6=problemService.getStatusCount(map6);	
-		int scount7=problemService.getStatusCount(map7);
-		int pcount=problemService.getProblemCount(publisher);
+		int XinJianCount=problemService.getStatusCount(mapXinJian);
+		int JinXingZhongCount=problemService.getStatusCount(mapJinXingZhong);	
+		int ChongXinOpenCount=problemService.getStatusCount(mapChongXinOpen);	
+		int YiJieJueCount=problemService.getStatusCount(mapYiJieJue);	
+		int LiuDaiJieJueCount=problemService.getStatusCount(mapLiuDaiJieJue);	
+		int YiHuLveCount=problemService.getStatusCount(mapYiHuLve);	
+		int YiGuanBiCount=problemService.getStatusCount(mapYiGuanBi);
+		int problemcount=problemService.getProblemCount(publisher);
 		
-		Map map8 = new HashMap();
-		map8.put("publisher",publisher);
-		map8.put("problemStatusName","新建");
+		Map mapTiJiaoXinJian = new HashMap();
+		mapTiJiaoXinJian.put("publisher",publisher);
+		mapTiJiaoXinJian.put("problemStatusName","新建");
 		
-		Map map9 = new HashMap();
-		map9.put("publisher",publisher);
-		map9.put("problemStatusName","进行中");
+		Map mapTiJiaoJinXinZhong = new HashMap();
+		mapTiJiaoJinXinZhong.put("publisher",publisher);
+		mapTiJiaoJinXinZhong.put("problemStatusName","进行中");
 		
-		Map map10 = new HashMap();
-		map10.put("publisher",publisher);
-		map10.put("problemStatusName","重新打开");
+		Map mapTiJiaoChongXinOpen = new HashMap();
+		mapTiJiaoChongXinOpen.put("publisher",publisher);
+		mapTiJiaoChongXinOpen.put("problemStatusName","重新打开");
 		
-		Map map11 = new HashMap();
-		map11.put("publisher",publisher);
-		map11.put("problemStatusName","已解决");
-		int countUid=problemService.getCountByUid(map8);
-		int countUid2=problemService.getCountByUid(map9);
-		int countUid3=problemService.getCountByUid(map10);
-		int countUid4=problemService.getCountByUid(map11);
-		
-		
-		Map map16 = new HashMap();
-		map16.put("publisher",publisher);
-		map16.put("problemStatusName","新建");
+		Map mapTiJiaoYiJieJue = new HashMap();
+		mapTiJiaoYiJieJue.put("publisher",publisher);
+		mapTiJiaoYiJieJue.put("problemStatusName","已解决");
+		int TiJiaoXinJianCount=problemService.getCountByUid(mapTiJiaoXinJian);
+		int TiJiaoJinXinZhongCount=problemService.getCountByUid(mapTiJiaoJinXinZhong);
+		int TiJiaoChongXinOpenCount=problemService.getCountByUid(mapTiJiaoChongXinOpen);
+		int TiJiaoYiJieJueCount=problemService.getCountByUid(mapTiJiaoYiJieJue);
 		
 		
-		Map map17 = new HashMap();
-		map17.put("publisher",publisher);
-		map17.put("problemStatusName","进行中");
 		
-		
-		Map map18 = new HashMap();
-		map18.put("publisher",publisher);
-		map18.put("problemStatusName","重新打开");
-		
-		
-		Map map19 = new HashMap();
-		map19.put("publisher",publisher);
-		map19.put("problemStatusName","已解决");
 		
 		   
-		model.addAttribute("countUid",countUid);
-		model.addAttribute("countUid2",countUid2);
-		model.addAttribute("countUid3",countUid3);
-		model.addAttribute("countUid4",countUid4);
-		model.addAttribute("pcount", pcount);
-		model.addAttribute("scount", scount);
-		model.addAttribute("scount2", scount2);
-		model.addAttribute("scount3", scount3);
-		model.addAttribute("scount4", scount4);
-		model.addAttribute("scount5", scount5);
-		model.addAttribute("scount6", scount6);
-		model.addAttribute("scount7", scount7);
+		model.addAttribute("TiJiaoXinJianCount",TiJiaoXinJianCount);
+		model.addAttribute("TiJiaoJinXinZhongCount",TiJiaoJinXinZhongCount);
+		model.addAttribute("TiJiaoChongXinOpenCount",TiJiaoChongXinOpenCount);
+		model.addAttribute("TiJiaoYiJieJueCount",TiJiaoYiJieJueCount);
+		model.addAttribute("problemcount", problemcount);//每个人提交问题的全部数量
+		model.addAttribute("XinJianCount", XinJianCount);
+		model.addAttribute("JinXingZhongCount",JinXingZhongCount);
+		model.addAttribute("ChongXinOpenCount",ChongXinOpenCount);
+		model.addAttribute("YiJieJueCount", YiJieJueCount);
+		model.addAttribute("LiuDaiJieJueCount",LiuDaiJieJueCount);
+		model.addAttribute("YiHuLveCount", YiHuLveCount);
+		model.addAttribute("YiGuanBiCount",YiGuanBiCount);
 		model.addAttribute("publisher", publisher);
 		
 		
@@ -207,12 +190,13 @@ public class ProblemController {
 	@RequestMapping(value= "/problem")
 	public String getProblemm(Model model,int publisher)
 	{
-		List<ProblemType> list=problemService.getAllType();
-		List<ProblemLevel> list2=problemService.getAllLevel();
-		List<ProblemStatus> list3=problemService.getAllStatus();
-		model.addAttribute("list", list);
-		model.addAttribute("list2", list2);
-		model.addAttribute("list3", list3);
+		List<ProblemType> listType=problemService.getAllType();
+		List<ProblemLevel> listLevel=problemService.getAllLevel();
+		List<ProblemStatus> listStatus=problemService.getAllStatus();
+	
+		model.addAttribute("listType", listType);
+		model.addAttribute("listLevel", listLevel);
+		model.addAttribute("listStatus", listStatus);
 		model.addAttribute("publisher", publisher);
 		return "2";
 	}
@@ -228,8 +212,8 @@ public class ProblemController {
 		
 		
 		
-		List<ProblemAll> all=problemService.getProblemAll(publisher);
-		model.addAttribute("all",all);
+		List<ProblemAll> allProblem=problemService.getProblemAll(publisher);
+		model.addAttribute("allProblem",allProblem);
 		model.addAttribute("publisher", publisher);
 		return "2";
 	}
@@ -309,8 +293,8 @@ public class ProblemController {
 		
 		
 		
-		List<ProblemAll> all=problemService.getProblemAll(publisher);
-		model.addAttribute("all",all);
+		List<ProblemAll> allProblem=problemService.getProblemAll(publisher);
+		model.addAttribute("allProblem",allProblem);
 		
 		model.addAttribute("publisher", publisher);
 		return "2";
@@ -331,8 +315,8 @@ public class ProblemController {
 		
 		
 		
-		List<ProblemAll> all=problemService.getProblemByStatus(map);
-		model.addAttribute("all",all);
+		List<ProblemAll> allProblem=problemService.getProblemByStatus(map);
+		model.addAttribute("allProblem",allProblem);
 		model.addAttribute("publisher", publisher);
 		return "2";
 	}
@@ -352,8 +336,8 @@ public class ProblemController {
 		map.put("publisher",publisher);
 		map.put("problemStatusName","进行中");
 		
-		List<ProblemAll> all=problemService.getProblemByStatus(map);
-		model.addAttribute("all",all);
+		List<ProblemAll> allProblem=problemService.getProblemByStatus(map);
+		model.addAttribute("allProblem",allProblem);
 		model.addAttribute("publisher", publisher);
 		return "2";
 	}
@@ -371,8 +355,8 @@ public class ProblemController {
 		map.put("publisher",publisher);
 		map.put("problemStatusName","重新打开");
 		
-		List<ProblemAll> all=problemService.getProblemByStatus(map);
-		model.addAttribute("all",all);
+		List<ProblemAll> allProblem=problemService.getProblemByStatus(map);
+		model.addAttribute("allProblem",allProblem);
 		model.addAttribute("publisher", publisher);
 		return "2";
 	}
@@ -390,8 +374,8 @@ public class ProblemController {
 		map.put("publisher",publisher);
 		map.put("problemStatusName","已解决");
 		
-		List<ProblemAll> all=problemService.getProblemByStatus(map);
-		model.addAttribute("all",all);
+		List<ProblemAll> allProblem=problemService.getProblemByStatus(map);
+		model.addAttribute("allProblem",allProblem);
 		model.addAttribute("publisher", publisher);
 		return "2";
 	}
@@ -409,8 +393,8 @@ public class ProblemController {
 		map.put("publisher",publisher);
 		map.put("problemStatusName","留待解决");
 		
-		List<ProblemAll> all=problemService.getProblemByStatus(map);
-		model.addAttribute("all",all);
+		List<ProblemAll> allProblem=problemService.getProblemByStatus(map);
+		model.addAttribute("allProblem",allProblem);
 		model.addAttribute("publisher", publisher);
 		return "2";
 	}
@@ -428,8 +412,8 @@ public class ProblemController {
 		map.put("publisher",publisher);
 		map.put("problemStatusName","已忽略");
 		
-		List<ProblemAll> all=problemService.getProblemByStatus(map);
-		model.addAttribute("all",all);
+		List<ProblemAll> allProblem=problemService.getProblemByStatus(map);
+		model.addAttribute("allProblem",allProblem);
 		model.addAttribute("publisher", publisher);
 		return "2";
 	}
@@ -447,8 +431,8 @@ public class ProblemController {
 		map.put("publisher",publisher);
 		map.put("problemStatusName","已关闭");
 		
-		List<ProblemAll> all=problemService.getProblemByStatus(map);
-		model.addAttribute("all",all);
+		List<ProblemAll> allProblem=problemService.getProblemByStatus(map);
+		model.addAttribute("allProblem",allProblem);
 		model.addAttribute("publisher", publisher);
 		return "2";
 	}
@@ -481,8 +465,8 @@ public class ProblemController {
 		Map map = new HashMap();
 		map.put("publisher",publisher);
 		map.put("problemStatusName","新建");
-		List<ProblemAll> all=problemService.getProblemByUid(map);
-		model.addAttribute("all",all);
+		List<ProblemAll> allProblem=problemService.getProblemByUid(map);
+		model.addAttribute("allProblem",allProblem);
 		model.addAttribute("publisher", publisher);
 		return "2";
 	}
@@ -497,8 +481,8 @@ public class ProblemController {
 		Map map = new HashMap();
 		map.put("publisher",publisher);
 		map.put("problemStatusName","进行中");
-		List<ProblemAll> all=problemService.getProblemByUid(map);
-		model.addAttribute("all",all);
+		List<ProblemAll> allProblem=problemService.getProblemByUid(map);
+		model.addAttribute("allProblem",allProblem);
 		model.addAttribute("publisher", publisher);
 		return "2";
 	}
@@ -513,8 +497,8 @@ public class ProblemController {
 		Map map = new HashMap();
 		map.put("publisher",publisher);
 		map.put("problemStatusName","重新打开");
-		List<ProblemAll> all=problemService.getProblemByUid(map);
-		model.addAttribute("all",all);
+		List<ProblemAll> allProblem=problemService.getProblemByUid(map);
+		model.addAttribute("allProblem",allProblem);
 		model.addAttribute("publisher", publisher);
 		return "2";
 	}
@@ -529,8 +513,8 @@ public class ProblemController {
 		Map map = new HashMap();
 		map.put("publisher",publisher);
 		map.put("problemStatusName","已解决");
-		List<ProblemAll> all=problemService.getProblemByUid(map);
-		model.addAttribute("all",all);
+		List<ProblemAll> allProblem=problemService.getProblemByUid(map);
+		model.addAttribute("allProblem",allProblem);
 		model.addAttribute("publisher", publisher);
 		return "2";
 	}
@@ -548,82 +532,83 @@ public class ProblemController {
 			User currentUser = (User) session.getAttribute("currentUser");
 int publisher = (int) currentUser.getId();
 
-			Map map1 = new HashMap();
-	    	map1.put("publisher",publisher);
-	    	map1.put("problemStatusName","新建");
-	    	
-	    	Map map2 = new HashMap();
-	    	map2.put("publisher",publisher);
-	    	map2.put("problemStatusName","进行中");
-	    	
-	    	Map map3 = new HashMap();
-	    	map3.put("publisher",publisher);
-	    	map3.put("problemStatusName","重新打开");
-	    	
-	    	Map map4 = new HashMap();
-	    	map4.put("publisher",publisher);
-	    	map4.put("problemStatusName","已解决");
-	    	
-	    	Map map5 = new HashMap();
-	    	map5.put("publisher",publisher);
-	    	map5.put("problemStatusName","留待解决");
-	    	
-	    	Map map6 = new HashMap();
-	    	map6.put("publisher",publisher);
-	    	map6.put("problemStatusName","已忽略");
-	    	
-	    	Map map7 = new HashMap();
-	    	map7.put("publisher",publisher);
-	    	map7.put("problemStatusName","已关闭");
-	    	
-	    int scount=problemService.getStatusCount(map1);
-	    int scount2=problemService.getStatusCount(map2);	
-	    int scount3=problemService.getStatusCount(map3);	
-	    int scount4=problemService.getStatusCount(map4);	
-	    int scount5=problemService.getStatusCount(map5);	
-	    int scount6=problemService.getStatusCount(map6);	
-	    int scount7=problemService.getStatusCount(map7);
-	    	int pcount=problemService.getProblemCount(publisher);
-	    	model.addAttribute("pcount", pcount);
-	    	model.addAttribute("scount", scount);
-	    	model.addAttribute("scount2", scount2);
-	    	model.addAttribute("scount3", scount3);
-	    	model.addAttribute("scount4", scount4);
-	    	model.addAttribute("scount5", scount5);
-	    	model.addAttribute("scount6", scount6);
-	    	model.addAttribute("scount7", scount7);
-	    	
-	    	model.addAttribute("publisher",publisher);
-	    	
-	    	Map map8 = new HashMap();
-	    	map8.put("publisher",publisher);
-	    	map8.put("problemStatusName","新建");
-	    	
-	    	Map map9 = new HashMap();
-	    	map9.put("publisher",publisher);
-	    	map9.put("problemStatusName","进行中");
-	    	
-	    	Map map10 = new HashMap();
-	    	map10.put("publisher",publisher);
-	    	map10.put("problemStatusName","重新打开");
-	    	
-	    	Map map11 = new HashMap();
-	    	map11.put("publisher",publisher);
-	    	map11.put("problemStatusName","已解决");
-	    	int countUid=problemService.getCountByUid(map8);
-	    	int countUid2=problemService.getCountByUid(map9);
-	    	int countUid3=problemService.getCountByUid(map10);
-	    	int countUid4=problemService.getCountByUid(map11);
-	    	
-	    	
-	    	
-	    	
-	    	   
-	    	model.addAttribute("countUid",countUid);
-	    	model.addAttribute("countUid2",countUid2);
-	    	model.addAttribute("countUid3",countUid3);
-	    	model.addAttribute("countUid4",countUid4);
-	    	model.addAttribute("publisher",publisher);
+
+
+
+Map mapXinJian = new HashMap();
+mapXinJian.put("publisher",publisher);
+mapXinJian.put("problemStatusName","新建");
+
+Map mapJinXingZhong = new HashMap();
+mapJinXingZhong.put("publisher",publisher);
+mapJinXingZhong.put("problemStatusName","进行中");
+
+Map mapChongXinOpen = new HashMap();
+mapChongXinOpen.put("publisher",publisher);
+mapChongXinOpen.put("problemStatusName","重新打开");
+
+Map mapYiJieJue = new HashMap();
+mapYiJieJue.put("publisher",publisher);
+mapYiJieJue.put("problemStatusName","已解决");
+
+Map mapLiuDaiJieJue = new HashMap();
+mapLiuDaiJieJue.put("publisher",publisher);
+mapLiuDaiJieJue.put("problemStatusName","留待解决");
+
+Map mapYiHuLve = new HashMap();
+mapYiHuLve.put("publisher",publisher);
+mapYiHuLve.put("problemStatusName","已忽略");
+
+Map mapYiGuanBi = new HashMap();
+mapYiGuanBi.put("publisher",publisher);
+mapYiGuanBi.put("problemStatusName","已关闭");
+
+int XinJianCount=problemService.getStatusCount(mapXinJian);
+int JinXingZhongCount=problemService.getStatusCount(mapJinXingZhong);	
+int ChongXinOpenCount=problemService.getStatusCount(mapChongXinOpen);	
+int YiJieJueCount=problemService.getStatusCount(mapYiJieJue);	
+int LiuDaiJieJueCount=problemService.getStatusCount(mapLiuDaiJieJue);	
+int YiHuLveCount=problemService.getStatusCount(mapYiHuLve);	
+int YiGuanBiCount=problemService.getStatusCount(mapYiGuanBi);
+int problemcount=problemService.getProblemCount(publisher);
+
+Map mapTiJiaoXinJian = new HashMap();
+mapTiJiaoXinJian.put("publisher",publisher);
+mapTiJiaoXinJian.put("problemStatusName","新建");
+
+Map mapTiJiaoJinXinZhong = new HashMap();
+mapTiJiaoJinXinZhong.put("publisher",publisher);
+mapTiJiaoJinXinZhong.put("problemStatusName","进行中");
+
+Map mapTiJiaoChongXinOpen = new HashMap();
+mapTiJiaoChongXinOpen.put("publisher",publisher);
+mapTiJiaoChongXinOpen.put("problemStatusName","重新打开");
+
+Map mapTiJiaoYiJieJue = new HashMap();
+mapTiJiaoYiJieJue.put("publisher",publisher);
+mapTiJiaoYiJieJue.put("problemStatusName","已解决");
+int TiJiaoXinJianCount=problemService.getCountByUid(mapTiJiaoXinJian);
+int TiJiaoJinXinZhongCount=problemService.getCountByUid(mapTiJiaoJinXinZhong);
+int TiJiaoChongXinOpenCount=problemService.getCountByUid(mapTiJiaoChongXinOpen);
+int TiJiaoYiJieJueCount=problemService.getCountByUid(mapTiJiaoYiJieJue);
+
+
+
+
+
+model.addAttribute("TiJiaoXinJianCount",TiJiaoXinJianCount);
+model.addAttribute("TiJiaoJinXinZhongCount",TiJiaoJinXinZhongCount);
+model.addAttribute("TiJiaoChongXinOpenCount",TiJiaoChongXinOpenCount);
+model.addAttribute("TiJiaoYiJieJueCount",TiJiaoYiJieJueCount);
+model.addAttribute("problemcount", problemcount);//每个人提交问题的全部数量
+model.addAttribute("XinJianCount", XinJianCount);
+model.addAttribute("JinXingZhongCount",JinXingZhongCount);
+model.addAttribute("ChongXinOpenCount",ChongXinOpenCount);
+model.addAttribute("YiJieJueCount", YiJieJueCount);
+model.addAttribute("LiuDaiJieJueCount",LiuDaiJieJueCount);
+model.addAttribute("YiHuLveCount", YiHuLveCount);
+model.addAttribute("YiGuanBiCount",YiGuanBiCount);
+model.addAttribute("publisher", publisher);
 	    	
 	
 	    return PageConst.PAGE_PROJECT_SUMMARY;
