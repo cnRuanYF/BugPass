@@ -28,6 +28,11 @@ public class PageConst {
     // 成员
     public static final String PAGE_MEMBER_MANAGE = "project_member";
 
+    // 问题相关
+    public static final String PAGE_PROBLEM_LIST = "problem_list";
+    public static final String PAGE_PROBLEM_ADD = "problem_add";
+    public static final String PAGE_PROBLEM_SHOW = "problem_show";
+
     // 个人中心相关
     public static final String PAGE_USER_PROFILE = "user_profile";
     public static final String PAGE_USER_CHANGE_PASSWORD = "user_change_password";
@@ -50,6 +55,7 @@ public class PageConst {
     public static final String CTRL_PROJECT_DELETE = "project/delete/{id}"; // TODO 未接入/未测试的功能
 
     // 模块管理
+    public static final String API_MODULE = "api/module/{id}";
     public static final String CTRL_MODULE = "module";
     public static final String CTRL_MODULE_ADD = "module/add";
     public static final String CTRL_MODULE_DELETE = "module/delete/{id}";
@@ -61,7 +67,12 @@ public class PageConst {
     public static final String CTRL_VERSION_DELETE = "version/delete/{id}";
     public static final String CTRL_VERSION_UPDATE = "version/update";
 
-    // TODO 成员管理待优化
+    // TODO 待优化: 成员管理控制器地址转常量
+
+    // 问题相关
+    public static final String CTRL_PROBLEM_LIST = "problem";
+    public static final String CTRL_PROBLEM_ADD = "problem/add";
+    public static final String CTRL_PROBLEM_SHOW = "problem/{id}";
 
     // 个人中心相关
     public static final String CTRL_USER_PROFILE = "user/updateProfile";
