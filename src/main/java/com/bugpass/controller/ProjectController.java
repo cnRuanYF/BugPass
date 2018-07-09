@@ -155,11 +155,13 @@ public class ProjectController {
     /**
      * 项目信息(设置) - 删除
      */
-    @RequestMapping(value = CTRL_PROJECT_DELETE, method = RequestMethod.DELETE)
-    public String deleteProject(@PathVariable(value = "id") long id) {
-        boolean flag = projectService.delProjectById(id);
-        return "";
+    @RequestMapping(value = CTRL_PROJECT_DELETE, method = RequestMethod.GET)
+    public String deleteProject(@PathVariable(value = "id") long id, HttpSession session) {
+        projectService.delProjectById(id);
+        session.removeAttribute(ATTRIB_CURRENT_PROJECT);
+        return redirect(PAGE_INDEX);
     }
+
     
 //    /**
 //     * 根据项目ID查询一条记录
