@@ -20,7 +20,7 @@ public class StatisticsController {
 	//转发至Statistics_info页面
 	@RequestMapping(value="/statistics",method=RequestMethod.GET)
 	public String getBugNumberByProjectName(Model model) {
-		List<Statistics> list=statisticsService.returnQueryProjectBugsByname("疯");
+		List<Statistics> list=statisticsService.returnQueryALLProjcetBugs();
 		model.addAttribute("statistics", list);
 		System.out.println(list);//测试
 		return "Statistics_info";

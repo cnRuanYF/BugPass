@@ -6,7 +6,7 @@ import com.bugpass.entity.Statistics;
 
 public interface StatisticsService {
 	
-//	List<Statistics> returnQueryALLProjcetBugs();
+	List<Statistics> returnQueryALLProjcetBugs();
 
 	List<Statistics> returnQueryProjectBugsByname(String projectName);
 }

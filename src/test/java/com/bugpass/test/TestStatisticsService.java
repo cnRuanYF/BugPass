@@ -28,8 +28,8 @@ public class TestStatisticsService {
 	//测试service
 	@Test
 	public void getStatistics() {
-		List<Statistics> list=statisticsService.returnQueryProjectBugsByname("疯");
-		list.forEach(System.out::println);
+		List<Statistics> list=statisticsService.returnQueryALLProjcetBugs();
+//		list.forEach(System.out::println);
 	}
 
 }

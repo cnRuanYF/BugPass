@@ -15,7 +15,7 @@ import com.bugpass.entity.Statistics;
 @Repository(value="statisticsDao")
 public interface StatisticsDAO {
 	
-//	List<Statistics> queryALLProjcetBugs();
+	List<Statistics> queryALLProjcetBugs();
 	
 	List<Statistics> queryProjectBugsByname(String projectName);
 }
