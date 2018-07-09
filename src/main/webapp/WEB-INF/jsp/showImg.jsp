@@ -8,21 +8,22 @@
 <title>Insert title here</title>
 </head>
 <body>
-    <table border="2px" cellpadding="0" cellspacing="0">
+    <table border="1px" cellpadding="0" cellspacing="0">
     <tr>
-        <th>序号</th>
-    	<th>图片</th>
-    	<th>uri</th>
+        <th>问题Id</th>
+    	<th>图片索引</th>
+    	<th>类型type</th>
+    	<th>img</th>
+    	<th>地址</th>
     	
     </tr>
-    <c:forEach items="${imglist}" var="imgs" varStatus="num">
+    <c:forEach items="${imglist}" var="img" >
    <tr>
-       <td>${num.count}</td>
-       <td>${imgs.problem_id}</td>
-       <td>  <img alt="" src="${imgs.attach_path }"></td>
-       <td>${imgs.attach_type}</td>
-       <td>${imgs.attach_index}</td>
-       
+       <td>${img.problemId}</td>
+       <td>${img.attachIndex}</td>
+       <td>${img.attachType}</td>
+       <td>  <img alt="" src="${img.attachPath }" height="200" width="200"></td>
+        <td>${img.attachPath}</td>
      </tr>
     </c:forEach>
     </table>

@@ -57,7 +57,7 @@ public class TestProblemAttachmentDao {
      */
     @Test
     public void testQueryById() {
-         ProblemAttachment problemAttachment = problemAttachmentDao.queryProblemAttachmentByProblemIdAndAttachIndex(1,2);
+         ProblemAttachment problemAttachment = problemAttachmentDao.queryProblemAttachmentByProblemIdAndAttachIndex(4,1);
         System.out.println(problemAttachment);
     }
 
@@ -133,47 +133,9 @@ public class TestProblemAttachmentDao {
         }
     }
     
-    /**
-     * 更新
-     */
-    @Test
-    public void testUpdate() {
-        Module obj = new Module();
-        obj.setModuleId(5);
-        obj.setModuleName("test2");
-        obj.setProjectId(1);
-        boolean flag = moduleDao.update(obj);
-        if(flag) {
-            System.out.println("成功");
-        }else {
-            System.out.println("失败");
-        }
-    }
+    
     /**************************************业务测试**********************************************/
     
-    /**
-     * 更新
-     */
-    @Test
-    public void testUpdateInService() {
-        Module module=new Module();
-        module.setModuleId(5);
-        module.setModuleName("testxxx");
-        module.setProjectId(1);
-        boolean flag = moduleService.udpModuleById(module);
-        if(flag) {
-            System.out.println("成功");
-        }else {
-            System.out.println("失败");
-        }
-    }
-    /**
-     * 查询单个记录
-     */
-    @Test
-    public void testQueryByIdInService() {
-        Module module = moduleService.findByModuleId(1);
-        System.out.println(module);
-    }
+ 
     
 }
