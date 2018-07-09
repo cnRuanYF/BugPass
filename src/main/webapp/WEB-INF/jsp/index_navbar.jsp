@@ -1,5 +1,5 @@
 <!--导航栏-->
-<header class="navbar navbar-expand-md navbar-light">
+<header class="navbar navbar-expand-sm navbar-light">
     <div class="container">
         <div class="navbar-brand">
             <h3 class="mt-1 mb-1"><i class="fa fa-bug mr-2"></i></h3>

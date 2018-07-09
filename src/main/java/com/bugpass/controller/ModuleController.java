@@ -79,11 +79,12 @@ public class ModuleController {
     }
 
     /**
-     * [RESTful] 删除模块
+     * [RESTful] 删除模块API
      */
-    @RequestMapping(value = "api/module/{moduleId}", method = RequestMethod.DELETE)
+    @RequestMapping(value = API_MODULE, method = RequestMethod.DELETE)
     @ResponseBody
-    public boolean restDeleteModule(@PathVariable("moduleId") long moduleId) {
+    public boolean restDeleteModule(@PathVariable("id") long moduleId) {
+        // TODO 权限验证
         return moduleService.delModuleById(moduleId);
     }
 

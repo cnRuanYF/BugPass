@@ -11,7 +11,9 @@
     <div class="container">
         <div class="navbar-brand">
             <h3 class="mt-1 mb-1">
-                <i class="fa fa-bug mr-2"></i>BugPass
+                <a href="index" style="color:#FFF;text-decoration:none">
+                    <i class="fa fa-bug mr-2"></i>BugPass
+                </a>
             </h3>
         </div>
         <button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -57,7 +59,7 @@
                 <c:if test="${currentProject != null}">
                     <li class="nav-item">
                         <a class="nav-link ${navItem == 'summary' ? 'active' : ''}" href="project/summary">
-                            <i class="fas fa-fw fa-th-list mr-1"></i>概述
+                            <i class="far fa-fw fa-file-alt mr-1"></i>概述
                         </a>
                     </li>
                     <li class="nav-item">
@@ -179,24 +181,35 @@
     </div>
 </div>
 
+<!--新建问题按钮-->
 <c:if test="${currentProject != null}">
-    <!--新建问题按钮-->
     <style>
-        #btnAddProblem {
-            position: fixed;
-            top: 25%;
-            right: -48px;
-            width: 96px;
-            height: 96px;
-            border-radius: 48px 48px 0 0;
-            z-index: 9;
-            transform: rotate(-90deg);
-            transition: right .2s, padding-top .2s;
+        @media (max-width: 1400px) {
+            #btnAddProblem {
+                position: fixed;
+                top: 25%;
+                right: -48px;
+                width: 96px;
+                height: 96px;
+                border-radius: 48px 48px 0 0;
+                z-index: 9;
+                transform: rotate(-90deg);
+                transition: all .2s;
+            }
+
+            #btnAddProblem:hover {
+                right: -32px;
+                padding-top: 1em;
+            }
         }
 
-        #btnAddProblem:hover {
-            right: -32px;
-            padding-top: 1em;
+        @media (min-width: 1400px) {
+            #btnAddProblem {
+                position: fixed;
+                top: 96px;
+                left: calc(50% + 580px);
+                transition: all .2s;
+            }
         }
     </style>
     <a id="btnAddProblem" class="btn btn-lg btn-success" href="problem/add" data-toggle="tooltip" data-placement="left"

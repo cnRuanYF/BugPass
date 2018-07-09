@@ -95,11 +95,11 @@
                 <div class="card-header">
                     <ul class="nav nav-tabs card-header-tabs">
                         <li class="nav-item">
-                            <a class="nav-link active" data-toggle="tab" href="#my-assign-content" role="tab"
+                            <a class="nav-link" data-toggle="tab" href="#my-assign-content" role="tab"
                                aria-controls="home" aria-selected="true">指派给我的</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#my-submit-content" role="tab"
+                            <a class="nav-link active" data-toggle="tab" href="#my-submit-content" role="tab"
                                aria-controls="profile" aria-selected="false">我提交的</a>
                         </li>
                         <li class="nav-item">
@@ -111,43 +111,43 @@
                 <div class="card-body">
                     <div class="tab-content">
                         <!--指派给我的-->
-                        <div class="tab-pane fade show active" id="my-assign-content" role="tabpanel">
+                        <div class="tab-pane fade" id="my-assign-content" role="tabpanel">
                             <div class="row">
                                 <div class="col-6 col-lg-3 mb-4">
-                                    <a href="#" style="text-decoration:none">
+                                    <a href="javascript:layer.msg('TODO',{icon: 0})" style="text-decoration:none">
                                         <div class="card border-0">
                                             <div class="card-body btn btn-outline-primary p-2">
-                                                <h1 class="mb-0">N</h1>
+                                                <h1 class="mb-0">M</h1>
                                                 打开
                                             </div>
                                         </div>
                                     </a>
                                 </div>
                                 <div class="col-6 col-lg-3 mb-4">
-                                    <a href="getstatusbypublisher?publisher=${publisher}" style="text-decoration:none">
+                                    <a href="javascript:layer.msg('TODO',{icon: 0})" style="text-decoration:none">
                                         <div class="card border-0">
                                             <div class="card-body btn btn-outline-danger p-2">
-                                                <h1 class="mb-0">${countUid}</h1>
+                                                <h1 class="mb-0">N</h1>
                                                 新问题
                                             </div>
                                         </div>
                                     </a>
                                 </div>
                                 <div class="col-6 col-lg-3 mb-4">
-                                    <a href="getstatusbypublisher2?publisher=${publisher}" style="text-decoration:none">
+                                    <a href="javascript:layer.msg('TODO',{icon: 0})" style="text-decoration:none">
                                         <div class="card border-0">
                                             <div class="card-body btn btn-outline-info p-2">
-                                                <h1 class="mb-0">${countUid2}</h1>
+                                                <h1 class="mb-0">X</h1>
                                                 进行中
                                             </div>
                                         </div>
                                     </a>
                                 </div>
                                 <div class="col-6 col-lg-3 mb-4">
-                                    <a href="getstatusbypublisher4?publisher=${publisher}" style="text-decoration:none">
+                                    <a href="javascript:layer.msg('TODO',{icon: 0})" style="text-decoration:none">
                                         <div class="card border-0">
                                             <div class="card-body btn btn-outline-success p-2">
-                                                <h1 class="mb-0">${countUid4}</h1>
+                                                <h1 class="mb-0">Y</h1>
                                                 已解决
                                             </div>
                                         </div>
@@ -155,7 +155,8 @@
                                 </div>
                             </div>
                             <h5>最近指派给我的
-                                <a class="small float-right" href="javascript:layer.msg('TODO',{icon: 0})">
+                                <a class="small float-right" href="javascript:layer.msg('TODO',{icon: 0})"
+                                   style="text-decoration:none">
                                     <i class="far fa-eye mr-1"></i>查看全部
                                 </a>
                             </h5>
@@ -163,18 +164,18 @@
                             <div class="list-group list-group-flush">
                                 <a class="list-group-item list-group-item-action border-0"
                                    href="javascript:layer.msg('TODO',{icon: 0})">
-                                    TEST DATA A
-                                    <small class="float-right">1999-6-18</small>
+                                    最近指派给我的问题 TEST DATA A
+                                    <small class="float-right">2018-6-18</small>
                                 </a>
                                 <a class="list-group-item list-group-item-action border-0"
                                    href="javascript:layer.msg('TODO',{icon: 0})">
-                                    PLACEHOLDER B
-                                    <small class="float-right">2018-6-6</small>
+                                    最近指派给我的问题 PLACEHOLDER B
+                                    <small class="float-right">2017-9-11</small>
                                 </a>
                                 <a class="list-group-item list-group-item-action border-0"
                                    href="javascript:layer.msg('TODO',{icon: 0})">
-                                    Foobar
-                                    <small class="float-right">2000</small>
+                                    最近指派给我的问题 Foobar C
+                                    <small class="float-right">2011-11-11</small>
                                 </a>
                                 <c:forEach items="${mxxxxxxxxxxxxxxxxxxxxxxxList}" var="prob">
                                     <a class="list-group-item list-group-item-action border-0"
@@ -186,12 +187,86 @@
                             </div>
                         </div>
                         <!--我提交的-->
-                        <div class="tab-pane fade" id="my-submit-content" role="tabpanel">
-                            我提交的
+                        <div class="tab-pane fade show active" id="my-submit-content" role="tabpanel">
+                            <div class="row">
+                                <div class="col-6 col-lg-3 mb-4">
+                                    <a href="javascript:layer.msg('TODO',{icon: 0})" style="text-decoration:none">
+                                        <div class="card border-0">
+                                            <div class="card-body btn btn-outline-primary p-2">
+                                                <h1 class="mb-0">M</h1>
+                                                打开
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="col-6 col-lg-3 mb-4">
+                                    <a href="getstatusbypublisher?publisher=${publisher}" style="text-decoration:none">
+                                        <div class="card border-0">
+                                            <div class="card-body btn btn-outline-danger p-2">
+                                                <h1 class="mb-0">${submitNewBuildCount}</h1>
+                                                新问题
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="col-6 col-lg-3 mb-4">
+                                    <a href="getstatusbypublisher2?publisher=${publisher}" style="text-decoration:none">
+                                        <div class="card border-0">
+                                            <div class="card-body btn btn-outline-info p-2">
+                                                <h1 class="mb-0">${submitRunningCount}</h1>
+                                                进行中
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="col-6 col-lg-3 mb-4">
+                                    <a href="getstatusbypublisher4?publisher=${publisher}" style="text-decoration:none">
+                                        <div class="card border-0">
+                                            <div class="card-body btn btn-outline-success p-2">
+                                                <h1 class="mb-0">${submitResolvedCount}</h1>
+                                                已解决
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <h5>最近提交的
+                                <a class="small float-right" href="javascript:layer.msg('TODO',{icon: 0})"
+                                   style="text-decoration:none">
+                                    <i class="far fa-eye mr-1"></i>查看全部
+                                </a>
+                            </h5>
+                            <div class="dropdown-divider"></div>
+                            <div class="list-group list-group-flush">
+                                <a class="list-group-item list-group-item-action border-0"
+                                   href="javascript:layer.msg('TODO',{icon: 0})">
+                                    最近提交的 TEST DATA A
+                                    <small class="float-right">2017-2-14</small>
+                                </a>
+                                <a class="list-group-item list-group-item-action border-0"
+                                   href="javascript:layer.msg('TODO',{icon: 0})">
+                                    最近提交的 PLACEHOLDER B
+                                    <small class="float-right">2016-6-18</small>
+                                </a>
+                                <a class="list-group-item list-group-item-action border-0"
+                                   href="javascript:layer.msg('TODO',{icon: 0})">
+                                    最近提交的 Foobar C
+                                    <small class="float-right">2008-8-8</small>
+                                </a>
+                                <c:forEach items="${mxxxxxxxxxxxxxxxxxxxxxxxList}" var="prob">
+                                    <a class="list-group-item list-group-item-action border-0"
+                                       href="javascript:layer.msg('TODO',{icon: 0})">
+                                            ${prob.problemTitle}
+                                        <small class="float-right">${prob.problemTitle}???</small>
+                                    </a>
+                                </c:forEach>
+                            </div>
                         </div>
                         <!--我跟踪的-->
                         <div class="tab-pane fade" id="my-track-content" role="tabpanel">
-                            我跟踪的
+                            <h1 class="mt-5 mb-5 text-secondary text-center">
+                                <i class="fa fa-snowflake fa-spin mr-3"></i>功能正在开花中
+                            </h1>
                         </div>
                     </div>
                 </div>

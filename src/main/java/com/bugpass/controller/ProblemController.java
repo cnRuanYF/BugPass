@@ -1,62 +1,46 @@
 package com.bugpass.controller;
-
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-
-
 import com.bugpass.constant.PageConst;
 import com.bugpass.entity.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-
 import com.bugpass.service.ProblemService;
+import org.springframework.web.bind.annotation.RequestMethod;
 
-
-
+import  static  com.bugpass.constant.PageConst.*;
 
 /**
  * 处理问题相关操作的Controller
- * @author xhh
- *
+ * @author xhh, RuanYaofeng
  */
 
 @Controller
 public class ProblemController {
-	
-	@Resource
-	private ProblemService problemService;
-	/**
-	 * 跳转到新建问题界面并显示问题的所有类型，所有级别，以及所有状态
-	 * @param model
-	 * @param publisher
-	 * @return
-	 * TODO Editing by RuanYaofeng
-	 */
-	@RequestMapping(value= "problem/add")
-	public String getProblem(Model model,HttpSession session)
-	{
-		User currentUser = (User) session.getAttribute("currentUser");
-		int publisher = (int) currentUser.getId();
 
-		List<ProblemType> listType=problemService.getAllType();
-		List<ProblemLevel> listLevel=problemService.getAllLevel();
-		List<ProblemStatus> listStatus=problemService.getAllStatus();
-	
-		model.addAttribute("listType", listType);
-		model.addAttribute("listLevel", listLevel);
-		model.addAttribute("listStatus", listStatus);
-		
-		model.addAttribute("publisher", publisher);
-		return "6";
-	}
+    @Autowired
+    private ProblemService problemService;
+
+    /**
+     * 跳转到新建问题界面
+     * Rewrited by RuanYaofeng
+     */
+    @RequestMapping(value = CTRL_PROBLEM_ADD, method = RequestMethod.GET)
+    public String showAddProblem(Model model) {
+        // 获取问题的所有类型，所有级别
+        List<ProblemType> problemTypeList = problemService.getAllType();
+        List<ProblemLevel> problemLevelList = problemService.getAllLevel();
+
+        model.addAttribute("problemTypeList", problemTypeList);
+        model.addAttribute("problemLevelList", problemLevelList);
+
+        return PAGE_PROBLEM_ADD;
+    }
 	
 
 	/**

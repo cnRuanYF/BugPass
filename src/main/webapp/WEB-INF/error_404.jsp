@@ -21,7 +21,9 @@
     <div class="container">
         <div class="navbar-brand">
             <h3 class="mt-1 mb-1">
-                <i class="fa fa-bug mr-2"></i>BugPass
+                <a href="index" style="text-decoration:none">
+                    <i class="fa fa-bug mr-2"></i>BugPass
+                </a>
             </h3>
         </div>
         <a class="btn btn-outline-primary" href="index">返回首页</a>

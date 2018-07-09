@@ -25,6 +25,8 @@ import com.bugpass.entity.User;
 import com.bugpass.service.MemberService;
 import com.bugpass.service.UserService;
 
+import static com.bugpass.constant.PageConst.*;
+
 /**
  * 处理成员相关操作的Controller
  *
@@ -116,7 +118,7 @@ public class MemberController {
         model.addAttribute("memberList", memberService.memberForProject(list));
         model.addAttribute("unconfirmList", memberService.unconfirmForProject(list));
 
-        return "project_member";
+        return PAGE_MEMBER_MANAGE;
     }
 
     /**
