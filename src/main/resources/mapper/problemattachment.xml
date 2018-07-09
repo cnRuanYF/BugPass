@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!-- 映射文件 有一个 namespace -->
+<mapper namespace="com.bugpass.dao.ProblemAttachmentDao">
+	<!-- 根据问题id查找对应的文件返回list -->
+	<select id="queryAllProblemAttachmentByProblemId" resultMap="problemAttachmentMap">
+		SELECT
+			problem_id,attach_index,attach_type,attach_path
+		FROM
+			problem_attachment
+		WHERE 
+			problem_id=#{problemId}
+	</select>
+	
+	<!-- 查询所有文件 -->
+	<select id="queryAll" resultMap="problemAttachmentMap">
+		SELECT
+			*
+		FROM
+			problem_attachment
+	</select>
+	<!-- 根据问题的id和文件索引查询文件 -->
+	<select id="queryProblemAttachmentByProblemIdAndAttachIndex" resultMap="problemAttachmentMap">
+		SELECT
+			problem_id,attach_index,attach_type,attach_path
+		FROM
+			problem_attachment
+		WHERE 
+			problem_id = #{problemId}
+			And attach_index=#{attachIndex}
+	</select>
+
+	<!-- 插入 parameterType="com.bugpass.entity.ProblemAttachment"-->
+	<insert id="addProblemAttachment2" parameterType="java.util.Map">
+		insert 
+			into 
+				problem_attachment (problem_id, attach_index, attach_type,attach_path)
+			VALUES
+				 (#{problem_id},#{attach_index},#{attach_type},#{attach_path})
+	</insert>
+	<!-- 插入2 parameterType="com.bugpass.entity.ProblemAttachment"-->
+	<insert id="addProblemAttachment" parameterType="com.bugpass.entity.ProblemAttachment">
+		insert 
+			into 
+				problem_attachment (problem_id, attach_index, attach_type,attach_path)
+			VALUES
+				 (#{problemId},#{attachIndex},#{attachType},#{attachPath})
+	</insert>
+	<!-- 删除  resultMap="problemAttachmentMap"-->
+	<delete id="deleteAttachmentByProblemIdAndAttachIndex" >
+		 DELETE FROM
+            problem_attachment
+        WHERE
+            problem_id = #{problemId}
+            AND attach_index = #{attachIndex}
+	</delete>
+	
+	<!-- 删除2  -->
+	<delete id="deleteProblemAttachment" parameterType="com.bugpass.entity.ProblemAttachment">
+		 DELETE FROM
+            problem_attachment
+        WHERE
+            problem_id = #{problem_id}
+            AND attach_index = #{attach_index}
+	</delete>
+	
+	
+	<!-- 更新 -->
+	<update id="update">
+		update module
+		<set>
+			<if test="moduleName != null">module_name=#{moduleName},</if>
+		</set>
+		where module_id=#{moduleId}
+	</update>
+	
+	<!-- 查询结果映射 -->
+	<resultMap type="com.bugpass.entity.ProblemAttachment" id="problemAttachmentMap">
+		<!-- property=实体类属性名，column=表中列名 -->
+		<id property="id" column="id"/>
+		<result property="problemId" column="problem_id" />
+		<result property="attachIndex" column="attach_index" />
+		<result property="attachType" column="attach_type" />
+		<result property="attachPath" column="attach_path" />
+	</resultMap>
+
+	
+	<!-- 加入一个二级缓存的最简单的配置 -->
+	<cache>
+	
+	</cache>
+</mapper>
