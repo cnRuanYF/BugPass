@@ -1,12 +1,17 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                             http://maven.apache.org/maven-v4_0_0.xsd">
+
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.bugpass</groupId>
     <artifactId>BugPass</artifactId>
     <packaging>war</packaging>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.2-SNAPSHOT</version>
     <name>BugPass</name>
+
     <url>http://maven.apache.org</url>
+
     <dependencies>
         <!-- 添加Spring4.2.2的核心包 -->
         <dependency>
@@ -21,66 +26,77 @@
             <artifactId>spring-context</artifactId>
             <version>4.2.2.RELEASE</version>
         </dependency>
+
         <!-- 添加spring-tx包 事务 -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-tx</artifactId>
             <version>4.2.2.RELEASE</version>
         </dependency>
+
         <!-- 添加spring-jdbc包 -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-jdbc</artifactId>
             <version>4.2.2.RELEASE</version>
         </dependency>
+
         <!-- 为了方便进行单元测试，添加spring-test包 -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
             <version>4.2.2.RELEASE</version>
         </dependency>
+
         <!--添加spring-web包 -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-web</artifactId>
             <version>4.2.2.RELEASE</version>
         </dependency>
+
         <!--添加spring-web MVC包 -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
             <version>4.2.2.RELEASE</version>
         </dependency>
+
         <!-- 添加springmvc文件上传有关jar包 commons-fileupload -->
         <dependency>
             <groupId>commons-fileupload</groupId>
             <artifactId>commons-fileupload</artifactId>
             <version>1.2.1</version>
         </dependency>
+
         <!-- 添加文件上传有关jar包 commons-io -->
         <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
             <version>2.5</version>
         </dependency>
+
         <!--添加aspectjweaver包 aop -->
         <dependency>
             <groupId>org.aspectj</groupId>
             <artifactId>aspectjweaver</artifactId>
             <version>1.8.5</version>
         </dependency>
+
         <!-- 添加mybatis的核心包 -->
         <dependency>
             <groupId>org.mybatis</groupId>
             <artifactId>mybatis</artifactId>
             <version>3.4.5</version>
         </dependency>
+
         <!-- 添加mybatis与Spring整合的核心包 -->
         <dependency>
             <groupId>org.mybatis</groupId>
             <artifactId>mybatis-spring</artifactId>
             <version>1.3.1</version>
         </dependency>
+
         <!-- 添加servlet3.0核心包 -->
         <dependency>
             <groupId>javax.servlet</groupId>
@@ -94,18 +110,21 @@
             <artifactId>jstl</artifactId>
             <version>1.2</version>
         </dependency>
+
         <!-- 添加mysql驱动包 -->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>5.1.34</version>
         </dependency>
+
         <!-- 添加druid连接池包 -->
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>druid</artifactId>
             <version>1.0.12</version>
         </dependency>
+
         <!-- 添加junit单元测试包 -->
         <dependency>
             <groupId>junit</groupId>
@@ -133,8 +152,8 @@
             <artifactId>jackson-annotations</artifactId>
             <version>2.9.6</version>
         </dependency>
-
     </dependencies>
+
     <build>
         <finalName>BugPass</finalName>
         <plugins>
@@ -148,4 +167,5 @@
             </plugin>
         </plugins>
     </build>
+
 </project>
