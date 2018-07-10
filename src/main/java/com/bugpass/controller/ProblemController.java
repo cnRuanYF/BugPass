@@ -44,6 +44,43 @@ public class ProblemController {
     private DiscussService discussService;
 
     /**
+     * 跳转到问题列表
+     * Rewrited by RuanYaofeng
+     */
+    @RequestMapping(value = CTRL_PROBLEM_LIST, method = RequestMethod.GET)
+    public String showProblemList(Model model, HttpSession session) {
+        // 获取当前项目
+        Project currentProject = (Project) session.getAttribute("currentProject");
+
+        // 获取项目的模块、版本、成员
+        List<Module> moduleList = moduleService.findByProjectId(currentProject.getId());
+        List<Version> versionList = versionService.returnFindAllByProjectid(currentProject.getId());
+        List<Member> memberList = memberService.queryByProjectId(currentProject.getId());
+
+        // 获取问题的所有类型，所有级别
+        List<ProblemType> problemTypeList = problemService.getAllType();
+        List<ProblemLevel> problemLevelList = problemService.getAllLevel();
+
+        // 获取项目中的所有问题
+        // TODO 暂时无差别的获取到所有项目的！！！！！！！！
+        List<Problem> problemList = problemService.getAllProblem();
+
+        // 传入视图
+        model.addAttribute("moduleList", moduleList);
+        model.addAttribute("versionList", versionList);
+        model.addAttribute("memberList", memberList);
+        model.addAttribute("problemTypeList", problemTypeList);
+        model.addAttribute("problemLevelList", problemLevelList);
+        model.addAttribute("problemList", problemList);
+
+        return PAGE_PROBLEM_LIST;
+    }
+
+    //////////////////////////////////////////////
+    //    以上代码临时测试中 (by  RuanYaofeng)    //
+    //////////////////////////////////////////////
+
+    /**
      * 跳转到新建问题界面
      * Rewrited by RuanYaofeng
      */

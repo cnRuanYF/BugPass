@@ -71,18 +71,15 @@
         <div class="form-group row">
             <label class="col-md-3 col-form-label text-md-right">指派给</label>
             <div class="col-md-6">
-                <button id="btnChooseAssignUser" type="button" class="btn btn-outline-secondary border-0"
-                        data-toggle="modal" data-target="#modal-choose-assign-user" disabled>
-                    <c:if test="${assignedUser != null}">
-                        <img class="user-head mr-2" src="img/avatar/${assignedUser.picture}.png"/>
-                        ${assignedUser.realname}
-                        <small>(${assignedUser.username})</small>
-                    </c:if>
-                    <c:if test="${assignedUser == null}">
-                        <img class="user-head mr-2" src="img/avatar/default.png"/>
-                        选择一个用户
-                    </c:if>
-                </button>
+                <c:if test="${assignedUser != null}">
+                    <img class="user-head mr-2" src="img/avatar/${assignedUser.picture}.png"/>
+                    ${assignedUser.realname}
+                    <small>(${assignedUser.username})</small>
+                </c:if>
+                <c:if test="${assignedUser == null}">
+                    <img class="user-head mr-2" src="img/avatar/default.png"/>
+                    （未指派）
+                </c:if>
             </div>
             <div class="col col-lg-2">
                 <a class="btn btn-warning btn-block" href="problem/edit/${problem.id}">修改问题</a>

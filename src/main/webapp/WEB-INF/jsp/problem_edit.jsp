@@ -32,7 +32,7 @@
                 </a>
             </h5>
         </c:if>
-        <form action=${isEdit ? "/problem/editSubmit" : "/problem/addSubmit"} method="post">
+        <form action=${isEdit ? "problem/editSubmit" : "problem/addSubmit"} method="post">
             <c:if test="${isEdit}">
                 <input type="hidden" name="id" value="${problem.id}">
             </c:if>
@@ -190,8 +190,7 @@
     /**
      * 切换问题级别
      */
-    function
-    changeLevel(id, name) {
+    function changeLevel(id, name) {
         // 重置4个按钮的样式
         for (var i = 1; i <= btnColors.length; i++) {
             var btn = $('#btnLevel' + i);

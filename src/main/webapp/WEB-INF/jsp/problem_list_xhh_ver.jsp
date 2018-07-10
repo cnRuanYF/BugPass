@@ -25,28 +25,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
  <body>
-
-
-
-  
-                                           
-
-
- <div>
-        <ul>
-
-            <li><a href="summary?publisher=${publisher}"><i></i>概述</a></li>
-            <li class="active"><a href="problem?publisher=${publisher}"><i></i>问题</a></li>
-            <li><a href="3.jsp"><i></i>统计</a></li>
-            <li style="position:relative;"><a href="4.jsp"><i></i>成员 <span></span></a></li>
-            <li><a href="5.jsp"><i></i>设置</a></li>
-        </ul>
-                <a href="newproblem?publisher=${publisher}">新建问题</a>
-            </div>
-
-
-
-<div>
     <!--成员左侧-->
    
        
