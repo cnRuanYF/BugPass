@@ -111,24 +111,21 @@
                         <c:forEach items="${problemList}" var="prob">
                             <a class="list-group-item list-group-item-action" href="problem/${prob.id}">
                                 <div>
-                                    <span class="text-primary">
-                                        ${problemLevelList.get(prob.problemLevel-1).problemLevelName}
-                                        的
-                                        ${problemTypeList.get(prob.problemType-1).problemTypeName}
-                                    </span>
+                                    <span class="problemLevelBadge${prob.problemLevel}">${problemLevelList.get(prob.problemLevel - 1).problemLevelName}</span>
+                                    <span>${problemTypeList.get(prob.problemType-1).problemTypeName}</span>
                                     <small class="float-right">
                                         <i class="far fa-clock mr-1"></i>
                                         <fmt:formatDate value="${prob.updateTime}" pattern="yyyy-M-d H:mm:ss"/>
                                     </small>
+                                    <small class="float-right mr-5">
+                                        <i class="fa fa-user mr-1"></i>
+                                        <c:forEach items="${memberList}" var="member">
+                                            <c:if test="${member.userId == prob.publisher}">${member.user.realname}</c:if>
+                                        </c:forEach>
+                                    </small>
                                 </div>
-                                <div class="line-limit-length">${prob.problemTitle}</div>
+                                <div class="text-primary line-limit-length">${prob.problemTitle}</div>
                                 <div class="small text-secondary line-limit-length">${prob.problemDesc}</div>
-                                <small>
-                                    <i class="fa fa-user mr-2"></i>
-                                    <c:forEach items="${memberList}" var="member">
-                                        <c:if test="${member.userId == prob.publisher}">${member.user.realname}</c:if>
-                                    </c:forEach>
-                                </small>
                             </a>
                         </c:forEach>
                     </div>
@@ -147,10 +144,14 @@
     // 问题级别按钮颜色
     var levelColors = ['danger', 'warning', 'info', 'secondary'];
 
-    // 设置4个按钮的样式
+    // 设置问题重要程度的样式
     for (var i = 1; i <= levelColors.length; i++) {
+        // 左侧筛选区Label
         var lbl = $('#cbLevel' + i).parent().find('label');
         lbl.addClass('badge badge-' + levelColors[i - 1]);
+
+        // 列表区Span
+        $('.problemLevelBadge' + i).addClass('badge badge-' + levelColors[i - 1]);
     }
 </script>
 

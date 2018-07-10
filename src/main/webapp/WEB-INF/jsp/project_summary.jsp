@@ -95,11 +95,11 @@
                 <div class="card-header">
                     <ul class="nav nav-tabs card-header-tabs">
                         <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#my-assign-content" role="tab"
+                            <a class="nav-link active" data-toggle="tab" href="#my-assign-content" role="tab"
                                aria-controls="my-assign-content" aria-selected="true">指派给我的</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" data-toggle="tab" href="#my-submit-content" role="tab"
+                            <a class="nav-link" data-toggle="tab" href="#my-submit-content" role="tab"
                                aria-controls="my-submit-content" aria-selected="false">我提交的</a>
                         </li>
                         <li class="nav-item">
@@ -111,7 +111,7 @@
                 <div class="card-body">
                     <div class="tab-content">
                         <!--指派给我的-->
-                        <div class="tab-pane fade" id="my-assign-content" role="tabpanel">
+                        <div class="tab-pane fade show active" id="my-assign-content" role="tabpanel">
                             <div class="row">
                                 <div class="col-6 col-lg-3 mb-4">
                                     <a href="problem/list" style="text-decoration:none">
@@ -155,8 +155,8 @@
                                 </div>
                             </div>
                             <c:if test="${problemToMeList == null || problemToMeList.size() == 0}">
-                                <h1 class="text-secondary text-center">
-                                    <i class="fa fa-exclamation-circle"></i>暂时没有任务指派给你
+                                <h1 class="text-secondary text-center mt-5 mb-5">
+                                    <i class="fa fa-exclamation-circle mr-3"></i>暂时没有任务指派给你
                                 </h1>
                             </c:if>
                             <c:if test="${problemToMeList != null && problemToMeList.size() > 0}">
@@ -179,7 +179,7 @@
                             </c:if>
                         </div>
                         <!--我提交的-->
-                        <div class="tab-pane fade show active" id="my-submit-content" role="tabpanel">
+                        <div class="tab-pane fade" id="my-submit-content" role="tabpanel">
                             <div class="row">
                                 <div class="col-6 col-lg-3 mb-4">
                                     <a href="problem/list" style="text-decoration:none">
@@ -224,8 +224,8 @@
                             </div>
 
                             <c:if test="${problemFromMeList == null || problemFromMeList.size() == 0}">
-                                <h1 class="text-secondary text-center">
-                                    <i class="fa fa-exclamation-circle"></i>暂时没有任务指派给你
+                                <h1 class="text-secondary text-center mt-5 mb-5">
+                                    <i class="fa fa-exclamation-circle mr-3"></i>暂时没有提交的问题
                                 </h1>
                             </c:if>
 

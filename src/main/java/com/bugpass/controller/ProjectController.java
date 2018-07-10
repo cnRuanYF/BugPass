@@ -192,6 +192,7 @@ public class ProjectController {
 
         // 查询刚刚创建的项目信息
         Project newProject = projectService.findProjectByDisplayId(project.getDisplayId());
+        newProject.setCreator(currentUser);
         session.setAttribute(ATTRIB_CURRENT_PROJECT, newProject);
         session.setAttribute("currentProjectCreator", currentUser);
 
@@ -243,13 +244,13 @@ public class ProjectController {
 
 
     /**
-     * 项目信息(设置) - 删除
+     * 解散项目信息 (标记为删除)
      */
     @RequestMapping(value = CTRL_PROJECT_DELETE, method = RequestMethod.GET)
     public String deleteProject(@PathVariable(value = "id") long id, HttpSession session) {
         projectService.delProjectById(id);
         session.removeAttribute(ATTRIB_CURRENT_PROJECT);
-        return redirect(PAGE_INDEX);
+        return redirect(CTRL_ENTER);
     }
 
 

@@ -62,8 +62,7 @@ public class ProblemController {
         List<ProblemLevel> problemLevelList = problemService.getAllLevel();
 
         // 获取项目中的所有问题
-        // TODO 暂时无差别的获取到所有项目的！！！！！！！！
-        List<Problem> problemList = problemService.getAllProblem();
+        List<Problem> problemList = problemService.queryProblemByProjectId(currentProject.getId());
 
         // 传入视图
         model.addAttribute("moduleList", moduleList);
@@ -75,10 +74,6 @@ public class ProblemController {
 
         return PAGE_PROBLEM_LIST;
     }
-
-    //////////////////////////////////////////////
-    //    以上代码临时测试中 (by  RuanYaofeng)    //
-    //////////////////////////////////////////////
 
     /**
      * 跳转到新建问题界面
@@ -252,7 +247,7 @@ public class ProblemController {
         } else {
             session.setAttribute(MessageType.WARNING, "添加问题失败");
         }
-        return redirect(CTRL_ENTER);
+        return redirect(CTRL_PROBLEM_LIST);
     }
 
     /**
@@ -265,22 +260,7 @@ public class ProblemController {
         } else {
             session.setAttribute(MessageType.WARNING, "修改问题失败");
         }
-        return redirect(CTRL_ENTER);
-    }
-
-    /**
-     * 跳转到问题列表页面
-     */
-    @RequestMapping(value = CTRL_PROBLEM_LIST, method = RequestMethod.GET)
-    public String problemList(HttpSession session, Model model) {
-
-        // 获取当前项目
-        Project currentProject = (Project) session.getAttribute("currentProject");
-
-        List<Problem> list = problemService.queryProblemByProjectId(currentProject.getId());
-
-        model.addAttribute("problemList", list);
-        return "problem_list";
+        return redirect(CTRL_PROBLEM_DETAIL.replace("{id}", problem.getId() + ""));
     }
 
     ////////////////////////////////////////////
