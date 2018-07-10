@@ -118,4 +118,15 @@ public class ProblemServiceImpl implements ProblemService{
 		return problemDao.queryById(id);
 	}
 
+	@Override
+	public boolean addProblem(Problem problem) {
+		return problemDao.add(problem);
+	}
+
+	@Override
+	public boolean editProblem(Problem problem) {
+		return problemDao.update(problem);
+	}
+
+
 }

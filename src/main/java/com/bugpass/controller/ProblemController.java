@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.bugpass.constant.MessageType;
 import com.bugpass.constant.PageConst;
 import com.bugpass.entity.*;
 import com.bugpass.service.*;
@@ -203,6 +204,36 @@ public class ProblemController {
 
     ////////////////////////////////////////////
     //    以上代码亲测可用 (by  RuanYaofeng)    //
+    ////////////////////////////////////////////
+
+    /**
+     * 添加问题
+     */
+    @RequestMapping(value = CTRL_PROBLEM_ADD_SUBMIT, method = RequestMethod.POST)
+    public String addSubmit(HttpSession session, Problem problem) {
+        if (problemService.addProblem(problem)) {
+            session.setAttribute(MessageType.SUCCESS, "添加问题成功");
+        } else {
+            session.setAttribute(MessageType.WARNING, "添加问题失败");
+        }
+        return redirect(CTRL_ENTER);
+    }
+
+    /**
+     * 修改问题
+     */
+    @RequestMapping(value = CTRL_PROBLEM_EDIT_SUBMIT, method = RequestMethod.POST)
+    public String editSubmit(HttpSession session, Problem problem) {
+        if (problemService.editProblem(problem)) {
+            session.setAttribute(MessageType.SUCCESS, "修改问题成功");
+        } else {
+            session.setAttribute(MessageType.WARNING, "修改问题失败");
+        }
+        return redirect(CTRL_ENTER);
+    }
+
+    ////////////////////////////////////////////
+    //     以上代码亲测可用 (by  VisonSun)     //
     ////////////////////////////////////////////
 
     /**
@@ -675,7 +706,6 @@ public class ProblemController {
      * 跳转到概述界面并显示每种状态的问题的数量
      *
      * @param model
-     * @param publisher
      * @return TODO Editing by RuanYaofeng
      */
     @RequestMapping(value = "xhh/summary")

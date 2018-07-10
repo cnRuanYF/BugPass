@@ -32,8 +32,10 @@
                 </a>
             </h5>
         </c:if>
-        <form action="problem/add" method="post">
-            <input type="hidden" name="id" value="${problem.id}">
+        <form action=${isEdit ? "/problem/editSubmit" : "/problem/addSubmit"} method="post">
+            <c:if test="${isEdit}">
+                <input type="hidden" name="id" value="${problem.id}">
+            </c:if>
             <input type="hidden" name="projectId" value="${currentProject.id}">
             <input type="hidden" name="publisher" value="${currentUser.id}">
             <c:if test="${isEdit}">

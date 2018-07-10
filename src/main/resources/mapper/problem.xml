@@ -4,16 +4,16 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.bugpass.dao.ProblemDao">
-    
+
     <!--RuanYaofeng Part-->
     <select id="queryById" resultMap="problemMap">
         SELECT *
         FROM problem
         WHERE problem_id = #{id}
     </select>
-    
+
     <!-- ++++++++++++++++++++++++++++++++ -->
-    
+
     <!--XHH Original Part-->
 
     <select id="getProblemCount" resultType="Integer">
@@ -107,15 +107,14 @@
 
 
     <insert id="addProblem" parameterType="java.util.Map">
-        insert into problem (problem_id, problem_title, problem_desc, problem_type, problem_level, problem_status, publisher)
-        values (null, #{problemTitle}, #{problemDesc}, #{problemType}, #{problemLevel}, #{problemStatus}, #{publisher})
+        insert into problem (problem_id, problem_title, problem_desc, problem_type, problem_level, problem_status, publisher,project_id)
+        values (null, #{problemTitle}, #{problemDesc}, #{problemType}, #{problemLevel}, #{problemStatus}, #{publisher},#{projectId})
     </insert>
 
     <delete id="deleteProblemById">
         delete from problem
         where problem_id = #{problemId}
     </delete>
-
 
     <resultMap type="com.bugpass.entity.ProblemType" id="problemTypeMap">
         <!-- 主键 其他列属性 -->
@@ -160,4 +159,30 @@
         <result property="createTime" column="create_time"/>
         <result property="updateTime" column="updatet_time"/>
     </resultMap>
+
+
+    <insert id="add">
+        insert into
+            problem (problem_id,problem_title, problem_desc, problem_type, problem_level, problem_status, publisher, project_id)
+        values
+            (null,#{problemTitle}, #{problemDesc}, #{problemType}, #{problemLevel}, #{problemStatus}, #{publisher}, #{projectId})
+    </insert>
+
+    <update id="update">
+        update
+            problem
+        set
+            <if test="problemTitle!=null">problem_title = #{problemTitle},</if>
+            <if test="problemType!=null">problem_type = #{problemType},</if>
+            <if test="problemDesc!=null">problem_desc = #{problemDesc},</if>
+            <if test="problemLevel!=null">problem_level = #{problemLevel},</if>
+            <if test="problemStatus!=null">problem_status = #{problemStatus},</if>
+            <if test="assignedTo!=null">assigned_to = #{assignedTo},</if>
+            <if test="moduleId!=null">module_id = #{moduleId},</if>
+            <if test="versionId!=null">version_id = #{versionId}</if>
+        where
+            problem_id = #{id}
+    </update>
+
+
 </mapper>

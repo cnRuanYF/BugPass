@@ -72,6 +72,8 @@ public class PageConst {
     // 问题相关
     public static final String CTRL_PROBLEM_LIST = "problem";
     public static final String CTRL_PROBLEM_ADD = "problem/add";
+    public static final String CTRL_PROBLEM_ADD_SUBMIT = "problem/addSubmit";
+    public static final String CTRL_PROBLEM_EDIT_SUBMIT = "problem/editSubmit";
     public static final String CTRL_PROBLEM_DETAIL = "problem/{id}";
     public static final String CTRL_PROBLEM_EDOT = "problem/edit/{id}";
 

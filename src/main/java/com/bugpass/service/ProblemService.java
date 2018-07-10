@@ -114,4 +114,20 @@ public interface ProblemService {
 	 */
 	public Problem getProblemById(long id);
 
-	}
+	/*
+	 * VisonSun Part
+	 */
+	/**
+	 * 添加问题
+	 * @param problem 问题对象
+	 * @return 是否成功
+	 */
+	boolean addProblem(Problem problem);
+
+	/**
+	 * 修改问题
+	 * @param problem 问题对象
+	 * @return 是否成功
+	 */
+	boolean editProblem(Problem problem);
+}
