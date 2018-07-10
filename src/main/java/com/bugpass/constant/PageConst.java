@@ -75,7 +75,7 @@ public class PageConst {
     public static final String CTRL_PROBLEM_ADD_SUBMIT = "problem/addSubmit";
     public static final String CTRL_PROBLEM_EDIT_SUBMIT = "problem/editSubmit";
     public static final String CTRL_PROBLEM_DETAIL = "problem/{id}";
-    public static final String CTRL_PROBLEM_EDOT = "problem/edit/{id}";
+    public static final String CTRL_PROBLEM_EDIT = "problem/edit/{id}";
 
     // 个人中心相关
     public static final String CTRL_USER_PROFILE = "user/updateProfile";
