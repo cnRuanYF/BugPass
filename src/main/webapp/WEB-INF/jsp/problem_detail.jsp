@@ -124,7 +124,7 @@
                                     </td>
                                     <td class="align-middle line-limit-length" width="1px">
                                         <span>${discuss.publisherUser.realname}</span>
-                                        <span class="text-secondary"> ${discuss.publisherUser.username}</span><br>
+                                        <span class="text-secondary">(${discuss.publisherUser.username})</span><br>
                                         <span class="text-secondary small">
                                             <fmt:formatDate value="${discuss.publishTime}" pattern="yy-M-d H:mm:ss"/>
                                         </span>

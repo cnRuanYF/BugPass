@@ -9,7 +9,6 @@ import javax.servlet.http.HttpSession;
 import com.bugpass.constant.PageConst;
 import com.bugpass.entity.*;
 import com.bugpass.service.*;
-import com.sun.xml.internal.ws.developer.ServerSideException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -75,7 +74,7 @@ public class ProblemController {
      * 跳转到编辑问题界面
      * Rewrited by RuanYaofeng
      */
-    @RequestMapping(value = CTRL_PROBLEM_EDOT, method = RequestMethod.GET)
+    @RequestMapping(value = CTRL_PROBLEM_EDIT, method = RequestMethod.GET)
     public String showEditProblem(@PathVariable("id") long problemId, Model model, HttpSession session) {
         Problem problem = problemService.getProblemById(problemId);
 
