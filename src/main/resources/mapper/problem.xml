@@ -144,22 +144,7 @@
         <result property="problemTypeName" column="problemtype_name"/>
     </resultMap>
 
-    <resultMap type="com.bugpass.entity.Problem" id="problemMap">
-        <!-- 主键 其他列属性 -->
-        <id property="id" column="problem_id"/>
-        <result property="problemTitle" column="problem_title"/>
-        <result property="problemDesc" column="problem_desc"/>
-        <result property="problemType" column="problem_type"/>
-        <result property="problemLevel" column="problem_level"/>
-        <result property="problemStatus" column="problem_status"/>
-        <result property="publisher" column="publisher"/>
-        <result property="assignedTo" column="assigned_to"/>
-        <result property="moduleId" column="module_id"/>
-        <result property="versionId" column="version_id"/>
-        <result property="createTime" column="create_time"/>
-        <result property="updateTime" column="updatet_time"/>
-    </resultMap>
-
+    <!-- ====================================================================== -->
 
     <insert id="add">
         insert into
@@ -184,5 +169,30 @@
             problem_id = #{id}
     </update>
 
+    <select id="queryProjectByProjectId" resultMap="problemMap">
+        select
+            *
+        from
+            problem
+        where
+            project_id = #{projectId}
 
+    </select>
+
+    <resultMap type="com.bugpass.entity.Problem" id="problemMap">
+        <!-- 主键 其他列属性 -->
+        <id property="id" column="problem_id"/>
+        <result property="problemTitle" column="problem_title"/>
+        <result property="problemDesc" column="problem_desc"/>
+        <result property="problemType" column="problem_type"/>
+        <result property="problemLevel" column="problem_level"/>
+        <result property="problemStatus" column="problem_status"/>
+        <result property="publisher" column="publisher"/>
+        <result property="assignedTo" column="assigned_to"/>
+        <result property="projectId" column="project_id"/>
+        <result property="moduleId" column="module_id"/>
+        <result property="versionId" column="version_id"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+    </resultMap>
 </mapper>

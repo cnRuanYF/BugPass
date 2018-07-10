@@ -63,7 +63,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link ${navItem == 'problem' ? 'active' : ''}" href="problem">
+                        <a class="nav-link ${navItem == 'problem' ? 'active' : ''}" href="problem/list">
                             <i class="fas fa-fw fa-exclamation-circle mr-1"></i>问题
                         </a>
                     </li>

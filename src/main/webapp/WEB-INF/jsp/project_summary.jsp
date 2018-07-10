@@ -51,37 +51,37 @@
                     <a class="card border-0" href="selectAll?publisher=${publisher}" style="text-decoration:none">
                         <div class="btn btn-primary p-0">
                             <div class="card-body">
-                                <h1 class="mb-0">${pcount}</h1>
+                                <h1 class="mb-0">${openedProblem}</h1>
                             </div>
                             <div class="card-footer">打开</div>
                         </div>
                     </a>
                 </div>
                 <div class="col-6 col-lg-3 mb-4">
-                    <a class="card border-0" href="getstatus?publisher=${publisher}" style="text-decoration:none">
+                    <a class="card border-0" href="problem/list" style="text-decoration:none">
                         <div class="btn btn-danger p-0">
                             <div class="card-body">
-                                <h1 class="mb-0">${scount}</h1>
+                                <h1 class="mb-0">${newProblem}</h1>
                             </div>
                             <div class="card-footer">新问题</div>
                         </div>
                     </a>
                 </div>
                 <div class="col-6 col-lg-3 mb-4">
-                    <a class="card border-0" href="getstatus2?publisher=${publisher}" style="text-decoration:none">
+                    <a class="card border-0" href="problem/list" style="text-decoration:none">
                         <div class="btn btn-info p-0">
                             <div class="card-body">
-                                <h1 class="mb-0">${scount2}</h1>
+                                <h1 class="mb-0">${doingProblem}</h1>
                             </div>
                             <div class="card-footer">进行中</div>
                         </div>
                     </a>
                 </div>
                 <div class="col-6 col-lg-3 mb-4">
-                    <a class="card border-0" href="getstatus4?publisher=${publisher}" style="text-decoration:none">
+                    <a class="card border-0" href="problem/list" style="text-decoration:none">
                         <div class="btn btn-success p-0">
                             <div class="card-body">
-                                <h1 class="mb-0">${scount4}</h1>
+                                <h1 class="mb-0">${resolvedProblem}</h1>
                             </div>
                             <div class="card-footer">已解决</div>
                         </div>
@@ -114,154 +114,141 @@
                         <div class="tab-pane fade" id="my-assign-content" role="tabpanel">
                             <div class="row">
                                 <div class="col-6 col-lg-3 mb-4">
-                                    <a href="javascript:layer.msg('TODO',{icon: 0})" style="text-decoration:none">
+                                    <a href="problem/list" style="text-decoration:none">
                                         <div class="card border-0">
                                             <div class="card-body btn btn-outline-primary p-2">
-                                                <h1 class="mb-0">M</h1>
+                                                <h1 class="mb-0">${openedProblemToMe}</h1>
                                                 打开
                                             </div>
                                         </div>
                                     </a>
                                 </div>
                                 <div class="col-6 col-lg-3 mb-4">
-                                    <a href="javascript:layer.msg('TODO',{icon: 0})" style="text-decoration:none">
+                                    <a href="problem/list" style="text-decoration:none">
                                         <div class="card border-0">
                                             <div class="card-body btn btn-outline-danger p-2">
-                                                <h1 class="mb-0">N</h1>
+                                                <h1 class="mb-0">${newProblemToMe}</h1>
                                                 新问题
                                             </div>
                                         </div>
                                     </a>
                                 </div>
                                 <div class="col-6 col-lg-3 mb-4">
-                                    <a href="javascript:layer.msg('TODO',{icon: 0})" style="text-decoration:none">
+                                    <a href="problem/list" style="text-decoration:none">
                                         <div class="card border-0">
                                             <div class="card-body btn btn-outline-info p-2">
-                                                <h1 class="mb-0">X</h1>
+                                                <h1 class="mb-0">${doingProblemToMe}</h1>
                                                 进行中
                                             </div>
                                         </div>
                                     </a>
                                 </div>
                                 <div class="col-6 col-lg-3 mb-4">
-                                    <a href="javascript:layer.msg('TODO',{icon: 0})" style="text-decoration:none">
+                                    <a href="problem/list" style="text-decoration:none">
                                         <div class="card border-0">
                                             <div class="card-body btn btn-outline-success p-2">
-                                                <h1 class="mb-0">Y</h1>
+                                                <h1 class="mb-0">${resolvedProblemToMe}</h1>
                                                 已解决
                                             </div>
                                         </div>
                                     </a>
                                 </div>
                             </div>
-                            <h5>最近指派给我的
-                                <a class="small float-right" href="javascript:layer.msg('TODO',{icon: 0})"
-                                   style="text-decoration:none">
-                                    <i class="far fa-eye mr-1"></i>查看全部
-                                </a>
-                            </h5>
-                            <div class="dropdown-divider"></div>
-                            <div class="list-group list-group-flush">
-                                <a class="list-group-item list-group-item-action border-0"
-                                   href="javascript:layer.msg('TODO',{icon: 0})">
-                                    最近指派给我的问题 TEST DATA A
-                                    <small class="float-right">2018-6-18</small>
-                                </a>
-                                <a class="list-group-item list-group-item-action border-0"
-                                   href="javascript:layer.msg('TODO',{icon: 0})">
-                                    最近指派给我的问题 PLACEHOLDER B
-                                    <small class="float-right">2017-9-11</small>
-                                </a>
-                                <a class="list-group-item list-group-item-action border-0"
-                                   href="javascript:layer.msg('TODO',{icon: 0})">
-                                    最近指派给我的问题 Foobar C
-                                    <small class="float-right">2011-11-11</small>
-                                </a>
-                                <c:forEach items="${mxxxxxxxxxxxxxxxxxxxxxxxList}" var="prob">
-                                    <a class="list-group-item list-group-item-action border-0"
-                                       href="javascript:layer.msg('TODO',{icon: 0})">
-                                            ${prob.problemTitle}
-                                        <small class="float-right">${prob.problemTitle}???</small>
+                            <c:if test="${problemToMeList == null || problemToMeList.size() == 0}">
+                                <h1 class="text-secondary text-center">
+                                    <i class="fa fa-exclamation-circle"></i>暂时没有任务指派给你
+                                </h1>
+                            </c:if>
+                            <c:if test="${problemToMeList != null && problemToMeList.size() > 0}">
+                                <h5>最近指派给我的
+                                    <a class="small float-right" href="problem/list"
+                                       style="text-decoration:none">
+                                        <i class="far fa-eye mr-1"></i>查看全部
                                     </a>
-                                </c:forEach>
-                            </div>
+                                </h5>
+                                <div class="dropdown-divider"></div>
+                                <div class="list-group list-group-flush">
+                                    <c:forEach items="${problemToMeList}" var="prob">
+                                        <a class="list-group-item list-group-item-action border-0"
+                                           href="problem/${prob.id}">
+                                                ${prob.problemTitle}
+                                            <small class="float-right"><fmt:formatDate value="${prob.updateTime}" pattern="yyyy年M月d日 H:mm"/></small>
+                                        </a>
+                                    </c:forEach>
+                                </div>
+                            </c:if>
                         </div>
                         <!--我提交的-->
                         <div class="tab-pane fade show active" id="my-submit-content" role="tabpanel">
                             <div class="row">
                                 <div class="col-6 col-lg-3 mb-4">
-                                    <a href="javascript:layer.msg('TODO',{icon: 0})" style="text-decoration:none">
+                                    <a href="problem/list" style="text-decoration:none">
                                         <div class="card border-0">
                                             <div class="card-body btn btn-outline-primary p-2">
-                                                <h1 class="mb-0">M</h1>
+                                                <h1 class="mb-0">${openedProblemFromMe}</h1>
                                                 打开
                                             </div>
                                         </div>
                                     </a>
                                 </div>
                                 <div class="col-6 col-lg-3 mb-4">
-                                    <a href="getstatusbypublisher?publisher=${publisher}" style="text-decoration:none">
+                                    <a href="problem/list" style="text-decoration:none">
                                         <div class="card border-0">
                                             <div class="card-body btn btn-outline-danger p-2">
-                                                <h1 class="mb-0">${submitNewBuildCount}</h1>
+                                                <h1 class="mb-0">${newProblemFromMe}</h1>
                                                 新问题
                                             </div>
                                         </div>
                                     </a>
                                 </div>
                                 <div class="col-6 col-lg-3 mb-4">
-                                    <a href="getstatusbypublisher2?publisher=${publisher}" style="text-decoration:none">
+                                    <a href="problem/list" style="text-decoration:none">
                                         <div class="card border-0">
                                             <div class="card-body btn btn-outline-info p-2">
-                                                <h1 class="mb-0">${submitRunningCount}</h1>
+                                                <h1 class="mb-0">${doingProblemFromMe}</h1>
                                                 进行中
                                             </div>
                                         </div>
                                     </a>
                                 </div>
                                 <div class="col-6 col-lg-3 mb-4">
-                                    <a href="getstatusbypublisher4?publisher=${publisher}" style="text-decoration:none">
+                                    <a href="problem/list" style="text-decoration:none">
                                         <div class="card border-0">
                                             <div class="card-body btn btn-outline-success p-2">
-                                                <h1 class="mb-0">${submitResolvedCount}</h1>
+                                                <h1 class="mb-0">${resolvedProblemFromMe}</h1>
                                                 已解决
                                             </div>
                                         </div>
                                     </a>
                                 </div>
                             </div>
+
+                            <c:if test="${problemFromMeList == null || problemFromMeList.size() == 0}">
+                                <h1 class="text-secondary text-center">
+                                    <i class="fa fa-exclamation-circle"></i>暂时没有任务指派给你
+                                </h1>
+                            </c:if>
+
+                            <c:if test="${problemFromMeList != null && problemFromMeList.size() > 0}">
                             <h5>最近提交的
-                                <a class="small float-right" href="javascript:layer.msg('TODO',{icon: 0})"
+                                <a class="small float-right" href="problem/list"
                                    style="text-decoration:none">
                                     <i class="far fa-eye mr-1"></i>查看全部
                                 </a>
                             </h5>
                             <div class="dropdown-divider"></div>
                             <div class="list-group list-group-flush">
-                                <a class="list-group-item list-group-item-action border-0"
-                                   href="javascript:layer.msg('TODO',{icon: 0})">
-                                    最近提交的 TEST DATA A
-                                    <small class="float-right">2017-2-14</small>
-                                </a>
-                                <a class="list-group-item list-group-item-action border-0"
-                                   href="javascript:layer.msg('TODO',{icon: 0})">
-                                    最近提交的 PLACEHOLDER B
-                                    <small class="float-right">2016-6-18</small>
-                                </a>
-                                <a class="list-group-item list-group-item-action border-0"
-                                   href="javascript:layer.msg('TODO',{icon: 0})">
-                                    最近提交的 Foobar C
-                                    <small class="float-right">2008-8-8</small>
-                                </a>
-                                <c:forEach items="${mxxxxxxxxxxxxxxxxxxxxxxxList}" var="prob">
+                                <c:forEach items="${problemFromMeList}" var="prob">
                                     <a class="list-group-item list-group-item-action border-0"
-                                       href="javascript:layer.msg('TODO',{icon: 0})">
+                                       href="problem/${prob.id}">
                                             ${prob.problemTitle}
-                                        <small class="float-right">${prob.problemTitle}???</small>
+                                        <small class="float-right"><fmt:formatDate value="${prob.updateTime}" pattern="yyyy年M月d日 H:mm"/></small>
                                     </a>
                                 </c:forEach>
                             </div>
+                            </c:if>
                         </div>
+
                         <!--我跟踪的-->
                         <div class="tab-pane fade" id="my-track-content" role="tabpanel">
                             <h1 class="mt-5 mb-5 text-secondary text-center">

@@ -70,7 +70,7 @@ public class PageConst {
     // TODO 待优化: 成员管理控制器地址转常量
 
     // 问题相关
-    public static final String CTRL_PROBLEM_LIST = "problem";
+    public static final String CTRL_PROBLEM_LIST = "problem/list";
     public static final String CTRL_PROBLEM_ADD = "problem/add";
     public static final String CTRL_PROBLEM_ADD_SUBMIT = "problem/addSubmit";
     public static final String CTRL_PROBLEM_EDIT_SUBMIT = "problem/editSubmit";
