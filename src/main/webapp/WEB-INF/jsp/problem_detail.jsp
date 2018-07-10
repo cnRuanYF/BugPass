@@ -21,7 +21,7 @@
     <div class="card card-body mb-4">
         <h5 class="mb-4">
             问题详情
-            <a class="float-right small" href="problem" style="text-decoration:none">
+            <a class="float-right small" href="problem/list" style="text-decoration:none">
                 <i class="fa fa-chevron-left mr-2"></i>返回问题列表
             </a>
         </h5>

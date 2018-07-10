@@ -2,6 +2,7 @@ package com.bugpass.service;
 
 import java.util.List;
 
+import com.bugpass.entity.Problem;
 import com.bugpass.entity.Project;
 import com.bugpass.entity.User;
 
@@ -84,4 +85,5 @@ public interface ProjectService {
      * @return Project对象
      */
     Project getProjectAllInfoByProjectId(long projectId);
+
 }

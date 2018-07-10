@@ -231,6 +231,21 @@ public class ProblemController {
         return redirect(CTRL_ENTER);
     }
 
+    /**
+     * 跳转到问题列表页面
+     */
+    @RequestMapping(value = CTRL_PROBLEM_LIST, method = RequestMethod.GET)
+    public String problemList(HttpSession session, Model model) {
+
+        // 获取当前项目
+        Project currentProject = (Project) session.getAttribute("currentProject");
+
+        List<Problem> list = problemService.queryProblemByProjectId(currentProject.getId());
+
+        model.addAttribute("problemList", list);
+        return "problem_list";
+    }
+
     ////////////////////////////////////////////
     //     以上代码亲测可用 (by  VisonSun)     //
     ////////////////////////////////////////////
@@ -265,7 +280,8 @@ public class ProblemController {
         map.put("publisher", publisher);
 
 
-        boolean flag = problemService.addProblem(map);
+//        boolean flag = problemService.addProblem(map);
+        boolean flag = false;
         if (flag) {
             Map mapNewBuild = new HashMap();
             mapNewBuild.put("publisher", publisher);

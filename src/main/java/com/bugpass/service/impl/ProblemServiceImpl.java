@@ -1,5 +1,6 @@
 package com.bugpass.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -41,11 +42,11 @@ public class ProblemServiceImpl implements ProblemService{
 		return problemDao.getAllStatus();
 	}
 
-	@Override
-	public boolean addProblem(Map map) {
-		// TODO Auto-generated method stub
-		return problemDao.addProblem(map);
-	}
+//	@Override
+//	public boolean addProblem(Map map) {
+//		// TODO Auto-generated method stub
+//		return problemDao.addProblem(map);
+//	}
 
 	@Override
 	public List<Problem> getAllProblem() {
@@ -118,6 +119,7 @@ public class ProblemServiceImpl implements ProblemService{
 		return problemDao.queryById(id);
 	}
 
+	//-------------------------------------------------------------------------------------------------
 	@Override
 	public boolean addProblem(Problem problem) {
 		return problemDao.add(problem);
@@ -126,6 +128,42 @@ public class ProblemServiceImpl implements ProblemService{
 	@Override
 	public boolean editProblem(Problem problem) {
 		return problemDao.update(problem);
+	}
+
+	@Override
+	public List<Problem> queryProblemByProjectId(long projectId) {
+		return problemDao.queryProjectByProjectId(projectId);
+	}
+
+	@Override
+	public List<Problem> queryProjectToMe(long projectId, long userId) {
+
+		List<Problem> list = problemDao.queryProjectByProjectId(projectId);
+		List<Problem> projectToMeList = new ArrayList<>();
+
+		// 遍历该项目的问题集合，如果被指派用户为当前用户，则存入新集合
+		list.forEach(problem -> {
+			if (problem.getAssignedTo() == userId){
+				projectToMeList.add(problem);
+			}
+		});
+
+		return projectToMeList;
+	}
+
+	@Override
+	public List<Problem> queryProjectFromMe(long projectId, long userId) {
+		List<Problem> list = problemDao.queryProjectByProjectId(projectId);
+		List<Problem> projectFromMeList = new ArrayList<>();
+
+		// 遍历该项目的问题集合，如果创建问题的用户为当前用户，则把该对象存入新集合
+		list.forEach(problem -> {
+			if (problem.getPublisher() == userId){
+				projectFromMeList.add(problem);
+			}
+		});
+
+		return projectFromMeList;
 	}
 
 

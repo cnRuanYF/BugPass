@@ -106,6 +106,11 @@ public interface ProblemDao extends BaseDAO<Problem> {
      * @return
      */
     public List<ProblemAll> getProblemByUid(Map map);
-   
- 
+
+	/**
+	 * 按照项目ID查询所有问题
+	 * @param projectId 项目ID
+	 * @return 问题集合
+	 */
+    List<Problem> queryProjectByProjectId(long projectId);
 }
