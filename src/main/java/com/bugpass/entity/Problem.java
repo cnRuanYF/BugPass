@@ -38,11 +38,11 @@ public class Problem {
     /**
      * 问题发布者
      */
-    private int publisher;
+    private long publisher;
     /**
      * 被指派人
      */
-    private int assignedTo;
+    private long assignedTo;
 
     /**
      * 项目ID
@@ -114,7 +114,7 @@ public class Problem {
         this.problemType = problemType;
     }
 
-    public int getPublisher() {
+    public long getPublisher() {
         return publisher;
     }
 
@@ -122,7 +122,7 @@ public class Problem {
         this.publisher = publisher;
     }
 
-    public int getAssignedTo() {
+    public long getAssignedTo() {
         return assignedTo;
     }
 

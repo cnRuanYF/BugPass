@@ -103,5 +103,15 @@ public interface ProblemService {
      * @return
      */
     public List<ProblemAll> getProblemByUid(Map map);
-  
-}
+
+    /*
+     * RuanYaofeng Part
+     */
+	/**
+	 * 根据ID查找问题对象
+	 * @param id 问题的ID
+	 * @return 完整的问题对象
+	 */
+	public Problem getProblemById(long id);
+
+	}

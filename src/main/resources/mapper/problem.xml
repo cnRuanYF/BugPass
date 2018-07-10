@@ -4,6 +4,17 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.bugpass.dao.ProblemDao">
+    
+    <!--RuanYaofeng Part-->
+    <select id="queryById" resultMap="problemMap">
+        SELECT *
+        FROM problem
+        WHERE problem_id = #{id}
+    </select>
+    
+    <!-- ++++++++++++++++++++++++++++++++ -->
+    
+    <!--XHH Original Part-->
 
     <select id="getProblemCount" resultType="Integer">
         select count(*)
@@ -136,15 +147,17 @@
 
     <resultMap type="com.bugpass.entity.Problem" id="problemMap">
         <!-- 主键 其他列属性 -->
-        <id property="problemId" column="problem_id"/>
+        <id property="id" column="problem_id"/>
         <result property="problemTitle" column="problem_title"/>
         <result property="problemDesc" column="problem_desc"/>
+        <result property="problemType" column="problem_type"/>
         <result property="problemLevel" column="problem_level"/>
         <result property="problemStatus" column="problem_status"/>
-        <result property="problemType" column="problem_type"/>
         <result property="publisher" column="publisher"/>
         <result property="assignedTo" column="assigned_to"/>
         <result property="moduleId" column="module_id"/>
         <result property="versionId" column="version_id"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="updatet_time"/>
     </resultMap>
 </mapper>

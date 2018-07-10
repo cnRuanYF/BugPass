@@ -96,15 +96,15 @@
                     <ul class="nav nav-tabs card-header-tabs">
                         <li class="nav-item">
                             <a class="nav-link" data-toggle="tab" href="#my-assign-content" role="tab"
-                               aria-controls="home" aria-selected="true">指派给我的</a>
+                               aria-controls="my-assign-content" aria-selected="true">指派给我的</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link active" data-toggle="tab" href="#my-submit-content" role="tab"
-                               aria-controls="profile" aria-selected="false">我提交的</a>
+                               aria-controls="my-submit-content" aria-selected="false">我提交的</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" data-toggle="tab" href="#my-track-content" role="tab"
-                               aria-controls="contact" aria-selected="false">我跟踪的</a>
+                               aria-controls="my-track-content" aria-selected="false">我跟踪的</a>
                         </li>
                     </ul>
                 </div>
@@ -270,11 +270,10 @@
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
 
-        <!--侧栏-->
+        <!--侧边栏-->
         <div class="col-md-4">
             <!--时间-->
             <div class="card bg-light text-center mb-4">
@@ -288,8 +287,7 @@
                 <h5 class="mb-3">
                     项目信息
                     <c:if test="${currentProject.creator.id == currentUser.id}">
-                        <a class="btn p-1 btn-outline-secondary float-right" href="project/info"
-                           style="border:none">
+                        <a class="btn p-1 btn-outline-secondary border-0 float-right" href="project/info">
                             <i class="fa fa-fw fa-pencil-alt"></i>
                         </a>
                     </c:if>

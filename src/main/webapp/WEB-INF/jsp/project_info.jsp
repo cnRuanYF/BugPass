@@ -43,7 +43,8 @@
                         <label class="col-md-3 col-form-label text-md-right" for="projectDesc">项目描述</label>
                         <div class="col-md-9 col-lg-6">
                             <textarea id="projectDesc" class="form-control" name="projectDesc"
-                                      placeholder="请输入项目描述"  ${projectCreator.id == currentUser.id ? '':'readonly'}>${currentProject.projectDesc}</textarea>
+                                      placeholder="请输入项目描述" style="min-height:160px"
+                                      ${projectCreator.id == currentUser.id ? '':'readonly'}>${currentProject.projectDesc}</textarea>
                         </div>
                     </div>
                     <div class="form-group row">

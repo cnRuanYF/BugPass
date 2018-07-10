@@ -113,4 +113,9 @@ public class ProblemServiceImpl implements ProblemService{
 		return problemDao.getProblemByUid(map);
 	}
 
+	@Override
+	public Problem getProblemById(long id){
+		return problemDao.queryById(id);
+	}
+
 }

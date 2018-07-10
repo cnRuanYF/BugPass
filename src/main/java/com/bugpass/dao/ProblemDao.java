@@ -3,6 +3,7 @@ package com.bugpass.dao;
 import java.util.List;
 import java.util.Map;
 
+import com.sun.xml.internal.rngom.parse.host.Base;
 import org.springframework.stereotype.Repository;
 
 import com.bugpass.entity.Problem;
@@ -17,7 +18,7 @@ import com.bugpass.entity.ProblemType;
  *
  */
 @Repository("problemDao")
-public interface ProblemDao {
+public interface ProblemDao extends BaseDAO<Problem> {
 	/**
 	 * 查询问题的所有类型
 	 * @return

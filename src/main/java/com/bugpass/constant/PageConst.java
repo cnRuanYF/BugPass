@@ -30,8 +30,8 @@ public class PageConst {
 
     // 问题相关
     public static final String PAGE_PROBLEM_LIST = "problem_list";
-    public static final String PAGE_PROBLEM_ADD = "problem_add";
-    public static final String PAGE_PROBLEM_SHOW = "problem_show";
+    public static final String PAGE_PROBLEM_DETAIL = "problem_detail";
+    public static final String PAGE_PROBLEM_EDIT = "problem_edit";
 
     // 个人中心相关
     public static final String PAGE_USER_PROFILE = "user_profile";
@@ -52,7 +52,7 @@ public class PageConst {
     public static final String CTRL_PROJECT_SWITCH = "project/switch/{id}";
     public static final String CTRL_PROJECT_SUMMARY = "project/summary";
     public static final String CTRL_PROJECT_INFO = "project/info";
-    public static final String CTRL_PROJECT_DELETE = "project/delete/{id}"; // TODO 未接入/未测试的功能
+    public static final String CTRL_PROJECT_DELETE = "project/delete/{id}";
 
     // 模块管理
     public static final String API_MODULE = "api/module/{id}";
@@ -72,7 +72,8 @@ public class PageConst {
     // 问题相关
     public static final String CTRL_PROBLEM_LIST = "problem";
     public static final String CTRL_PROBLEM_ADD = "problem/add";
-    public static final String CTRL_PROBLEM_SHOW = "problem/{id}";
+    public static final String CTRL_PROBLEM_DETAIL = "problem/{id}";
+    public static final String CTRL_PROBLEM_EDOT = "problem/edit/{id}";
 
     // 个人中心相关
     public static final String CTRL_USER_PROFILE = "user/updateProfile";

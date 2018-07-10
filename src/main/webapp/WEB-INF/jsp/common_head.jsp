@@ -28,7 +28,8 @@
         'color:white; background:#007BFF; border:1px solid #007BFF; padding:8px 0; border-radius:8px 0 0 8px',
         'color:#007BFF; background:white; border:1px solid #007BFF; padding:8px 0; border-radius:0 8px 8px 0');
     console.log('\n%c TeamXHH:' +
-        '\n   RuanYF, SuWQ, GuoCH, ChenZJ,' +
-        '\n   QiuWY, WangDH, YeH\n ',
-        'color:#007BFF; font-size:24px');
+        '\n   RuanYF, SuWQ, WangDH,' +
+        '\n   QiuWY, ChenZJ, GuoCH,' +
+        '\n   YeH\n ',
+        'color:#007BFF; font-size:20px');
 </script>
